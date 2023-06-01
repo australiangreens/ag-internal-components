@@ -1,0 +1,16 @@
+# don't ever lint node_modules
+node_modules
+# don't lint build output (make sure it's set to your correct build folder name)
+dist
+# don't lint nyc coverage output
+coverage
+# Makes those annoying module.exports errors go away in cases where we need them
+*.cjs
+
+# For now we just disable linting on the vite config file to avoid:
+# Parsing error: ESLint was configured to run on
+# `<tsconfigRootDir>/vite.config.ts` using `parserOptions.project`:
+# <tsconfigRootDir>/tsconfig.json
+vite.config.ts
+
+

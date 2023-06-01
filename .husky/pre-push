@@ -1,0 +1,6 @@
+if yarn --silent prepush; then
+    exit 0
+else
+    echo "Error: tests failed"
+    exit 1
+fi

@@ -1,0 +1,6 @@
+if yarn --silent precommit; then
+    exit 0
+else
+    echo "Error: tests failed"
+    exit 1
+fi

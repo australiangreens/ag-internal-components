@@ -1,0 +1,6 @@
+if yarn --silent commitmsg $1; then
+    exit 0
+else
+    echo "Error: commit-msg failed"
+    exit 1
+fi

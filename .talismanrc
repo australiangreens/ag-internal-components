@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: src/vite-env.d.ts
+  checksum: 9c2ae9b11db645629df3b350633cdc6fac8a281a806f39c9c4b817373de19fa2
+version: "1.0"

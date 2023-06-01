@@ -1,0 +1,95 @@
+{
+  "name": "ag-internal-components",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://bitbucket.org/australian_greens/ag-internal-components/src/main/",
+  "license": "MIT",
+  "description": "Library of components",
+  "author": "The Australian Greens <webops@greens.org.au>",
+  "contributors": [
+    "Anthony Blond <anthony@unfinishedteleporter.com>"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "eslint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "eslint:fix": "eslint --fix 'src/**/*.{jsx,ts,tsx}'",
+    "format": "prettier --write src//**/*.{ts,tsx,css} --config ./.prettierrc",
+    "test": "exit 0",
+    "test:coverage": "exit 0",
+    "test:watch": "exit 0",
+    "### LIFECYCLE SCRIPTS ###": "See https://yarnpkg.com/advanced/lifecycle-scripts",
+    "prepare": "husky install",
+    "### HUSKY GIT HOOKS ###": "Called by husky pre-commit and pre-push scripts",
+    "prepush": "sh ./githooks/pre-push.sh",
+    "prepush:verbose": "VERBOSE=1 sh ./pre-push.sh",
+    "precommit": "sh ./githooks/pre-commit.sh",
+    "commitmsg": "sh ./githooks/commit-msg.sh"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/australian_greens/ag-internal-components"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-linter": "^2.0.2",
+    "vite-tsconfig-paths": "^4.2.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-testing-library": "^5.11.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8",
+    "react-hooks": "^1.0.1",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "yarn eslint",
+      "yarn format"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  }
+}
