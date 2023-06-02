@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://bitbucket.org/australian_greens/ag-internal-components/src/main/",
+  "homepage": "https://github.com/australiangreens/ag-internal-components",
   "license": "MIT",
   "description": "Library of components",
   "author": "The Australian Greens <webops@greens.org.au>",
@@ -43,18 +43,18 @@
     "url": "https://bitbucket.org/australian_greens/ag-internal-components"
   },
   "dependencies": {
+    "@types/node": "16.18.0",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
     "@vitejs/plugin-react": "^4.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-linter": "^2.0.2",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@types/node": "^20.2.5",
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "@vitejs/plugin-react-swc": "^3.0.0",
