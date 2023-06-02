@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo -n "Running eslint..."
-if !(yarn --silent eslint); then
+echo -n "Running eslint on staged files..."
+if !(npx lint-staged); then
     echo "Error: eslint failed"
     exit 1
 fi
