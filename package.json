@@ -1,9 +1,9 @@
 {
-  "name": "ag-internal-components",
+  "name": "@australiangreens/ag-internal-components",
   "private": false,
-  "version": "0.0.4",
+  "version": "0.0.1",
   "type": "module",
-  "homepage": "https://github.com/australiangreens/ag-internal-components",
+  "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
   "description": "Library of components",
   "author": "The Australian Greens <webops@greens.org.au>",

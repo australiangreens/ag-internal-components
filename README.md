@@ -1,5 +1,3 @@
 # ag-internal-components
 
-Library of react components used across various apps
-
-test
+Library of MUI react components used across various apps.
