@@ -24,8 +24,9 @@ export default defineConfig((configEnv) => ({
     sourcemap: true,
     lib: {
       entry: {
+        // In the future we may want multiple entry points for different
+        // components etc
         index: './src/index.ts',
-        HelloWorld: './src/HelloWorld/index.tsx',
       },
       name: 'AgInternalComponents',
       formats: ['es', 'cjs'],
@@ -37,7 +38,7 @@ export default defineConfig((configEnv) => ({
   },
 }));
 
-function determineFileName(format: 'es' | 'esm', entryName: string): string {
+function determineFileName(format: 'es' | 'esm', entryName: string) {
   const moduleTypeDir = format === 'es' ? 'esm' : format;
   if (entryName === 'index') {
     return `${moduleTypeDir}/index.js`;
