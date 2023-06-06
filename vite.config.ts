@@ -22,6 +22,7 @@ export default defineConfig((configEnv) => ({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    target: 'es6',
     lib: {
       entry: {
         // In the future we may want multiple entry points for different
