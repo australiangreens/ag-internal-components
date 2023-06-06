@@ -4,7 +4,6 @@ import dts from 'vite-plugin-dts';
 import EsLint from 'vite-plugin-linter';
 import tsConfigPaths from 'vite-tsconfig-paths';
 const { EsLinter, linterPlugin } = EsLint;
-import * as packageJson from './package.json';
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => ({
@@ -34,8 +33,10 @@ export default defineConfig((configEnv) => ({
       fileName: determineFileName,
     },
     rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
+      // We don't want to include anything in node modules, this is a library
+      external: /node_modules/,
     },
+    minify: true,
   },
 }));
 

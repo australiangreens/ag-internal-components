@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
 export interface HelloWorldProps {
   text: string;
 }
