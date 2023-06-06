@@ -13,4 +13,7 @@ coverage
 # <tsconfigRootDir>/tsconfig.json
 vite.config.ts
 
+# Ditto
+vitest.config.ts
+
 

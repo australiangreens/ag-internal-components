@@ -19,10 +19,16 @@ export default function HelloWorld({ text }: HelloWorldProps) {
       <Typography variant="caption" display="block">
         <span>Just ensuring MUI is working as planned as a peer dependency</span>
       </Typography>
-      <Button variant="outlined" onClick={() => setNum((oldNum) => oldNum + 1)}>
+      <Button
+        variant="outlined"
+        onClick={() => setNum((oldNum) => oldNum + 1)}
+        aria-label="Increment"
+      >
         Hello I am a button
       </Button>
-      <p>This is some text: {text}</p>
+      <p>
+        This is some text: <span>{text}</span>
+      </p>
       <Paper>This number will incremember when button pressed: {num}</Paper>
     </>
   );
