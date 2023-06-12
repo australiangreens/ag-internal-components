@@ -3,7 +3,6 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import EsLint from 'vite-plugin-linter';
 import tsConfigPaths from 'vite-tsconfig-paths';
-import * as packageJson from './package.json';
 
 const { EsLinter, linterPlugin } = EsLint;
 
@@ -19,6 +18,7 @@ export default defineConfig((configEnv) => ({
     dts({
       include: ['src'],
     }),
+    // nodeResolve(),
   ],
   build: {
     outDir: 'dist',
@@ -35,16 +35,20 @@ export default defineConfig((configEnv) => ({
       fileName: determineFileName,
     },
     rollupOptions: {
-      external: [
-        // We need to set all peerDependencies as external to prevent them being
-        // included in the bundle.
-        ...Object.keys(packageJson.peerDependencies),
-
-        // We also need specify react/jsx-runtime too even thought we don't
-        // import it ourselves anywhere. Because we are using the react-jsx in
-        // tsconfig, it is actually imported and therefore would get bundled.
-        'react/jsx-runtime',
-      ],
+      // We want to make external anything that is not part of our project, so
+      // it doesn't get included in the bundle.
+      //
+      // If we only specified the entries in devDependencies, we'll still
+      // include all their transitive dependencies.
+      //
+      // If we use /node_modules/, we won't include these but rollup will
+      // convert all the imports to local paths, absolute on this machine.
+      //
+      // So, we use the functional form to ensure we only make external the
+      // actual imports that aren't local.
+      external: (id: string) => {
+        return !id.startsWith('/') && !id.startsWith('.');
+      },
     },
     minify: true,
   },
