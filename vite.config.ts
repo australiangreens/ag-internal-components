@@ -3,6 +3,8 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import EsLint from 'vite-plugin-linter';
 import tsConfigPaths from 'vite-tsconfig-paths';
+import * as packageJson from './package.json';
+
 const { EsLinter, linterPlugin } = EsLint;
 
 // https://vitejs.dev/config/
@@ -33,8 +35,16 @@ export default defineConfig((configEnv) => ({
       fileName: determineFileName,
     },
     rollupOptions: {
-      // We don't want to include anything in node modules, this is a library
-      external: /node_modules/,
+      external: [
+        // We need to set all peerDependencies as external to prevent them being
+        // included in the bundle.
+        ...Object.keys(packageJson.peerDependencies),
+
+        // We also need specify react/jsx-runtime too even thought we don't
+        // import it ourselves anywhere. Because we are using the react-jsx in
+        // tsconfig, it is actually imported and therefore would get bundled.
+        'react/jsx-runtime',
+      ],
     },
     minify: true,
   },
