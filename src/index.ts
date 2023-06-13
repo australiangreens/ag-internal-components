@@ -1,3 +1,5 @@
-export { default as HelloWorld } from './HelloWorld';
+export { default as ExampleComponent } from './ExampleComponent';
+export * from './ExampleComponent';
 
-export * from './HelloWorld';
+export { default as AgThemeProvider } from './AgThemeProvider';
+export * from './AgThemeProvider';

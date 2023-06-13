@@ -3,11 +3,11 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-export interface HelloWorldProps {
+export interface ExampleComponentProps {
   text: string;
 }
 
-export default function HelloWorld({ text }: HelloWorldProps) {
+export default function ExampleComponent({ text }: ExampleComponentProps) {
   const [num, setNum] = useState(0);
 
   return (
