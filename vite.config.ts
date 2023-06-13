@@ -18,7 +18,6 @@ export default defineConfig((configEnv) => ({
     dts({
       include: ['src'],
     }),
-    // nodeResolve(),
   ],
   build: {
     outDir: 'dist',

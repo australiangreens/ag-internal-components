@@ -21,7 +21,7 @@
       "ag-internal-components": ["src/index.ts"]
     },
     "typeRoots": ["node_modules/@types", "src/index.d.ts"],
-    "baseUrl": "src"
+    "baseUrl": "."
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
