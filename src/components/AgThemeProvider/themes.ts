@@ -1,5 +1,7 @@
 import { alpha, createTheme } from '@mui/material/styles';
 
+import './augmentations';
+
 export const internalAGSystemsTheme = createTheme({
   palette: {
     primary: {
@@ -139,22 +141,3 @@ export const fed21Theme = createTheme({
     },
   },
 });
-
-// See https://mui.com/material-ui/customization/typography/#adding-amp-disabling-variants
-declare module '@mui/material/styles' {
-  interface TypographyVariants {
-    explainer: React.CSSProperties;
-  }
-
-  // allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    explainer?: React.CSSProperties;
-  }
-}
-
-// Update the Typography's variant prop options
-declare module '@mui/material/Typography' {
-  interface TypographyPropsVariantOverrides {
-    explainer: true;
-  }
-}

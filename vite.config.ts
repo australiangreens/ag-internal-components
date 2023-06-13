@@ -28,6 +28,7 @@ export default defineConfig((configEnv) => ({
         // In the future we may want multiple entry points for different
         // components etc
         index: './src/index.ts',
+        augmentations: './src/augmentations.ts',
       },
       name: 'AgInternalComponents',
       formats: ['es', 'cjs'],

@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/styles';
 
 import { internalAGSystemsTheme, fed21Theme } from './themes';
 
