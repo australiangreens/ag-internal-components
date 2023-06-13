@@ -17,11 +17,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declarationMap": true,
-    "baseUrl": ".",
     "paths": {
       "ag-internal-components": ["src/index.ts"]
     },
-    "typeRoots": ["node_modules/@types", "src/index.d.ts"]
+    "typeRoots": ["node_modules/@types", "src/index.d.ts"],
+    "baseUrl": "src"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
