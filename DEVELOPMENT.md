@@ -14,3 +14,18 @@ this. However at the time it was not a priority.
 
 Also, each component will likely be relatively stand alone, so using relative
 paths for local imports unlikely to be arduous, at least in the near term.
+
+## Yarn/npm linking
+
+I kept running into issues when trying to work on this library and test that it
+can be properly imported into our of our apps by using `yarn link`.
+Specifically, would get an error that starts with:
+
+> Error: Invalid hook call. Hooks can only be called inside of the body of a
+> function component
+
+Turns out its not expected to work. It causes multiple copy of react to exist:
+<https://github.com/facebook/react/issues/14257>.
+
+So don't try it like I did, unless you make use of the workarounds mentioned in
+the issue.

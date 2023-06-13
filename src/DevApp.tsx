@@ -1,9 +1,10 @@
-import { HelloWorld } from '.';
+import { AgThemeProvider } from '.';
+import { ExampleComponent } from '.';
 
 export default function DevApp() {
   return (
-    <>
-      <HelloWorld text="Some text" />
-    </>
+    <AgThemeProvider name="fed21">
+      <ExampleComponent text="Some text" />
+    </AgThemeProvider>
   );
 }

@@ -17,7 +17,7 @@ export default function ExampleComponent({ text }: ExampleComponentProps) {
       </Typography>
 
       <Typography variant="caption" display="block">
-        <span>Just ensuring MUI is working as planned as a peer dependency. v0.0.10</span>
+        <span>Just ensuring MUI is working as planned as a peer dependency. v0.0.11</span>
       </Typography>
       <Button
         variant="outlined"
