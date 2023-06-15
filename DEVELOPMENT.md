@@ -33,7 +33,8 @@ the issue.
 ## Typescript module augmentation
 
 Any files named `augmentations.d.ts` will be concatenated into
-`dist/augmentations.d.ts` after a build.
+`dist/augmentations.d.ts` after a build. This is exported by the main entry
+point.
 
 This was first done for the AgThemeProvider component, which adds new variants
 to MUI's Typography component. For the typing to work, we need to use module
