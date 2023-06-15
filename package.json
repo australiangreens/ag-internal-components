@@ -1,7 +1,7 @@
 {
   "name": "@australiangreens/ag-internal-components",
   "private": false,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "type": "module",
   "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && sh ./scripts/post-build.sh",
     "preview": "vite preview",
     "eslint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "test": "vitest run",
@@ -20,7 +20,7 @@
     "test:watch": "vitest",
     "### LIFECYCLE SCRIPTS ###": "See https://yarnpkg.com/advanced/lifecycle-scripts",
     "prepare": "husky install",
-    "prepublishOnly": "yarn eslint && yarn test && yarn build && sh ./scripts/dist-cleanup.sh",
+    "prepublishOnly": "yarn eslint && yarn test && yarn build",
     "### HUSKY GIT HOOKS ###": "Called by husky pre-commit and pre-push scripts",
     "prepush": "sh ./scripts/githooks/pre-push.sh",
     "precommit": "sh ./scripts/githooks/pre-commit.sh",

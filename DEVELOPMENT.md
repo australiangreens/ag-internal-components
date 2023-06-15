@@ -29,3 +29,16 @@ Turns out its not expected to work. It causes multiple copy of react to exist:
 
 So don't try it like I did, unless you make use of the workarounds mentioned in
 the issue.
+
+## Typescript module augmentation
+
+Any files named `augmentations.d.ts` will be concatenated into
+`dist/augmentations.d.ts` after a build.
+
+This was first done for the AgThemeProvider component, which adds new variants
+to MUI's Typography component. For the typing to work, we need to use module
+augmentation as per
+<https://mui.com/material-ui/customization/typography/#adding-amp-disabling-variants>
+
+Things like `declare module '@mui/material/styles' {` aren't included in
+typescript output, so we have a script to copy them over.

@@ -1,7 +1,5 @@
 import { alpha, createTheme } from '@mui/material/styles';
 
-import './augmentations';
-
 export const internalAGSystemsTheme = createTheme({
   palette: {
     primary: {

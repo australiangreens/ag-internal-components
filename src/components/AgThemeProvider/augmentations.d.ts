@@ -1,5 +1,6 @@
 // See https://mui.com/material-ui/customization/typography/#adding-amp-disabling-variants
 // and https://github.com/mui/material-ui/issues/31097
+// and https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation
 
 import '@mui/material/styles';
 import '@mui/material/Typography';

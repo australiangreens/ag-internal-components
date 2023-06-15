@@ -20,7 +20,7 @@
     "paths": {
       "ag-internal-components": ["src/index.ts"]
     },
-    "typeRoots": ["node_modules/@types", "src/index.d.ts"],
+    "typeRoots": ["node_modules/@types"],
     "baseUrl": "."
   },
   "include": ["src"],
