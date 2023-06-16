@@ -1,10 +1,12 @@
 import { PropsWithChildren } from 'react';
-import { ThemeProvider } from '@mui/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 import { internalAGSystemsTheme, fed21Theme } from './themes';
 
+export type AgThemeName = 'internal' | 'fed21';
+
 export interface AgThemeProviderProps {
-  name?: 'internal' | 'fed21';
+  name?: AgThemeName;
 }
 
 export default function AgThemeProvider({
