@@ -17,10 +17,12 @@ do
   echo -n "// From $i: $file" >> $AUG_OUT
   # Remove comments before including file
   sed '/^[[:blank:]]*\/\//d;s/\/\/.*//' $file >> $AUG_OUT
-  echo "Done"
   i=$(($i+1))
+  echo " ✓"
 done
 echo "// --- END AUGMENTATIONS SECTION ---\n" >> $AUG_OUT
 
 cat "$INDEX_TMP" >> $AUG_OUT
 rm "$INDEX_TMP"
+
+echo ""

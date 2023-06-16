@@ -1,10 +1,12 @@
-import { AgThemeProvider } from '.';
-import { ExampleComponent } from '.';
+import { AgThemeProvider, SaladBarProvider } from '.';
+import DevDemo from './DevDemo';
 
 export default function DevApp() {
   return (
     <AgThemeProvider name="fed21">
-      <ExampleComponent text="Some text" />
+      <SaladBarProvider>
+        <DevDemo />
+      </SaladBarProvider>
     </AgThemeProvider>
   );
 }

@@ -15,6 +15,16 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@australiangreens/ag-error-jest@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@australiangreens/ag-error-jest/-/ag-error-jest-0.1.9.tgz#f8607b00e4ecfb994c28a286b89247a5e463953c"
+  integrity sha512-T28ZWUq2DGv8hhTaA9n8XTw9Bj6u9w0wrGQ6+hf8/46hMHrJ5wBJO975dqg4aDJKertEBE72+F3R7odzHbsurA==
+
+"@australiangreens/ag-error@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@australiangreens/ag-error/-/ag-error-0.1.7.tgz#213fb898122876335cd51836aaea16d9c2103923"
+  integrity sha512-ltcA6ZZ4vpx2mx9ogWnUcXMCLw3KiM4gr63HzzSp9hf6Wk+30WulXPZYo4O8270dyqsm4JOtO973ueR2/x8jZg==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.21.4":
   version "7.21.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.21.4.tgz#d0fa9e4413aca81f2b23b9442797bda1826edb39"

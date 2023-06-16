@@ -7,5 +7,8 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     setupFiles: './setupTests.ts',
+    deps: {
+      registerNodeLoader: true, // [LIST-461]
+    },
   },
 });
