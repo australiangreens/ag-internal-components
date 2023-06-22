@@ -29,7 +29,7 @@ type SaladBarProps = {
   children: React.ReactNode;
 };
 
-const SaladBar = ({ children, ...snackbarProps }: SaladBarProps) => {
+export default function SaladBarProvider({ children, ...snackbarProps }: SaladBarProps) {
   const [open, setOpen] = useState(false);
 
   // We use a ref instead of a state to store the actual data, because we want
@@ -202,6 +202,4 @@ const SaladBar = ({ children, ...snackbarProps }: SaladBarProps) => {
       </Snackbar>
     </SaladBarContext.Provider>
   );
-};
-
-export default SaladBar;
+}
