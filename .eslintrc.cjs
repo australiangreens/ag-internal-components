@@ -66,6 +66,10 @@ module.exports = {
 
     // eslint-plugin-tsdoc rules
     'tsdoc/syntax': 'warn',
+
+    // It can be useful to effectively re-export the props of another component
+    // for some wrappers. E.g. SaladBarProviderProps is same as SnackbarProps
+    '@typescript-eslint/no-empty-interface': 'off',
   },
   parserOptions: {
     project: './tsconfig.json',

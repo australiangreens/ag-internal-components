@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar, { SnackbarProps } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -25,11 +25,9 @@ const alertWithLinearProgressStyle = {
   borderBottomRightRadius: '0px',
 };
 
-type SaladBarProps = {
-  children: React.ReactNode;
-};
+export interface SaladBarProviderProps extends SnackbarProps {}
 
-export default function SaladBarProvider({ children, ...snackbarProps }: SaladBarProps) {
+export default function SaladBarProvider({ children, ...snackbarProps }: SaladBarProviderProps) {
   const [open, setOpen] = useState(false);
 
   // We use a ref instead of a state to store the actual data, because we want
