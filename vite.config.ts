@@ -49,7 +49,7 @@ export default defineConfig((configEnv) => ({
         return !id.startsWith('/') && !id.startsWith('.');
       },
     },
-    minify: true,
+    minify: false,
   },
 }));
 
