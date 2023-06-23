@@ -48,6 +48,10 @@ export default defineConfig((configEnv) => ({
       external: (id: string) => {
         return !id.startsWith('/') && !id.startsWith('.');
       },
+      output: {
+        // [LIST-461]
+        interop: 'auto',
+      },
     },
     minify: false,
   },
