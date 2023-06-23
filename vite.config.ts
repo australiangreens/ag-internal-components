@@ -53,7 +53,7 @@ export default defineConfig((configEnv) => ({
         interop: 'auto',
       },
     },
-    minify: false,
+    minify: true,
   },
 }));
 
