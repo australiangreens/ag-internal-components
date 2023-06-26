@@ -10,6 +10,12 @@ export const defaultSnackbarProps = {
   disableWindowBlurListener: false,
 };
 
+export const defaultSaladBarProps = {
+  shouldClose: (_event: Event | React.SyntheticEvent<Element, Event>, reason: string) => {
+    return reason !== 'clickaway';
+  },
+};
+
 export const defaultEnqueueNotificationOptions = {
   message: '',
   severity: 'info',

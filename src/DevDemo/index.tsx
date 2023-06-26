@@ -12,7 +12,7 @@ export default function DevDemo() {
     enqueueNotification({ message: `First message`, severity: 'success' });
     enqueueNotification({ message: `Second message`, severity: 'success' });
     enqueueNotification({ message: `Third message`, severity: 'success' });
-    // [LIST-471]
+    // [LIST-471] Avoid loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -24,7 +24,6 @@ export default function DevDemo() {
       <Button
         variant="outlined"
         onClick={() => {
-          // [LIST-472] Not very useful for demonstrating the queuing
           enqueueNotification({ message: `Hello I am a message ${saladCount}`, severity: 'info' });
           setSaladCount((prev) => prev + 1);
         }}

@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react';
-import Snackbar, { SnackbarProps } from '@mui/material/Snackbar';
+import Snackbar, { SnackbarProps, SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import SaladBarContext, { NotificationType } from './SaladBarContext';
-import { defaultSnackbarProps, defaultEnqueueNotificationOptions } from './defaults';
+import {
+  defaultSaladBarProps,
+  defaultSnackbarProps,
+  defaultEnqueueNotificationOptions,
+} from './defaults';
 
 const MAX_QUEUE_LENGTH = 100;
 const MAX_QUEUE_HIT_REPORT_INTERVAL = 2000;
@@ -25,9 +29,23 @@ const alertWithLinearProgressStyle = {
   borderBottomRightRadius: '0px',
 };
 
-export interface SaladBarProviderProps extends SnackbarProps {}
+export type SaladBarCloseReason = SnackbarCloseReason | 'closeAlert';
 
-export default function SaladBarProvider({ children, ...snackbarProps }: SaladBarProviderProps) {
+export interface SaladBarProviderProps extends SnackbarProps {
+  /** Called when an event triggers closing of currently displayed snackbar.
+   * Default implementation returns false if reason is 'clickaway', otherwise
+   * true.*/
+  shouldClose?: (
+    event: Event | React.SyntheticEvent<Element, Event>,
+    reason: SaladBarCloseReason
+  ) => boolean;
+}
+
+export default function SaladBarProvider({
+  children,
+  shouldClose = defaultSaladBarProps.shouldClose,
+  ...snackbarProps
+}: SaladBarProviderProps) {
   const [open, setOpen] = useState(false);
 
   // We use a ref instead of a state to store the actual data, because we want
@@ -105,21 +123,11 @@ export default function SaladBarProvider({ children, ...snackbarProps }: SaladBa
     return queueRef.current.splice(index, 1);
   };
 
-  // Callback fired when the component requests to be closed
-  // const handleClose = (_event, reason) => {
-  //   // We ignore click away, letting user continue with UI while its still
-  //   // displayed
-  //   if (reason === 'clickaway') return;
-
-  //   setOpen(false);
-  // };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleClose = (_event: Event | React.SyntheticEvent<Element, Event>) => {
-    // We ignore click away, letting user continue with UI while its still
-    // displayed
-
-    setOpen(false);
+  const handleClose = (
+    event: Event | React.SyntheticEvent<Element, Event>,
+    reason: SaladBarCloseReason
+  ) => {
+    if (shouldClose(event, reason)) setOpen(false);
   };
 
   // Callback fired before the transition is exiting.
@@ -179,7 +187,7 @@ export default function SaladBarProvider({ children, ...snackbarProps }: SaladBa
       >
         <div>
           <Alert
-            onClose={handleClose}
+            onClose={(event) => handleClose(event, 'closeAlert')}
             severity={currentNotification.severity}
             variant={'filled'}
             icon={
