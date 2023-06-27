@@ -1,28 +1,38 @@
-import { useState } from 'react';
-import Button from '@mui/material/Button';
+import { SyntheticEvent, useState } from 'react';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 
-import { ExampleComponent, useSaladBar } from '..';
+import ExampleComponentDemo from './ExampleComponentDemo';
+import SaladBarDemo from './SaladBarDemo';
+
+const demoComponents = ['ExampleComponent', 'SaladBar'];
+
+type ComponentTabId = (typeof demoComponents)[number];
 
 export default function DevDemo() {
-  const [saladCount, setSaladCount] = useState(0);
-
-  const { enqueueNotification } = useSaladBar();
+  const [tabId, setTabId] = useState<ComponentTabId>('ExampleComponent');
 
   return (
-    <>
-      <ExampleComponent text="Some text" />
-      <br />
-      <br />
-      <Button
-        variant="outlined"
-        onClick={() => {
-          enqueueNotification({ message: `Hello I am a message ${saladCount}`, severity: 'info' });
-          setSaladCount((prev) => prev + 1);
+    <Box sx={{ width: '100%' }}>
+      <Tabs
+        value={tabId}
+        onChange={(event: SyntheticEvent, newValue: string) => {
+          setTabId(newValue);
         }}
-        aria-label="Enqueue SaladBar message"
       >
-        Enqueue SaladBar message
-      </Button>
-    </>
+        {demoComponents.map((x) => (
+          <Tab key={x} value={x} label={x} />
+        ))}
+      </Tabs>
+      <br />
+      <br />
+
+      <Box>
+        {tabId === 'ExampleComponent' && <ExampleComponentDemo />}
+
+        {tabId === 'SaladBar' && <SaladBarDemo />}
+      </Box>
+    </Box>
   );
 }
