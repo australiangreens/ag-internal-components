@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 
-import PageLayout from '../components/PageLayout';
-import ExampleComponent from '../components/ExampleComponent';
+import { PageLayout, ExampleComponent } from '..';
 import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
 import { NavbarContext } from '.';
 

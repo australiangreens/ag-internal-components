@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 
-import { useSaladBar } from '..';
-import PageLayout from '../components/PageLayout';
+import { PageLayout, useSaladBar } from '..';
 import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
 import { NavbarContext } from '.';
 
