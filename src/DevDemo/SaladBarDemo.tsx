@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 
 import { useSaladBar } from '..';
+import PageLayout from '../components/PageLayout';
+import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
+import { NavbarContext } from '.';
 
 export default function SaladBarDemo() {
+  const { open: navBarOpen } = useContext(NavbarContext);
   const [saladCount, setSaladCount] = useState(0);
 
   const { enqueueNotification } = useSaladBar();
 
   return (
-    <>
+    <PageLayout
+      titleText={'ExampleComponent'}
+      navBarOpen={navBarOpen}
+      navBarWidthOpen={NAVBAR_WIDTH_OPENED}
+      navBarWidthClosed={NAVBAR_WIDTH_CLOSED}
+    >
       <Button
         variant="outlined"
         onClick={() => {
@@ -23,6 +32,6 @@ export default function SaladBarDemo() {
       >
         Enqueue SaladBar message
       </Button>
-    </>
+    </PageLayout>
   );
 }

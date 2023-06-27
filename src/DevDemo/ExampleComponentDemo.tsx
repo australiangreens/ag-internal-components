@@ -1,5 +1,21 @@
+import { useContext } from 'react';
+
+import PageLayout from '../components/PageLayout';
 import ExampleComponent from '../components/ExampleComponent';
+import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
+import { NavbarContext } from '.';
 
 export default function ExampleComponentDemo() {
-  return <ExampleComponent text="Some text" />;
+  const { open: navBarOpen } = useContext(NavbarContext);
+
+  return (
+    <PageLayout
+      titleText={'ExampleComponent'}
+      navBarOpen={navBarOpen}
+      navBarWidthOpen={NAVBAR_WIDTH_OPENED}
+      navBarWidthClosed={NAVBAR_WIDTH_CLOSED}
+    >
+      <ExampleComponent text="Some text" />
+    </PageLayout>
+  );
 }
