@@ -1,10 +1,16 @@
-import React, { useRef, useState } from 'react';
-import Snackbar, { SnackbarProps, SnackbarCloseReason } from '@mui/material/Snackbar';
+import React, { useRef, useState, createContext, useCallback } from 'react';
+import Snackbar, { SnackbarProps } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import SaladBarContext, { NotificationType } from './SaladBarContext';
+import {
+  Notification,
+  SaladBarCloseReason,
+  SaladBarState,
+  SaladBarActions,
+  SaladBarContext,
+} from './types';
 import {
   defaultSaladBarProps,
   defaultSnackbarProps,
@@ -29,9 +35,19 @@ const alertWithLinearProgressStyle = {
   borderBottomRightRadius: '0px',
 };
 
-export type SaladBarCloseReason = SnackbarCloseReason | 'closeAlert';
+// Note: Must be at at this scope, otherwise useEffect will loop infinitely
+const defaultOverrideState = {};
+const defaultOverrideActions = {};
+
+export const Context = createContext<SaladBarContext | null>(null);
 
 export interface SaladBarProviderProps extends SnackbarProps {
+  /** Allow overriding the state of the SaladBar (for tests etc)*/
+  overrideState?: Partial<SaladBarState>;
+
+  /** Allow overriding the actions of the SaladBar (for tests etc)*/
+  overrideActions?: Partial<SaladBarActions>;
+
   /** Called when an event triggers closing of currently displayed snackbar.
    * Default implementation returns false if reason is 'clickaway', otherwise
    * true.*/
@@ -42,23 +58,30 @@ export interface SaladBarProviderProps extends SnackbarProps {
 }
 
 export default function SaladBarProvider({
-  children,
+  overrideState = defaultOverrideState,
+  overrideActions = defaultOverrideActions,
   shouldClose = defaultSaladBarProps.shouldClose,
+  children,
   ...snackbarProps
 }: SaladBarProviderProps) {
-  const [open, setOpen] = useState(false);
+  const [{ open }, setSaladBarState] = useState({ open: false });
 
   // We use a ref instead of a state to store the actual data, because we want
   // queue to be persistent across the whole lifetime of component. I considered
   // using yocto-queue because it would be O(1) instead of O(n), but its not
   // designed to access the head without removing it and its not going to make
   // much difference anyway.
-  const queueRef = useRef<NotificationType[]>([]);
+  const queueRef = useRef<Notification[]>([]);
 
   const limitLastHitAt = useRef(Date.now());
   const limitHitCountSinceLastReport = useRef(0);
 
-  const enqueueNotification = (notification = {}) => {
+  const setOpen = useCallback((newVal: boolean) => {
+    setSaladBarState({ open: newVal });
+  }, []);
+
+  // TODO: Wrap the enqueue functions with useCallback hook too?
+  const enqueueNotification = (notification: Notification = {}) => {
     limitHitCountSinceLastReport.current += 1;
     if (queueRef.current.length >= MAX_QUEUE_LENGTH) {
       // If the queue length is hit, probably stuck in some sort of loop, so
@@ -79,11 +102,11 @@ export default function SaladBarProvider({
     };
 
     // Add to the end of queue
-    queueRef.current.push(newNotification as NotificationType);
+    queueRef.current.push(newNotification as Notification);
 
     // If the queue was previously empty, then open the snackbar. We don't do it
     // whenever enqueueNotification is called since it will mess up transitions
-    if (queueRef.current.length === 1) setOpen(true);
+    if (queueRef.current.length === 1) setSaladBarState({ open: true });
 
     return newNotification.key;
   };
@@ -108,7 +131,7 @@ export default function SaladBarProvider({
    *
    * @returns The removed notification
    */
-  const removeNotification = (key: unknown) => {
+  const removeNotification = (key: Notification['key']) => {
     const index = queueRef.current.findIndex((x) => x.key === key);
     if (index === -1) return;
 
@@ -116,7 +139,7 @@ export default function SaladBarProvider({
       // If its at the front of the queue, it is either currently being
       // displayed or in process of being closed. Either way, we can just set
       // open to false
-      setOpen(false);
+      setSaladBarState({ open: false });
       return queueRef.current[0];
     }
     // Otherwise we just remove it from the queue, it won't need to transition
@@ -127,7 +150,7 @@ export default function SaladBarProvider({
     event: Event | React.SyntheticEvent<Element, Event>,
     reason: SaladBarCloseReason
   ) => {
-    if (shouldClose(event, reason)) setOpen(false);
+    if (shouldClose(event, reason)) setSaladBarState({ open: false });
   };
 
   // Callback fired before the transition is exiting.
@@ -139,7 +162,7 @@ export default function SaladBarProvider({
     queueRef.current.shift();
 
     // If there is still something on the queue, then re-open
-    if (queueRef.current.length > 0) setOpen(true);
+    if (queueRef.current.length > 0) setSaladBarState({ open: true });
   };
 
   // The notification to display is the one at head of queue
@@ -155,24 +178,27 @@ export default function SaladBarProvider({
   }
 
   // Note the order of props in Snackbar, we don't allow overriding open and
-  // onClose.
+  // onClose directly.
+  const snackbarFinalProps = {
+    ...defaultSnackbarProps,
+    ...snackbarProps,
+  };
 
-  const snackbarFinalProps = { ...defaultSnackbarProps, ...snackbarProps };
+  const value: SaladBarContext = {
+    open,
+    setOpen,
+    enqueueNotification,
+    enqueueSuccessNotification,
+    enqueueInfoNotification,
+    enqueueWarningNotification,
+    enqueueErrorNotification,
+    removeNotification,
+    ...overrideState,
+    ...overrideActions,
+  };
 
   return (
-    // Should be resolved when we move to React >= 18
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    <SaladBarContext.Provider
-      value={{
-        enqueueNotification,
-        enqueueSuccessNotification,
-        enqueueInfoNotification,
-        enqueueWarningNotification,
-        enqueueErrorNotification,
-        removeNotification,
-      }}
-    >
+    <Context.Provider value={value}>
       {children}
       <Snackbar
         {...snackbarFinalProps}
@@ -206,6 +232,6 @@ export default function SaladBarProvider({
           {currentNotification.progressIndicator === 'linear' && <LinearProgress color="primary" />}
         </div>
       </Snackbar>
-    </SaladBarContext.Provider>
+    </Context.Provider>
   );
 }

@@ -1,9 +1,13 @@
 import { useContext } from 'react';
-import SaladBarContext from './SaladBarContext';
+
+import { Context } from './SaladBarContext';
+import { ContextError } from '../../errors/ContextError';
 
 /**
  * Use the `useSaladBar` hook in components to access the enqueueNotification()
  * method to add a snackbar message to queue.
+ *
+ * Must be used inside a <SaladBarProvider>
  *
  * Example:
  *
@@ -21,6 +25,12 @@ import SaladBarContext from './SaladBarContext';
  * enqueueInfoNotification('hello');
  * ```
  */
-export default function useSaladBar() {
-  return useContext(SaladBarContext);
+export function useSaladBar() {
+  const context = useContext(Context);
+
+  if (context === null) {
+    throw new ContextError('Error: Tried to useSaladBar outside of a <SaladBarProvider>');
+  }
+
+  return context;
 }

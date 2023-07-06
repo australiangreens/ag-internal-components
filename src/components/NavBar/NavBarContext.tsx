@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useContext,
-  PropsWithChildren,
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
+import { createContext, useContext, PropsWithChildren, useState, useCallback } from 'react';
 import { ContextError } from '../../errors/ContextError';
 
 export type NavBarState = {
@@ -37,9 +30,9 @@ export const NavBarProvider = ({
   const [{ open }, setNavBarState] = useState<NavBarState>({ open: true });
 
   // TODO: Is this needed? We don't have it backed by anything like localstorage
-  useEffect(() => {
-    if (overrideState.open) return;
-  }, [overrideState]);
+  // useEffect(() => {
+  //   if (overrideState.open) return;
+  // }, [overrideState]);
 
   // We allow setOpen to be a boolean or a function, same as a useState() hook
   // However this will have to be dependent on open, so not memoized really...
