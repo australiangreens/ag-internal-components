@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 
-import { PageLayout, useSaladBar } from '..';
-import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
-import { useNavBar } from '..';
+import { PageLayout, useSaladBar, NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED, useNavBar } from '..';
 
 export default function SaladBarDemo() {
   const { open: navBarOpen } = useNavBar();

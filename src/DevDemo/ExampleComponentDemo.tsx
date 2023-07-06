@@ -1,6 +1,10 @@
-import { PageLayout, ExampleComponent } from '..';
-import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
-import { useNavBar } from '..';
+import {
+  PageLayout,
+  ExampleComponent,
+  NAVBAR_WIDTH_OPENED,
+  NAVBAR_WIDTH_CLOSED,
+  useNavBar,
+} from '..';
 
 export default function ExampleComponentDemo() {
   const { open: navBarOpen } = useNavBar();
