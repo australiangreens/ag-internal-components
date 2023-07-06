@@ -1,14 +1,13 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 
 import { PageLayout, useSaladBar } from '..';
 import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
-import { NavbarContext } from '.';
+import { useNavBar } from '..';
 
 export default function SaladBarDemo() {
-  const { open: navBarOpen } = useContext(NavbarContext);
+  const { open: navBarOpen } = useNavBar();
   const [saladCount, setSaladCount] = useState(0);
-
   const { enqueueNotification } = useSaladBar();
 
   return (

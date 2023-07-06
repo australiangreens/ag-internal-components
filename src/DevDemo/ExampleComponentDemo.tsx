@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-
 import { PageLayout, ExampleComponent } from '..';
 import { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
-import { NavbarContext } from '.';
+import { useNavBar } from '..';
 
 export default function ExampleComponentDemo() {
-  const { open: navBarOpen } = useContext(NavbarContext);
+  const { open: navBarOpen } = useNavBar();
 
   return (
     <PageLayout
