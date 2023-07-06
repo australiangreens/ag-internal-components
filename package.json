@@ -1,7 +1,7 @@
 {
   "name": "@australiangreens/ag-internal-components",
   "private": false,
-  "version": "0.0.25",
+  "version": "0.0.26",
   "type": "module",
   "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
@@ -38,7 +38,8 @@
   },
   "dependencies": {
     "@australiangreens/ag-error": "^0.1.7",
-    "@australiangreens/ag-error-jest": "^0.1.9"
+    "@australiangreens/ag-error-jest": "^0.1.9",
+    "souvlaki": "^0.3.0"
   },
   "peerDependencies": {
     "@emotion/react": "11.10.5",
