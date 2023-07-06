@@ -10,6 +10,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:jsx-a11y/recommended',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   env: {
     browser: true,
@@ -29,7 +30,6 @@ module.exports = {
         allowForLoopAfterthoughts: true,
       },
     ],
-
     // @typescript-eslint rules
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-use-before-define': [
@@ -57,16 +57,13 @@ module.exports = {
         },
       },
     ],
-
     // react rules
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',
     'react/destructuring-assignment': ['error', 'always'],
-
     // eslint-plugin-tsdoc rules
     'tsdoc/syntax': 'warn',
-
     // It can be useful to effectively re-export the props of another component
     // for some wrappers. E.g. SaladBarProviderProps is same as SnackbarProps
     '@typescript-eslint/no-empty-interface': 'off',
