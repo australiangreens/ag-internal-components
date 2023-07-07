@@ -1,4 +1,7 @@
+import React from 'react';
 import type { Preview } from '@storybook/react';
+
+import AgTheme from '../src/providers/AgTheme';
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +13,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <AgTheme>
+        <Story />
+      </AgTheme>
+    ),
+  ],
 };
 
 export default preview;
