@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 export interface ExampleComponentProps {
+  /** Test */
   text: string;
 }
 

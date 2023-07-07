@@ -6,8 +6,9 @@ import { useNavBar } from './NavBarContext';
 
 export { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './Styling';
 
-// eslint-disable-next-line
-type NavbarProps = {
+export type NavbarProps = {
+  /** Set the datatest-id on the root element for using reactdom's getByTestId()
+   * function */
   'data-testid'?: string;
 };
 
