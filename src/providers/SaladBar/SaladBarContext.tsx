@@ -80,8 +80,7 @@ export default function SaladBarProvider({
     setSaladBarState({ open: newVal });
   }, []);
 
-  // TODO: Wrap the enqueue functions with useCallback hook too?
-  const enqueueNotification = (notification: Notification = {}) => {
+  const enqueueNotification = useCallback((notification: Notification = {}) => {
     limitHitCountSinceLastReport.current += 1;
     if (queueRef.current.length >= MAX_QUEUE_LENGTH) {
       // If the queue length is hit, probably stuck in some sort of loop, so
@@ -109,7 +108,7 @@ export default function SaladBarProvider({
     if (queueRef.current.length === 1) setSaladBarState({ open: true });
 
     return newNotification.key;
-  };
+  }, []);
 
   const enqueueSuccessNotification = (message = '', options = {}) =>
     enqueueNotification({ message, severity: 'success', ...options });
