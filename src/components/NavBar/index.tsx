@@ -14,6 +14,15 @@ export type NavbarProps = {
 
 // TODO: Add in more common elements (or make another component) for user/organisations/logout etc?
 // TODO: Should there be two sets of 'children', one for the list and one for dialogs etc?
+
+/**
+ * A (currently uncontrolled) styled navigation bar wth a context provider to
+ * retrieve its current open/closed state. At this point in time its pretty
+ * unopinionated, it just renders whatever children it is given. THe
+ * NavBarDarkStyledList component can be used for consistent styling against the
+ * background. We'll be changing the way we use NavBars soon anyway, so not much
+ * point solidying the patterns yet.
+ */
 export default function NavBar({
   'data-testid': dataTestId,
   children,

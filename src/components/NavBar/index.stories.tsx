@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListIcon from '@mui/icons-material/List';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link as RouterLink, MemoryRouter, useLocation } from 'react-router-dom';
+import { Title, Description, Primary, Controls, Stories } from '@storybook/blocks';
 
 import NavBar, { NavBarProvider, NavBarDarkStyledList } from '.';
 
@@ -26,6 +27,34 @@ const meta = {
     children: {
       control: { type: null },
       description: 'Contents of the navbar',
+    },
+  },
+
+  // Below generates (more or less) the same as the default autodocs template
+  // does. Just want to add a note saying it might look weird.
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <p>
+            <em>
+              Note: The navbar won&apos;t show up correctly on this page. Open the With Content
+              story instead.
+            </em>
+          </p>
+          <Description />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
     },
   },
 } satisfies Meta<typeof NavBar>;

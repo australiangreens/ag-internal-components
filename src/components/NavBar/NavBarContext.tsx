@@ -29,24 +29,6 @@ export const NavBarProvider = ({
 }: PropsWithChildren<NavBarProviderProps>) => {
   const [{ open }, setNavBarState] = useState<NavBarState>({ open: true });
 
-  // TODO: Is this needed? We don't have it backed by anything like localstorage
-  // useEffect(() => {
-  //   if (overrideState.open) return;
-  // }, [overrideState]);
-
-  // We allow setOpen to be a boolean or a function, same as a useState() hook
-  // However this will have to be dependent on open, so not memoized really...
-  // const setOpen = useCallback((valOrFn: SetStateAction<boolean>) => {
-  //   let newVal;
-
-  //   if (typeof valOrFn === 'function') {
-  //     newVal = valOrFn(open);
-  //   } else {
-  //     newVal = valOrFn;
-  //   }
-  //   setNavBarState({ open: newVal });
-  // }, []);
-
   const setOpen = useCallback((newVal: boolean) => {
     setNavBarState({ open: newVal });
   }, []);
