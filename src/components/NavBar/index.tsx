@@ -15,6 +15,9 @@ export type NavbarProps = {
 // TODO: Add in more common elements (or make another component) for user/organisations/logout etc?
 // TODO: Should there be two sets of 'children', one for the list and one for dialogs etc?
 
+// TODO: Rather than exporting the min and max widths, would it make more sense
+// TODO: to just share them via the context provider?
+
 /**
  * A (currently uncontrolled) styled navigation bar wth a context provider to
  * retrieve its current open/closed state. At this point in time its pretty
