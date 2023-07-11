@@ -2,8 +2,19 @@
 /* eslint-disable react/display-name */
 import { createHelper } from 'souvlaki';
 
-import SaladBarProvider from './SaladBarContext';
+import SaladBarProvider, { SaladBarProviderProps } from './SaladBarContext';
 
-export const withSaladBarProvider = createHelper(() => ({ children }) => (
-  <SaladBarProvider>{children}</SaladBarProvider>
-));
+export const withSaladBar = createHelper(
+  (
+      props: SaladBarProviderProps = { autoHideDuration: 1 },
+      state: Partial<unknown> = {},
+      actions: Partial<unknown> = {}
+    ) =>
+    ({ children }) => {
+      return (
+        <SaladBarProvider {...props} overrideState={state} overrideActions={actions}>
+          {children}
+        </SaladBarProvider>
+      );
+    }
+);
