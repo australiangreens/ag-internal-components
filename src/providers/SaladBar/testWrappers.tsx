@@ -4,7 +4,7 @@ import { createHelper } from 'souvlaki';
 
 import SaladBarProvider, { SaladBarProviderProps } from './SaladBarContext';
 
-export const withSaladBar = createHelper(
+export const withSaladBarProvider = createHelper(
   (
       props: SaladBarProviderProps = { autoHideDuration: 1 },
       state: Partial<unknown> = {},
