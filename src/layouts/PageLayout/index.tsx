@@ -81,7 +81,15 @@ export type PageLayoutProps = PropsWithChildren<
 >;
 
 /**
- * To be used by all Page components in our apps to
+ * To be used by all Page components in our apps to use a standard Top Bar, Left
+ * Panel, Right Panel and Page Contents within the contents for a uniform look.
+ *
+ * At present it is somewhat crudely adapted from the code used in the
+ * ListManager app. It _assumes_ NavBar component on the left.
+ *
+ * It is in the process of being tidied up, and as such is very much in flux.
+ * The end goal is to unify the left most NavBar component with the PageLayout,
+ * but this has to be done incrementally.
  */
 export default function PageLayout({
   children,

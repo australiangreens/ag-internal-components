@@ -1,7 +1,5 @@
-import { Box, IconButton, styled } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, IconButton, styled, Typography } from '@mui/material';
+import {ArrowForward as ForwardIcon, ArrowBack as BackIcon} from '@mui/icons-material';
 
 const TOP_STRIPE_HEIGHT = 24;
 const TITLE_BAR_HEIGHT = 64;
@@ -130,7 +128,7 @@ export default function TopBar({
               size="large"
             >
               {' '}
-              <ArrowForwardIcon />
+              <ForwardIcon />
             </IconButton>
           )}
 
@@ -148,7 +146,7 @@ export default function TopBar({
               size="large"
             >
               {' '}
-              <ArrowBackIcon />
+              <BackIcon />
             </IconButton>
           )}
         </Box>

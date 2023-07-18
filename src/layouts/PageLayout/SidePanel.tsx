@@ -1,11 +1,6 @@
 import { PropsWithChildren } from 'react';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Drawer, { DrawerProps } from '@mui/material/Drawer';
-import Box, { BoxProps } from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import { styled } from '@mui/material';
+import {Box, BoxProps, Typography, styled, Drawer, DrawerProps, IconButton} from '@mui/material';
+import {ArrowBack as BackIcon, ArrowForward as ForwardIcon} from '@mui/icons-material';
 
 export const DEFAULT_PANEL_WIDTH = 400;
 
@@ -150,7 +145,7 @@ export default function SidePanel({
 
             {showCloseArrow && (
               <IconButton onClick={onClose} size="large" aria-label="Close left side panel">
-                <ArrowBackIcon data-testid="arrowbackicon" />{' '}
+                <BackIcon data-testid="arrowbackicon" />{' '}
               </IconButton>
             )}
           </>
@@ -158,7 +153,7 @@ export default function SidePanel({
           <>
             {showCloseArrow && (
               <IconButton onClick={onClose} size="large" aria-label="Close right side panel">
-                <ArrowForwardIcon />{' '}
+                <ForwardIcon />{' '}
               </IconButton>
             )}
 

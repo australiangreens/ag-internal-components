@@ -1,5 +1,5 @@
-import { styled } from '@mui/material';
-import Container from '@mui/material/Container';
+import { styled, Container } from '@mui/material';
+
 
 /** Just a simple styled container applying our spacings*/
 const PageContainer = styled(Container, {

@@ -1,11 +1,7 @@
 import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListIcon from '@mui/icons-material/List';
-import HomeIcon from '@mui/icons-material/Home';
+import {ListItemButton, ListItem, ListItemText, ListItemIcon  } from '@mui/material';
+import { List as Page1Icon,  Home as Page2Icon} from '@mui/icons-material';
 import { Link as RouterLink, MemoryRouter, useLocation } from 'react-router-dom';
 import { Description,  Stories, Markdown} from '@storybook/blocks';
 
@@ -21,13 +17,13 @@ import NavBar, {
 const iconTableItems = [
   {
     label: 'Home page',
-    destPathname: '/home',
-    icon: HomeIcon,
+    destPathname: '/page1',
+    icon: Page1Icon,
   },
   {
     label: 'Some list page',
-    destPathname: '/list',
-    icon: ListIcon,
+    destPathname: '/page2',
+    icon: Page2Icon,
   },
 ];
 
@@ -48,13 +44,7 @@ const meta = {
       page: () => (
         <>
           {/* <Title /> */}
-          <p>
-            <em>
-              Note: At the present time we are just including the original
-              REAMDE.md file below, rather than relying completely on
-              Storybook&apos;s autodocs
-            </em>
-          </p>
+          <h1>Original readme</h1>
           <Markdown>{Readme}</Markdown>
           <Description />
           {/* <Primary /> */}
