@@ -9,6 +9,7 @@ export interface AgThemeProviderProps {
   name?: AgThemeName;
 }
 
+// TODO: Any advantage having this as a component rather than just a normal theme that can be added to a themeprovider? Might make documentation simpler.
 export default function AgThemeProvider({
   name = 'internal',
   children,

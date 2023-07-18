@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
-import {ListItemButton, ListItem, ListItemText, ListItemIcon  } from '@mui/material';
-import { List as Page1Icon,  Home as Page2Icon} from '@mui/icons-material';
+import { ListItemButton, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import { Home as Page1Icon, List as Page2Icon } from '@mui/icons-material';
 import { Link as RouterLink, MemoryRouter, useLocation } from 'react-router-dom';
-import { Description,  Stories, Markdown} from '@storybook/blocks';
+import { Description, Stories, Markdown } from '@storybook/blocks';
 
 import PageLayout from '.';
 import Readme from './README.md?raw';
@@ -77,8 +77,7 @@ const meta = {
       control: { type: null },
       description: 'Contents of the navbar',
     },
-  }
-
+  },
 } satisfies Meta<typeof PageLayout>;
 
 export default meta;

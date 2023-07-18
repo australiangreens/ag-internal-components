@@ -1,4 +1,4 @@
-import { SnackbarCloseReason } from '@mui/material/Snackbar';
+import { SnackbarCloseReason } from '@mui/material';
 
 export type Notification = {
   key?: number;

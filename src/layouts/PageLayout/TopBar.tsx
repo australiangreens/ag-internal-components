@@ -1,5 +1,5 @@
 import { Box, IconButton, styled, Typography } from '@mui/material';
-import {ArrowForward as ForwardIcon, ArrowBack as BackIcon} from '@mui/icons-material';
+import { ArrowForward as ForwardIcon, ArrowBack as BackIcon } from '@mui/icons-material';
 
 const TOP_STRIPE_HEIGHT = 24;
 const TITLE_BAR_HEIGHT = 64;

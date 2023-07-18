@@ -1,8 +1,5 @@
 import React, { useRef, useState, createContext, useCallback } from 'react';
-import Snackbar, { SnackbarProps } from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import LinearProgress from '@mui/material/LinearProgress';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Alert, LinearProgress, CircularProgress, Snackbar, SnackbarProps } from '@mui/material';
 
 import {
   Notification,
