@@ -23,7 +23,7 @@ const PANEL_DEFAULTS = {
   dataTestId: undefined,
 };
 
-interface SidePanelProps {
+export interface SidePanelProps {
   titleText?: string;
   content?: ReactNode;
   flavour?: 'push' | 'overlay';
@@ -80,6 +80,9 @@ export type PageLayoutProps = PropsWithChildren<
   PageLayoutWithNavBarProps | PagelayoutWithoutNavBarProps
 >;
 
+/**
+ * To be used by all Page components in our apps to
+ */
 export default function PageLayout({
   children,
   titleText = '',

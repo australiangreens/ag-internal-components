@@ -1,4 +1,4 @@
-# PageLayout component
+# PageLayout
 
 This is designed to be a resuable component for all Pages.
 
