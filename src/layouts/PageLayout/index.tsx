@@ -65,8 +65,11 @@ interface BasePageLayoutProps {
 }
 
 interface PageLayoutWithNavBarProps extends BasePageLayoutProps {
+  /** Only used by side panels for alignment purposes */
   navBarOpen: boolean;
+  /** Only used by side panels for alignment purposes */
   navBarWidthOpen: number;
+  /** Only used by side panels for alignment purposes */
   navBarWidthClosed: number;
 }
 
