@@ -8,6 +8,9 @@ node_modules/
 dist/
 coverage/
 
+# Vite config temp file
+vite.config.ts.timestamp*
+
 # Compiled Java class files
 *.class
 
