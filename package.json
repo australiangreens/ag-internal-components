@@ -26,6 +26,7 @@
     "precommit": "sh ./scripts/githooks/pre-commit.sh",
     "commitmsg": "sh ./scripts/githooks/commit-msg.sh",
     "storybook": "storybook dev -p 6006",
+    "storybook:no": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
   "files": [
