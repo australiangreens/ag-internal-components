@@ -9,11 +9,25 @@ It should be used as the top level component on most pages.
 
 It was _designed_ to work with a NavBar component on the left taking up space.
 Information about it is provided via the `navBarOpen`, `navBarWidthOpen` and
-`navBarWidthClosed` props. They way this works will be changed once the NavBar
-itself is moved into this library.
+`navBarWidthClosed` props.
 
 By default the open/closed states of each panel are _uncontrolled_. Optional
 props are provided if the parent component needs to know/control their state.
+
+## Planned changes
+
+It is planned to replace this with a newer AppLayout component being used for a
+new app, which has a different look and feel and more closely aligns to Material
+Design guidelines.
+
+The main difference will be that it:
+
+- Is a parent to Pages, rather than the other way around
+
+- Does not directly control the SidePanels, they just become part of each page
+  as controlled components.
+
+- Includes the NavBar as part of it, rather than expecting it to be there.
 
 ## Props
 
