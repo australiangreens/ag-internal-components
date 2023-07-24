@@ -7,6 +7,7 @@ export type NavBarState = {
 
 export type NavBarActions = {
   setOpen: (newVal: boolean) => void;
+  toggleOpen: () => void;
 };
 
 type NavBarContext = NavBarState & NavBarActions;
@@ -33,9 +34,14 @@ export const NavBarProvider = ({
     setNavBarState({ open: newVal });
   }, []);
 
+  const toggleOpen = useCallback(() => {
+    setNavBarState((prevState) => ({ ...prevState, open: !prevState.open }));
+  }, []);
+
   const value: NavBarContext = {
     open,
     setOpen,
+    toggleOpen,
     ...overrideState,
     ...overrideActions,
   };

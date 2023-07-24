@@ -1,33 +1,36 @@
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { Link as RouterLink } from 'react-router-dom';
-import ListIcon from '@mui/icons-material/List';
-import HomeIcon from '@mui/icons-material/Home';
-
+import { ListItemButton, ListItem, ListItemText, ListItemIcon, IconButton } from '@mui/material';
+import {
+  List as ExampleIcon,
+  Home as SaladIcon,
+  ViewHeadline as HamburgerIcon,
+} from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 
-import { NavBarDarkStyledList } from '../components/NavBar';
+import { NavBarDarkStyledList, useNavBar } from '../components/NavBar';
 
 const iconTableItems = [
   {
     label: 'ExampleComponentDemo',
     destPathname: '/ExampleComponentDemo',
-    icon: HomeIcon,
+    icon: ExampleIcon,
   },
   {
     label: 'SaladBarDemo',
     destPathname: '/SaladBarDemo',
-    icon: ListIcon,
+    icon: SaladIcon,
   },
 ];
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
+  const { toggleOpen: toggleNavBar } = useNavBar();
 
   return (
     <nav>
+      <IconButton color="inherit" onClick={toggleNavBar}>
+        <HamburgerIcon />
+      </IconButton>
       <h1>This is the NavBar</h1>
       <NavBarDarkStyledList>
         {iconTableItems.map((iconTableItem) => (
