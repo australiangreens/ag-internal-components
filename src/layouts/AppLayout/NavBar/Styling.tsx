@@ -46,8 +46,8 @@ const sharedOverrides = (): CSSObject => ({
   height: '100%',
   overflowX: 'hidden',
   overflowY: 'hidden',
-  color: 'white',
-  backgroundColor: 'black',
+  color: 'inherit',
+  backgroundColor: '#e8e8e8',
 });
 
 const openedMixin = (width: number): CSSObject => ({

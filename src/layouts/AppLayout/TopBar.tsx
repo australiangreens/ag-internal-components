@@ -1,7 +1,15 @@
-import { Box, styled, Typography } from '@mui/material';
+import { ReactElement, cloneElement } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  CssBaseline,
+  useScrollTrigger,
+  IconButton,
+  styled,
+} from '@mui/material';
 
-const TOP_STRIPE_HEIGHT = 24;
-const TITLE_BAR_HEIGHT = 64;
+import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
 
 const PREFIX = 'TopBar';
 
@@ -11,69 +19,64 @@ export interface TopBarProps {
 }
 
 export const classes = {
-  topStripe: `${PREFIX}-topStripe`,
-  titleBar: `${PREFIX}-titleBar`,
-  titleSlider: `${PREFIX}-titleSlider`,
-
   titleText: `${PREFIX}-titleText`,
 };
 
-interface RootProps {}
+interface StyledRootProps {}
 
-const Root = styled('div', {
-  shouldForwardProp: (prop) => !(['leftPanel', 'rightPanel'] as Array<PropertyKey>).includes(prop),
+const StyledRoot = styled('div', {
   name: PREFIX,
-})<RootProps>(({ theme }) => ({
-  width: '100%',
-
-  [`& .${classes.topStripe}`]: {
-    width: '100%',
-    height: `${TOP_STRIPE_HEIGHT}px`,
-    backgroundColor: theme.palette.primary.main,
-  },
-
-  [`& .${classes.titleBar}`]: {
-    backgroundColor: theme.palette.primary.light,
-    height: `${TITLE_BAR_HEIGHT}px`,
-    padding: theme.spacing(0, 3),
-    width: '100%',
-  },
-
-  [`& .${classes.titleSlider}`]: {
-    height: '100%',
+})<StyledRootProps>(({ theme }) => ({
+  ['& .MuiToolbar-root']: {
     display: 'flex',
-    alignItems: 'center',
-    color: 'white',
-
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-
-    [`& .${classes.titleText}`]: {
-      flexGrow: 1,
-    },
+    height: theme.spacing(8),
+    alignItems: 'left',
+    gap: theme.spacing(2),
+    flexShrink: 0,
+    padding: 0,
   },
 }));
 
+function ElevationScroll({ children }: { children: ReactElement }) {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
+
+  return cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
 /**
- * Goes at the top of every page. Wasn't feeling creative in naming it.
- *
- * This differs from the more complex TopBar used in the PageLayout component
- * that it has to interact with a sliding side panel that is not the main
- * navbar.
+ * Goes at the top of every page. Wrapper for the MUI AppBar
  */
 export default function TopBar({ titleText = '', 'data-testid': dataTestId }: TopBarProps) {
+  const handleClickHamburger = () => {
+    console.log('handleClickHamburger()');
+  };
+
   return (
-    <Root data-testid={dataTestId}>
-      <div className={classes.topStripe} />
-      <div className={classes.titleBar}>
-        <Box className={classes.titleSlider}>
-          <Typography className={classes.titleText} variant="h6" noWrap>
-            {titleText}
-          </Typography>
-        </Box>
-      </div>
-    </Root>
+    <StyledRoot data-testid={dataTestId}>
+      <CssBaseline />
+      <ElevationScroll>
+        <AppBar>
+          <Toolbar>
+            <IconButton
+              size="medium"
+              color="inherit"
+              sx={{ padding: 1.5 }}
+              onClick={handleClickHamburger}
+            >
+              <HamburgerIcon fontSize="medium" />
+            </IconButton>
+            <Typography className={classes.titleText} variant="h6">
+              {titleText}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <Toolbar />
+    </StyledRoot>
   );
 }
