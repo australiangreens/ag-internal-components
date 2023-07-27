@@ -1,5 +1,7 @@
-import { styled, CSSObject } from '@mui/material/styles';
+import { styled, CSSObject, Theme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
+
+import { DEFAULT_TOP_BAR_HEIGHT } from '../defaults';
 
 const PREFIX = 'Navbar';
 
@@ -41,23 +43,36 @@ export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
 // The starting point for this was the "Mini variant drawer" of
 // https://mui.com/components/drawers/#main-content
 
-const sharedOverrides = (): CSSObject => ({
-  // position: 'absolute',
-  height: '100%',
+const sharedOverrides = (theme: Theme): CSSObject => ({
+  height: `calc(100vh - ${theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT})`,
+  top: theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT,
   overflowX: 'hidden',
   overflowY: 'hidden',
   color: 'inherit',
   backgroundColor: '#e8e8e8',
 });
 
-const openedMixin = (width: number): CSSObject => ({
+const openedMixin = (theme: Theme, width: number): CSSObject => ({
   width,
-  ...sharedOverrides(),
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  ...sharedOverrides(theme),
 });
 
-const closedMixin = (width: number): CSSObject => ({
+const closedMixin = (theme: Theme, width: number): CSSObject => ({
   width,
-  ...sharedOverrides(),
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  // [theme.breakpoints.up('sm')]: {
+  //   width: `calc(${theme.spacing(8)} + 1px)`,
+  // },
+  overflowX: 'hidden',
+
+  ...sharedOverrides(theme),
 });
 
 interface NavDrawerProps {
@@ -69,17 +84,18 @@ interface NavDrawerProps {
 export const NavDrawer = styled(Drawer, {
   shouldForwardProp: (prop) => !['open', 'widthOpen', 'widthClosed'].includes(prop as string),
 })<NavDrawerProps>(({ theme, open, widthOpen, widthClosed }) => ({
-  width: open ? widthOpen : widthClosed,
+  // width: 240,
   flexShrink: 0,
   whiteSpace: 'nowrap',
-  // boxSizing: 'border-box',
-  zIndex: theme.zIndex.drawer + 100,
+  boxSizing: 'border-box',
 
   ...(open && {
-    '& .MuiDrawer-paper': openedMixin(widthOpen),
+    ...openedMixin(theme, widthOpen),
+    '& .MuiDrawer-paper': openedMixin(theme, widthOpen),
   }),
   ...(!open && {
-    '& .MuiDrawer-paper': closedMixin(widthClosed),
+    ...closedMixin(theme, widthClosed),
+    '& .MuiDrawer-paper': closedMixin(theme, widthClosed),
   }),
 
   // boxShadow:

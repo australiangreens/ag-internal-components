@@ -1,11 +1,11 @@
+import { Box, CssBaseline } from '@mui/material';
+
 import { AppLayoutProps } from './types';
 import { NAVBAR_DEFAULTS } from './defaults';
 import TopBar from './TopBar';
 import NavBar from './NavBar';
 import PageContainer from './PageContainer';
 import { AppLayoutProvider, useAppLayout } from './AppLayoutContext';
-import { Box } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
 
 function AppLayout({
   children,
@@ -24,16 +24,19 @@ function AppLayout({
   } = navBar ? { ...NAVBAR_DEFAULTS, ...navBar } : { ...NAVBAR_DEFAULTS };
 
   return (
-    <Box sx={{ overflow: 'hidden' }}>
+    <Box>
       <CssBaseline />
       <TopBar titleText={titleText} data-testid={topBarDataTestId} />
-      <NavBar open={navBarOpen} widthOpen={navBarWidthOpen} widthClosed={navBarWidthClosed}>
-        {navBarContent}
-      </NavBar>
 
-      <PageContainer data-testid={pageContentDataTestId} {...pageContainerProps}>
-        {children}
-      </PageContainer>
+      <Box sx={{ display: 'flex' }}>
+        <NavBar open={navBarOpen} widthOpen={navBarWidthOpen} widthClosed={navBarWidthClosed}>
+          {navBarContent}
+        </NavBar>
+
+        <PageContainer data-testid={pageContentDataTestId} {...pageContainerProps}>
+          {children}
+        </PageContainer>
+      </Box>
     </Box>
   );
 }

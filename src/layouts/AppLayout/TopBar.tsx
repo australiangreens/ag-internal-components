@@ -2,6 +2,7 @@ import { Typography, IconButton, Paper } from '@mui/material';
 import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
 
 import { DEFAULT_TOP_BAR_HEIGHT } from './defaults';
+import { useAppLayout } from './AppLayoutContext';
 
 const PREFIX = 'TopBar';
 
@@ -20,9 +21,7 @@ export const classes = {
  * content
  */
 export default function TopBar({ titleText = '', 'data-testid': dataTestId }: TopBarProps) {
-  const handleClickHamburger = () => {
-    console.log('handleClickHamburger()');
-  };
+  const { toggleNavBarOpen: toggleNavBar } = useAppLayout();
 
   return (
     <header data-testid={dataTestId}>
@@ -41,12 +40,7 @@ export default function TopBar({ titleText = '', 'data-testid': dataTestId }: To
           height: (theme) => theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT,
         }}
       >
-        <IconButton
-          size="medium"
-          color="inherit"
-          sx={{ padding: 1.5 }}
-          onClick={handleClickHamburger}
-        >
+        <IconButton size="medium" color="inherit" sx={{ padding: 1.5 }} onClick={toggleNavBar}>
           <HamburgerIcon fontSize="medium" />
         </IconButton>
         <Typography className={classes.titleText} variant="h6">

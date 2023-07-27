@@ -1,13 +1,9 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { ListItemButton, ListItem, ListItemText, ListItemIcon, IconButton } from '@mui/material';
-import {
-  List as ExampleIcon,
-  Home as SaladIcon,
-  ViewHeadline as HamburgerIcon,
-} from '@mui/icons-material';
+import { ListItemButton, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import { List as ExampleIcon, Home as SaladIcon } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 
-import { NavBarLightStyledList, useAppLayout } from '..';
+import { NavBarLightStyledList } from '..';
 
 const iconTableItems = [
   {
@@ -24,13 +20,9 @@ const iconTableItems = [
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
-  const { toggleNavBarOpen: toggleNavBar } = useAppLayout();
 
   return (
     <nav>
-      <IconButton color="inherit" onClick={toggleNavBar}>
-        <HamburgerIcon />
-      </IconButton>
       <h1>This is the NavBar</h1>
       <NavBarLightStyledList>
         {iconTableItems.map((iconTableItem) => (

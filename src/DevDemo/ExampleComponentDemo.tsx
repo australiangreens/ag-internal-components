@@ -14,8 +14,7 @@ export default function ExampleComponentDemo() {
 
   return (
     <>
-      <ExampleComponent text="Some text" />
-      <br />
+      <ExampleComponent text="Hello world!" />
       <Button
         variant="outlined"
         onClick={() => {

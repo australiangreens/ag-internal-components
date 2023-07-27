@@ -11,8 +11,10 @@ declare module '@mui/material/styles' {
      * the viewport.*/
     topBar?: {
       /** The height in pixels. This is used by both the NavBar itself, as well
-       * as the PageContainer component below it. The PageContainer needs it to
-       * calculate its height for its vertical scrollbar.*/
+       * as the PageContainer and NavBar components below it. The PageContainer
+       * needs it to calculate its height for its vertical scrollbar, while the
+       * NavBar needs it for the height of the underlying MUI Drawer
+       * component.*/
       height?: number;
     };
   }
