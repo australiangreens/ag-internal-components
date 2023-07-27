@@ -6,6 +6,20 @@ import '@mui/material/styles';
 import '@mui/material/Typography';
 
 declare module '@mui/material/styles' {
+  interface AgCustomTheme {
+    /** When using PageLayout, there is a TopBar component sticky on the top of
+     * the viewport.*/
+    topBar?: {
+      /** The height in pixels. This is used by both the NavBar itself, as well
+       * as the PageContainer component below it. The PageContainer needs it to
+       * calculate its height for its vertical scrollbar.*/
+      height?: number;
+    };
+  }
+
+  interface Theme extends AgCustomTheme {}
+  interface ThemeOptions extends AgCustomTheme {}
+
   interface TypographyVariants {
     explainer: React.CSSProperties;
   }

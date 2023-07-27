@@ -42,7 +42,7 @@ export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
 // https://mui.com/components/drawers/#main-content
 
 const sharedOverrides = (): CSSObject => ({
-  position: 'absolute',
+  // position: 'absolute',
   height: '100%',
   overflowX: 'hidden',
   overflowY: 'hidden',
@@ -72,7 +72,7 @@ export const NavDrawer = styled(Drawer, {
   width: open ? widthOpen : widthClosed,
   flexShrink: 0,
   whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
+  // boxSizing: 'border-box',
   zIndex: theme.zIndex.drawer + 100,
 
   ...(open && {
@@ -81,4 +81,7 @@ export const NavDrawer = styled(Drawer, {
   ...(!open && {
     '& .MuiDrawer-paper': closedMixin(widthClosed),
   }),
+
+  // boxShadow:
+  //   '0px 2px 1px -1px rgba(0, 0, 0, 0.20), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
 }));

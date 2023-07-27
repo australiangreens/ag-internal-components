@@ -3,7 +3,7 @@ import DevDemo from './DevDemo';
 
 export default function DevApp() {
   return (
-    <AgThemeProvider name="fed21">
+    <AgThemeProvider name="internal">
       <SaladBarProvider>
         <DevDemo />
       </SaladBarProvider>

@@ -17,6 +17,8 @@ export const INITIAL_RIGHT_PANEL_OPEN = false;
 
 export const NAVBAR_DEFAULTS = {
   content: <></>,
-  widthOpen: 330,
-  widthClosed: 73,
+  widthOpen: 256,
+  widthClosed: 64,
 };
+
+export const DEFAULT_TOP_BAR_HEIGHT = 164;

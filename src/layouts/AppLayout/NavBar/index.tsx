@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 
 import { classes, Root, NavDrawer } from './Styling';
 
@@ -30,9 +30,25 @@ export default function NavBar({
   'data-testid': dataTestId,
   children,
 }: PropsWithChildren<NavbarProps>) {
+  // return (
+  //   <Root className={classes.root} data-testid={dataTestId}>
+  //     <CssBaseline />
+  //     <NavDrawer
+  //       variant="permanent"
+  //       anchor="left"
+  //       // We aren't using transitions, and {0} will still create an unwanted timeout
+  //       transitionDuration={null as unknown as number}
+  //       open={open}
+  //       widthOpen={widthOpen}
+  //       widthClosed={widthClosed}
+  //     >
+  //       {children}
+  //     </NavDrawer>
+  //   </Root>
+  // );
   return (
     <Root className={classes.root} data-testid={dataTestId}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <NavDrawer
         variant="permanent"
         anchor="left"
@@ -41,6 +57,7 @@ export default function NavBar({
         open={open}
         widthOpen={widthOpen}
         widthClosed={widthClosed}
+        // elevation={1}
       >
         {children}
       </NavDrawer>

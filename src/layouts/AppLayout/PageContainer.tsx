@@ -1,12 +1,25 @@
-import { styled, Container } from '@mui/material';
+import { PropsWithChildren } from 'react';
+import { Container, Box } from '@mui/material';
+import { DEFAULT_TOP_BAR_HEIGHT } from './defaults';
 
-/** Just a simple styled container applying our spacings*/
-const PageContainer = styled(Container, {
-  name: 'PageContainer',
-})(({ theme }) => ({
-  // Horizontal padding comes from the Container's gutter
-  paddingTop: theme.spacing(3),
-  paddingBottom: theme.spacing(3),
-}));
+interface PageContainerProps {
+  topBarHeight?: number;
+}
+
+function PageContainer({ children }: PropsWithChildren<PageContainerProps>) {
+  return (
+    <Box
+      sx={{
+        overflow: 'auto',
+        height: (theme) => `calc(100vh - ${theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT}px)`,
+        scrollbarGutter: 'stable',
+      }}
+    >
+      <Container component="main" id="main-content" sx={{ paddingTop: 3, paddingBottom: 3 }}>
+        {children}
+      </Container>
+    </Box>
+  );
+}
 
 export default PageContainer;

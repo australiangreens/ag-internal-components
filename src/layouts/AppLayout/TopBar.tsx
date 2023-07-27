@@ -1,15 +1,7 @@
-import { ReactElement, cloneElement } from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  CssBaseline,
-  useScrollTrigger,
-  IconButton,
-  styled,
-} from '@mui/material';
-
+import { Typography, IconButton, Paper } from '@mui/material';
 import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
+
+import { DEFAULT_TOP_BAR_HEIGHT } from './defaults';
 
 const PREFIX = 'TopBar';
 
@@ -22,34 +14,10 @@ export const classes = {
   titleText: `${PREFIX}-titleText`,
 };
 
-interface StyledRootProps {}
-
-const StyledRoot = styled('div', {
-  name: PREFIX,
-})<StyledRootProps>(({ theme }) => ({
-  ['& .MuiToolbar-root']: {
-    display: 'flex',
-    height: theme.spacing(8),
-    alignItems: 'left',
-    gap: theme.spacing(2),
-    flexShrink: 0,
-    padding: 0,
-  },
-}));
-
-function ElevationScroll({ children }: { children: ReactElement }) {
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-  });
-
-  return cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
-}
-
 /**
- * Goes at the top of every page. Wrapper for the MUI AppBar
+ * Top bar of every page, above the content. Works a bit like MUI's AppBar but
+ * the scroll bar will not appear for the whole page, instead just the page
+ * content
  */
 export default function TopBar({ titleText = '', 'data-testid': dataTestId }: TopBarProps) {
   const handleClickHamburger = () => {
@@ -57,26 +25,34 @@ export default function TopBar({ titleText = '', 'data-testid': dataTestId }: To
   };
 
   return (
-    <StyledRoot data-testid={dataTestId}>
-      <CssBaseline />
-      <ElevationScroll>
-        <AppBar>
-          <Toolbar>
-            <IconButton
-              size="medium"
-              color="inherit"
-              sx={{ padding: 1.5 }}
-              onClick={handleClickHamburger}
-            >
-              <HamburgerIcon fontSize="medium" />
-            </IconButton>
-            <Typography className={classes.titleText} variant="h6">
-              {titleText}
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </ElevationScroll>
-      <Toolbar />
-    </StyledRoot>
+    <header data-testid={dataTestId}>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          width: '100%',
+          position: 'sticky',
+          color: 'primary.contrastText',
+          backgroundColor: 'primary.main',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          flexShrink: 0,
+          height: (theme) => theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT,
+        }}
+      >
+        <IconButton
+          size="medium"
+          color="inherit"
+          sx={{ padding: 1.5 }}
+          onClick={handleClickHamburger}
+        >
+          <HamburgerIcon fontSize="medium" />
+        </IconButton>
+        <Typography className={classes.titleText} variant="h6">
+          {titleText}
+        </Typography>
+      </Paper>
+    </header>
   );
 }

@@ -7,7 +7,7 @@ import {
 } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 
-import { NavBarDarkStyledList, useNavBar } from '../components/NavBar';
+import { NavBarLightStyledList, useAppLayout } from '..';
 
 const iconTableItems = [
   {
@@ -24,7 +24,7 @@ const iconTableItems = [
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
-  const { toggleOpen: toggleNavBar } = useNavBar();
+  const { toggleNavBarOpen: toggleNavBar } = useAppLayout();
 
   return (
     <nav>
@@ -32,7 +32,7 @@ export default function NavBarContent() {
         <HamburgerIcon />
       </IconButton>
       <h1>This is the NavBar</h1>
-      <NavBarDarkStyledList>
+      <NavBarLightStyledList>
         {iconTableItems.map((iconTableItem) => (
           <ListItem key={iconTableItem.label}>
             <ListItemButton
@@ -47,7 +47,7 @@ export default function NavBarContent() {
             </ListItemButton>
           </ListItem>
         ))}
-      </NavBarDarkStyledList>
+      </NavBarLightStyledList>
     </nav>
   );
 }

@@ -88,6 +88,9 @@ export const internalAGSystemsTheme = createTheme({
       fontWeight: 700,
     },
   },
+  topBar: {
+    height: 64,
+  },
 });
 
 export const fed21Theme = createTheme({
@@ -137,5 +140,9 @@ export const fed21Theme = createTheme({
       fontSize: '14px',
       marginBlockStart: '1em',
     },
+  },
+
+  topBar: {
+    height: 64,
   },
 });
