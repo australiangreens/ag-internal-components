@@ -1,10 +1,13 @@
-import { ReactNode, ComponentProps, PropsWithChildren } from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 
 import PageContainer from './PageContainer';
 import { AppLayoutContextActions, AppLayoutContextState } from './AppLayoutContext';
+import { NavBarProps } from './NavBar';
 
 export interface BaseAppLayoutProps {
-  navBarContent?: ReactNode;
+  /** Either an array of objects used to automatically generate the content of
+   * the navbar, or a node to render directly.*/
+  navBarMiddle: NavBarProps['contents'];
 
   /** Props applied to the PageContainer component, which is a styled MUI Container */
   pageContainerProps?: ComponentProps<typeof PageContainer>;

@@ -8,12 +8,11 @@ import { AppLayoutProvider, useAppLayout } from './AppLayoutContext';
 
 function AppLayout({
   children,
-  navBarContent,
   pageContainerProps,
   pageContentDataTestId,
   topBarDataTestId,
+  navBarMiddle,
 }: AppLayoutProps) {
-  // TODO: Would it be cleaner to have the NavBar have its own provider, so there is a separate useAppLayout() and useNavBar()?
   const { navBarOpen, titleText } = useAppLayout();
 
   return (
@@ -22,7 +21,7 @@ function AppLayout({
       <TopBar titleText={titleText} data-testid={topBarDataTestId} />
 
       <Box sx={{ display: 'flex' }}>
-        <NavBar open={navBarOpen}>{navBarContent}</NavBar>
+        <NavBar open={navBarOpen} middle={navBarMiddle} />
 
         <PageContainer data-testid={pageContentDataTestId} {...pageContainerProps}>
           {children}
