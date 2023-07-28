@@ -8,7 +8,7 @@ import SaladBarDemo from './SaladBarDemo';
 export default function DevDemo() {
   return (
     <BrowserRouter>
-      <AppLayout navBar={{ content: <NavBarContent /> }}>
+      <AppLayout navBarContent={<NavBarContent />}>
         <Routes>
           <Route index element={<ExampleComponentDemo />} />
           <Route path="/ExampleComponentDemo" element={<ExampleComponentDemo />} />

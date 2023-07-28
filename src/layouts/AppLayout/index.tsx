@@ -1,7 +1,6 @@
 import { Box, CssBaseline } from '@mui/material';
 
 import { AppLayoutProps } from './types';
-import { NAVBAR_DEFAULTS } from './defaults';
 import TopBar from './TopBar';
 import NavBar from './NavBar';
 import PageContainer from './PageContainer';
@@ -9,7 +8,7 @@ import { AppLayoutProvider, useAppLayout } from './AppLayoutContext';
 
 function AppLayout({
   children,
-  navBar = NAVBAR_DEFAULTS,
+  navBarContent,
   pageContainerProps,
   pageContentDataTestId,
   topBarDataTestId,
@@ -17,21 +16,13 @@ function AppLayout({
   // TODO: Would it be cleaner to have the NavBar have its own provider, so there is a separate useAppLayout() and useNavBar()?
   const { navBarOpen, titleText } = useAppLayout();
 
-  const {
-    content: navBarContent,
-    widthOpen: navBarWidthOpen,
-    widthClosed: navBarWidthClosed,
-  } = navBar ? { ...NAVBAR_DEFAULTS, ...navBar } : { ...NAVBAR_DEFAULTS };
-
   return (
     <Box>
       <CssBaseline />
       <TopBar titleText={titleText} data-testid={topBarDataTestId} />
 
       <Box sx={{ display: 'flex' }}>
-        <NavBar open={navBarOpen} widthOpen={navBarWidthOpen} widthClosed={navBarWidthClosed}>
-          {navBarContent}
-        </NavBar>
+        <NavBar open={navBarOpen}>{navBarContent}</NavBar>
 
         <PageContainer data-testid={pageContentDataTestId} {...pageContainerProps}>
           {children}

@@ -1,13 +1,9 @@
 import { PropsWithChildren } from 'react';
-// import CssBaseline from '@mui/material/CssBaseline';
 
 import { classes, Root, NavDrawer } from './Styling';
 
 export type NavbarProps = {
   open: boolean;
-  widthOpen: number;
-  widthClosed: number;
-
   /** Set the datatest-id on the root element for using reactdom's getByTestId()
    * function */
   'data-testid'?: string;
@@ -18,47 +14,17 @@ export type NavbarProps = {
 
 /**
  * A styled navigation bar. At this point in time its pretty unopinionated, it
- * just renders whatever children it is given. The NavBarDarkStyledList
- * component can be used for consistent styling against the background. We'll be
- * changing the way we use NavBars soon anyway, so not much point solidying the
- * patterns yet.
+ * just renders whatever children it is given. The NavBarLightStyledList
+ * component can be used for consistent styling against the background.
  */
 export default function NavBar({
   open,
-  widthOpen,
-  widthClosed,
   'data-testid': dataTestId,
   children,
 }: PropsWithChildren<NavbarProps>) {
-  // return (
-  //   <Root className={classes.root} data-testid={dataTestId}>
-  //     <CssBaseline />
-  //     <NavDrawer
-  //       variant="permanent"
-  //       anchor="left"
-  //       // We aren't using transitions, and {0} will still create an unwanted timeout
-  //       transitionDuration={null as unknown as number}
-  //       open={open}
-  //       widthOpen={widthOpen}
-  //       widthClosed={widthClosed}
-  //     >
-  //       {children}
-  //     </NavDrawer>
-  //   </Root>
-  // );
   return (
     <Root className={classes.root} data-testid={dataTestId}>
-      {/* <CssBaseline /> */}
-      <NavDrawer
-        variant="permanent"
-        anchor="left"
-        // We aren't using transitions, and {0} will still create an unwanted timeout
-        transitionDuration={null as unknown as number}
-        open={open}
-        widthOpen={widthOpen}
-        widthClosed={widthClosed}
-        // elevation={1}
-      >
+      <NavDrawer variant="permanent" anchor="left" open={open}>
         {children}
       </NavDrawer>
     </Root>

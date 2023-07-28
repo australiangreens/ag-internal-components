@@ -1,7 +1,12 @@
 import { styled, CSSObject, Theme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 
-import { DEFAULT_TOP_BAR_HEIGHT } from '../defaults';
+import {
+  DEFAULT_TOP_BAR_HEIGHT,
+  DEFAULT_NAV_BAR_WIDTH_OPEN,
+  DEFAULT_NAV_BAR_WIDTH_CLOSED,
+  DEFAULT_NAV_BAR_BACKGROUND_COLOR,
+} from '../defaults';
 
 const PREFIX = 'Navbar';
 
@@ -40,20 +45,17 @@ export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
   },
 }));
 
-// The starting point for this was the "Mini variant drawer" of
-// https://mui.com/components/drawers/#main-content
-
 const sharedOverrides = (theme: Theme): CSSObject => ({
   height: `calc(100vh - ${theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT})`,
   top: theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT,
   overflowX: 'hidden',
   overflowY: 'hidden',
   color: 'inherit',
-  backgroundColor: '#e8e8e8',
+  backgroundColor: theme?.navBar?.backgroundColor ?? DEFAULT_NAV_BAR_BACKGROUND_COLOR,
 });
 
-const openedMixin = (theme: Theme, width: number): CSSObject => ({
-  width,
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: theme?.navBar?.widthOpen ?? DEFAULT_NAV_BAR_WIDTH_OPEN,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -61,15 +63,12 @@ const openedMixin = (theme: Theme, width: number): CSSObject => ({
   ...sharedOverrides(theme),
 });
 
-const closedMixin = (theme: Theme, width: number): CSSObject => ({
-  width,
+const closedMixin = (theme: Theme): CSSObject => ({
+  width: theme?.navBar?.widthClosed ?? DEFAULT_NAV_BAR_WIDTH_CLOSED,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  // [theme.breakpoints.up('sm')]: {
-  //   width: `calc(${theme.spacing(8)} + 1px)`,
-  // },
   overflowX: 'hidden',
 
   ...sharedOverrides(theme),
@@ -77,27 +76,21 @@ const closedMixin = (theme: Theme, width: number): CSSObject => ({
 
 interface NavDrawerProps {
   open: boolean;
-  widthOpen: number;
-  widthClosed: number;
 }
 
 export const NavDrawer = styled(Drawer, {
-  shouldForwardProp: (prop) => !['open', 'widthOpen', 'widthClosed'].includes(prop as string),
-})<NavDrawerProps>(({ theme, open, widthOpen, widthClosed }) => ({
-  // width: 240,
+  shouldForwardProp: (prop) => !['open'].includes(prop as string),
+})<NavDrawerProps>(({ theme, open }) => ({
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
 
   ...(open && {
-    ...openedMixin(theme, widthOpen),
-    '& .MuiDrawer-paper': openedMixin(theme, widthOpen),
+    ...openedMixin(theme),
+    '& .MuiDrawer-paper': openedMixin(theme),
   }),
   ...(!open && {
-    ...closedMixin(theme, widthClosed),
-    '& .MuiDrawer-paper': closedMixin(theme, widthClosed),
+    ...closedMixin(theme),
+    '& .MuiDrawer-paper': closedMixin(theme),
   }),
-
-  // boxShadow:
-  //   '0px 2px 1px -1px rgba(0, 0, 0, 0.20), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
 }));

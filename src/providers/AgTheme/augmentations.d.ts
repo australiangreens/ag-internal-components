@@ -17,6 +17,18 @@ declare module '@mui/material/styles' {
        * component.*/
       height?: number;
     };
+
+    /** When using PageLayout, there is always a NavBar component on the left of
+     * the view port, which can be opened and closed (minimised) by a button in
+     * the TopBar */
+    navBar?: {
+      widthOpen?: number;
+      widthClosed?: number;
+
+      /** In our design the background of the navbar doesn't match anything on
+       * the pallete, so we define it separately */
+      backgroundColor?: string;
+    };
   }
 
   interface Theme extends AgCustomTheme {}

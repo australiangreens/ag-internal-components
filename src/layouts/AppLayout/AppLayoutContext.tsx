@@ -8,8 +8,6 @@ import {
 export interface AppLayoutContextState {
   navBarOpen: boolean;
   titleText: string;
-  navBarWidthOpen: number;
-  navBarWidthClosed: number;
 }
 
 export interface AppLayoutContextActions {
@@ -49,8 +47,10 @@ export const AppLayoutProvider = ({
   children,
 }: PageProviderProps) => {
   // Under the hood we use a reducer to manage our state
-  const [{ titleText, navBarOpen, navBarWidthOpen, navBarWidthClosed }, appLayoutContextDispatch] =
-    useReducer(appLayoutContextStateReducer, INITIAL_PAGE_LAYOUT_CONTEXT_STATE);
+  const [{ titleText, navBarOpen }, appLayoutContextDispatch] = useReducer(
+    appLayoutContextStateReducer,
+    INITIAL_PAGE_LAYOUT_CONTEXT_STATE
+  );
 
   const appLayoutContextDispatchWrappers = useMemo(
     () => ({
@@ -68,8 +68,6 @@ export const AppLayoutProvider = ({
   const value: AppLayoutContext = {
     navBarOpen,
     titleText,
-    navBarWidthOpen,
-    navBarWidthClosed,
     ...appLayoutContextDispatchWrappers,
     ...overrideState,
     ...overrideActions,

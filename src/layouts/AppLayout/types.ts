@@ -3,14 +3,8 @@ import { ReactNode, ComponentProps, PropsWithChildren } from 'react';
 import PageContainer from './PageContainer';
 import { AppLayoutContextActions, AppLayoutContextState } from './AppLayoutContext';
 
-export interface NavBarProps {
-  content?: ReactNode;
-  widthOpen?: number;
-  widthClosed?: number;
-}
-
 export interface BaseAppLayoutProps {
-  navBar?: NavBarProps;
+  navBarContent?: ReactNode;
 
   /** Props applied to the PageContainer component, which is a styled MUI Container */
   pageContainerProps?: ComponentProps<typeof PageContainer>;

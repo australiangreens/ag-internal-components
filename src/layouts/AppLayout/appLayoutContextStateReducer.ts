@@ -1,5 +1,4 @@
 import { AppLayoutContextState } from './AppLayoutContext';
-import { NAVBAR_DEFAULTS } from './defaults';
 
 type Action =
   | { type: 'toggleNavBarOpen' }
@@ -9,8 +8,6 @@ type Action =
 export const INITIAL_PAGE_LAYOUT_CONTEXT_STATE: AppLayoutContextState = {
   navBarOpen: true,
   titleText: '',
-  navBarWidthOpen: NAVBAR_DEFAULTS.widthOpen,
-  navBarWidthClosed: NAVBAR_DEFAULTS.widthClosed,
 };
 
 export function appLayoutContextStateReducer(

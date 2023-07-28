@@ -91,6 +91,11 @@ export const internalAGSystemsTheme = createTheme({
   topBar: {
     height: 64,
   },
+  navBar: {
+    widthOpen: 256,
+    widthClosed: 64,
+    backgroundColor: '#E8E8E8',
+  },
 });
 
 export const fed21Theme = createTheme({
