@@ -1,13 +1,6 @@
 import { styled, CSSObject, Theme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 
-import {
-  DEFAULT_TOP_BAR_HEIGHT,
-  DEFAULT_NAV_BAR_WIDTH_OPEN,
-  DEFAULT_NAV_BAR_WIDTH_CLOSED,
-  DEFAULT_NAV_BAR_BACKGROUND_COLOR,
-} from '../defaults';
-
 const PREFIX = 'Navbar';
 
 export const classes = {
@@ -46,16 +39,16 @@ export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
 }));
 
 const sharedOverrides = (theme: Theme): CSSObject => ({
-  height: `calc(100vh - ${theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT})`,
-  top: theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT,
+  height: `calc(100vh - ${theme.topBar.height})`,
+  top: theme.topBar.height,
   overflowX: 'hidden',
   overflowY: 'hidden',
   color: 'inherit',
-  backgroundColor: theme?.navBar?.backgroundColor ?? DEFAULT_NAV_BAR_BACKGROUND_COLOR,
+  backgroundColor: theme.navBar.backgroundColor,
 });
 
 const openedMixin = (theme: Theme): CSSObject => ({
-  width: theme?.navBar?.widthOpen ?? DEFAULT_NAV_BAR_WIDTH_OPEN,
+  width: theme.navBar.widthOpen,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -64,7 +57,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-  width: theme?.navBar?.widthClosed ?? DEFAULT_NAV_BAR_WIDTH_CLOSED,
+  width: theme.navBar.widthClosed,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,

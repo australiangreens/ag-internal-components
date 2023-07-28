@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import { Container, Box } from '@mui/material';
-import { DEFAULT_TOP_BAR_HEIGHT } from './defaults';
 
 // const NavBarAwareMargins = styled('div', {
 //   shouldForwardProp: (prop) => !(['leftPanel', 'rightPanel'] as Array<PropertyKey>).includes(prop),
@@ -34,7 +33,7 @@ function PageContainer({ children }: PropsWithChildren<PageContainerProps>) {
     <Box
       sx={{
         overflow: 'auto',
-        height: (theme) => `calc(100vh - ${theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT}px)`,
+        height: (theme) => `calc(100vh - ${theme.topBar.height}px)`,
         scrollbarGutter: 'stable',
         // scrollbarGutter: 'stable both-edges',
         flexGrow: 1,

@@ -1,7 +1,6 @@
 import { Typography, IconButton, Paper } from '@mui/material';
 import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
 
-import { DEFAULT_TOP_BAR_HEIGHT } from './defaults';
 import { useAppLayout } from './AppLayoutContext';
 
 const PREFIX = 'TopBar';
@@ -37,7 +36,7 @@ export default function TopBar({ titleText = '', 'data-testid': dataTestId }: To
           alignItems: 'center',
           gap: 2,
           flexShrink: 0,
-          height: (theme) => theme?.topBar?.height ?? DEFAULT_TOP_BAR_HEIGHT,
+          height: (theme) => theme.topBar.height,
         }}
       >
         <IconButton size="medium" color="inherit" sx={{ padding: 1.5 }} onClick={toggleNavBar}>
