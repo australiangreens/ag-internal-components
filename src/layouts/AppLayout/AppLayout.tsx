@@ -1,4 +1,4 @@
-import { PropsWithChildren, ComponentProps } from 'react';
+import { PropsWithChildren, ComponentProps, useEffect } from 'react';
 import { Box, CssBaseline } from '@mui/material';
 
 import TopBar from './TopBar';
@@ -9,24 +9,22 @@ import { AppLayoutContextActions, AppLayoutContextState } from './AppLayoutConte
 import { NavBarProps } from './NavBar';
 
 export interface BaseAppLayoutProps {
+  /**
+   * The initial titleText. Shortcut for calling a setter from useAppLayout()
+   * hook since its such a common action.
+   */
+  initialTitleText?: string;
+
+  /**
+   * The initial open state of the navbar, which is true by default. Shortcut
+   * for calling a setter from useAppLayout() hook since its such a common
+   * action.
+   */
+  initialNavBarOpen?: boolean;
+
   /** Either an array of objects used to automatically generate the content of
    * the navbar, or a node to render directly.*/
   navBarMiddle: NavBarProps['middle'];
-
-  /**
-   * Override the height of the top bar in pixels
-   */
-  topBarHeight?: number;
-
-  /**
-   * Override the width of the navbar when closed
-   */
-  navBarWidthClosed?: number;
-
-  /**
-   * Override the width of the navbar when open
-   */
-  navBarWidthOpen?: number;
 
   /** Props applied to the PageContainer component, which is a styled MUI Container */
   pageContainerProps?: ComponentProps<typeof PageContainer>;
@@ -50,14 +48,37 @@ type AppLayoutProps = PropsWithChildren<BaseAppLayoutProps>;
 
 function AppLayout({
   children,
+  initialTitleText,
+  initialNavBarOpen,
   pageContainerProps,
   pageContentDataTestId,
   topBarDataTestId,
   navBarDataTestId,
   navBarMiddle,
 }: AppLayoutProps) {
-  const { navBarOpen, titleText, topBarHeight, navBarWidthOpen, navBarWidthClosed } =
-    useAppLayout();
+  const {
+    navBarOpen,
+    setNavBarOpen,
+    titleText,
+    setTitleText,
+    topBarHeight,
+    navBarWidthOpen,
+    navBarWidthClosed,
+  } = useAppLayout();
+
+  // Allow open state of navbar to start differently than the default. Unlike
+  // changing widths and such, this could be a common scenario.
+  useEffect(() => {
+    if (initialTitleText !== undefined) setTitleText(initialTitleText);
+  }, [initialTitleText, setTitleText]);
+
+  // Similarly for navbar open state.
+  useEffect(() => {
+    console.log(initialNavBarOpen);
+    if (initialNavBarOpen !== undefined) setNavBarOpen(initialNavBarOpen);
+  }, [initialNavBarOpen, setNavBarOpen]);
+
+  // Can't imagine initial prop values for other states would be useful
 
   return (
     <Box>

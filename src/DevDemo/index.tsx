@@ -12,6 +12,7 @@ import { AppLayout } from '..';
 import NavBarContent from './NavBarContent';
 import ExampleComponentDemo from './ExampleComponentDemo';
 import SaladBarDemo from './SaladBarDemo';
+import SomeRandomDemo from './SomeRandomDemo';
 
 // const navBarMiddleLinks = [
 //   {
@@ -29,10 +30,15 @@ import SaladBarDemo from './SaladBarDemo';
 export default function DevDemo() {
   return (
     <BrowserRouter>
-      <AppLayout navBarMiddle={<NavBarContent navBarWidthOpen={256} />} navBarWidthOpen={256}>
+      <AppLayout
+        navBarMiddle={<NavBarContent />}
+        initialNavBarOpen={false}
+        initialTitleText="OurAppName"
+      >
         <Routes>
           <Route index element={<ExampleComponentDemo />} />
           <Route path="/ExampleComponentDemo" element={<ExampleComponentDemo />} />
+          <Route path="/SomeRandom" element={<SomeRandomDemo />} />
           <Route path="/SaladBarDemo" element={<SaladBarDemo />} />
         </Routes>
       </AppLayout>

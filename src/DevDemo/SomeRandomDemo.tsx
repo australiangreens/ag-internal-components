@@ -1,31 +1,11 @@
 import { useState } from 'react';
-import { Button, Slider, Box } from '@mui/material';
+import { Button } from '@mui/material';
 
-import { ExampleComponent, useAppLayout } from '..';
-
-const parse1dSliderValue = (val: number | number[]) => (Array.isArray(val) ? val[0] : val);
-
-export default function ExampleComponentDemo() {
+export default function SomeRandomDemo() {
   const [showLotsOfText, setShowLotsOfText] = useState(true);
-
-  const { setNavBarWidthOpen } = useAppLayout();
 
   return (
     <>
-      <ExampleComponent text="Hello world!" />
-
-      <Box sx={{ display: 'flex' }}>
-        <Slider
-          sx={{ width: '200px', margin: '10px' }}
-          aria-label="Change navbar open width"
-          valueLabelDisplay="auto"
-          defaultValue={256}
-          min={0}
-          max={400}
-          onChangeCommitted={(_event, value) => setNavBarWidthOpen(parse1dSliderValue(value))}
-        />
-      </Box>
-
       <Button
         variant="outlined"
         onClick={() => {

@@ -22,7 +22,7 @@ export default function NavBarContent() {
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
-        <ListItemText primary="Sent mail" />
+        <ListItemText primary="Example component" />
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
