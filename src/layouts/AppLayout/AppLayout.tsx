@@ -1,27 +1,63 @@
+import { PropsWithChildren, ComponentProps } from 'react';
 import { Box, CssBaseline } from '@mui/material';
 
-import { AppLayoutProps } from './types';
 import TopBar from './TopBar';
 import NavBar from './NavBar';
-import PageContainer from './PageContainer';
 import { AppLayoutProvider, useAppLayout } from './AppLayoutContext';
-import {
-  DEFAULT_TOP_BAR_HEIGHT,
-  DEFAULT_NAV_BAR_WIDTH_OPEN,
-  DEFAULT_NAV_BAR_WIDTH_CLOSED,
-} from './defaults';
+import PageContainer from './PageContainer';
+import { AppLayoutContextActions, AppLayoutContextState } from './AppLayoutContext';
+import { NavBarProps } from './NavBar';
+
+export interface BaseAppLayoutProps {
+  /** Either an array of objects used to automatically generate the content of
+   * the navbar, or a node to render directly.*/
+  navBarMiddle: NavBarProps['middle'];
+
+  /**
+   * Override the height of the top bar in pixels
+   */
+  topBarHeight?: number;
+
+  /**
+   * Override the width of the navbar when closed
+   */
+  navBarWidthClosed?: number;
+
+  /**
+   * Override the width of the navbar when open
+   */
+  navBarWidthOpen?: number;
+
+  /** Props applied to the PageContainer component, which is a styled MUI Container */
+  pageContainerProps?: ComponentProps<typeof PageContainer>;
+
+  topBarDataTestId?: string;
+
+  pageContentDataTestId?: string;
+
+  navBarDataTestId?: string;
+
+  /** Allow overriding the context state (navBarOpen etc) for tests,
+   * particularly with souvlaki */
+  overrideContextState?: Partial<AppLayoutContextState>;
+
+  /** Allow overriding the context actions (setNavBarOpen etc) for tests,
+   * particularly with souvlaki */
+  overrideContextActions?: Partial<AppLayoutContextActions>;
+}
+
+type AppLayoutProps = PropsWithChildren<BaseAppLayoutProps>;
 
 function AppLayout({
   children,
   pageContainerProps,
   pageContentDataTestId,
   topBarDataTestId,
+  navBarDataTestId,
   navBarMiddle,
-  topBarHeight = DEFAULT_TOP_BAR_HEIGHT,
-  navBarWidthOpen = DEFAULT_NAV_BAR_WIDTH_OPEN,
-  navBarWidthClosed = DEFAULT_NAV_BAR_WIDTH_CLOSED,
 }: AppLayoutProps) {
-  const { navBarOpen, titleText } = useAppLayout();
+  const { navBarOpen, titleText, topBarHeight, navBarWidthOpen, navBarWidthClosed } =
+    useAppLayout();
 
   return (
     <Box>
@@ -35,6 +71,7 @@ function AppLayout({
           widthOpen={navBarWidthOpen}
           widthClosed={navBarWidthClosed}
           offsetTop={topBarHeight}
+          data-testid={navBarDataTestId}
         />
 
         <PageContainer

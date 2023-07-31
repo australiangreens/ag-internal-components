@@ -7,6 +7,9 @@ import {
 
 export interface AppLayoutContextState {
   navBarOpen: boolean;
+  navBarWidthOpen: number;
+  navBarWidthClosed: number;
+  topBarHeight: number;
   titleText: string;
 }
 
@@ -14,6 +17,8 @@ export interface AppLayoutContextActions {
   toggleNavBarOpen: () => void;
   setNavBarOpen: (newVal: boolean) => void;
   setTitleText: (newVal: string) => void;
+  setNavBarWidthOpen: (newVal: number) => void;
+  setNavBarWidthClosed: (newVal: number) => void;
 }
 
 export type AppLayoutContext = AppLayoutContextState & AppLayoutContextActions;
@@ -47,10 +52,10 @@ export const AppLayoutProvider = ({
   children,
 }: PageProviderProps) => {
   // Under the hood we use a reducer to manage our state
-  const [{ titleText, navBarOpen }, appLayoutContextDispatch] = useReducer(
-    appLayoutContextStateReducer,
-    INITIAL_PAGE_LAYOUT_CONTEXT_STATE
-  );
+  const [
+    { titleText, topBarHeight, navBarOpen, navBarWidthOpen, navBarWidthClosed },
+    appLayoutContextDispatch,
+  ] = useReducer(appLayoutContextStateReducer, INITIAL_PAGE_LAYOUT_CONTEXT_STATE);
 
   const appLayoutContextDispatchWrappers = useMemo(
     () => ({
@@ -59,15 +64,27 @@ export const AppLayoutProvider = ({
       setNavBarOpen: (newValue: boolean) =>
         appLayoutContextDispatch({ type: 'setNavBarOpen', payload: newValue }),
 
+      setNavBarWidthOpen: (newValue: number) =>
+        appLayoutContextDispatch({ type: 'setNavBarWidthOpen', payload: newValue }),
+
+      setNavBarWidthClosed: (newValue: number) =>
+        appLayoutContextDispatch({ type: 'setNavBarWidthClosed', payload: newValue }),
+
       setTitleText: (newValue: string) =>
         appLayoutContextDispatch({ type: 'setTitleText', payload: newValue }),
+
+      setTopBarHeight: (newValue: number) =>
+        appLayoutContextDispatch({ type: 'setTopBarHeight', payload: newValue }),
     }),
     []
   );
 
   const value: AppLayoutContext = {
     navBarOpen,
+    navBarWidthOpen,
+    navBarWidthClosed,
     titleText,
+    topBarHeight,
     ...appLayoutContextDispatchWrappers,
     ...overrideState,
     ...overrideActions,

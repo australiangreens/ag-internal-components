@@ -1,20 +1,14 @@
 import { useState } from 'react';
-// import { Link as RouterLink } from 'react-router-dom';
 import { ListItemButton, ListItemText, ListItemIcon, List, Collapse } from '@mui/material';
-// import { List as ExampleIcon, Home as SaladIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-// import StarBorder from '@mui/icons-material/StarBorder';
-// import { useLocation } from 'react-router-dom';
 
-interface NavBarContentProps {
-  navBarWidthOpen: number;
-}
+// interface NavBarContentProps {}
 
-export default function NavBarContent({ navBarWidthOpen }: NavBarContentProps) {
+export default function NavBarContent() {
   // const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
@@ -23,13 +17,7 @@ export default function NavBarContent({ navBarWidthOpen }: NavBarContentProps) {
   };
 
   return (
-    <List
-      component="nav"
-      sx={{
-        width: '100%',
-        maxWidth: navBarWidthOpen,
-      }}
-    >
+    <List component="nav">
       <ListItemButton>
         <ListItemIcon>
           <SendIcon />

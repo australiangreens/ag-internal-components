@@ -1,5 +1,10 @@
 # NavBar
 
+## Status
+
+This is still needed for one of the apps, but newer ones are using AppLayout
+that has different NavBar as a sub component.
+
 ## Usage
 
 The `NavBar` component must be used within a `NavBarProvider`.

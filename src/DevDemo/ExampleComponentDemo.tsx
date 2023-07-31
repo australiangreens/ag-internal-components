@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Slider, Box } from '@mui/material';
 
 import { ExampleComponent, useAppLayout } from '..';
+
+const parse1dSliderValue = (val: number | number[]) => (Array.isArray(val) ? val[0] : val);
 
 export default function ExampleComponentDemo() {
   const [showLotsOfText, setShowLotsOfText] = useState(true);
 
-  const { setTitleText } = useAppLayout();
+  const { setTitleText, setNavBarWidthOpen } = useAppLayout();
 
   useEffect(() => {
     setTitleText('Events Creator');
@@ -15,6 +17,19 @@ export default function ExampleComponentDemo() {
   return (
     <>
       <ExampleComponent text="Hello world!" />
+
+      <Box sx={{ display: 'flex' }}>
+        <Slider
+          sx={{ width: '200px', margin: '10px' }}
+          aria-label="Change navbar open width"
+          valueLabelDisplay="auto"
+          defaultValue={256}
+          min={0}
+          max={400}
+          onChangeCommitted={(_event, value) => setNavBarWidthOpen(parse1dSliderValue(value))}
+        />
+      </Box>
+
       <Button
         variant="outlined"
         onClick={() => {
