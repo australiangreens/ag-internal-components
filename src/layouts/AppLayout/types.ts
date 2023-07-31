@@ -7,7 +7,22 @@ import { NavBarProps } from './NavBar';
 export interface BaseAppLayoutProps {
   /** Either an array of objects used to automatically generate the content of
    * the navbar, or a node to render directly.*/
-  navBarMiddle: NavBarProps['contents'];
+  navBarMiddle: NavBarProps['middle'];
+
+  /**
+   * Override the height of the top bar in pixels
+   */
+  topBarHeight?: number;
+
+  /**
+   * Override the width of the navbar when closed
+   */
+  navBarWidthClosed?: number;
+
+  /**
+   * Override the width of the navbar when open
+   */
+  navBarWidthOpen?: number;
 
   /** Props applied to the PageContainer component, which is a styled MUI Container */
   pageContainerProps?: ComponentProps<typeof PageContainer>;

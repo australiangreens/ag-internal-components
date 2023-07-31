@@ -10,6 +10,12 @@ import { LinksMenu } from './LinksMenu';
 export interface NavBarProps {
   open: boolean;
 
+  offsetTop?: number;
+
+  widthOpen: number;
+
+  widthClosed: number;
+
   /** Set the datatest-id on the root element for using reactdom's getByTestId()
    * function */
   'data-testid'?: string;
@@ -49,10 +55,24 @@ export interface NavBarProps {
  * just renders whatever children it is given. The NavBarLightStyledList
  * component can be used for consistent styling against the background.
  */
-export default function NavBar({ open, 'data-testid': dataTestId, middle }: NavBarProps) {
+export default function NavBar({
+  open,
+  offsetTop = 0,
+  widthOpen,
+  widthClosed,
+  'data-testid': dataTestId,
+  middle,
+}: NavBarProps) {
   return (
     <Root className={classes.root} data-testid={dataTestId}>
-      <NavDrawer variant="permanent" anchor="left" open={open}>
+      <NavDrawer
+        variant="permanent"
+        anchor="left"
+        open={open}
+        widthOpen={widthOpen}
+        widthClosed={widthClosed}
+        offsetTop={offsetTop}
+      >
         <nav>
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
           {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}

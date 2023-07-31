@@ -29,7 +29,7 @@ import SaladBarDemo from './SaladBarDemo';
 export default function DevDemo() {
   return (
     <BrowserRouter>
-      <AppLayout navBarMiddle={<NavBarContent />}>
+      <AppLayout navBarMiddle={<NavBarContent navBarWidthOpen={256} />} navBarWidthOpen={256}>
         <Routes>
           <Route index element={<ExampleComponentDemo />} />
           <Route path="/ExampleComponentDemo" element={<ExampleComponentDemo />} />

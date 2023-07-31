@@ -7,6 +7,7 @@ const PREFIX = 'TopBar';
 
 export interface TopBarProps {
   titleText?: string;
+  height: number;
   'data-testid'?: string;
 }
 
@@ -19,7 +20,7 @@ export const classes = {
  * the scroll bar will not appear for the whole page, instead just the page
  * content
  */
-export default function TopBar({ titleText = '', 'data-testid': dataTestId }: TopBarProps) {
+export default function TopBar({ titleText = '', height, 'data-testid': dataTestId }: TopBarProps) {
   const { toggleNavBarOpen: toggleNavBar } = useAppLayout();
 
   return (
@@ -36,7 +37,7 @@ export default function TopBar({ titleText = '', 'data-testid': dataTestId }: To
           alignItems: 'center',
           gap: 2,
           flexShrink: 0,
-          height: (theme) => theme.topBar.height,
+          height,
         }}
       >
         <IconButton size="medium" color="inherit" sx={{ padding: 1.5 }} onClick={toggleNavBar}>

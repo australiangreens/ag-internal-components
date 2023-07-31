@@ -49,12 +49,7 @@ const theme = createTheme({
     },
   },
 
-  topBar: {
-    height: 64,
-  },
   navBar: {
-    widthOpen: 256,
-    widthClosed: 64,
     backgroundColor: '#E8E8E8',
   },
 });

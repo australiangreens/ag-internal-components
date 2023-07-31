@@ -10,7 +10,11 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 // import StarBorder from '@mui/icons-material/StarBorder';
 // import { useLocation } from 'react-router-dom';
 
-export default function NavBarContent() {
+interface NavBarContentProps {
+  navBarWidthOpen: number;
+}
+
+export default function NavBarContent({ navBarWidthOpen }: NavBarContentProps) {
   // const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
@@ -23,7 +27,7 @@ export default function NavBarContent() {
       component="nav"
       sx={{
         width: '100%',
-        maxWidth: (theme) => theme.navBar.widthOpen,
+        maxWidth: navBarWidthOpen,
       }}
     >
       <ListItemButton>

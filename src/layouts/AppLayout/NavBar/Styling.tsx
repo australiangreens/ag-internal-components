@@ -8,9 +8,9 @@ export const classes = {
   menuButton: `${PREFIX}-menuButton`,
   hide: `${PREFIX}-hide`,
   content: `${PREFIX}-content`,
-  userInfoHolder: `${PREFIX}-userInfoHolder`,
-  settings: `${PREFIX}-settings`,
-  pieChartIcon: `${PREFIX}-pieChartIcon`,
+  // userInfoHolder: `${PREFIX}-userInfoHolder`,
+  // settings: `${PREFIX}-settings`,
+  // pieChartIcon: `${PREFIX}-pieChartIcon`,
 };
 
 export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
@@ -31,59 +31,63 @@ export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
     padding: theme.spacing(3),
   },
 
-  [`& .${classes.userInfoHolder}`]: {
-    height: '148px',
-    marginTop: '64px',
-    marginBottom: '16px',
-  },
+  // [`& .${classes.userInfoHolder}`]: {
+  //   height: '148px',
+  //   marginTop: '64px',
+  //   marginBottom: '16px',
+  // },
 }));
 
-const sharedOverrides = (theme: Theme): CSSObject => ({
-  height: `calc(100vh - ${theme.topBar.height})`,
-  top: theme.topBar.height,
+const sharedOverrides = (theme: Theme, offsetTop: number): CSSObject => ({
+  height: `calc(100vh - ${offsetTop})`,
+  top: offsetTop,
   overflowX: 'hidden',
   overflowY: 'hidden',
   color: 'inherit',
-  backgroundColor: theme.navBar.backgroundColor,
+  backgroundColor: theme?.navBar?.backgroundColor ?? 'white', // Provide default so tests don't need to wrap theme provider
 });
 
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: theme.navBar.widthOpen,
+const openedMixin = (theme: Theme, width: number, offsetTop: number): CSSObject => ({
+  width,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  ...sharedOverrides(theme),
+  ...sharedOverrides(theme, offsetTop),
 });
 
-const closedMixin = (theme: Theme): CSSObject => ({
-  width: theme.navBar.widthClosed,
+const closedMixin = (theme: Theme, width: number, offsetTop: number): CSSObject => ({
+  width,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
 
-  ...sharedOverrides(theme),
+  ...sharedOverrides(theme, offsetTop),
 });
 
 interface NavDrawerProps {
   open: boolean;
+  widthOpen: number;
+  widthClosed: number;
+  offsetTop: number;
 }
 
 export const NavDrawer = styled(Drawer, {
-  shouldForwardProp: (prop) => !['open'].includes(prop as string),
-})<NavDrawerProps>(({ theme, open }) => ({
+  shouldForwardProp: (prop) =>
+    !['open', 'widthOpen', 'widthClosed', 'offsetTop'].includes(prop as string),
+})<NavDrawerProps>(({ theme, open, widthOpen, widthClosed, offsetTop }) => ({
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
 
   ...(open && {
-    ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
+    ...openedMixin(theme, widthOpen, offsetTop),
+    '& .MuiDrawer-paper': openedMixin(theme, widthOpen, offsetTop),
   }),
   ...(!open && {
-    ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
+    ...closedMixin(theme, widthClosed, offsetTop),
+    '& .MuiDrawer-paper': closedMixin(theme, widthClosed, offsetTop),
   }),
 }));

@@ -26,14 +26,16 @@ import { Container, Box } from '@mui/material';
 //   }),
 // }));
 
-interface PageContainerProps {}
+interface PageContainerProps {
+  topBarHeight: number;
+}
 
-function PageContainer({ children }: PropsWithChildren<PageContainerProps>) {
+function PageContainer({ children, topBarHeight }: PropsWithChildren<PageContainerProps>) {
   return (
     <Box
       sx={{
         overflow: 'auto',
-        height: (theme) => `calc(100vh - ${theme.topBar.height}px)`,
+        height: `calc(100vh - ${topBarHeight}px)`,
         scrollbarGutter: 'stable',
         // scrollbarGutter: 'stable both-edges',
         flexGrow: 1,
