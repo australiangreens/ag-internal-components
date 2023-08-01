@@ -11,7 +11,8 @@ type Action =
   | { type: 'setTopBarHeight'; payload: AppLayoutContextState['topBarHeight'] }
   | { type: 'setNavBarWidthOpen'; payload: AppLayoutContextState['navBarWidthOpen'] }
   | { type: 'setNavBarWidthClosed'; payload: AppLayoutContextState['navBarWidthClosed'] }
-  | { type: 'setTitleText'; payload: AppLayoutContextState['titleText'] };
+  | { type: 'setTitleText'; payload: AppLayoutContextState['titleText'] }
+  | { type: 'setNavBarTop'; payload: AppLayoutContextState['navBarTop'] };
 
 export const INITIAL_PAGE_LAYOUT_CONTEXT_STATE: AppLayoutContextState = {
   navBarOpen: true,
@@ -19,6 +20,7 @@ export const INITIAL_PAGE_LAYOUT_CONTEXT_STATE: AppLayoutContextState = {
   navBarWidthOpen: DEFAULT_NAV_BAR_WIDTH_OPEN,
   navBarWidthClosed: DEFAULT_NAV_BAR_WIDTH_CLOSED,
   topBarHeight: DEFAULT_TOP_BAR_HEIGHT,
+  navBarTop: undefined,
 };
 
 export function appLayoutContextStateReducer(
@@ -54,6 +56,12 @@ export function appLayoutContextStateReducer(
       return {
         ...state,
         topBarHeight: action.payload,
+      };
+
+    case 'setNavBarTop':
+      return {
+        ...state,
+        navBarTop: action.payload,
       };
 
     default:

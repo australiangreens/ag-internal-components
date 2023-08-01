@@ -1,5 +1,5 @@
 import { PropsWithChildren, ComponentProps, useEffect } from 'react';
-import { Box, CssBaseline } from '@mui/material';
+import { Box, CssBaseline, Paper } from '@mui/material';
 
 import TopBar from './TopBar';
 import NavBar from './NavBar';
@@ -64,6 +64,7 @@ function AppLayout({
     topBarHeight,
     navBarWidthOpen,
     navBarWidthClosed,
+    navBarTop,
   } = useAppLayout();
 
   // Allow open state of navbar to start differently than the default. Unlike
@@ -88,7 +89,16 @@ function AppLayout({
       <Box sx={{ display: 'flex' }}>
         <NavBar
           open={navBarOpen}
+          top={navBarTop}
           middle={navBarMiddle}
+          bottom={
+            <Box sx={{ padding: 2 }}>
+              <Paper sx={{ padding: 2, textWrap: 'initial' }} variant="outlined">
+                Placeholder for standard user settings, domain selector etc. It should be at the
+                very bottom, but WIP
+              </Paper>
+            </Box>
+          }
           widthOpen={navBarWidthOpen}
           widthClosed={navBarWidthClosed}
           offsetTop={topBarHeight}

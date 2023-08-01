@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Divider, Box } from '@mui/material';
 
 import { NavBarLink } from './types';
 import { classes, Root, NavDrawer } from './Styling';
@@ -61,7 +62,9 @@ export default function NavBar({
   widthOpen,
   widthClosed,
   'data-testid': dataTestId,
+  top,
   middle,
+  bottom,
 }: NavBarProps) {
   return (
     <Root className={classes.root} data-testid={dataTestId}>
@@ -73,10 +76,24 @@ export default function NavBar({
         widthClosed={widthClosed}
         offsetTop={offsetTop}
       >
-        <nav>
+        <Box component="nav" sx={{}}>
+          {top && (
+            <Box sx={{ flexGrow: 1 }}>
+              {top}
+              <Divider variant="middle" />
+            </Box>
+          )}
+
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
           {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}
-        </nav>
+
+          {bottom && (
+            <Box sx={{}}>
+              <Divider variant="middle" />
+              {bottom}
+            </Box>
+          )}
+        </Box>
       </NavDrawer>
     </Root>
   );

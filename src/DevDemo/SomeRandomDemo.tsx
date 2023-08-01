@@ -7,6 +7,8 @@ import {
   Pets as Step3Icon,
 } from '@mui/icons-material';
 
+import { useAppLayout } from '..';
+
 const hackyTitle = {
   color: 'success.contrastText',
   borderBottomLeftRadius: 0,
@@ -17,6 +19,7 @@ const hackyTitle = {
 export default function SomeRandomDemo() {
   const location = useLocation();
   const lastHash = useRef('');
+  const { clearNavBarTop } = useAppLayout();
 
   // listen to location change using useEffect with location as dependency
   // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen
@@ -34,6 +37,10 @@ export default function SomeRandomDemo() {
       }, 100);
     }
   }, [location]);
+
+  useEffect(() => {
+    clearNavBarTop();
+  }, [clearNavBarTop]);
 
   return (
     <>

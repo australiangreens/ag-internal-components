@@ -1,4 +1,11 @@
-import { createContext, useContext, PropsWithChildren, useMemo, useReducer } from 'react';
+import {
+  createContext,
+  useContext,
+  PropsWithChildren,
+  useMemo,
+  useReducer,
+  ReactNode,
+} from 'react';
 import { ContextError } from '../../errors/ContextError';
 import {
   INITIAL_PAGE_LAYOUT_CONTEXT_STATE,
@@ -11,6 +18,9 @@ export interface AppLayoutContextState {
   navBarWidthClosed: number;
   topBarHeight: number;
   titleText: string;
+
+  /** TODO: Would this be better handled with a portal? */
+  navBarTop: ReactNode;
 }
 
 export interface AppLayoutContextActions {
@@ -19,6 +29,8 @@ export interface AppLayoutContextActions {
   setTitleText: (newVal: string) => void;
   setNavBarWidthOpen: (newVal: number) => void;
   setNavBarWidthClosed: (newVal: number) => void;
+  setNavBarTop: (newVal: ReactNode) => void;
+  clearNavBarTop: () => void;
 }
 
 export type AppLayoutContext = AppLayoutContextState & AppLayoutContextActions;
@@ -53,7 +65,7 @@ export const AppLayoutProvider = ({
 }: PageProviderProps) => {
   // Under the hood we use a reducer to manage our state
   const [
-    { titleText, topBarHeight, navBarOpen, navBarWidthOpen, navBarWidthClosed },
+    { titleText, topBarHeight, navBarOpen, navBarWidthOpen, navBarWidthClosed, navBarTop },
     appLayoutContextDispatch,
   ] = useReducer(appLayoutContextStateReducer, INITIAL_PAGE_LAYOUT_CONTEXT_STATE);
 
@@ -75,6 +87,11 @@ export const AppLayoutProvider = ({
 
       setTopBarHeight: (newValue: number) =>
         appLayoutContextDispatch({ type: 'setTopBarHeight', payload: newValue }),
+
+      setNavBarTop: (newValue: ReactNode) =>
+        appLayoutContextDispatch({ type: 'setNavBarTop', payload: newValue }),
+
+      clearNavBarTop: () => appLayoutContextDispatch({ type: 'setNavBarTop', payload: undefined }),
     }),
     []
   );
@@ -85,6 +102,7 @@ export const AppLayoutProvider = ({
     navBarWidthClosed,
     titleText,
     topBarHeight,
+    navBarTop,
     ...appLayoutContextDispatchWrappers,
     ...overrideState,
     ...overrideActions,

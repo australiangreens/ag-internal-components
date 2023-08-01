@@ -6,6 +6,7 @@ import {
   Send as SendIcon,
   ExpandLess as ExpandLessIcon,
   ExpandMore as ExpandMoreIcon,
+  Add as AddIcon,
 } from '@mui/icons-material';
 
 // interface NavBarContentProps {}
@@ -42,6 +43,17 @@ export default function NavBarContent() {
           <DraftsIcon />
         </ListItemIcon>
         <ListItemText primary="SaladBar Demo" />
+      </ListItemButton>
+
+      <ListItemButton
+        component={RouterLink}
+        to={'/specialDemo'}
+        selected={pathname === '/specialDemo'}
+      >
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText primary="NavBarTop Demo" />
       </ListItemButton>
 
       <ListItemButton

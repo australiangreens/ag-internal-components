@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 
-import { useSaladBar } from '..';
+import { useAppLayout, useSaladBar } from '..';
 
 export default function SaladBarDemo() {
   const [saladCount, setSaladCount] = useState(0);
   const { enqueueNotification } = useSaladBar();
+  const { clearNavBarTop } = useAppLayout();
+
+  useEffect(() => {
+    clearNavBarTop();
+  }, [clearNavBarTop]);
 
   return (
     <>
