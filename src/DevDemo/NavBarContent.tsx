@@ -1,52 +1,71 @@
-import { useState } from 'react';
 import { ListItemButton, ListItemText, ListItemIcon, List, Collapse } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import {
+  Inbox as InboxIcon,
+  Drafts as DraftsIcon,
+  Send as SendIcon,
+  ExpandLess as ExpandLessIcon,
+  ExpandMore as ExpandMoreIcon,
+} from '@mui/icons-material';
 
 // interface NavBarContentProps {}
 
 export default function NavBarContent() {
-  // const { pathname } = useLocation();
-  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  // const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
+  // const handleClick = () => {
+  //   setOpen((prev) => !prev);
+  // };
+
+  const open = pathname.startsWith('/someRandom');
 
   return (
     <List component="nav">
-      <ListItemButton>
+      <ListItemButton
+        component={RouterLink}
+        to={'/exampleComponentDemo'}
+        selected={pathname === '/exampleComponentDemo'}
+      >
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
-        <ListItemText primary="Example component" />
+        <ListItemText primary="Example Component" />
       </ListItemButton>
-      <ListItemButton>
+
+      <ListItemButton
+        component={RouterLink}
+        to={'/saladBarDemo'}
+        selected={pathname === '/saladBarDemo'}
+      >
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
-        <ListItemText primary="Drafts" />
+        <ListItemText primary="SaladBar Demo" />
       </ListItemButton>
-      <ListItemButton onClick={handleClick}>
+
+      <ListItemButton
+        component={RouterLink}
+        to={'/someRandom#top'}
+        selected={pathname.startsWith('/someRandom')}
+      >
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        <ListItemText primary="Random Page" />
+        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
+
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 2 }}>
-            <ListItemText primary="1. Basic Info" inset />
+          <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/someRandom#step1'}>
+            <ListItemText primary="1. Something" inset />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 2 }}>
-            <ListItemText primary="2. Next bit" inset />
+          <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/someRandom#step2'}>
+            <ListItemText primary="2. Something else" inset />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 2 }}>
-            <ListItemText primary="3. Another thing" inset />
+          <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/someRandom#step3'}>
+            <ListItemText primary="3. Puppies!" inset />
           </ListItemButton>
         </List>
       </Collapse>

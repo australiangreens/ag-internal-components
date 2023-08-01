@@ -1,21 +1,73 @@
-import { useState } from 'react';
-import { Button } from '@mui/material';
+import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Paper, Typography, Box } from '@mui/material';
+import {
+  AccessAlarm as Step1Icon,
+  AddHome as Step2Icon,
+  Pets as Step3Icon,
+} from '@mui/icons-material';
+
+const hackyTitle = {
+  color: 'success.contrastText',
+  borderBottomLeftRadius: 0,
+  borderBottomRightRadius: 0,
+  padding: 1,
+};
 
 export default function SomeRandomDemo() {
-  const [showLotsOfText, setShowLotsOfText] = useState(true);
+  const location = useLocation();
+  const lastHash = useRef('');
+
+  // listen to location change using useEffect with location as dependency
+  // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen
+  useEffect(() => {
+    if (location.hash) {
+      lastHash.current = location.hash.slice(1); // safe hash for further use after navigation
+    }
+
+    if (lastHash.current && document.getElementById(lastHash.current)) {
+      setTimeout(() => {
+        document
+          .getElementById(lastHash.current)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        lastHash.current = '';
+      }, 100);
+    }
+  }, [location]);
 
   return (
     <>
-      <Button
-        variant="outlined"
-        onClick={() => {
-          setShowLotsOfText((prev) => !prev);
+      <Box sx={{ margin: 2, marginTop: 0, padding: 0 }} id="top">
+        <Typography variant="h4">
+          <strong>Do some stuff: Blah blah</strong>
+        </Typography>
+        <p>
+          Kale caesar salad bento box scotch bonnet pepper macadamia nut cookies basmati tahini
+          drizzle vitamin glow vegan summertime hummus green tea lime cookies samosa fruit smash.
+        </p>
+      </Box>
+
+      <Paper
+        id="step1"
+        elevation={5}
+        sx={{
+          margin: 2,
+          marginBottom: 4,
         }}
       >
-        Toggle text below
-      </Button>
-      {showLotsOfText && (
-        <div>
+        <Paper
+          sx={{
+            ...hackyTitle,
+            backgroundColor: 'primary.light',
+          }}
+        >
+          <Typography variant="h4">
+            &nbsp;
+            <Step1Icon />
+            &nbsp; Step 1. Something
+          </Typography>
+        </Paper>
+        <Box sx={{ padding: 2 }}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper ligula at posuere
             posuere. Cras volutpat ipsum id suscipit hendrerit. Proin maximus neque convallis,
@@ -34,6 +86,23 @@ export default function SomeRandomDemo() {
             erat, tincidunt sit amet semper et, tincidunt non justo. Donec gravida magna tristique
             sapien consequat, nec pharetra ante tincidunt.
           </p>
+        </Box>
+      </Paper>
+
+      <Paper elevation={5} sx={{ margin: 2, marginBottom: 4 }} id="step2">
+        <Paper
+          sx={{
+            ...hackyTitle,
+            backgroundColor: 'secondary.main',
+          }}
+        >
+          <Typography variant="h4">
+            &nbsp;
+            <Step2Icon />
+            &nbsp;Step 2. Something else
+          </Typography>
+        </Paper>
+        <Box sx={{ padding: 2 }}>
           <p>
             Donec finibus nisi et felis maximus scelerisque. Fusce faucibus ac turpis sit amet
             commodo. Donec molestie luctus molestie. Nam volutpat felis efficitur elit ullamcorper
@@ -55,6 +124,23 @@ export default function SomeRandomDemo() {
             Maecenas efficitur leo sapien, nec interdum massa pretium in. Nullam ut quam dapibus,
             iaculis lacus a, malesuada dui.
           </p>
+        </Box>
+      </Paper>
+
+      <Paper elevation={5} sx={{ margin: 2, marginBottom: 4 }} id="step3">
+        <Paper
+          sx={{
+            ...hackyTitle,
+            backgroundColor: 'warning.main',
+          }}
+        >
+          <Typography variant="h4">
+            &nbsp;
+            <Step3Icon />
+            &nbsp;Step 3. Puppies!
+          </Typography>
+        </Paper>
+        <Box sx={{ padding: 2 }}>
           <p>
             Maecenas quis dui elit. Vivamus nec viverra dui. Maecenas eget vehicula dui. Vestibulum
             vel sapien magna. Nunc fringilla nulla dui, id lacinia enim lacinia eu. Sed non rhoncus
@@ -78,42 +164,8 @@ export default function SomeRandomDemo() {
             rhoncus urna vulputate vel. Vestibulum mollis tellus egestas, egestas neque ac,
             imperdiet odio. Proin placerat massa ac metus vehicula, id finibus justo faucibus.
           </p>
-          <p>
-            Fusce tristique ante vel augue egestas rutrum. Pellentesque posuere, lacus eu aliquet
-            molestie, ante neque aliquam diam, non pulvinar diam magna vel ligula. Vestibulum id
-            tortor placerat, egestas diam id, dignissim diam. Fusce suscipit a est ac viverra.
-            Curabitur sagittis velit ac lorem blandit iaculis. Nullam elementum libero vel gravida
-            sollicitudin. Donec tristique ut quam non varius. Integer vulputate consequat ornare.
-            Etiam sit amet posuere nisl. Proin condimentum in tortor vel tincidunt. Duis lobortis
-            ullamcorper ex, id tincidunt enim consequat sit amet. Morbi pellentesque posuere leo eu
-            laoreet. Mauris justo dui, dictum non iaculis id, finibus sit amet tortor. Quisque
-            turpis urna, suscipit et nulla eu, gravida lobortis mauris. Suspendisse sit amet nisl
-            tempus magna hendrerit posuere.
-          </p>
-          <p>
-            Quisque venenatis sapien fringilla tristique convallis. Suspendisse porttitor eget mi eu
-            congue. Nunc eu ipsum eget metus viverra gravida. Aenean fermentum tellus eget neque
-            convallis, bibendum auctor metus facilisis. Ut aliquet mauris sit amet rhoncus mollis.
-            Curabitur vitae elit pretium magna porta ultricies. Fusce tempus et magna sed tincidunt.
-            Aenean nec nulla aliquam, luctus velit ac, suscipit dolor. Fusce sodales imperdiet
-            lorem, non imperdiet felis bibendum vitae. Mauris finibus augue quis facilisis
-            elementum. Cras pretium cursus vehicula. Aliquam ultrices, arcu nec fermentum aliquam,
-            neque ligula convallis lorem, sed ultrices lectus massa lacinia ex. Pellentesque eget mi
-            egestas risus interdum pellentesque. Donec non orci magna. Suspendisse potenti. Quisque
-            tristique, tortor tempus iaculis fringilla, lacus erat feugiat felis, sed pretium orci
-            lorem nec lacus.
-          </p>
-          <p>
-            Etiam quis est odio. Suspendisse ut fringilla magna. Nulla consequat rhoncus velit, ac
-            tristique risus hendrerit consequat. Integer quis velit ut eros pulvinar mollis eu quis
-            nibh. Duis a nunc rhoncus tortor pellentesque posuere. Aenean sed nunc mattis, efficitur
-            purus a, gravida massa. Vestibulum placerat nisl et est rhoncus fringilla in ac ipsum.
-            Proin sit amet metus interdum ipsum ultrices rutrum. Aliquam finibus porta fringilla.
-            Quisque eu sem id massa feugiat viverra.
-          </p>
-          <p>Final line</p>
-        </div>
-      )}
+        </Box>
+      </Paper>
     </>
   );
 }

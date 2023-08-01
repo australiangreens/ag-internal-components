@@ -32,14 +32,14 @@ export default function DevDemo() {
     <BrowserRouter>
       <AppLayout
         navBarMiddle={<NavBarContent />}
-        initialNavBarOpen={false}
+        initialNavBarOpen={true}
         initialTitleText="OurAppName"
       >
         <Routes>
           <Route index element={<ExampleComponentDemo />} />
-          <Route path="/ExampleComponentDemo" element={<ExampleComponentDemo />} />
-          <Route path="/SomeRandom" element={<SomeRandomDemo />} />
-          <Route path="/SaladBarDemo" element={<SaladBarDemo />} />
+          <Route path="/exampleComponentDemo" element={<ExampleComponentDemo />} />
+          <Route path="/saladBarDemo" element={<SaladBarDemo />} />
+          <Route path="/someRandom" element={<SomeRandomDemo />} />
         </Routes>
       </AppLayout>
     </BrowserRouter>
