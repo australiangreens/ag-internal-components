@@ -14,6 +14,7 @@ import ExampleComponentDemo from './ExampleComponentDemo';
 import SaladBarDemo from './SaladBarDemo';
 import SomeRandomDemo from './SomeRandomDemo';
 import SpecialPageDemo from './SpecialPageDemo';
+import DomainCodeDemo from './DomainCodeDemo';
 
 // const navBarMiddleLinks = [
 //   {
@@ -42,6 +43,7 @@ export default function DevDemo() {
           <Route path="/saladBarDemo" element={<SaladBarDemo />} />
           <Route path="/specialDemo" element={<SpecialPageDemo />} />
           <Route path="/someRandom" element={<SomeRandomDemo />} />
+          <Route path="/domainCode" element={<DomainCodeDemo />} />
         </Routes>
       </AppLayout>
     </BrowserRouter>
