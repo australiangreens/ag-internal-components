@@ -1,6 +1,6 @@
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import { PropsWithChildren, useState } from 'react';
-import AgDialog from 'src/components/AgDialog/AgDialog';
+import AgDialog from 'src/components/AgDialog';
 import { useDomainCode } from './hooks';
 
 const DOMAIN_CODE_LABELS = {
