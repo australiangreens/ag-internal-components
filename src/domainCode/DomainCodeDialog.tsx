@@ -1,4 +1,4 @@
-import { Autocomplete, CircularProgress, TextField } from '@mui/material';
+import { Autocomplete, CircularProgress, TextField, Typography } from '@mui/material';
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
 import { useDomainCode } from './hooks';
@@ -51,7 +51,9 @@ const DomainCodeDialog = ({
       }}
       onClose={handleClose}
     >
-      <p>Select the default organisation that you want to use with the List Manager.</p>
+      <Typography marginBottom={2}>
+        Select the default organisation that you want to use with the List Manager.
+      </Typography>
 
       <Autocomplete
         loading={isLoading}
