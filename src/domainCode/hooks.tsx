@@ -2,7 +2,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { RESET, atomWithStorage } from 'jotai/utils';
 import { DomainCode } from './DomainCodeDialog';
 
-const domainCodeAtom = atomWithStorage<DomainCode>('domainCode', 'ag');
+const domainCodeAtom = atomWithStorage<DomainCode>('domainCode', '');
 
 export const useDomainCode = () => {
   const [domainCode, setDomainCode] = useAtom(domainCodeAtom);
