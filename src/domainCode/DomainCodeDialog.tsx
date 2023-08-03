@@ -26,7 +26,7 @@ const getOptionLabel = (domainCode: DomainCode | null) => {
 type Props = PropsWithChildren<{
   isLoading: boolean;
   isOpen: boolean;
-  onClose: () => Promise<void>;
+  onClose: () => void;
   domainOptions: DomainCode[];
 }>;
 
