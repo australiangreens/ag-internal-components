@@ -9,9 +9,11 @@ const DomainCodeDemo = () => {
       <h1>DomainCode example</h1>
       <Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
       <DomainCodeDialog
+        applicationName="Example Manager"
+        handleLogout={() => console.log('Logout')}
         isOpen={isDialogOpen}
         onClose={async () => setIsDialogOpen(false)}
-        domainOptions={['ag', 'act']}
+        domainOptions={['act', 'nsw']}
         isLoading={false}
         key={isDialogOpen ? 'domainCodeDialogOpen' : 'domainCodeDialogClosed'}
       />
