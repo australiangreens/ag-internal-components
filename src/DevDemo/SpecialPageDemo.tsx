@@ -28,7 +28,7 @@ const hackyTitle = {
   padding: 1,
 };
 
-function NavBarTopContent() {
+function NavBarTopContent({ open }: { open: boolean }) {
   return (
     <>
       <ListItemButton>
@@ -39,7 +39,7 @@ function NavBarTopContent() {
         <ExpandLessIcon />
       </ListItemButton>
 
-      <Collapse in={true} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/specialDemo#step1'}>
             <ListItemText primary="1. Something" inset />
@@ -59,7 +59,7 @@ function NavBarTopContent() {
 export default function SpecialPageDemo() {
   const location = useLocation();
   const lastHash = useRef('');
-  const { setNavBarTop } = useAppLayout();
+  const { setNavBarTop, navBarOpen } = useAppLayout();
 
   // listen to location change using useEffect with location as dependency
   // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen
@@ -79,8 +79,8 @@ export default function SpecialPageDemo() {
   }, [location]);
 
   useEffect(() => {
-    setNavBarTop(<NavBarTopContent />);
-  }, [setNavBarTop]);
+    setNavBarTop(<NavBarTopContent open={navBarOpen} />);
+  }, [setNavBarTop, navBarOpen]);
 
   return (
     <>

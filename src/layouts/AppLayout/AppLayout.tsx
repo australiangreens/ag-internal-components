@@ -92,12 +92,20 @@ function AppLayout({
           top={navBarTop}
           middle={navBarMiddle}
           bottom={
-            <Box sx={{ padding: 2 }}>
-              <Paper sx={{ padding: 2, textWrap: 'initial' }} variant="outlined">
-                Placeholder for standard user settings, domain selector etc. It should be at the
-                very bottom, but WIP
-              </Paper>
-            </Box>
+            navBarOpen ? (
+              <Box sx={{ padding: 2 }}>
+                <Paper sx={{ padding: 2, textWrap: 'initial' }} variant="outlined">
+                  Placeholder for standard user settings, domain selector etc. It should be at the
+                  very bottom, but WIP
+                </Paper>
+              </Box>
+            ) : (
+              <Box sx={{ paddingTop: 2 }}>
+                <Paper sx={{ padding: 2, textWrap: 'initial' }} variant="outlined">
+                  WIP
+                </Paper>
+              </Box>
+            )
           }
           widthOpen={navBarWidthOpen}
           widthClosed={navBarWidthClosed}

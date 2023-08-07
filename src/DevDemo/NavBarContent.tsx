@@ -9,17 +9,13 @@ import {
   Add as AddIcon,
 } from '@mui/icons-material';
 
-// interface NavBarContentProps {}
+import { useAppLayout } from '../';
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
-  // const [open, setOpen] = useState(false);
+  const { navBarOpen } = useAppLayout();
 
-  // const handleClick = () => {
-  //   setOpen((prev) => !prev);
-  // };
-
-  const open = pathname.startsWith('/someRandom');
+  const menuOpen = pathname.startsWith('/someRandom');
 
   return (
     <List component="nav">
@@ -65,10 +61,10 @@ export default function NavBarContent() {
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="Random Page" />
-        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        {menuOpen && navBarOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
 
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={menuOpen && navBarOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/someRandom#step1'}>
             <ListItemText primary="1. Something" inset />
