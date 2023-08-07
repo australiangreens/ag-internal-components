@@ -18,7 +18,8 @@ paths for local imports unlikely to be arduous, at least in the near term.
 ## Yarn/npm linking
 
 To use this project for development without publishing new versions, we can use
-`yarn link` to essentially create a symlink between the local folder and the node modules.
+`yarn link` to essentially create a symlink between the local folder and the
+node modules.
 
 I kept running into issues when trying to work on this library and test that it
 can be properly imported into our of our apps by using `yarn link`.
@@ -34,31 +35,37 @@ Turns out its not expected to work. It causes multiple copy of react to exist:
 
 In this project, run:
 
-```
+```sh
 yarn link
 ```
 
 In the project you have the library as a dependency, run:
 
-```
+```sh
 yarn link "@australiangreens/ag-internal-components"
 ```
 
-To solve the issue of multiple react versions, in this project, run:
+To solve the issue of multiple react and mui versions, in this project, run:
 
-```
+```sh
 cd node_modules/react
 yarn link
 cd ../react-dom
+yarn link
+cd ../@mui/material
 yarn link
 ```
 
 and then in same project as before, run:
 
-```
+```sh
 yarn link react
 yarn link react-dom
+yarn link "@mui/material"
 ```
+
+Note: At time of writing, this was the minimum needed to work. If you have
+future issues, try linking the rest of the packages in `peerDependencies`.
 
 ## Typescript module augmentation
 
