@@ -17,6 +17,9 @@ paths for local imports unlikely to be arduous, at least in the near term.
 
 ## Yarn/npm linking
 
+To use this project for development without publishing new versions, we can use
+`yarn link` to essentially create a symlink between the local folder and the node modules.
+
 I kept running into issues when trying to work on this library and test that it
 can be properly imported into our of our apps by using `yarn link`.
 Specifically, would get an error that starts with:
@@ -27,8 +30,35 @@ Specifically, would get an error that starts with:
 Turns out its not expected to work. It causes multiple copy of react to exist:
 <https://github.com/facebook/react/issues/14257>.
 
-So don't try it like I did, unless you make use of the workarounds mentioned in
-the issue.
+### To link the library to another project
+
+In this project, run:
+
+```
+yarn link
+```
+
+In the project you have the library as a dependency, run:
+
+```
+yarn link "@australiangreens/ag-internal-components"
+```
+
+To solve the issue of multiple react versions, in this project, run:
+
+```
+cd node_modules/react
+yarn link
+cd ../react-dom
+yarn link
+```
+
+and then in same project as before, run:
+
+```
+yarn link react
+yarn link react-dom
+```
 
 ## Typescript module augmentation
 
