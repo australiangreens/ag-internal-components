@@ -9,6 +9,10 @@ import { AppLayoutContextActions, AppLayoutContextState } from './AppLayoutConte
 import { NavBarProps } from './NavBar';
 
 export interface BaseAppLayoutProps {
+  /** Either an array of objects used to automatically generate the content of
+   * the navbar (WIP), or a node to render directly.*/
+  navBarMiddle: NavBarProps['middle'];
+
   /**
    * The initial titleText. Shortcut for calling a setter from useAppLayout()
    * hook since its such a common action.
@@ -22,11 +26,8 @@ export interface BaseAppLayoutProps {
    */
   initialNavBarOpen?: boolean;
 
-  /** Either an array of objects used to automatically generate the content of
-   * the navbar, or a node to render directly.*/
-  navBarMiddle: NavBarProps['middle'];
-
-  /** Props applied to the PageContainer component, which is a styled MUI Container */
+  /** Props applied to the PageContainer component, which is a styled MUI
+   * Container */
   pageContainerProps?: ComponentProps<typeof PageContainer>;
 
   topBarDataTestId?: string;

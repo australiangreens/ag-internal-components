@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
+import { ThemeProvider } from '@mui/material/styles';
 
-import AgTheme from '../src/providers/AgTheme';
+import { internalAgSystemsTheme } from '../src/themes';
 
 const preview: Preview = {
   parameters: {
@@ -15,9 +16,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <AgTheme>
+      <ThemeProvider theme={internalAgSystemsTheme}>
         <Story />
-      </AgTheme>
+      </ThemeProvider>
     ),
   ],
 };

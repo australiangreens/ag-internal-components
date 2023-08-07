@@ -10,17 +10,19 @@ import {
 
 export type Builder<T> = (overrides?: Partial<T>) => T;
 
-export const buildNavBarState: Builder<AppLayoutContextState> = (overrides = {}) => ({
+export const buildState: Builder<AppLayoutContextState> = (overrides = {}) => ({
   navBarOpen: true,
-  navBarWidthClosed: 50,
-  navBarWidthOpen: 100,
+  navBarWidthOpen: 64,
+  navBarWidthClosed: 256,
+  topBarHeight: 64,
   titleText: '',
+  navBarTop: undefined,
   ...overrides,
 });
 
 export const withAppLayout = createHelper(
   (
-      state: Partial<AppLayoutContextState> = buildNavBarState(),
+      state: Partial<AppLayoutContextState> = buildState(),
       actions: Partial<AppLayoutContextActions> = {}
     ) =>
     ({ children }) => {

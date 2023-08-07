@@ -1,3 +1,5 @@
+// TODO: Once patterns are solidified, create a storybook story for it.
+
 import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ListItemButton, ListItem, ListItemText, ListItemIcon } from '@mui/material';

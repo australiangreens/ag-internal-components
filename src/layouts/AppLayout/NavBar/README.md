@@ -1,26 +1,39 @@
 # NavBar
 
+## Overview
+
+The NavBar has three sections: top, middle and bottom. Only the middle is
+required. The basic idea is the top content is related to the current page being
+displayed (where needed), while the middle is common to all pages in the app.
+The bottom section is stickied to the bottom of viewport, and displays
+information that is (more or less) common across all apps making use of the
+AppLayout component.
+
 ## Usage
 
-The `NavBar` is not designed to be used directly. Instead it is used by the
-`PageLayout` component within a `PageLayoutProvider`. However it can still be
-used separately if needed:
+The `NavBar` is not designed to be used directl, instead sitting below the
+`TopBar` within the `AppLayout`. However it can still be used separately if
+needed.
 
 E.g.
 
 ```jsx
-import {NavBar, PageLayoutProvider} from '@australiangreens/ag-internal-components';
+import {NavBar, AppLayoutProvider} from '@australiangreens/ag-internal-components';
 ...
+
+export function SomePageComponent() {
+  const [navBarOpen, setNavBarOpen] = useState<boolean>(true);
+
+
   return (
-    <PageLayoutProvider>
-      <NavBar>
+      <NavBar open={navBarOpen}, widthOpen={256} widthClosed={64} >
       {/* Navbar contents */}
       </NavBar>
-      <PageLayout
-        {/* props */}
-      </PageLayout>
-    </PageLayoutProvider>
+
+      <SomeSortOfContent>
+      </SomeSortOfContent>
   );
+}
 ```
 
 ## Planned improvements

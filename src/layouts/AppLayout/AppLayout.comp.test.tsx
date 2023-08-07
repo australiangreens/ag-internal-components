@@ -23,7 +23,7 @@ describe('AppLayout', () => {
     const user = userEvent.setup();
 
     render(
-      <AppLayout topBarDataTestId="topBar">
+      <AppLayout navBarMiddle={<div>Nothing</div>} topBarDataTestId="topBar">
         <ChildPageComponent />
       </AppLayout>
     );
