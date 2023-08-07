@@ -5,7 +5,7 @@
 import '@mui/material/styles';
 import '@mui/material/Typography';
 
-import { AgCustomTheme } from './types';
+import { AgCustomTheme } from '.';
 
 declare module '@mui/material/styles' {
   interface Theme extends AgCustomTheme {}

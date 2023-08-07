@@ -62,14 +62,16 @@ yarn link react-dom
 
 ## Typescript module augmentation
 
-Any files named `augmentations.d.ts` will be concatenated into
-`dist/augmentations.d.ts` after a build. This is exported by the main entry
-point.
+Things like `declare module '@mui/material/styles' {` aren't included in
+typescript output, so we have a script to copy them over.
+
+Any files named `augmentations.d.ts` will be concatenated into `dist/index.d.ts`
+after a build. This is exported by the main entry point.
+
+Be careful with any import statements - the paths will not be resolved, just
+copied verbatim.
 
 This was first done for the AgThemeProvider component, which adds new variants
 to MUI's Typography component. For the typing to work, we need to use module
 augmentation as per
 <https://mui.com/material-ui/customization/typography/#adding-amp-disabling-variants>
-
-Things like `declare module '@mui/material/styles' {` aren't included in
-typescript output, so we have a script to copy them over.
