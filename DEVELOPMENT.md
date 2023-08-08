@@ -67,6 +67,8 @@ yarn link "@mui/material"
 Note: At time of writing, this was the minimum needed to work. If you have
 future issues, try linking the rest of the packages in `peerDependencies`.
 
+I've also found `@testing-library/react` also needs to be linked when testing.
+
 ## Typescript module augmentation
 
 Things like `declare module '@mui/material/styles' {` aren't included in
