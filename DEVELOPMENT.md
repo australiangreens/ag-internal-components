@@ -38,18 +38,7 @@ too. As well as some testing related things.
 In this project, run:
 
 ```sh
-yarn link
-```
-
-In the project you have the library as a dependency, run:
-
-```sh
-yarn link "@australiangreens/ag-internal-components"
-```
-
-To solve the issue of multiple react, mui etc versions, in this project, run:
-
-```sh
+yarn link &&\
 cd node_modules/react &&\
 yarn link &&\
 cd ../react-dom  &&\
@@ -66,9 +55,10 @@ cd ../../@testing-library/react &&\
 yarn link
 ```
 
-and then in same project as before, run:
+and then in the project using the library as a dependency, run:
 
 ```sh
+yarn link "@australiangreens/ag-internal-components" &&\
 yarn link react &&\
 yarn link react-dom &&\
 yarn link "@mui/material" &&\
@@ -77,6 +67,33 @@ yarn link "@emotion/react" &&\
 yarn link "@emotion/styled" &&\
 yarn link "@testing-library/react"
 ```
+
+### Unlinking
+
+In the project using the library as a dependency, run:
+
+```sh
+yarn unlink react &&\
+yarn unlink react-dom &&\
+yarn unlink "@mui/material" &&\
+yarn unlink "@mui/icons-material" &&\
+yarn unlink "@emotion/react" &&\
+yarn unlink "@emotion/styled" &&\
+yarn unlink "@testing-library/react" &&\
+yarn unlink "@@australiangreens/ag-internal-components" &&\
+yarn install --force
+```
+
+There is no need to unlink things on in `ag-internal-components`.
+
+If you are unsure if everything is properly unlinked, you can check using:
+
+```sh
+npm ls --link=true
+```
+
+If you still run into problems after unlinking, removing the `node_modules`
+directory and re-running `yarn` might be the best solution.
 
 ## Typescript module augmentation
 
