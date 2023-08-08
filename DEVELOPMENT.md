@@ -21,15 +21,17 @@ To use this project for development without publishing new versions, we can use
 `yarn link` to essentially create a symlink between the local folder and the
 node modules.
 
-I kept running into issues when trying to work on this library and test that it
-can be properly imported into our of our apps by using `yarn link`.
-Specifically, would get an error that starts with:
+Complications can arise due to peer dependencies. Ending with errors along the
+lines of:
 
 > Error: Invalid hook call. Hooks can only be called inside of the body of a
 > function component
 
-Turns out its not expected to work. It causes multiple copy of react to exist:
-<https://github.com/facebook/react/issues/14257>.
+This is due to multiple versions of react co-existing. Similar things can
+happen with other peer dependencies such as material-ui.
+
+To avoid these issues, we link not just the library but the peer dependencies
+too. As well as some testing related things.
 
 ### To link the library to another project
 
@@ -45,29 +47,36 @@ In the project you have the library as a dependency, run:
 yarn link "@australiangreens/ag-internal-components"
 ```
 
-To solve the issue of multiple react and mui versions, in this project, run:
+To solve the issue of multiple react, mui etc versions, in this project, run:
 
 ```sh
-cd node_modules/react
-yarn link
-cd ../react-dom
-yarn link
-cd ../@mui/material
+cd node_modules/react &&\
+yarn link &&\
+cd ../react-dom  &&\
+yarn link  &&\
+cd ../@mui/material &&\
+yarn link &&\
+cd ../icons-material &&\
+yarn link &&\
+cd ../../@emotion/react &&\
+yarn link &&\
+cd ../styled &&\
+yarn link &&\
+cd ../../@testing-library/react &&\
 yarn link
 ```
 
 and then in same project as before, run:
 
 ```sh
-yarn link react
-yarn link react-dom
-yarn link "@mui/material"
+yarn link react &&\
+yarn link react-dom &&\
+yarn link "@mui/material" &&\
+yarn link "@mui/icons-material" &&\
+yarn link "@emotion/react" &&\
+yarn link "@emotion/styled" &&\
+yarn link "@testing-library/react"
 ```
-
-Note: At time of writing, this was the minimum needed to work. If you have
-future issues, try linking the rest of the packages in `peerDependencies`.
-
-I've also found `@testing-library/react` also needs to be linked when testing.
 
 ## Typescript module augmentation
 
