@@ -29,7 +29,7 @@ export const HydrateAtoms = <T,>({
   children,
 }: PropsWithChildren<{ initialValues: [WritableAtom<T, T[], void>, T][] }>) => {
   useHydrateAtoms<[WritableAtom<T, T[], void>, T][]>(initialValues);
-  return children;
+  return <>{children}</>;
 };
 
 type AtomConfigOption = keyof typeof atomsToInitialize;
