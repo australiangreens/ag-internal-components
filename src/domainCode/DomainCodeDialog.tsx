@@ -55,8 +55,9 @@ const DomainCodeDialog = ({
   const userHasNoRolesInDomain =
     Boolean(domainCode) &&
     !domainOptions.includes(domainCode) &&
-    Boolean(selectedDomainCode) &&
     !domainOptions.includes(selectedDomainCode);
+
+  const shouldLogout = !domainCode || userHasNoDomains || userHasNoRolesInDomain;
 
   const handleConfirmDomainCode = async () => {
     if (selectedDomainCode) {
@@ -70,7 +71,7 @@ const DomainCodeDialog = ({
     if (domainCode && !userHasNoDomains && !userHasNoRolesInDomain) {
       setSelectedDomainCode(domainCode);
       handleClose();
-    } else if (!domainCode || userHasNoDomains || userHasNoRolesInDomain) {
+    } else if (shouldLogout) {
       handleLogout();
     }
   };
@@ -93,8 +94,7 @@ const DomainCodeDialog = ({
         disabled: !selectedDomainCode || userHasNoDomains || userHasNoRolesInDomain,
       }}
       secondaryButton={{
-        text:
-          !selectedDomainCode || userHasNoDomains || userHasNoRolesInDomain ? 'Logout' : 'Cancel',
+        text: shouldLogout ? 'Logout' : 'Cancel',
         onClick: handleDialogClose,
       }}
       onClose={handleClose}
@@ -107,10 +107,10 @@ const DomainCodeDialog = ({
         loading={isLoading}
         multiple={false}
         disableClearable={false}
-        value={selectedDomainCode}
+        value={selectedDomainCode ?? null}
         onChange={(_, value) => setSelectedDomainCode(value ?? '')}
         getOptionLabel={getOptionLabel}
-        options={[...domainOptions, '']}
+        options={[...domainOptions]}
         renderInput={(params) => (
           <TextField
             {...params}
