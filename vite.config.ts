@@ -57,10 +57,10 @@ export default defineConfig((configEnv) => ({
   },
 }));
 
-function determineFileName(format: 'es' | 'esm', entryName: string) {
+function determineFileName(format: 'es' | 'esm' | 'cjs', entryName: string) {
   const moduleTypeDir = format === 'es' ? 'esm' : format;
   if (entryName === 'index') {
-    return `${moduleTypeDir}/index.js`;
+    return `${moduleTypeDir}/index.${format === 'cjs' ? 'c' : ''}js`;
   } else {
     return `${moduleTypeDir}/${entryName}/index.js`;
   }
