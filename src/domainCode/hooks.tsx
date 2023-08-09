@@ -6,9 +6,10 @@ const DOMAIN_CODE_KEY = 'domainCode';
 const domainCodeAtom = atom<DomainCode>(
   (localStorage.getItem(DOMAIN_CODE_KEY) as DomainCode) ?? ''
 );
-const domainCodeAtomWithPersistence = atom(
+
+export const domainCodeAtomWithPersistence = atom(
   (get) => get(domainCodeAtom),
-  (get, set, newValue: DomainCode) => {
+  (_, set, newValue: DomainCode) => {
     set(domainCodeAtom, newValue);
     localStorage.setItem(DOMAIN_CODE_KEY, newValue);
   }

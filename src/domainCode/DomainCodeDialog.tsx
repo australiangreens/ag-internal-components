@@ -7,8 +7,8 @@ import {
 } from '@mui/material';
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
-import { useDomainCode } from './hooks';
 import { useSaladBar } from '../providers';
+import { useDomainCode } from './hooks';
 
 const DOMAIN_CODE_LABELS = {
   act: 'ACT',
@@ -110,7 +110,7 @@ const DomainCodeDialog = ({
         value={selectedDomainCode}
         onChange={(_, value) => setSelectedDomainCode(value ?? '')}
         getOptionLabel={getOptionLabel}
-        options={domainOptions}
+        options={[...domainOptions, '']}
         renderInput={(params) => (
           <TextField
             {...params}
