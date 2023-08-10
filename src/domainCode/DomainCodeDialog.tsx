@@ -8,7 +8,8 @@ import {
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
 import { useSaladBar } from '../providers';
-import { useDomainCode } from './hooks';
+import { domainCodeAtom } from './hooks';
+import { useAtom } from 'jotai';
 
 const DOMAIN_CODE_LABELS = {
   act: 'ACT',
@@ -47,7 +48,7 @@ const DomainCodeDialog = ({
   applicationName,
   handleLogout,
 }: Props) => {
-  const [domainCode, setDomainCode] = useDomainCode();
+  const [domainCode, setDomainCode] = useAtom(domainCodeAtom);
   const [selectedDomainCode, setSelectedDomainCode] = useState(domainCode);
   const { enqueueSuccessNotification } = useSaladBar();
 
@@ -120,7 +121,9 @@ const DomainCodeDialog = ({
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                  {isLoading ? (
+                    <CircularProgress color="inherit" size={20} sx={{ marginTop: '-20px' }} />
+                  ) : null}
                   {params.InputProps.endAdornment}
                 </>
               ),

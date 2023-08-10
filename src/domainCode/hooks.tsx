@@ -1,29 +1,16 @@
-import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { atom } from 'jotai';
 import { DomainCode } from './DomainCodeDialog';
 
 const DOMAIN_CODE_KEY = 'domainCode';
 
-const domainCodeAtom = atom<DomainCode>(
-  (localStorage.getItem(DOMAIN_CODE_KEY) as DomainCode) ?? ''
+const baseDomainCodeAtom = atom<DomainCode>(
+  JSON.parse(localStorage.getItem(DOMAIN_CODE_KEY) ?? '{}').domainCode as DomainCode
 );
 
-export const domainCodeAtomWithPersistence = atom(
-  (get) => get(domainCodeAtom),
+export const domainCodeAtom = atom(
+  (get) => get(baseDomainCodeAtom),
   (_, set, newValue: DomainCode) => {
-    set(domainCodeAtom, newValue);
-    localStorage.setItem(DOMAIN_CODE_KEY, newValue);
+    set(baseDomainCodeAtom, newValue);
+    localStorage.setItem(DOMAIN_CODE_KEY, JSON.stringify({ domainCode: newValue }));
   }
 );
-
-export const useDomainCode = () => {
-  const [domainCode, setDomainCode] = useAtom(domainCodeAtomWithPersistence);
-  return [domainCode, setDomainCode, () => setDomainCode('')] as const;
-};
-
-export const useDomainCodeValue = () => {
-  return useAtomValue(domainCodeAtomWithPersistence);
-};
-
-export const useSetDomainCode = () => {
-  return useSetAtom(domainCodeAtomWithPersistence);
-};

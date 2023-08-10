@@ -5,20 +5,30 @@ import { Provider, WritableAtom, useAtomValue } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { PropsWithChildren } from 'react';
 import { createHelper } from 'souvlaki';
-import { domainCodeAtomWithPersistence } from '../domainCode';
+import { domainCodeAtom } from '../domainCode';
 
 /**
  * When you need to want to set an initial value for an atom, you can use either:
- * - withDefaultValue (first add your atom to the atomsToInitialize)
+ * - withOverrideDefaults (first add your atom to the atomsToOverride with your choice of key)
  * - your own custom wrapper that extends HydrateAtoms, like withDomainCode.
  *   You'll need to pass it:
  *     -- an array of tuples of atoms and their values.
  *     -- i.e. [[your_atom, value], [another_atom, value2]]
  */
 
-const atomsToInitialize = {
-  domainCode: domainCodeAtomWithPersistence,
+const atomsToOverride = {
+  domainCode: domainCodeAtom,
 };
+
+type OverrideValues<T> = [WritableAtom<T, T[], void>, T][];
+
+type AtomConfigOption = keyof typeof atomsToOverride;
+
+type AtomConfigValue<T extends AtomConfigOption> = ReturnType<
+  typeof useAtomValue<(typeof atomsToOverride)[T]>
+>;
+
+type AtomConfig = { [K in AtomConfigOption]: AtomConfigValue<K> };
 
 export const withAtomProvider = createHelper(() => ({ children }) => (
   <Provider>{children}</Provider>
@@ -27,30 +37,26 @@ export const withAtomProvider = createHelper(() => ({ children }) => (
 export const HydrateAtoms = <T,>({
   initialValues,
   children,
-}: PropsWithChildren<{ initialValues: [WritableAtom<T, T[], void>, T][] }>) => {
-  useHydrateAtoms<[WritableAtom<T, T[], void>, T][]>(initialValues);
+}: PropsWithChildren<{ initialValues: OverrideValues<T> }>) => {
+  useHydrateAtoms<OverrideValues<T>>(initialValues);
   return <>{children}</>;
 };
 
-type AtomConfigOption = keyof typeof atomsToInitialize;
-
-type AtomConfigValue<T extends AtomConfigOption> = ReturnType<
-  typeof useAtomValue<(typeof atomsToInitialize)[T]>
->;
-
-type AtomConfig = { [K in AtomConfigOption]: AtomConfigValue<K> };
-
-export const withDefaultValue = createHelper((overrides: Partial<AtomConfig>) => ({ children }) => (
-  <HydrateAtoms
-    // Typescript doesn't type Object.entries well yet
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    initialValues={(Object.entries(overrides) as any).map(
-      <T extends AtomConfigOption>([key, value]: [T, AtomConfigValue<T>]) => [
-        atomsToInitialize[key],
-        value,
-      ]
-    )}
-  >
-    {children}
-  </HydrateAtoms>
-));
+export const withOverrideDefaults = createHelper(
+  (overrides: Partial<AtomConfig>) =>
+    ({ children }) =>
+      (
+        <HydrateAtoms
+          // Typescript doesn't type Object.entries well yet
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          initialValues={(Object.entries(overrides) as any).map(
+            <T extends AtomConfigOption>([key, value]: [T, AtomConfigValue<T>]) => [
+              atomsToOverride[key],
+              value,
+            ]
+          )}
+        >
+          {children}
+        </HydrateAtoms>
+      )
+);

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { wrap } from 'souvlaki';
 import { withSaladBarProvider } from 'src/providers';
-import { withDefaultValue } from 'src/testing/wrappers';
+import { withOverrideDefaults } from 'src/testing/wrappers';
 import DomainCodeDialog from './DomainCodeDialog';
 
 describe('domaincodedialog', () => {
@@ -16,7 +16,7 @@ describe('domaincodedialog', () => {
         handleLogout={vitest.fn()}
       />,
       {
-        wrapper: wrap(withSaladBarProvider(), withDefaultValue({ domainCode: 'ag' })),
+        wrapper: wrap(withSaladBarProvider(), withOverrideDefaults({ domainCode: 'ag' })),
       }
     );
     expect(
