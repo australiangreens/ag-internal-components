@@ -8,12 +8,13 @@ import {
   ExpandMore as ExpandMoreIcon,
   Add as AddIcon,
 } from '@mui/icons-material';
+import { useAtomValue } from 'jotai';
 
-import { useAppLayout } from '../';
+import { navBarOpenAtom } from '../';
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
-  const { navBarOpen } = useAppLayout();
+  const navBarOpen = useAtomValue(navBarOpenAtom);
 
   const menuOpen = pathname.startsWith('/someRandom');
 

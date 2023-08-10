@@ -18,8 +18,9 @@ import {
   ExpandLess as ExpandLessIcon,
 } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSetAtom, useAtomValue } from 'jotai';
 
-import { useAppLayout } from '..';
+import { navBarTopAtom, navBarOpenAtom } from '..';
 
 const hackyTitle = {
   color: 'success.contrastText',
@@ -59,7 +60,8 @@ function NavBarTopContent({ open }: { open: boolean }) {
 export default function SpecialPageDemo() {
   const location = useLocation();
   const lastHash = useRef('');
-  const { setNavBarTop, navBarOpen } = useAppLayout();
+  const navBarOpen = useAtomValue(navBarOpenAtom);
+  const setNavBarTop = useSetAtom(navBarTopAtom);
 
   // listen to location change using useEffect with location as dependency
   // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen

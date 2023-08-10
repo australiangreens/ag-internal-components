@@ -1,11 +1,18 @@
 import { PropsWithChildren, ComponentProps, useEffect } from 'react';
 import { Box, CssBaseline, Paper } from '@mui/material';
+import { useAtom } from 'jotai';
 
+import {
+  navBarOpenAtom,
+  navBarWidthOpenAtom,
+  navBarWidthClosedAtom,
+  titleTextAtom,
+  topBarHeightAtom,
+  navBarTopAtom,
+} from './stateAtoms';
 import TopBar from './TopBar';
 import NavBar from './NavBar';
-import { AppLayoutProvider, useAppLayout } from './AppLayoutContext';
 import PageContainer from './PageContainer';
-import { AppLayoutContextActions, AppLayoutContextState } from './AppLayoutContext';
 import { NavBarProps } from './NavBar';
 
 export interface BaseAppLayoutProps {
@@ -30,24 +37,19 @@ export interface BaseAppLayoutProps {
    * Container */
   pageContainerProps?: ComponentProps<typeof PageContainer>;
 
+  /** Passed directly as prop of TopBar component */
   topBarDataTestId?: string;
 
+  /** Passed directly as prop of PageContainer component */
   pageContentDataTestId?: string;
 
+  /** Passed down as prop to the root element of the NavBar component */
   navBarDataTestId?: string;
-
-  /** Allow overriding the context state (navBarOpen etc) for tests,
-   * particularly with souvlaki */
-  overrideContextState?: Partial<AppLayoutContextState>;
-
-  /** Allow overriding the context actions (setNavBarOpen etc) for tests,
-   * particularly with souvlaki */
-  overrideContextActions?: Partial<AppLayoutContextActions>;
 }
 
 type AppLayoutProps = PropsWithChildren<BaseAppLayoutProps>;
 
-function AppLayout({
+export default function AppLayout({
   children,
   initialTitleText,
   initialNavBarOpen,
@@ -57,16 +59,12 @@ function AppLayout({
   navBarDataTestId,
   navBarMiddle,
 }: AppLayoutProps) {
-  const {
-    navBarOpen,
-    setNavBarOpen,
-    titleText,
-    setTitleText,
-    topBarHeight,
-    navBarWidthOpen,
-    navBarWidthClosed,
-    navBarTop,
-  } = useAppLayout();
+  const [navBarOpen, setNavBarOpen] = useAtom(navBarOpenAtom);
+  const [navBarWidthOpen] = useAtom(navBarWidthOpenAtom);
+  const [navBarWidthClosed] = useAtom(navBarWidthClosedAtom);
+  const [titleText, setTitleText] = useAtom(titleTextAtom);
+  const [topBarHeight] = useAtom(topBarHeightAtom);
+  const [navBarTop] = useAtom(navBarTopAtom);
 
   // Allow open state of navbar to start differently than the default. Unlike
   // changing widths and such, this could be a common scenario.
@@ -76,7 +74,6 @@ function AppLayout({
 
   // Similarly for navbar open state.
   useEffect(() => {
-    console.log(initialNavBarOpen);
     if (initialNavBarOpen !== undefined) setNavBarOpen(initialNavBarOpen);
   }, [initialNavBarOpen, setNavBarOpen]);
 
@@ -123,13 +120,5 @@ function AppLayout({
         </PageContainer>
       </Box>
     </Box>
-  );
-}
-
-export default function AppLayoutWithProvider(props: AppLayoutProps) {
-  return (
-    <AppLayoutProvider>
-      <AppLayout {...props} />
-    </AppLayoutProvider>
   );
 }

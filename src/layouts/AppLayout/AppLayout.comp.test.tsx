@@ -2,13 +2,14 @@ import { render, screen, within } from '@testing-library/react';
 import { Button } from '@mui/material';
 import { config as reactTransitionGroupConfig } from 'react-transition-group';
 import userEvent from '@testing-library/user-event';
+import { useSetAtom } from 'jotai';
 
-import AppLayout, { useAppLayout } from './index';
+import AppLayout, { titleTextAtom } from '.';
 
 reactTransitionGroupConfig.disabled = true;
 
 const ChildPageComponent = () => {
-  const { setTitleText } = useAppLayout();
+  const setTitleText = useSetAtom(titleTextAtom);
 
   return (
     <>
@@ -19,7 +20,7 @@ const ChildPageComponent = () => {
 };
 
 describe('AppLayout', () => {
-  it('useAppLayout().setTitleText() causes title to update', async () => {
+  it('Visible title changes with titleTextAtom', async () => {
     const user = userEvent.setup();
 
     render(

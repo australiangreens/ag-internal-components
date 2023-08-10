@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Button, Slider, Box } from '@mui/material';
+import { useSetAtom } from 'jotai';
 
-import { ExampleComponent, useAppLayout } from '..';
+import { ExampleComponent, navBarWidthOpenAtom, navBarTopAtom } from '..';
 
 const parse1dSliderValue = (val: number | number[]) => (Array.isArray(val) ? val[0] : val);
 
 export default function ExampleComponentDemo() {
   const [showLotsOfText, setShowLotsOfText] = useState(true);
-  const { setNavBarWidthOpen, clearNavBarTop } = useAppLayout();
+  const setNavBarWidthOpen = useSetAtom(navBarWidthOpenAtom);
+  const setNavBarTop = useSetAtom(navBarTopAtom);
 
   useEffect(() => {
-    clearNavBarTop();
-  }, [clearNavBarTop]);
+    setNavBarTop(undefined);
+  }, [setNavBarTop]);
 
   return (
     <>

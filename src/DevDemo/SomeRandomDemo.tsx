@@ -6,8 +6,9 @@ import {
   AddHome as Step2Icon,
   Pets as Step3Icon,
 } from '@mui/icons-material';
+import { useSetAtom } from 'jotai';
 
-import { useAppLayout } from '..';
+import { navBarTopAtom } from '..';
 
 const hackyTitle = {
   color: 'success.contrastText',
@@ -19,7 +20,7 @@ const hackyTitle = {
 export default function SomeRandomDemo() {
   const location = useLocation();
   const lastHash = useRef('');
-  const { clearNavBarTop } = useAppLayout();
+  const setNavBarTop = useSetAtom(navBarTopAtom);
 
   // listen to location change using useEffect with location as dependency
   // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen
@@ -39,8 +40,8 @@ export default function SomeRandomDemo() {
   }, [location]);
 
   useEffect(() => {
-    clearNavBarTop();
-  }, [clearNavBarTop]);
+    setNavBarTop(undefined);
+  }, [setNavBarTop]);
 
   return (
     <>
