@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { wrap } from 'souvlaki';
 import { withSaladBarProvider } from 'src/providers';
-import { withOverrideDefaults } from 'src/testing/wrappers';
+import { withAtomProvider, withOverrideDefaults } from 'src/testing/wrappers';
 import DomainCodeDialog from './DomainCodeDialog';
 
 describe('domaincodedialog', () => {
-  it('renders', () => {
+  it('renders', async () => {
     render(
       <DomainCodeDialog
         isLoading={false}
@@ -26,5 +26,45 @@ describe('domaincodedialog', () => {
     ).toBeInTheDocument();
     expect(screen.getByRole('combobox', { name: 'Select organisation' })).toHaveValue('AG');
     expect(screen.getByRole('combobox', { name: 'Select organisation' })).not.toHaveValue('');
+  });
+
+  it('should show logout button and error message if they do not have any domains', async () => {
+    render(
+      <DomainCodeDialog
+        isLoading={false}
+        isOpen={true}
+        onClose={() => {}}
+        domainOptions={[]}
+        applicationName={''}
+        handleLogout={() => {}}
+      />,
+      {
+        wrapper: wrap(withOverrideDefaults({ domainCode: 'qld' }), withSaladBarProvider()),
+      }
+    );
+    expect(await screen.findByText(/logout/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        /Unable to retrieve your active organisations. Try logging in again./i
+      )
+    ).toBeInTheDocument();
+  });
+
+  it('should show logout button and blank dialog on first log on', async () => {
+    render(
+      <DomainCodeDialog
+        isLoading={false}
+        isOpen={true}
+        onClose={() => {}}
+        domainOptions={[]}
+        applicationName={''}
+        handleLogout={() => {}}
+      />,
+      {
+        wrapper: wrap(withSaladBarProvider(), withAtomProvider()),
+      }
+    );
+    expect(await screen.findByText(/logout/i)).toBeInTheDocument();
+    expect(await screen.findByRole('combobox')).toHaveDisplayValue(['']);
   });
 });
