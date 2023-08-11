@@ -80,7 +80,7 @@ yarn unlink "@mui/icons-material" &&\
 yarn unlink "@emotion/react" &&\
 yarn unlink "@emotion/styled" &&\
 yarn unlink "@testing-library/react" &&\
-yarn unlink "@@australiangreens/ag-internal-components" &&\
+yarn unlink "@australiangreens/ag-internal-components" &&\
 yarn install --force
 ```
 
