@@ -1,8 +1,11 @@
 import { Provider, createStore } from 'jotai';
 import { PropsWithChildren } from 'react';
 
-const defaultStore = createStore();
+export const defaultStore = createStore();
 
-export const AtomProvider = ({ children }: PropsWithChildren) => (
-  <Provider store={defaultStore}>{children}</Provider>
+export const AtomProvider = ({
+  children,
+  store,
+}: PropsWithChildren<{ store?: ReturnType<typeof createStore> }>) => (
+  <Provider store={store ?? defaultStore}>{children}</Provider>
 );
