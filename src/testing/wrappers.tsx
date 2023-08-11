@@ -6,6 +6,14 @@ import { useHydrateAtoms } from 'jotai/utils';
 import { PropsWithChildren } from 'react';
 import { createHelper } from 'souvlaki';
 import { domainCodeAtom } from '../domainCode';
+import {
+  navBarOpenAtom,
+  navBarWidthOpenAtom,
+  navBarWidthClosedAtom,
+  titleTextAtom,
+  topBarHeightAtom,
+  navBarTopAtom,
+} from '../layouts/AppLayout';
 
 /**
  * When you need to want to set an initial value for an atom, you can use either:
@@ -18,6 +26,12 @@ import { domainCodeAtom } from '../domainCode';
 
 const atomsToOverride = {
   domainCode: domainCodeAtom,
+  navBarOpen: navBarOpenAtom,
+  navBarWidthOpen: navBarWidthOpenAtom,
+  navBarWidthClosed: navBarWidthClosedAtom,
+  titleText: titleTextAtom,
+  topBarHeight: topBarHeightAtom,
+  navBarTop: navBarTopAtom,
 };
 
 type OverrideValues<T> = [WritableAtom<T, T[], void>, T][];
