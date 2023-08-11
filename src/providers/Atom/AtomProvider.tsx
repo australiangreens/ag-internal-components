@@ -3,6 +3,6 @@ import { PropsWithChildren } from 'react';
 
 const defaultStore = createStore();
 
-export const atomProvider = ({ children }: PropsWithChildren) => (
+export const AtomProvider = ({ children }: PropsWithChildren) => (
   <Provider store={defaultStore}>{children}</Provider>
 );
