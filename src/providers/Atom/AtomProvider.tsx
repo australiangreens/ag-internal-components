@@ -1,7 +1,7 @@
-import { Provider, createStore } from 'jotai';
+import { Provider, createStore, getDefaultStore } from 'jotai';
 import { PropsWithChildren } from 'react';
 
-export const defaultStore = createStore();
+export const defaultStore = getDefaultStore();
 
 export const AtomProvider = ({
   children,
