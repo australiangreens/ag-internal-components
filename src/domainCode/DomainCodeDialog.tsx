@@ -5,11 +5,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useAtom } from 'jotai';
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
 import { useSaladBar } from '../providers';
 import { domainCodeAtom } from './hooks';
-import { useAtom } from 'jotai';
 
 const DOMAIN_CODE_LABELS = {
   act: 'ACT',
@@ -108,7 +108,7 @@ const DomainCodeDialog = ({
         loading={isLoading}
         multiple={false}
         disableClearable={false}
-        value={selectedDomainCode ?? null}
+        value={selectedDomainCode !== '' ? selectedDomainCode : null}
         onChange={(_, value) => setSelectedDomainCode(value ?? '')}
         getOptionLabel={getOptionLabel}
         options={[...domainOptions]}
