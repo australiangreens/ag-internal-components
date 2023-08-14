@@ -4,7 +4,7 @@ import { DomainCode } from './DomainCodeDialog';
 const DOMAIN_CODE_KEY = 'domainCode';
 
 const baseDomainCodeAtom = atom<DomainCode>(
-  JSON.parse(localStorage.getItem(DOMAIN_CODE_KEY) ?? '{}').domainCode as DomainCode
+  JSON.parse(localStorage.getItem(DOMAIN_CODE_KEY) ?? '{"domainCode": ""}').domainCode as DomainCode
 );
 
 export const domainCodeAtom = atom(
