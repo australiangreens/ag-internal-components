@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { useAtomValue } from 'jotai';
 
-import { AppLayout } from '..';
+import { AppLayout, domainCodeAtom } from '..';
 import NavBarContent from './NavBarContent';
 import ExampleComponentDemo from './ExampleComponentDemo';
 import SaladBarDemo from './SaladBarDemo';
@@ -9,12 +10,15 @@ import SpecialPageDemo from './SpecialPageDemo';
 import DomainCodeDemo from './DomainCodeDemo';
 
 export default function DevDemo() {
+  const domainCode = useAtomValue(domainCodeAtom);
+
   return (
     <BrowserRouter>
       <AppLayout
         navBarMiddle={<NavBarContent />}
         initialNavBarOpen={true}
         initialTitleText="OurAppName"
+        domainCode={domainCode}
       >
         <Routes>
           <Route index element={<ExampleComponentDemo />} />

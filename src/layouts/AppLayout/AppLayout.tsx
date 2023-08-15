@@ -1,5 +1,5 @@
 import { PropsWithChildren, ComponentProps, useEffect } from 'react';
-import { Box, CssBaseline, Paper } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 import { useAtom } from 'jotai';
 
 import {
@@ -11,9 +11,8 @@ import {
   navBarTopAtom,
 } from './stateAtoms';
 import TopBar from './TopBar';
-import NavBar from './NavBar';
+import NavBar, { NavBarProps } from './NavBar';
 import PageContainer from './PageContainer';
-import { NavBarProps } from './NavBar';
 
 export interface BaseAppLayoutProps {
   /** Either an array of objects used to automatically generate the content of
@@ -45,6 +44,13 @@ export interface BaseAppLayoutProps {
 
   /** Passed down as prop to the root element of the NavBar component */
   navBarDataTestId?: string;
+
+  /** Used to display user name and provided picture as avatar or one generated
+   * from unitials of the name */
+  user?: NavBarProps['user'];
+
+  /** Display under the user's name */
+  domainCode?: NavBarProps['domainCode'];
 }
 
 type AppLayoutProps = PropsWithChildren<BaseAppLayoutProps>;
@@ -58,6 +64,8 @@ export default function AppLayout({
   topBarDataTestId,
   navBarDataTestId,
   navBarMiddle,
+  user,
+  domainCode,
 }: AppLayoutProps) {
   const [navBarOpen, setNavBarOpen] = useAtom(navBarOpenAtom);
   const [navBarWidthOpen] = useAtom(navBarWidthOpenAtom);
@@ -89,22 +97,8 @@ export default function AppLayout({
           open={navBarOpen}
           top={navBarTop}
           middle={navBarMiddle}
-          bottom={
-            navBarOpen ? (
-              <Box sx={{ padding: 2 }}>
-                <Paper sx={{ padding: 2, textWrap: 'initial' }} variant="outlined">
-                  Placeholder for standard user settings, domain selector etc. It should be at the
-                  very bottom, but WIP
-                </Paper>
-              </Box>
-            ) : (
-              <Box sx={{ paddingTop: 2 }}>
-                <Paper sx={{ padding: 2, textWrap: 'initial' }} variant="outlined">
-                  WIP
-                </Paper>
-              </Box>
-            )
-          }
+          user={user}
+          domainCode={domainCode}
           widthOpen={navBarWidthOpen}
           widthClosed={navBarWidthClosed}
           offsetTop={topBarHeight}

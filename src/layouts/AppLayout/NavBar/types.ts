@@ -6,3 +6,10 @@ export interface NavBarLink {
   icon?: ReactNode;
   // links?: NavBarLink[];
 }
+
+export interface User {
+  name?: string;
+
+  /** URL of user's avatar image*/
+  picture?: string;
+}

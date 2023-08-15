@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
 import { Divider, Box } from '@mui/material';
 
-import { NavBarLink } from './types';
+import { NavBarLink, User } from './types';
 import { classes, Root, NavDrawer } from './Styling';
 import { LinksMenu } from './LinksMenu';
-
-// TODO: Add in more common elements (or make another component) for user/organisations/logout etc?
-// TODO: Should there be two sets of 'children', one for the list and one for dialogs etc?
+import { DomainCode } from '../../../domainCode';
+import UserInfo from './UserInfo';
 
 export interface NavBarProps {
   open: boolean;
@@ -47,8 +46,11 @@ export interface NavBarProps {
    */
   middle: ReactNode | NavBarLink[];
 
-  /** The contents aligned against bottom of view port, user info etc */
-  bottom?: ReactNode;
+  /** User information displayed at bottom of navabar when it is open*/
+  user?: User;
+
+  /** Displayed below the user information when available */
+  domainCode?: DomainCode;
 }
 
 /**
@@ -64,7 +66,8 @@ export default function NavBar({
   'data-testid': dataTestId,
   top,
   middle,
-  bottom,
+  user,
+  domainCode,
 }: NavBarProps) {
   return (
     <Root className={classes.root} data-testid={dataTestId}>
@@ -87,12 +90,8 @@ export default function NavBar({
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
           {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}
 
-          {bottom && (
-            <Box sx={{}}>
-              <Divider variant="middle" />
-              {bottom}
-            </Box>
-          )}
+          <Divider variant="middle" />
+          <UserInfo user={user} domainCode={domainCode} />
         </Box>
       </NavDrawer>
     </Root>

@@ -31,6 +31,16 @@ describe('NavBar', () => {
     expect(screen.getByText('Down the bottom we go!')).toBeVisible();
   });
 
+  it('Renders domain code when open', async () => {
+    render(<NavBar {...commonProps} open={true} domainCode={'wa'} />);
+    expect(screen.getByText('WA')).toBeVisible();
+  });
+
+  // it('Does not show domain code when closed', async () => {
+  //   render(<NavBar {...commonProps} open={false} />);
+  //   expect(screen.queryByText('WA')).not.toBeInTheDocument();
+  // });
+
   it('has expected width when open', async () => {
     render(<NavBar {...commonProps} open={true} data-testid={NAVBAR_TEST_ID} widthOpen={642} />);
 
