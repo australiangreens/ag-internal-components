@@ -11,6 +11,7 @@ type ButtonConfig = {
   onClick?: () => Promise<void>;
   disabled?: boolean;
   testId?: string;
+  buttonColor?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
 };
 
 type Props = PropsWithChildren<{
@@ -54,6 +55,7 @@ const AgDialog = ({
           onClick={secondaryButton?.onClick ?? handleClose}
           data-testid={secondaryButton?.testId}
           disabled={secondaryButton?.disabled || areButtonsDisabled}
+          color={secondaryButton?.buttonColor}
         >
           {secondaryButton?.text ?? 'Cancel'}
         </Button>
@@ -66,6 +68,7 @@ const AgDialog = ({
             }}
             data-testid={primaryButton.testId}
             disabled={primaryButton.disabled || areButtonsDisabled}
+            color={primaryButton?.buttonColor}
           >
             {primaryButton.text}
           </Button>

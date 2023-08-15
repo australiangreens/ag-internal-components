@@ -93,6 +93,7 @@ const DomainCodeDialog = ({
         text: 'Confirm',
         onClick: handleConfirmDomainCode,
         disabled: !selectedDomainCode || userHasNoDomains || userHasNoRolesInDomain,
+        buttonColor: 'primary'
       }}
       secondaryButton={{
         text: shouldLogout ? 'Logout' : 'Cancel',

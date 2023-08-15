@@ -7,6 +7,7 @@ import {
   ExpandLess as ExpandLessIcon,
   ExpandMore as ExpandMoreIcon,
   Add as AddIcon,
+  PieChart as PieChartIcon
 } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
 
@@ -52,6 +53,19 @@ export default function NavBarContent() {
         </ListItemIcon>
         <ListItemText primary="NavBarTop Demo" />
       </ListItemButton>
+
+      <ListItemButton
+        component={RouterLink}
+        to={'/domaincode'}
+        selected={pathname === '/domaincode'}
+      >
+        <ListItemIcon>
+          <PieChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="DomainCode Demo" />
+      </ListItemButton>
+
+
 
       <ListItemButton
         component={RouterLink}
