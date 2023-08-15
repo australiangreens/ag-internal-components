@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { PropsWithChildren, useState } from 'react';
 
-type ButtonConfig = {
+export type AgDialogButtonConfig = {
   text: string;
   onClick?: () => Promise<void>;
   disabled?: boolean;
@@ -14,12 +14,12 @@ type ButtonConfig = {
   buttonColor?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
 };
 
-type Props = PropsWithChildren<{
+export type AgDialogProps = PropsWithChildren<{
   isOpen: boolean;
   dialogTitle: string;
   maxWidth?: false | Breakpoint;
-  primaryButton?: ButtonConfig;
-  secondaryButton?: ButtonConfig;
+  primaryButton?: AgDialogButtonConfig;
+  secondaryButton?: AgDialogButtonConfig;
   onClose: () => void;
 }>;
 
@@ -35,7 +35,7 @@ const AgDialog = ({
   primaryButton,
   secondaryButton,
   onClose: handleClose,
-}: Props) => {
+}: AgDialogProps) => {
   const [areButtonsDisabled, setButtonsDisabled] = useState(false);
 
   return (
