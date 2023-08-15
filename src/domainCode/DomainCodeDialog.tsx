@@ -98,7 +98,7 @@ const DomainCodeDialog = ({
         text: shouldLogout ? 'Logout' : 'Cancel',
         onClick: handleDialogClose,
       }}
-      onClose={handleClose}
+      onClose={shouldLogout ? () => {} : handleClose}
     >
       <Typography marginBottom={2}>
         Select the default organisation that you want to use with the {applicationName}.
