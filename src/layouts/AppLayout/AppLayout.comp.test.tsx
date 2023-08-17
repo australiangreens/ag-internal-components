@@ -3,13 +3,13 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { config as reactTransitionGroupConfig } from 'react-transition-group';
 
+import { useSetAtom } from 'jotai';
 import AppLayout, { titleTextAtom } from '.';
-import { useSetLibraryAtom } from '../../providers';
 
 reactTransitionGroupConfig.disabled = true;
 
 const ChildPageComponent = () => {
-  const setTitleText = useSetLibraryAtom(titleTextAtom);
+  const setTitleText = useSetAtom(titleTextAtom);
 
   return (
     <>

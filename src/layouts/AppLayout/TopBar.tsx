@@ -1,7 +1,7 @@
 import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
 import { IconButton, Paper, Typography } from '@mui/material';
 
-import { useSetLibraryAtom } from '../../providers';
+import { useSetAtom } from 'jotai';
 import { navBarOpenAtom } from './stateAtoms';
 
 const PREFIX = 'TopBar';
@@ -22,7 +22,7 @@ export const classes = {
  * content
  */
 export default function TopBar({ titleText = '', height, 'data-testid': dataTestId }: TopBarProps) {
-  const setNavBarOpen = useSetLibraryAtom(navBarOpenAtom);
+  const setNavBarOpen = useSetAtom(navBarOpenAtom);
 
   const toggleNavBar = () => setNavBarOpen((prevVal) => !prevVal);
 

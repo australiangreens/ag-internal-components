@@ -1,7 +1,7 @@
 import { Box, CssBaseline } from '@mui/material';
 import { ComponentProps, PropsWithChildren, useEffect } from 'react';
 
-import { useLibraryAtom } from '../../providers';
+import { useAtom } from 'jotai';
 import NavBar, { NavBarProps } from './NavBar';
 import PageContainer from './PageContainer';
 import TopBar from './TopBar';
@@ -67,12 +67,12 @@ export default function AppLayout({
   user,
   domainCode,
 }: AppLayoutProps) {
-  const [navBarOpen, setNavBarOpen] = useLibraryAtom(navBarOpenAtom);
-  const [navBarWidthOpen] = useLibraryAtom(navBarWidthOpenAtom);
-  const [navBarWidthClosed] = useLibraryAtom(navBarWidthClosedAtom);
-  const [titleText, setTitleText] = useLibraryAtom(titleTextAtom);
-  const [topBarHeight] = useLibraryAtom(topBarHeightAtom);
-  const [navBarTop] = useLibraryAtom(navBarTopAtom);
+  const [navBarOpen, setNavBarOpen] = useAtom(navBarOpenAtom);
+  const [navBarWidthOpen] = useAtom(navBarWidthOpenAtom);
+  const [navBarWidthClosed] = useAtom(navBarWidthClosedAtom);
+  const [titleText, setTitleText] = useAtom(titleTextAtom);
+  const [topBarHeight] = useAtom(topBarHeightAtom);
+  const [navBarTop] = useAtom(navBarTopAtom);
 
   // Allow open state of navbar to start differently than the default. Unlike
   // changing widths and such, this could be a common scenario.

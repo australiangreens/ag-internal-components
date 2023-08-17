@@ -5,9 +5,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useAtom } from 'jotai';
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
-import { useLibraryAtom, useSaladBar } from '../providers';
+import { useSaladBar } from '../providers';
 import { domainCodeAtom } from './hooks';
 
 const DOMAIN_CODE_LABELS = {
@@ -47,7 +48,7 @@ const DomainCodeDialog = ({
   applicationName,
   handleLogout,
 }: Props) => {
-  const [domainCode, setDomainCode] = useLibraryAtom(domainCodeAtom);
+  const [domainCode, setDomainCode] = useAtom(domainCodeAtom);
   const [selectedDomainCode, setSelectedDomainCode] = useState(domainCode);
   const { enqueueSuccessNotification } = useSaladBar();
 

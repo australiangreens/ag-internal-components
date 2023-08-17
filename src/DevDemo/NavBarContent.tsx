@@ -10,11 +10,12 @@ import {
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-import { navBarOpenAtom, useLibraryAtomValue } from '../';
+import { useAtomValue } from 'jotai';
+import { navBarOpenAtom } from '../';
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
-  const navBarOpen = useLibraryAtomValue(navBarOpenAtom);
+  const navBarOpen = useAtomValue(navBarOpenAtom);
 
   const menuOpen = pathname.startsWith('/someRandom');
 

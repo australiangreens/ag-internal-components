@@ -7,7 +7,8 @@ import { Box, Paper, Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { navBarTopAtom, useSetLibraryAtom } from '..';
+import { useSetAtom } from 'jotai';
+import { navBarTopAtom } from '..';
 
 const hackyTitle = {
   color: 'success.contrastText',
@@ -19,7 +20,7 @@ const hackyTitle = {
 export default function SomeRandomDemo() {
   const location = useLocation();
   const lastHash = useRef('');
-  const setNavBarTop = useSetLibraryAtom(navBarTopAtom);
+  const setNavBarTop = useSetAtom(navBarTopAtom);
 
   // listen to location change using useEffect with location as dependency
   // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen
