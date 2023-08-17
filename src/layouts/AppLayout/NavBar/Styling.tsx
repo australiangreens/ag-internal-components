@@ -39,7 +39,7 @@ export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
 }));
 
 const sharedOverrides = (theme: Theme, offsetTop: number): CSSObject => ({
-  height: `calc(100vh - ${offsetTop})`,
+  height: `calc(100vh - ${offsetTop}px)`,
   top: offsetTop,
   overflowX: 'hidden',
   overflowY: 'hidden',
