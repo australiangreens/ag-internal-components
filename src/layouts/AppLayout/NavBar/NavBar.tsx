@@ -6,6 +6,7 @@ import { classes, Root, NavDrawer } from './Styling';
 import { LinksMenu } from './LinksMenu';
 import { DomainCode } from '../../../domainCode';
 import UserInfo from './UserInfo';
+import SettingsEtcPlaceholder from './SettingsEtcPlaceholder';
 
 export interface NavBarProps {
   open: boolean;
@@ -92,6 +93,8 @@ export default function NavBar({
 
           <Divider variant="middle" />
           <UserInfo user={user} domainCode={domainCode} open={open} />
+
+          <SettingsEtcPlaceholder navBarOpen={open} />
         </Box>
       </NavDrawer>
     </Root>
