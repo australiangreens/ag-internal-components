@@ -1,15 +1,13 @@
 import { StrictMode } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import DevApp from './DevApp';
 import './index.css';
 
-render(
-  // Should be resolved when we move to React >= 18
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+const container = document.getElementById('root') as Element;
+const root = createRoot(container);
+root.render(
   <StrictMode>
     <DevApp />
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 );
