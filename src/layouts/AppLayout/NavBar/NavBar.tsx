@@ -79,21 +79,29 @@ export default function NavBar({
         widthOpen={widthOpen}
         widthClosed={widthClosed}
         offsetTop={offsetTop}
+        PaperProps={{
+          // https://github.com/mui/material-ui/issues/27703
+          // This isn't fixed in the version we are using at time of writing
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          component: 'nav',
+        }}
       >
-        <Box component="nav" sx={{}}>
-          {top && (
-            <Box sx={{ flexGrow: 1 }}>
-              {top}
-              <Divider variant="middle" />
-            </Box>
-          )}
+        {top && (
+          <Box sx={{ flex: '0 0 auto' }}>
+            {top}
+            <Divider variant="middle" />
+          </Box>
+        )}
 
+        <Box sx={{ flex: '1 0 auto' }}>
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
           {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}
+        </Box>
 
+        <Box sx={{ flex: '0 0 auto' }}>
           <Divider variant="middle" />
           <UserInfo user={user} domainCode={domainCode} open={open} />
-
           <SettingsEtcPlaceholder navBarOpen={open} />
         </Box>
       </NavDrawer>

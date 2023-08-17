@@ -14,18 +14,18 @@ interface SettingsEtcPlaceholderProps {
 
 export default function SettingsEtcPlaceholder({ navBarOpen }: SettingsEtcPlaceholderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(navBarOpen);
+
   return (
-    <List component="nav">
+    <List>
       <ListItemButton onClick={() => setMenuOpen((prev: boolean) => !prev)}>
         <ListItemIcon>
           <SwitchToIcon />
         </ListItemIcon>
         <ListItemText primary="Switch to ..." />
-        {menuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        {menuOpen && navBarOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
 
-      <Collapse in={menuOpen} timeout="auto" unmountOnExit>
+      <Collapse in={menuOpen && navBarOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 2 }}>
             <ListItemText primary="1. Something" inset />

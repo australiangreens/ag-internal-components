@@ -81,6 +81,8 @@ export const NavDrawer = styled(Drawer, {
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column',
 
   ...(open && {
     ...openedMixin(theme, widthOpen, offsetTop),
