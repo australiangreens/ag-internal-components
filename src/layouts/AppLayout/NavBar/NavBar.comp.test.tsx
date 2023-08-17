@@ -36,10 +36,10 @@ describe('NavBar', () => {
     expect(screen.getByText('WA')).toBeVisible();
   });
 
-  // it('Does not show domain code when closed', async () => {
-  //   render(<NavBar {...commonProps} open={false} />);
-  //   expect(screen.queryByText('WA')).not.toBeInTheDocument();
-  // });
+  it('Does not show domain code when closed', async () => {
+    render(<NavBar {...commonProps} open={false} />);
+    expect(screen.queryByText('WA')).not.toBeInTheDocument();
+  });
 
   it('has expected width when open', async () => {
     render(<NavBar {...commonProps} open={true} data-testid={NAVBAR_TEST_ID} widthOpen={642} />);
