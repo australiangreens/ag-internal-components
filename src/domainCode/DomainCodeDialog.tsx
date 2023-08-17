@@ -5,10 +5,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useAtom } from 'jotai';
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
-import { useSaladBar } from '../providers';
+import { useLibraryAtom, useSaladBar } from '../providers';
 import { domainCodeAtom } from './hooks';
 
 const DOMAIN_CODE_LABELS = {
@@ -48,7 +47,7 @@ const DomainCodeDialog = ({
   applicationName,
   handleLogout,
 }: Props) => {
-  const [domainCode, setDomainCode] = useAtom(domainCodeAtom);
+  const [domainCode, setDomainCode] = useLibraryAtom(domainCodeAtom);
   const [selectedDomainCode, setSelectedDomainCode] = useState(domainCode);
   const { enqueueSuccessNotification } = useSaladBar();
 
@@ -93,7 +92,7 @@ const DomainCodeDialog = ({
         text: 'Confirm',
         onClick: handleConfirmDomainCode,
         disabled: !selectedDomainCode || userHasNoDomains || userHasNoRolesInDomain,
-        buttonColor: 'primary'
+        buttonColor: 'primary',
       }}
       secondaryButton={{
         text: shouldLogout ? 'Logout' : 'Cancel',

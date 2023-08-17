@@ -8,11 +8,11 @@ import { createHelper } from 'souvlaki';
 import { domainCodeAtom } from '../domainCode';
 import {
   navBarOpenAtom,
-  navBarWidthOpenAtom,
+  navBarTopAtom,
   navBarWidthClosedAtom,
+  navBarWidthOpenAtom,
   titleTextAtom,
   topBarHeightAtom,
-  navBarTopAtom,
 } from '../layouts/AppLayout';
 
 /**

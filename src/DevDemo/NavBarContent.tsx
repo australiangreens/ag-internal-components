@@ -1,21 +1,20 @@
-import { ListItemButton, ListItemText, ListItemIcon, List, Collapse } from '@mui/material';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
-  Inbox as InboxIcon,
+  Add as AddIcon,
   Drafts as DraftsIcon,
-  Send as SendIcon,
   ExpandLess as ExpandLessIcon,
   ExpandMore as ExpandMoreIcon,
-  Add as AddIcon,
-  PieChart as PieChartIcon
+  Inbox as InboxIcon,
+  PieChart as PieChartIcon,
+  Send as SendIcon,
 } from '@mui/icons-material';
-import { useAtomValue } from 'jotai';
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-import { navBarOpenAtom } from '../';
+import { navBarOpenAtom, useLibraryAtomValue } from '../';
 
 export default function NavBarContent() {
   const { pathname } = useLocation();
-  const navBarOpen = useAtomValue(navBarOpenAtom);
+  const navBarOpen = useLibraryAtomValue(navBarOpenAtom);
 
   const menuOpen = pathname.startsWith('/someRandom');
 
@@ -64,8 +63,6 @@ export default function NavBarContent() {
         </ListItemIcon>
         <ListItemText primary="DomainCode Demo" />
       </ListItemButton>
-
-
 
       <ListItemButton
         component={RouterLink}

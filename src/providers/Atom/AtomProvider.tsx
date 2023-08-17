@@ -10,14 +10,13 @@ export const AtomProvider = ({
   <Provider store={store ?? atomStore}>{children}</Provider>
 );
 
-export const useLibraryAtom = (atom: Parameters<typeof useAtom>) => {
-  return useAtom(...atom);
-};
+export const useLibraryAtom: typeof useAtom = (...atom: Parameters<typeof useAtom>) =>
+  useAtom(...atom);
 
-export const useSetLibraryAtom = (atom: Parameters<typeof useSetAtom>) => {
-  return useSetAtom(...atom);
-};
+export const useSetLibraryAtom: typeof useSetAtom = <A, B extends [], C>(
+  ...atom: Parameters<typeof useSetAtom<A, B, C>>
+) => useSetAtom(...atom);
 
-export const useLibraryAtomValue = (atom: Parameters<typeof useAtomValue>) => {
-  return useAtomValue(...atom);
-};
+export const useLibraryAtomValue: typeof useAtomValue = (
+  ...atom: Parameters<typeof useAtomValue>
+) => useLibraryAtomValue(...atom);

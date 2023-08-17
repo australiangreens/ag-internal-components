@@ -1,26 +1,24 @@
-import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import {
-  Paper,
-  Typography,
-  Box,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
-  List,
-} from '@mui/material';
-import {
-  Edit as TopIcon,
+  ExpandLess as ExpandLessIcon,
   AccessAlarm as Step1Icon,
   AddHome as Step2Icon,
   Pets as Step3Icon,
-  ExpandLess as ExpandLessIcon,
+  Edit as TopIcon,
 } from '@mui/icons-material';
-import { Link as RouterLink } from 'react-router-dom';
-import { useSetAtom, useAtomValue } from 'jotai';
+import {
+  Box,
+  Collapse,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Typography,
+} from '@mui/material';
+import { useEffect, useRef } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-import { navBarTopAtom, navBarOpenAtom } from '..';
+import { navBarOpenAtom, navBarTopAtom, useLibraryAtomValue, useSetLibraryAtom } from '..';
 
 const hackyTitle = {
   color: 'success.contrastText',
@@ -60,8 +58,8 @@ function NavBarTopContent({ open }: { open: boolean }) {
 export default function SpecialPageDemo() {
   const location = useLocation();
   const lastHash = useRef('');
-  const navBarOpen = useAtomValue(navBarOpenAtom);
-  const setNavBarTop = useSetAtom(navBarTopAtom);
+  const navBarOpen = useLibraryAtomValue(navBarOpenAtom);
+  const setNavBarTop = useSetLibraryAtom(navBarTopAtom);
 
   // listen to location change using useEffect with location as dependency
   // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen

@@ -1,16 +1,15 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { useAtomValue } from 'jotai';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { AppLayout, domainCodeAtom } from '..';
-import NavBarContent from './NavBarContent';
+import { AppLayout, domainCodeAtom, useLibraryAtomValue } from '..';
+import DomainCodeDemo from './DomainCodeDemo';
 import ExampleComponentDemo from './ExampleComponentDemo';
+import NavBarContent from './NavBarContent';
 import SaladBarDemo from './SaladBarDemo';
 import SomeRandomDemo from './SomeRandomDemo';
 import SpecialPageDemo from './SpecialPageDemo';
-import DomainCodeDemo from './DomainCodeDemo';
 
 export default function DevDemo() {
-  const domainCode = useAtomValue(domainCodeAtom);
+  const domainCode = useLibraryAtomValue(domainCodeAtom);
 
   return (
     <BrowserRouter>

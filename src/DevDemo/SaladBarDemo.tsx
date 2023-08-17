@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
 
-import { useSaladBar, navBarTopAtom } from '..';
+import { navBarTopAtom, useSaladBar, useSetLibraryAtom } from '..';
 
 export default function SaladBarDemo() {
   const [saladCount, setSaladCount] = useState(0);
   const { enqueueNotification } = useSaladBar();
-  const setNavBarTop = useSetAtom(navBarTopAtom);
+  const setNavBarTop = useSetLibraryAtom(navBarTopAtom);
 
   useEffect(() => {
     setNavBarTop(undefined);

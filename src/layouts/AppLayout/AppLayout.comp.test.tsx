@@ -1,15 +1,15 @@
-import { render, screen, within } from '@testing-library/react';
 import { Button } from '@mui/material';
-import { config as reactTransitionGroupConfig } from 'react-transition-group';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useSetAtom } from 'jotai';
+import { config as reactTransitionGroupConfig } from 'react-transition-group';
 
+import { useSetLibraryAtom } from 'src/providers';
 import AppLayout, { titleTextAtom } from '.';
 
 reactTransitionGroupConfig.disabled = true;
 
 const ChildPageComponent = () => {
-  const setTitleText = useSetAtom(titleTextAtom);
+  const setTitleText = useSetLibraryAtom(titleTextAtom);
 
   return (
     <>
