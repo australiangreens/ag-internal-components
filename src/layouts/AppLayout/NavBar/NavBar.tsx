@@ -91,7 +91,7 @@ export default function NavBar({
           {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}
 
           <Divider variant="middle" />
-          <UserInfo user={user} domainCode={domainCode} />
+          <UserInfo user={user} domainCode={domainCode} open={open} />
         </Box>
       </NavDrawer>
     </Root>
