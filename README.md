@@ -25,3 +25,10 @@ If an app needs to customise the theme further via `createTheme()`, either do a
 with](https://mui.com/material-ui/customization/theming/#createtheme-options-args-theme)
 with `internalAgSystemsTheme` or just ensure all required properties in the
 `AgCustomTheme` interface are provided.
+
+## Move to React 18
+
+As over v0.0.50 we have moved from React 17 to React 18 (also Node 16 to Node
+18). This breaks the peer dependency compatibility with some of our older apps.
+They will need be upgraded in the future to use newer versions, but for now can
+only use v0.0.50 of this library.
