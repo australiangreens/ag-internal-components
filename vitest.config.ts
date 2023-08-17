@@ -8,7 +8,9 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: './setupTests.ts',
     deps: {
-      registerNodeLoader: true, // [LIST-461]
+      // Originally for [LIST-461].
+      // Now causing warnings, see [EVNT-51]
+      registerNodeLoader: true,
     },
   },
 });
