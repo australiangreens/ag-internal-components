@@ -42,7 +42,9 @@
   "dependencies": {
     "@australiangreens/ag-error": "^0.1.7",
     "@australiangreens/ag-error-jest": "^0.1.9",
+    "@types/react-transition-group": "^4.4.6",
     "jotai": "^2.3.1",
+    "react-transition-group": "^4.4.5",
     "souvlaki": "^0.3.0"
   },
   "peerDependencies": {

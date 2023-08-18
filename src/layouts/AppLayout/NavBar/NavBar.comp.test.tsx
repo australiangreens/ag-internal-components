@@ -10,6 +10,15 @@ const commonProps = {
   middle: <div>Nothing</div>,
 };
 
+const userWithPicture = {
+  name: 'Rosio Cinelli',
+  picture: 'https://www.rosiocinelli.com.au'
+}
+
+const userWithoutPicture = {
+  name: 'Rosio Cinelli',
+}
+
 describe('NavBar', () => {
   it('Renders middle content', async () => {
     render(
@@ -39,6 +48,30 @@ describe('NavBar', () => {
   it('Does not show domain code when closed', async () => {
     render(<NavBar {...commonProps} open={false} />);
     expect(screen.queryByText('WA')).not.toBeInTheDocument();
+  });
+
+  it('Renders user as initials and name when open; user has no picture', async () => {
+    render(<NavBar {...commonProps} open={true} user={userWithoutPicture} />);
+    expect(screen.getByText('Rosio Cinelli')).toBeVisible();
+    expect(screen.getByText('RC')).toBeVisible();
+  });
+
+  it('Renders user as initials (but not name) when closed; user has no picture', async () => {
+    render(<NavBar {...commonProps} open={false} user={userWithoutPicture} />);
+    expect(screen.getByText('RC')).toBeVisible();
+    expect(screen.queryByText('Rosio Cinelli')).not.toBeInTheDocument();
+  });
+
+  it('Renders user as name but not initials when open; user has picture', async () => {
+    render(<NavBar {...commonProps} open={true} user={userWithPicture} />);
+    expect(screen.getByText('Rosio Cinelli')).toBeVisible();
+    expect(screen.queryByText('RC')).not.toBeInTheDocument();
+  });
+
+  it('Renders user with neither name nor initials when closed; user has picture', async () => {
+    render(<NavBar {...commonProps} open={false} user={userWithPicture} />);
+    expect(screen.queryByText('RC')).not.toBeInTheDocument();
+    expect(screen.queryByText('Rosio Cinelli')).not.toBeInTheDocument();
   });
 
   it('has expected width when open', async () => {
