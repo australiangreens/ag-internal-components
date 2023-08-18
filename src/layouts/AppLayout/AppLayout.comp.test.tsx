@@ -2,9 +2,10 @@ import { Button } from '@mui/material';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { config as reactTransitionGroupConfig } from 'react-transition-group';
-
 import { useSetAtom } from 'jotai';
-import AppLayout, { titleTextAtom } from '.';
+
+import AppLayout from './AppLayout';
+import { titleTextAtom } from './stateAtoms';
 
 reactTransitionGroupConfig.disabled = true;
 

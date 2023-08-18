@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import NavBar from '.';
+import NavBar from './NavBar';
 
 const NAVBAR_TEST_ID = 'the-nav-bar';
 
@@ -12,12 +12,12 @@ const commonProps = {
 
 const userWithPicture = {
   name: 'Rosio Cinelli',
-  picture: 'https://www.rosiocinelli.com.au'
-}
+  picture: 'https://www.rosiocinelli.com.au',
+};
 
 const userWithoutPicture = {
   name: 'Rosio Cinelli',
-}
+};
 
 describe('NavBar', () => {
   it('Renders middle content', async () => {
