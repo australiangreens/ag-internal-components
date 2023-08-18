@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
-
 import { useSetAtom } from 'jotai';
-import { navBarTopAtom, useSaladBar } from '..';
+
+import { navBarTopAtom, useSaladBar } from 'ag-internal-components';
 
 export default function SaladBarDemo() {
   const [saladCount, setSaladCount] = useState(0);

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { useAtomValue } from 'jotai';
-import { AppLayout, domainCodeAtom } from '..';
+
+import { AppLayout, domainCodeAtom } from 'ag-internal-components';
 import DomainCodeDemo from './DomainCodeDemo';
 import ExampleComponentDemo from './ExampleComponentDemo';
 import NavBarContent from './NavBarContent';

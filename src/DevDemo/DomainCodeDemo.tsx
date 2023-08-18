@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import DomainCodeDialog from 'src/domainCode/DomainCodeDialog';
+
+import { DomainCodeDialog } from 'ag-internal-components';
 
 const DomainCodeDemo = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

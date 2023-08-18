@@ -9,9 +9,9 @@ import {
 } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-
 import { useAtomValue } from 'jotai';
-import { navBarOpenAtom } from '../';
+
+import { navBarOpenAtom } from 'ag-internal-components';
 
 export default function NavBarContent() {
   const { pathname } = useLocation();

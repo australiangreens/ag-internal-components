@@ -6,9 +6,9 @@ import {
 import { Box, Paper, Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import { useSetAtom } from 'jotai';
-import { navBarTopAtom } from '..';
+
+import { navBarTopAtom } from 'ag-internal-components';
 
 const hackyTitle = {
   color: 'success.contrastText',
