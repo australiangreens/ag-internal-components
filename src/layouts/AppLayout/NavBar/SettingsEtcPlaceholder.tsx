@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Dashboard as SwitchToIcon, // TODO: The SpaceDashboard icon in figma design is not in MUI 5.11.0
+  SpaceDashboard as SwitchToIcon,
   Settings as SettingsIcon,
   Logout as LogoutIcon,
   ExpandLess as ExpandLessIcon,
