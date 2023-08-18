@@ -1,10 +1,8 @@
 import { Box, Avatar, Typography, Skeleton } from '@mui/material';
-import { useAtomValue } from 'jotai';
 
 import { DomainCode } from '../../../domainCode';
 import { simpleHashCode } from '../../../utils';
 import { User } from './types';
-import { navBarWidthClosedAtom, navBarWidthOpenAtom } from '..';
 
 // These all have good contrast against our typical navbar background colour
 const avatarColours = ['#A62A21', '#7e3794', '#0B51C1', '#3A6024', '#A81563', '#B3003C'];
@@ -22,6 +20,8 @@ export interface UserInfoProps {
   user?: User;
   domainCode?: DomainCode;
   open: boolean;
+  navBarWidthClosed: number;
+  navBarWidthOpen: number;
 }
 
 /**
@@ -34,13 +34,18 @@ export interface UserInfoProps {
  *
  * If user is undefined or the name is undefined, a generic empty avatar image
  * will be displayed.
+ *
+ * ! navBarWidthClosed and navBarWidthOpen are needed to size the avatar
+ * ! correctly. Specifying css in Styling.tsx might
+ * ! be a better approach. See [EVNT-59]
  */
-export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
-  // ! Using these hooks is a temporary hack while working on [EVNT-19]
-  // ! In [EVNT-30] we can add in proper transitions involving percentage widths instead
-  const navBarWidthClosed = useAtomValue(navBarWidthClosedAtom);
-  const navBarWidthOpen = useAtomValue(navBarWidthOpenAtom);
-
+export default function UserInfo({
+  user,
+  domainCode,
+  open,
+  navBarWidthClosed,
+  navBarWidthOpen,
+}: UserInfoProps) {
   return (
     <Box sx={{ paddingTop: 3 }}>
       <Box

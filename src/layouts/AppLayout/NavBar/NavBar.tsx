@@ -97,7 +97,13 @@ export default function NavBar({
 
         <Box sx={{ flex: '0 0 auto' }}>
           <Divider variant="middle" />
-          <UserInfo user={user} domainCode={domainCode} open={open} />
+          <UserInfo
+            user={user}
+            domainCode={domainCode}
+            open={open}
+            navBarWidthClosed={widthClosed}
+            navBarWidthOpen={widthOpen}
+          />
           <SettingsEtcPlaceholder navBarOpen={open} />
         </Box>
       </NavDrawer>
