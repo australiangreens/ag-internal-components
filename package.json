@@ -106,11 +106,6 @@
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.34.1"
   },
-  "resolutions": {
-    "strip-ansi": "^6.0.1",
-    "string-width": "^4.2.2",
-    "wrap-ansi": "^7.0.0"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
