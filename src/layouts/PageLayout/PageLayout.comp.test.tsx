@@ -1,9 +1,8 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen, within } from '@testing-library/react';
-
 import { config as reactTransitionGroupConfig } from 'react-transition-group';
 
-import PageLayout, { PageLayoutProps } from './index';
+import PageLayout, { PageLayoutProps } from './PageLayout';
 
 reactTransitionGroupConfig.disabled = true;
 

@@ -1,7 +1,7 @@
 import { wrap } from 'souvlaki';
 import { render, screen } from '@testing-library/react';
 
-import NavBar, { withNavBarProvider, NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from '.';
+import NavBar, { withNavBarProvider, NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
 
 const NAVBAR_TEST_ID = 'the-nav-bar';
 
