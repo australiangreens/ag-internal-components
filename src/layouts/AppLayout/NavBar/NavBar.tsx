@@ -80,10 +80,6 @@ export default function NavBar({
         widthClosed={widthClosed}
         offsetTop={offsetTop}
         PaperProps={{
-          // https://github.com/mui/material-ui/issues/27703
-          // This isn't fixed in the version we are using at time of writing
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           component: 'nav',
         }}
       >
