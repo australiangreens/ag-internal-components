@@ -8,6 +8,7 @@ import NavBarContent from './NavBarContent';
 import SaladBarDemo from './SaladBarDemo';
 import SomeRandomDemo from './SomeRandomDemo';
 import SpecialPageDemo from './SpecialPageDemo';
+import SettingsEtcPlaceholder from '../layouts/AppLayout/NavBar/SettingsEtcPlaceholder';
 
 export default function DevDemo() {
   const domainCode = useAtomValue(domainCodeAtom);
@@ -16,6 +17,7 @@ export default function DevDemo() {
     <BrowserRouter>
       <AppLayout
         navBarMiddle={<NavBarContent />}
+        navBarBottom={<SettingsEtcPlaceholder />}
         initialNavBarOpen={true}
         initialTitleText="OurAppName"
         domainCode={domainCode}

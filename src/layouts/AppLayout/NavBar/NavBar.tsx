@@ -6,7 +6,6 @@ import { NavBarLink, User } from './types';
 import { classes, Root, NavDrawer } from './Styling';
 import { LinksMenu } from './LinksMenu';
 import UserInfo from './UserInfo';
-import SettingsEtcPlaceholder from './SettingsEtcPlaceholder';
 
 export interface NavBarProps {
   open: boolean;
@@ -52,6 +51,9 @@ export interface NavBarProps {
 
   /** Displayed below the user information when available */
   domainCode?: DomainCode;
+
+  /** The contents to be displayed at the bottom, specified to the current page */
+  bottom?: ReactNode;
 }
 
 /**
@@ -67,6 +69,7 @@ export default function NavBar({
   'data-testid': dataTestId,
   top,
   middle,
+  bottom,
   user,
   domainCode,
 }: NavBarProps) {
@@ -104,7 +107,8 @@ export default function NavBar({
             navBarWidthClosed={widthClosed}
             navBarWidthOpen={widthOpen}
           />
-          <SettingsEtcPlaceholder navBarOpen={open} />
+
+          {bottom && <>{bottom}</>}
         </Box>
       </NavDrawer>
     </Root>

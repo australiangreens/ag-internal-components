@@ -19,6 +19,9 @@ export interface BaseAppLayoutProps {
    * the navbar (WIP), or a node to render directly.*/
   navBarMiddle: NavBarProps['middle'];
 
+  /** A node to render directly.*/
+  navBarBottom: NavBarProps['bottom'];
+
   /**
    * The initial titleText. Shortcut for calling a setter from useAppLayout()
    * hook since its such a common action.
@@ -64,6 +67,7 @@ export default function AppLayout({
   topBarDataTestId,
   navBarDataTestId,
   navBarMiddle,
+  navBarBottom,
   user,
   domainCode,
 }: AppLayoutProps) {
@@ -97,6 +101,7 @@ export default function AppLayout({
           open={navBarOpen}
           top={navBarTop}
           middle={navBarMiddle}
+          bottom={navBarBottom}
           user={user}
           domainCode={domainCode}
           widthOpen={navBarWidthOpen}

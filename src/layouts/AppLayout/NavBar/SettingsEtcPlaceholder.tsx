@@ -9,11 +9,7 @@ import {
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import AgDialog from '../../../components/AgDialog/AgDialog';
 
-interface SettingsEtcPlaceholderProps {
-  navBarOpen: boolean;
-}
-
-export default function SettingsEtcPlaceholder({ navBarOpen }: SettingsEtcPlaceholderProps) {
+export default function SettingsEtcPlaceholder() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -35,10 +31,10 @@ export default function SettingsEtcPlaceholder({ navBarOpen }: SettingsEtcPlaceh
             <SwitchToIcon />
           </ListItemIcon>
           <ListItemText primary="Switch to ..." />
-          {menuOpen && navBarOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          {menuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItemButton>
 
-        <Collapse in={menuOpen && navBarOpen} timeout="auto" unmountOnExit>
+        <Collapse in={menuOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 2 }} onClick={() => handleDialogOpen('1. Something')}>
               <ListItemText primary="1. Something" inset />
