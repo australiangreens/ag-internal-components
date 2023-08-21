@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import { Divider, Box } from '@mui/material';
 
-import { DomainCode } from 'domainCode';
 import { NavBarLink, User } from './types';
 import { classes, Root, NavDrawer } from './Styling';
 import { LinksMenu } from './LinksMenu';
+import { DomainCode } from '../../../domainCode';
 import UserInfo from './UserInfo';
 
 export interface NavBarProps {

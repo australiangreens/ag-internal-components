@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 
 import { internalAgSystemsTheme } from './themes';
-import { SaladBarProvider } from './providers';
+import { SaladBarProvider } from '.';
 import DevDemo from './DevDemo';
 
 export default function DevApp() {

@@ -5,8 +5,7 @@ import { Provider, WritableAtom, useAtomValue } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { PropsWithChildren } from 'react';
 import { createHelper } from 'souvlaki';
-
-import { domainCodeAtom } from 'domainCode';
+import { domainCodeAtom } from '../domainCode';
 import {
   navBarOpenAtom,
   navBarTopAtom,
@@ -14,7 +13,7 @@ import {
   navBarWidthOpenAtom,
   titleTextAtom,
   topBarHeightAtom,
-} from 'layouts';
+} from '../layouts/AppLayout';
 
 /**
  * When you need to want to set an initial value for an atom, you can use either:
@@ -24,6 +23,7 @@ import {
  *     -- an array of tuples of atoms and their values.
  *     -- i.e. [[your_atom, value], [another_atom, value2]]
  */
+
 const atomsToOverride = {
   domainCode: domainCodeAtom,
   navBarOpen: navBarOpenAtom,

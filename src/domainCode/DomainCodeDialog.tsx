@@ -7,9 +7,8 @@ import {
 } from '@mui/material';
 import { useAtom } from 'jotai';
 import { PropsWithChildren, useState } from 'react';
-
-import { useSaladBar } from 'providers';
-import { AgDialog } from 'components';
+import AgDialog from '../components/AgDialog';
+import { useSaladBar } from '../providers';
 import { domainCodeAtom } from './hooks';
 
 const DOMAIN_CODE_LABELS = {

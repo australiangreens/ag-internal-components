@@ -1,5 +1,4 @@
 import { atom } from 'jotai';
-
 import { DomainCode } from './DomainCodeDialog';
 
 const DOMAIN_CODE_KEY = 'domainCode';

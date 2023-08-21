@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import { ContextError } from 'errors';
 import { Context } from './SaladBarContext';
+import { ContextError } from '../../errors/ContextError';
 
 /**
  * Use the `useSaladBar` hook in components to access the enqueueNotification()

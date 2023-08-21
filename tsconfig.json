@@ -18,17 +18,10 @@
     "esModuleInterop": true,
     "declarationMap": true,
     "paths": {
-      "ag-internal-components": ["./src/index.ts"],
-      "components": ["./src/components"],
-      "domainCode": ["./src/domainCode"],
-      "errors": ["./src/errors"],
-      "layouts": ["./src/layouts"],
-      "providers": ["./src/providers"],
-      "testing": ["./src/testing"],
-      "themes": ["./src/themes"],
-      "utils": ["./src/utils"]
+      "ag-internal-components": ["src/index.ts"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "baseUrl": "."
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

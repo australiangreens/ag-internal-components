@@ -1,6 +1,5 @@
 import { createContext, useContext, PropsWithChildren, useState, useCallback } from 'react';
-
-import { ContextError } from 'errors';
+import { ContextError } from '../../errors/ContextError';
 
 export type NavBarState = {
   open: boolean;

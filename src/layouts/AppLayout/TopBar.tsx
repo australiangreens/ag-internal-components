@@ -1,7 +1,7 @@
 import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
 import { IconButton, Paper, Typography } from '@mui/material';
-import { useSetAtom } from 'jotai';
 
+import { useSetAtom } from 'jotai';
 import { navBarOpenAtom } from './stateAtoms';
 
 const PREFIX = 'TopBar';
