@@ -1,0 +1,179 @@
+{
+  // Processed as a jsonc file, comments allowed
+  //
+  // Copy this file and rename to settings.json within .vscode directory
+  // Customise as needed, depending which extensions are relevant to you
+
+  // Hide folders in vscode
+  "files.exclude": {
+    "**/node_modules": true,
+    ".eslintcache": true
+  },
+  // Exclude from searches (the hidden files above are automatically excluded)
+  "search.exclude": {
+    "**/.git": true,
+    "**/build": true,
+    "**/tmp": true,
+    "**/*.lock": true
+  },
+
+  // This is consistent with the airbnb eslint rules we use
+  "editor.rulers": [80, 100],
+
+  // Never worry about missing semicolon again!
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Can set language specific settings here. We are explicit with some of these
+  // despite the global editor settings above because although settings override
+  // precedence is workspace > user, it is also language > global and objects
+  // are merged
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  // For the following, its ok if we have user level per language settings.
+  "[json]": {},
+  "[jsonc]": {},
+  "[html]": {},
+  "[yaml]": {},
+  "[markdown]": {
+    // Use markdownlint instead. For some reason editor.defaultFormatter won't
+    // work, but codeActionsOnSave does
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": true
+    }
+  },
+
+  // This is useful due to our pattern of committing to main
+  "git.autofetch": true,
+
+  // This works well when using lots of nesting with index.js files
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.highlightModifiedTabs": true,
+
+  // This ensures import paths are autocompleted without needing to use ctrl+space
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+
+  // SPECIFIC TO: DBAEUMER.VSCODE-ESLINT
+  "eslint.packageManager": "yarn",
+  "eslint.format.enable": false, // We use prettier for formatting
+  "eslint.alwaysShowStatus": true,
+
+  // SPECIFIC TO: ORTA.VSCODE-JEST
+  // You'll want this off for workspaces by default, and only set it up on a
+  // per-project basis
+  "jest.autoRun": "off",
+
+  // SPECIFIC TO: JAKOB101.RELATIVEPATH
+  "relativePath.excludedExtensions": [".js", ".ts"],
+  "relativePath.ignore": [
+    "**/node_modules/**",
+    "**/*.dll,",
+    "**/obj/**",
+    "**/objd/**",
+    "**/public/**",
+    "**/*.json",
+    "**/*.md",
+    "**/*.html",
+    "**/*.css",
+    "**/*.scss",
+    "**/*.ico",
+    "**/data/**",
+    "**/coverage/**",
+    "**/.husky/**",
+    "**/*.test.*",
+    "**/coverage",
+    "**/dist/**"
+  ],
+
+  // JOOSTLUBACH.JS-INDEX
+  "js-index.quotes": "single",
+  "js-index.defaultTemplate": "export * from ${relpath};",
+
+  // EAMODIO.GITLENS
+  "gitlens.defaultDateFormat": null,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.codeLens.includeSingleLineSymbols": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.hovers.enabled": false,
+
+  // AARON-BOND.BETTER-COMMENTS
+  "better-comments.tags": [
+    {
+      // We disable the highlighting on comments within comments to allow
+      // comments used in examples in jsdoc
+      "tag": "//",
+      "color": false,
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": false,
+      "bold": false,
+      "italic": false
+    },
+    // The rest of these settings are just the defaults
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }
+  ],
+  "patternlinks.rules": [
+    {
+      "linkPattern": "LIST-\\d+",
+      "linkTarget": "https://australiangreens.atlassian.net/jira/software/projects/LIST/boards/4?selectedIssue=LIST-$0"
+    }
+  ]
+
+  // MAY BE USEFUL BUT NOT NECESSARILY RECOMMENDED
+  // This increases the indentation in the file explorer. Depends on icon
+  // customisations can be useful to modify it
+  // "workbench.tree.indent": 16
+}

@@ -1,0 +1,7 @@
+# Ignore everything except itself
+*
+!.gitignore
+
+# But not these files
+!restore-terminals.json.example
+!settings.json.example

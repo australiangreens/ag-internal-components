@@ -1,0 +1,34 @@
+{
+  "artificialDelayMilliseconds": 300,
+  "keepExistingTerminalsOpen": false,
+  "runOnStartup": true,
+  "terminals": [
+    {
+      "splitTerminals": [
+        {
+          "name": "git",
+          "commands": ["git pull", "git pull"],
+          "$comment": "Double up of git pull is a hacky to mitigate the 'cannot rebaes onto multiple rebase' issue. Setting shouldRunCommands: false just pastes the commands rather than running them",
+          "shouldRunCommands": true
+        },
+        {
+          "name": "build & run",
+          "commands": [
+            "yarn start"
+          ],
+          "$comment": "If you are using the vs-jest extension with autorun startup, will want to leave shouldRunCommands as false so they both both try to do a build:dbonly at same time",
+          "shouldRunCommands": false
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
+          "name": "testing",
+          "commands": [],
+          "shouldRunCommands": false
+        }
+      ]
+    }
+  ]
+}
