@@ -18,10 +18,10 @@
     "esModuleInterop": true,
     "declarationMap": true,
     "paths": {
-      "ag-internal-components": ["src/index.ts"]
+      "ag-internal-components": ["./src/index.ts"],
+      "/*": ["./src/*"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
-    "baseUrl": "."
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
