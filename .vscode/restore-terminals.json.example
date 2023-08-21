@@ -14,7 +14,7 @@
         {
           "name": "build & run",
           "commands": [
-            "yarn start"
+            "pnpm start"
           ],
           "$comment": "If you are using the vs-jest extension with autorun startup, will want to leave shouldRunCommands as false so they both both try to do a build:dbonly at same time",
           "shouldRunCommands": false

@@ -1,4 +1,4 @@
-if yarn --silent commitmsg $1; then
+if pnpm --silent commitmsg $1; then
     exit 0
 else
     echo "Error: commit-msg failed"

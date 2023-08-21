@@ -1,4 +1,4 @@
-if yarn --silent prepush; then
+if pnpm --silent prepush; then
     exit 0
 else
     echo "Error: tests failed"

@@ -17,6 +17,9 @@ paths for local imports unlikely to be arduous, at least in the near term.
 
 ## Yarn/npm linking
 
+TODO: Currently experimenting with [pnpm](https://pnpm.io) so this is out of
+date.
+
 To use this project for development without publishing new versions, we can use
 `yarn link` to essentially create a symlink between the local folder and the
 node modules.

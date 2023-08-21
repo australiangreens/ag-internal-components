@@ -71,9 +71,7 @@
   },
 
   // SPECIFIC TO: DBAEUMER.VSCODE-ESLINT
-  "eslint.packageManager": "yarn",
   "eslint.format.enable": false, // We use prettier for formatting
-  "eslint.alwaysShowStatus": true,
 
   // SPECIFIC TO: ORTA.VSCODE-JEST
   // You'll want this off for workspaces by default, and only set it up on a

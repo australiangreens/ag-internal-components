@@ -1,4 +1,4 @@
-if yarn --silent precommit; then
+if pnpm --silent precommit; then
     exit 0
 else
     echo "Error: tests failed"
