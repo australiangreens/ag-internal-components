@@ -1,4 +1,6 @@
-import { styled } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { StyledComponent } from '@emotion/styled';
+import { Box, BoxProps } from '@mui/material';
 
 interface PanelProps {
   width: number;
@@ -15,10 +17,13 @@ interface PanelAwareMarginsProps {
   rightPanel?: PanelProps;
 }
 
+// TODO: Explicit type annotation needed until following issue fixed:
+// https://github.com/microsoft/TypeScript/issues/48212
+
 /** With the optional leftPanel and rightPanel props providing state and width,
  * the children of of the PanelAwareMargins will looks like they is pushed aside
  * by the panels by transitioning the margins. */
-const PanelAwareMargins = styled('div', {
+const PanelAwareMargins: StyledComponent<BoxProps> = styled(Box, {
   shouldForwardProp: (prop) => !(['leftPanel', 'rightPanel'] as Array<PropertyKey>).includes(prop),
   name: 'PanelAwareMargins',
 })<PanelAwareMarginsProps>(({ theme, leftPanel, rightPanel }) => ({

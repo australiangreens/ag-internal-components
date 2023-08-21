@@ -1,5 +1,6 @@
 import { styled, CSSObject, Theme } from '@mui/material/styles';
-import Drawer from '@mui/material/Drawer';
+import { StyledComponent } from '@emotion/styled';
+import { Box, BoxProps, Drawer, DrawerProps } from '@mui/material';
 
 const PREFIX = 'Navbar';
 
@@ -13,7 +14,9 @@ export const classes = {
   // pieChartIcon: `${PREFIX}-pieChartIcon`,
 };
 
-export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
+// TODO: Explicit type annotation needed until following issue fixed:
+// https://github.com/microsoft/TypeScript/issues/48212
+export const Root: StyledComponent<BoxProps> = styled(Box, { name: 'NavBar' })(({ theme }) => ({
   [`&.${classes.root}`]: {
     display: 'flex',
   },
@@ -74,7 +77,10 @@ interface NavDrawerProps {
   offsetTop: number;
 }
 
-export const NavDrawer = styled(Drawer, {
+// TODO: Explicit type annotation needed until following issue fixed:
+// https://github.com/microsoft/TypeScript/issues/48212
+// We also use the second Generic parameter
+export const NavDrawer: StyledComponent<DrawerProps, NavDrawerProps> = styled(Drawer, {
   shouldForwardProp: (prop) =>
     !['open', 'widthOpen', 'widthClosed', 'offsetTop'].includes(prop as string),
 })<NavDrawerProps>(({ theme, open, widthOpen, widthClosed, offsetTop }) => ({

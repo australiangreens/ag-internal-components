@@ -15,6 +15,55 @@ this. However at the time it was not a priority.
 Also, each component will likely be relatively stand alone, so using relative
 paths for local imports unlikely to be arduous, at least in the near term.
 
+## Regarding typing of thing like "Root = styled(...)"
+
+At the time of writing, with typescript 5.0.2, this project is affected by a
+typescript issue involved nested package types, which in particular crops up
+when uses MUI's `styled()` utility.
+
+For example you have the following component defined as:
+
+```ts
+import { styled} from '@mui/system';
+import { Box } from '@mui/material';
+
+export const Root = styled(Box, {
+  name: 'NavBar',
+})(({ theme }) => ({
+  // ... object containing styling
+}));
+```
+
+You'll get a typescrypt error along the lines of:
+
+```text
+src/components/NavBar/Test.tsx(4,14): error TS2742: The inferred type of
+'Root' cannot be named without a reference to
+'.pnpm/@mui+system@5.14.5_@emotion+react@11.11.1_@emotion+styled@11.11.0_
+@types+react@18.2.0_react@18.2.0/node_modules/@mui/system'. This is likely not
+portable. A type annotation is necessary.
+```
+
+This is currently an open issue:
+<https://github.com/microsoft/TypeScript/issues/48212>, related to nested
+modules. It is currently milestoned to be resolved in 5.1.0, but that was
+already pushed out from 4.8.0
+
+There are many workarounds, but the one we landed on was to use a type
+annotation as the warning says. The component would then be defind as:
+
+```ts
+import { styled } from '@mui/material/styles'; // Not @mui/system
+import { Box, BoxProps } from '@mui/material';
+import { StyledComponent } from '@emotion/styled';
+
+export const Root:StyledComponent<BoxProps> = styled(Box, {
+  name: 'NavBar',
+})(({ theme }) => ({
+  // ... object containing styling
+}));
+```
+
 ## Yarn/npm linking
 
 TODO: Currently experimenting with [pnpm](https://pnpm.io) so this is out of

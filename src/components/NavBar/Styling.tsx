@@ -1,5 +1,6 @@
 import { styled, CSSObject } from '@mui/material/styles';
-import Drawer from '@mui/material/Drawer';
+import { StyledComponent } from '@emotion/styled';
+import { Box, BoxProps, Drawer, DrawerProps } from '@mui/material';
 
 export const NAVBAR_WIDTH_OPENED = 330;
 export const NAVBAR_WIDTH_CLOSED = 73;
@@ -16,7 +17,11 @@ export const classes = {
   pieChartIcon: `${PREFIX}-pieChartIcon`,
 };
 
-export const Root = styled('div', { name: 'NavBar' })(({ theme }) => ({
+// TODO: Explicit type annotation needed until following issue fixed:
+// https://github.com/microsoft/TypeScript/issues/48212
+export const Root: StyledComponent<BoxProps> = styled(Box, {
+  name: 'NavBar',
+})(({ theme }) => ({
   [`&.${classes.root}`]: {
     display: 'flex',
   },
@@ -64,7 +69,9 @@ const closedMixin = (): CSSObject => ({
   ...sharedOverrides(),
 });
 
-export const NavDrawer = styled(Drawer, {
+// TODO: Explicit type annotation needed until following issue fixed:
+// https://github.com/microsoft/TypeScript/issues/48212
+export const NavDrawer: StyledComponent<DrawerProps> = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   width: open ? NAVBAR_WIDTH_OPENED : NAVBAR_WIDTH_CLOSED,

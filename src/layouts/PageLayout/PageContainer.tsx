@@ -1,7 +1,9 @@
-import { styled, Container } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { StyledComponent } from '@emotion/styled';
+import { Container, ContainerProps } from '@mui/material';
 
 /** Just a simple styled container applying our spacings*/
-const PageContainer = styled(Container, {
+const PageContainer: StyledComponent<ContainerProps> = styled(Container, {
   name: 'PageContainer',
 })(({ theme }) => ({
   // Horizontal padding comes from the Container's gutter

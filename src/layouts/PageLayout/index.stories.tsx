@@ -27,7 +27,9 @@ const iconTableItems = [
   },
 ];
 
-const meta = {
+// TODO: It shouldn't be encessary to have this explicit type annotation here.
+// It is a workaround for https://github.com/microsoft/TypeScript/issues/48212
+const meta: Meta<typeof PageLayout> = {
   component: PageLayout,
   tags: ['autodocs'],
   parameters: {
