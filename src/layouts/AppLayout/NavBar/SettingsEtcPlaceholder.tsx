@@ -7,7 +7,8 @@ import {
   ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import AgDialog from '../../../components/AgDialog/AgDialog';
+
+import AgDialog from '/components/AgDialog/AgDialog';
 
 export default function SettingsEtcPlaceholder() {
   const [menuOpen, setMenuOpen] = useState(false);
