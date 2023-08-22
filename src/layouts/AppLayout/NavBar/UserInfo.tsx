@@ -45,7 +45,7 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        gap: '8px',
+        gap: '0.5rem',
       }}
     >
       <Box
@@ -74,14 +74,13 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
       </Box>
       <Collapse
         sx={{ width: '100%' }}
-        // Meant to match the transitions in the navdrawer styled component
+        // Matches the transitions in the navdrawer styled component
         easing={theme.transitions.easing.sharp}
         timeout={{
           enter: theme.transitions.duration.enteringScreen,
-          exit: theme.transitions.duration.leavingScreen - 37,
+          exit: theme.transitions.duration.leavingScreen,
         }}
         in={open}
-        unmountOnExit
       >
         <Box width="100%" display="flex" flexDirection="column" alignItems="center">
           {user?.name ? (
