@@ -1,4 +1,4 @@
-import { Avatar, Box, Collapse, Skeleton, Typography, useTheme } from '@mui/material';
+import { Avatar, Box, Collapse, Fade, Skeleton, Typography, useTheme } from '@mui/material';
 
 import { DomainCode } from '../../../domainCode';
 import { simpleHashCode } from '../../../utils';
@@ -82,18 +82,20 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
         }}
         in={open}
       >
-        <Box width="100%" display="flex" flexDirection="column" alignItems="center">
-          {user?.name ? (
-            <Typography>{user.name}</Typography>
-          ) : (
-            <Skeleton animation={false} width={'50%'} />
-          )}
-          {domainCode ? (
-            <Typography>{domainCode.toUpperCase()}</Typography>
-          ) : (
-            <Skeleton animation={false} width={'25%'} />
-          )}
-        </Box>
+        <Fade in={open}>
+          <Box width="100%" display="flex" flexDirection="column" alignItems="center">
+            {user?.name ? (
+              <Typography>{user.name}</Typography>
+            ) : (
+              <Skeleton animation={false} width={'50%'} />
+            )}
+            {domainCode ? (
+              <Typography>{domainCode.toUpperCase()}</Typography>
+            ) : (
+              <Skeleton animation={false} width={'25%'} />
+            )}
+          </Box>
+        </Fade>
       </Collapse>
     </Box>
   );
