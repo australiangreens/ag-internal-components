@@ -1,7 +1,8 @@
-import { Box, Avatar, Typography, Skeleton } from '@mui/material';
+import { Avatar, Box, Collapse, Skeleton, Typography, useTheme } from '@mui/material';
 
 import { DomainCode } from '../../../domainCode';
 import { simpleHashCode } from '../../../utils';
+import { navbarTransition } from './Styling';
 import { User } from './types';
 
 // These all have good contrast against our typical navbar background colour
@@ -20,8 +21,6 @@ export interface UserInfoProps {
   user?: User;
   domainCode?: DomainCode;
   open: boolean;
-  navBarWidthClosed: number;
-  navBarWidthOpen: number;
 }
 
 /**
@@ -35,82 +34,68 @@ export interface UserInfoProps {
  * If user is undefined or the name is undefined, a generic empty avatar image
  * will be displayed.
  *
- * ! navBarWidthClosed and navBarWidthOpen are needed to size the avatar
- * ! correctly. Specifying css in Styling.tsx might
- * ! be a better approach. See [EVNT-59]
  */
-export default function UserInfo({
-  user,
-  domainCode,
-  open,
-  navBarWidthClosed,
-  navBarWidthOpen,
-}: UserInfoProps) {
+
+export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
+  const theme = useTheme();
   return (
-    <Box sx={{ paddingTop: 3 }}>
+    <Box
+      sx={{
+        paddingTop: 3,
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        gap: '8px',
+      }}
+    >
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
+          width: open ? '5rem' : '2rem',
+          transition: open
+            ? navbarTransition(theme, ['width', 'height'], 'entering')
+            : navbarTransition(theme, ['width', 'height'], 'leaving'),
+          aspectRatio: 1,
         }}
       >
-        {open ? (
-          <>
-            <Box
-              sx={{
-                width: `${navBarWidthOpen * 0.33}px`,
-                aspectRatio: 1,
-                marginBottom: 1,
-              }}
-            >
-              {user?.name ? (
-                <Avatar
-                  src={user?.picture}
-                  sx={{
-                    width: '100%',
-                    height: '100%',
-                    bgcolor:
-                      avatarColours[Math.abs(simpleHashCode(user.name)) % avatarColours.length],
-                  }}
-                >
-                  {extractInitials(user.name)}
-                </Avatar>
-              ) : (
-                <Avatar sx={{ width: '100%', height: '100%' }} />
-              )}
-            </Box>
-            {user?.name ? (
-              <Typography>{user.name}</Typography>
-            ) : (
-              <Skeleton animation={false} width={'50%'} />
-            )}
-            {domainCode ? (
-              <Typography>{domainCode.toUpperCase()}</Typography>
-            ) : (
-              <Skeleton animation={false} width={'25%'} />
-            )}
-          </>
+        {user?.name ? (
+          <Avatar
+            src={user?.picture}
+            sx={{
+              width: '100%',
+              height: '100%',
+              bgcolor: avatarColours[Math.abs(simpleHashCode(user.name)) % avatarColours.length],
+            }}
+          >
+            {extractInitials(user.name)}
+          </Avatar>
         ) : (
-          <Box sx={{ width: `${navBarWidthClosed * 0.5}px`, aspectRatio: 1, marginBottom: 1 }}>
-            {user?.name ? (
-              <Avatar
-                src={user?.picture}
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  bgcolor:
-                    avatarColours[Math.abs(simpleHashCode(user.name)) % avatarColours.length],
-                }}
-              >
-                {extractInitials(user.name)}
-              </Avatar>
-            ) : (
-              <Avatar sx={{ width: '100%', height: '100%' }} />
-            )}
-          </Box>
+          <Avatar sx={{ width: '100%', height: '100%' }} />
         )}
       </Box>
+      <Collapse
+        sx={{ width: '100%' }}
+        // Meant to match the transitions in the navdrawer styled component
+        easing={theme.transitions.easing.sharp}
+        timeout={{
+          enter: theme.transitions.duration.enteringScreen,
+          exit: theme.transitions.duration.leavingScreen - 37,
+        }}
+        in={open}
+        unmountOnExit
+      >
+        <Box width="100%" display="flex" flexDirection="column" alignItems="center">
+          {user?.name ? (
+            <Typography>{user.name}</Typography>
+          ) : (
+            <Skeleton animation={false} width={'50%'} />
+          )}
+          {domainCode ? (
+            <Typography>{domainCode.toUpperCase()}</Typography>
+          ) : (
+            <Skeleton animation={false} width={'25%'} />
+          )}
+        </Box>
+      </Collapse>
     </Box>
   );
 }

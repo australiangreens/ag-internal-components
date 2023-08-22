@@ -1,11 +1,11 @@
+import { Box, Divider } from '@mui/material';
 import { ReactNode } from 'react';
-import { Divider, Box } from '@mui/material';
 
-import { NavBarLink, User } from './types';
-import { classes, Root, NavDrawer } from './Styling';
-import { LinksMenu } from './LinksMenu';
 import { DomainCode } from '../../../domainCode';
+import { LinksMenu } from './LinksMenu';
+import { NavDrawer, Root, classes } from './Styling';
 import UserInfo from './UserInfo';
+import { NavBarLink, User } from './types';
 
 export interface NavBarProps {
   open: boolean;
@@ -87,26 +87,20 @@ export default function NavBar({
         }}
       >
         {top && (
-          <Box sx={{ flex: '0 0 auto' }}>
+          <Box flexGrow="0">
             {top}
             <Divider variant="middle" />
           </Box>
         )}
 
-        <Box sx={{ flex: '1 0 auto' }}>
+        <Box flexGrow="1">
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
           {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}
         </Box>
 
-        <Box sx={{ flex: '0 0 auto' }}>
+        <Box flexGrow="0">
           <Divider variant="middle" />
-          <UserInfo
-            user={user}
-            domainCode={domainCode}
-            open={open}
-            navBarWidthClosed={widthClosed}
-            navBarWidthOpen={widthOpen}
-          />
+          <UserInfo user={user} domainCode={domainCode} open={open} />
 
           {bottom && <>{bottom}</>}
         </Box>

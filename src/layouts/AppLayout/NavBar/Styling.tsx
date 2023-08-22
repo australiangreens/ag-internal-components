@@ -1,6 +1,6 @@
-import { styled, CSSObject, Theme } from '@mui/material/styles';
 import { StyledComponent } from '@emotion/styled';
 import { Box, BoxProps, Drawer, DrawerProps } from '@mui/material';
+import { CSSObject, Theme, styled } from '@mui/material/styles';
 
 const PREFIX = 'Navbar';
 
@@ -41,6 +41,19 @@ export const Root: StyledComponent<BoxProps> = styled(Box, { name: 'NavBar' })((
   // },
 }));
 
+export const navbarTransition = (
+  theme: Theme,
+  property: string | string[],
+  action: 'entering' | 'leaving'
+) =>
+  theme.transitions.create(property, {
+    easing: theme.transitions.easing.sharp,
+    duration:
+      action === 'leaving'
+        ? theme.transitions.duration.leavingScreen
+        : theme.transitions.duration.enteringScreen,
+  });
+
 const sharedOverrides = (theme: Theme, offsetTop: number): CSSObject => ({
   height: `calc(100vh - ${offsetTop}px)`,
   top: offsetTop,
@@ -52,19 +65,13 @@ const sharedOverrides = (theme: Theme, offsetTop: number): CSSObject => ({
 
 const openedMixin = (theme: Theme, width: number, offsetTop: number): CSSObject => ({
   width,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
+  transition: navbarTransition(theme, 'width', 'entering'),
   ...sharedOverrides(theme, offsetTop),
 });
 
 const closedMixin = (theme: Theme, width: number, offsetTop: number): CSSObject => ({
   width,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  transition: navbarTransition(theme, 'width', 'leaving'),
   overflowX: 'hidden',
 
   ...sharedOverrides(theme, offsetTop),
