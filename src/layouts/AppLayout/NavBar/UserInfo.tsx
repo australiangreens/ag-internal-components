@@ -1,8 +1,7 @@
 import { Box, Avatar, Typography, Skeleton } from '@mui/material';
 
-import { DomainCode } from '/domainCode';
-import { simpleHashCode } from '/utils';
-
+import { DomainCode } from '../../../domainCode';
+import { simpleHashCode } from '../../../utils';
 import { User } from './types';
 
 // These all have good contrast against our typical navbar background colour

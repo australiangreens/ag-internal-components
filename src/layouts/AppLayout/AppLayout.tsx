@@ -1,7 +1,7 @@
 import { Box, CssBaseline } from '@mui/material';
 import { ComponentProps, PropsWithChildren, useEffect } from 'react';
-import { useAtom } from 'jotai';
 
+import { useAtom } from 'jotai';
 import NavBar, { NavBarProps } from './NavBar';
 import PageContainer from './PageContainer';
 import TopBar from './TopBar';
