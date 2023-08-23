@@ -1,8 +1,8 @@
-import { Avatar, Box, Collapse, Fade, Skeleton, Typography, useTheme } from '@mui/material';
+import { Avatar, Box, Fade, Skeleton, Typography, useTheme } from '@mui/material';
 
 import { DomainCode } from '../../../domainCode';
 import { simpleHashCode } from '../../../utils';
-import { navbarTransition } from './Styling';
+import { NavbarCollapse, navbarTransition } from './Styling';
 import { User } from './types';
 
 // These all have good contrast against our typical navbar background colour
@@ -72,16 +72,7 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
           <Avatar sx={{ width: '100%', height: '100%' }} />
         )}
       </Box>
-      <Collapse
-        sx={{ width: '100%' }}
-        // Matches the transitions in the navdrawer styled component
-        easing={theme.transitions.easing.sharp}
-        timeout={{
-          enter: theme.transitions.duration.enteringScreen,
-          exit: theme.transitions.duration.leavingScreen,
-        }}
-        in={open}
-      >
+      <NavbarCollapse sx={{ width: '100%' }} in={open}>
         <Fade in={open}>
           <Box width="100%" display="flex" flexDirection="column" alignItems="center">
             {user?.name ? (
@@ -96,7 +87,7 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
             )}
           </Box>
         </Fade>
-      </Collapse>
+      </NavbarCollapse>
     </Box>
   );
 }

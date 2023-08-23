@@ -1,7 +1,10 @@
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, Toolbar } from '@mui/material';
 import { ReactNode } from 'react';
 
+import { useSetAtom } from 'jotai';
 import { DomainCode } from '../../../domainCode';
+import { useSmallScreen } from '../mobile';
+import { navBarOpenAtom } from '../stateAtoms';
 import { LinksMenu } from './LinksMenu';
 import { NavDrawer, Root, classes } from './Styling';
 import UserInfo from './UserInfo';
@@ -63,9 +66,8 @@ export interface NavBarProps {
  */
 export default function NavBar({
   open,
-  offsetTop = 0,
-  widthOpen,
   widthClosed,
+  widthOpen,
   'data-testid': dataTestId,
   top,
   middle,
@@ -73,19 +75,26 @@ export default function NavBar({
   user,
   domainCode,
 }: NavBarProps) {
+  const isSmallScreen = useSmallScreen();
+  const setNavBarOpen = useSetAtom(navBarOpenAtom);
+
   return (
     <Root className={classes.root} data-testid={dataTestId}>
       <NavDrawer
-        variant="permanent"
-        anchor="left"
         open={open}
         widthOpen={widthOpen}
         widthClosed={widthClosed}
-        offsetTop={offsetTop}
+        anchor="left"
+        variant={!isSmallScreen ? 'permanent' : 'temporary'}
         PaperProps={{
           component: 'nav',
         }}
+        onClose={() => {
+          setNavBarOpen(false);
+        }}
+        isSmallScreen={isSmallScreen}
       >
+        {!isSmallScreen && <Toolbar />}
         {top && (
           <Box flexGrow="0">
             {top}

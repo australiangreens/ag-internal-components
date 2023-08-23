@@ -1,5 +1,13 @@
 import { StyledComponent } from '@emotion/styled';
-import { Box, BoxProps, Drawer, DrawerProps } from '@mui/material';
+import {
+  Box,
+  BoxProps,
+  Collapse,
+  CollapseProps,
+  Drawer,
+  DrawerProps,
+  useTheme,
+} from '@mui/material';
 import { CSSObject, Theme, styled } from '@mui/material/styles';
 
 const PREFIX = 'Navbar';
@@ -54,34 +62,43 @@ export const navbarTransition = (
         : theme.transitions.duration.enteringScreen,
   });
 
-const sharedOverrides = (theme: Theme, offsetTop: number): CSSObject => ({
-  height: `calc(100vh - ${offsetTop}px)`,
-  top: offsetTop,
+export const NavbarCollapse = (props: CollapseProps) => {
+  const theme = useTheme();
+  return (
+    <Collapse
+      easing={theme.transitions.easing.sharp}
+      timeout={{
+        enter: theme.transitions.duration.enteringScreen,
+        exit: theme.transitions.duration.leavingScreen,
+      }}
+      {...props}
+    />
+  );
+};
+
+const sharedOverrides = (theme: Theme): CSSObject => ({
   overflowX: 'hidden',
-  overflowY: 'hidden',
   color: 'inherit',
   backgroundColor: theme?.navBar?.backgroundColor ?? 'white', // Provide default so tests don't need to wrap theme provider
 });
 
-const openedMixin = (theme: Theme, width: number, offsetTop: number): CSSObject => ({
+const openedMixin = (theme: Theme, width: number): CSSObject => ({
   width,
   transition: navbarTransition(theme, 'width', 'entering'),
-  ...sharedOverrides(theme, offsetTop),
+  ...sharedOverrides(theme),
 });
 
-const closedMixin = (theme: Theme, width: number, offsetTop: number): CSSObject => ({
+const closedMixin = (theme: Theme, width: number): CSSObject => ({
   width,
   transition: navbarTransition(theme, 'width', 'leaving'),
-  overflowX: 'hidden',
-
-  ...sharedOverrides(theme, offsetTop),
+  ...sharedOverrides(theme),
 });
 
 interface NavDrawerProps {
   open: boolean;
   widthOpen: number;
   widthClosed: number;
-  offsetTop: number;
+  isSmallScreen: boolean;
 }
 
 // TODO: Explicit type annotation needed until following issue fixed:
@@ -89,8 +106,8 @@ interface NavDrawerProps {
 // We also use the second Generic parameter
 export const NavDrawer: StyledComponent<DrawerProps, NavDrawerProps> = styled(Drawer, {
   shouldForwardProp: (prop) =>
-    !['open', 'widthOpen', 'widthClosed', 'offsetTop'].includes(prop as string),
-})<NavDrawerProps>(({ theme, open, widthOpen, widthClosed, offsetTop }) => ({
+    !['widthOpen', 'widthClosed', 'isSmallScreen'].includes(prop as string),
+})<NavDrawerProps>(({ theme, open, widthOpen, widthClosed, isSmallScreen }) => ({
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
@@ -98,11 +115,13 @@ export const NavDrawer: StyledComponent<DrawerProps, NavDrawerProps> = styled(Dr
   flexDirection: 'column',
 
   ...(open && {
-    ...openedMixin(theme, widthOpen, offsetTop),
-    '& .MuiDrawer-paper': openedMixin(theme, widthOpen, offsetTop),
+    ...openedMixin(theme, widthOpen),
+    backgroundColor: '',
+    '& .MuiDrawer-paper': openedMixin(theme, widthOpen),
   }),
   ...(!open && {
-    ...closedMixin(theme, widthClosed, offsetTop),
-    '& .MuiDrawer-paper': closedMixin(theme, widthClosed, offsetTop),
+    ...closedMixin(theme, isSmallScreen ? widthOpen : widthClosed),
+    backgroundColor: '',
+    '& .MuiDrawer-paper': closedMixin(theme, isSmallScreen ? widthOpen : widthClosed),
   }),
 }));

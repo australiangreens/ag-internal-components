@@ -1,7 +1,8 @@
 import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
-import { IconButton, Paper, Typography } from '@mui/material';
+import { IconButton, Paper, Typography, useTheme } from '@mui/material';
 
 import { useSetAtom } from 'jotai';
+import { useSmallScreen } from './mobile';
 import { navBarOpenAtom } from './stateAtoms';
 
 const PREFIX = 'TopBar';
@@ -25,7 +26,8 @@ export default function TopBar({ titleText = '', height, 'data-testid': dataTest
   const setNavBarOpen = useSetAtom(navBarOpenAtom);
 
   const toggleNavBar = () => setNavBarOpen((prevVal) => !prevVal);
-
+  const theme = useTheme();
+  const isSmallScreen = useSmallScreen();
   return (
     <header data-testid={dataTestId}>
       <Paper
@@ -41,6 +43,7 @@ export default function TopBar({ titleText = '', height, 'data-testid': dataTest
           gap: 2,
           flexShrink: 0,
           height,
+          zIndex: isSmallScreen ? 0 : theme.zIndex.drawer + 1,
         }}
       >
         <IconButton size="medium" color="inherit" sx={{ padding: 1.5 }} onClick={toggleNavBar}>
