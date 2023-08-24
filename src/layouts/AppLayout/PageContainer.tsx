@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { Container, Box } from '@mui/material';
+import { Container, Box, ContainerProps } from '@mui/material';
 
 // const NavBarAwareMargins = styled('div', {
 //   shouldForwardProp: (prop) => !(['leftPanel', 'rightPanel'] as Array<PropertyKey>).includes(prop),
@@ -28,9 +28,20 @@ import { Container, Box } from '@mui/material';
 
 interface PageContainerProps {
   topBarHeight: number;
+
+  /** Passed to underlying Container. False be default.*/
+  maxWidth?: ContainerProps['maxWidth'];
 }
 
-function PageContainer({ children, topBarHeight }: PropsWithChildren<PageContainerProps>) {
+/**
+ * An MUI Container component wrapped in a Box whose height adapts to the
+ * topBarHeight and has a stable scrollbar gutter.
+ */
+function PageContainer({
+  children,
+  topBarHeight,
+  maxWidth = false,
+}: PropsWithChildren<PageContainerProps>) {
   return (
     <Box
       sx={{
@@ -44,6 +55,7 @@ function PageContainer({ children, topBarHeight }: PropsWithChildren<PageContain
       <Container
         component="main"
         id="main-content"
+        maxWidth={maxWidth}
         sx={{ paddingTop: 3, paddingBottom: 3, flexGrow: 1 }}
       >
         {children}
