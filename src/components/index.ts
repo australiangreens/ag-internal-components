@@ -6,3 +6,6 @@ export * from './NavBar';
 
 export { default as AgDialog } from './AgDialog';
 export * from './AgDialog';
+
+export { default as FetchAutocomplete } from './FetchAutocomplete';
+export * from './FetchAutocomplete';
