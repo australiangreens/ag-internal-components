@@ -17,6 +17,7 @@ export default defineConfig((configEnv) => ({
     }),
     dts({
       include: ['src'],
+      exclude: ['node_modules/**', 'src/DevApp.tsx', 'src/devMain.tsx', 'src/DevDemo/**'],
     }),
   ],
   build: {
