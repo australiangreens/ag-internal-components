@@ -13,16 +13,23 @@ import { Cancel as CancelIcon, ArrowDropDown as DefaultPopupIcon } from '@mui/ic
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 
-import { GenericAutocompleteEntity, GenericAutocompleteEntityIdType } from './types';
+import {
+  AutocompleteGenericEntity,
+  AutocompleteGenericEntityIdType,
+  FetchAutocompleteChangeReason,
+} from './types';
 
-export interface FetchAutocompleteProps<EntityType extends GenericAutocompleteEntity> {
+export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity> {
   /**
-   * Callback fired when the value changes. reason is one of "createOption",
-   * "selectOption", "removeOption", "blur" or "clear". This is passed directly
-   * to the underlying Autocomplete, but it is triggered by the Autocomplete's
-   * own onChange.
+   * Callback fired when the value changes. This is passed directly to the
+   * underlying Autocomplete, but it is triggered by the Autocomplete's own
+   * onChange, with the exception of the deletion of chips.
    */
-  onChange: (event: SyntheticEvent<Element, Event>, newValue: EntityType[]) => unknown;
+  onChange: (
+    newValue: EntityType[],
+    reason: FetchAutocompleteChangeReason,
+    event: SyntheticEvent<Element, Event>
+  ) => unknown;
 
   /** The sequence of entity types returned. */
   value: EntityType[];
@@ -69,7 +76,7 @@ export interface FetchAutocompleteProps<EntityType extends GenericAutocompleteEn
  * as-you-type fetching from an api and styled the way we want it across the app
  * by default.
  */
-export default function FetchAutocomplete<EntityType extends GenericAutocompleteEntity>({
+export default function FetchAutocomplete<EntityType extends AutocompleteGenericEntity>({
   lookup = async () => {},
   enableHighlighting = true,
   onChange,
@@ -90,11 +97,11 @@ export default function FetchAutocomplete<EntityType extends GenericAutocomplete
   const [loading, setLoading] = useState(false);
 
   const handleDelete = (
-    _e: SyntheticEvent<Element, Event>,
-    deleteValue: GenericAutocompleteEntityIdType
+    e: SyntheticEvent<Element, Event>,
+    deleteValue: AutocompleteGenericEntityIdType
   ) => {
     const newInternalValue = value.filter((x) => x.id !== deleteValue);
-    onChange(_e, newInternalValue);
+    onChange(newInternalValue, 'delete', e);
   };
 
   useEffect(() => {
@@ -174,8 +181,8 @@ export default function FetchAutocomplete<EntityType extends GenericAutocomplete
         value={value}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
-        onChange={(event, newValue) => {
-          onChange(event, newValue);
+        onChange={(event, newValue, reason) => {
+          onChange(newValue, reason, event);
         }}
         onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
         noOptionsText={noOptionsText}

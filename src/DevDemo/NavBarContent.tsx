@@ -6,6 +6,7 @@ import {
   Inbox as InboxIcon,
   PieChart as PieChartIcon,
   Send as SendIcon,
+  Search as AutoCompleteDemoIcon,
 } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -63,6 +64,17 @@ export default function NavBarContent() {
           <PieChartIcon />
         </ListItemIcon>
         <ListItemText primary="DomainCode Demo" />
+      </ListItemButton>
+
+      <ListItemButton
+        component={RouterLink}
+        to={'/autocomplete'}
+        selected={pathname === '/autocomplete'}
+      >
+        <ListItemIcon>
+          <AutoCompleteDemoIcon />
+        </ListItemIcon>
+        <ListItemText primary="FetchAutocomplete" />
       </ListItemButton>
 
       <ListItemButton

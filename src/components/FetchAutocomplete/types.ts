@@ -1,7 +1,17 @@
-export type GenericAutocompleteEntityIdType = number | string;
+export type AutocompleteGenericEntityIdType = number | string;
 
-export interface GenericAutocompleteEntity {
-  id: GenericAutocompleteEntityIdType;
+/** These are an extension of the reasons for MUI's Autocomplete. We add delete
+ * reason. */
+export type FetchAutocompleteChangeReason =
+  | 'createOption'
+  | 'selectOption'
+  | 'removeOption'
+  | 'blur'
+  | 'clear'
+  | 'delete';
+
+export interface AutocompleteGenericEntity {
+  id: AutocompleteGenericEntityIdType;
   label: string;
   /**
    * optional chip label specifically for displaying custom chip

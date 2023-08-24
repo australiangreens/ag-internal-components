@@ -9,6 +9,7 @@ const PageContainer: StyledComponent<ContainerProps> = styled(Container, {
   // Horizontal padding comes from the Container's gutter
   paddingTop: theme.spacing(3),
   paddingBottom: theme.spacing(3),
+  // TODO: Remove max width
 }));
 
 export default PageContainer;

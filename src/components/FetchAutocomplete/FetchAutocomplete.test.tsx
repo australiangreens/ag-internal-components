@@ -1,9 +1,8 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SyntheticEvent } from 'react';
 
 import FetchAutocomplete from '.';
-import { GenericAutocompleteEntity } from './types';
+import { AutocompleteGenericEntity } from './types';
 
 const genericLookupMethod = async () => {
   return [
@@ -77,11 +76,8 @@ describe('FetchAutocomplete', () => {
     const user = userEvent.setup();
     const testlabel = 'This is a label';
     const nostufftext = 'No stuff found';
-    let fetchAutocompleteContents = [] as GenericAutocompleteEntity[];
-    const handleFetchAutocompleteContents = (
-      event: SyntheticEvent<Element, Event>,
-      newValue: GenericAutocompleteEntity[]
-    ) => {
+    let fetchAutocompleteContents = [] as AutocompleteGenericEntity[];
+    const handleFetchAutocompleteContents = (newValue: AutocompleteGenericEntity[]) => {
       fetchAutocompleteContents = newValue;
     };
 
@@ -249,11 +245,8 @@ describe('FetchAutocomplete', () => {
   it('should allow an item to be selected and turned into a chip (which is later removed) with preLoadedOptions', async () => {
     const testlabel = 'This is a label';
     const nostufftext = 'No stuff found';
-    let fetchAutocompleteContents = [] as GenericAutocompleteEntity[];
-    const handleFetchAutocompleteContents = (
-      event: SyntheticEvent<Element, Event>,
-      newValue: GenericAutocompleteEntity[]
-    ) => {
+    let fetchAutocompleteContents = [] as AutocompleteGenericEntity[];
+    const handleFetchAutocompleteContents = (newValue: AutocompleteGenericEntity[]) => {
       fetchAutocompleteContents = newValue;
     };
     const preLoadedOptions = [

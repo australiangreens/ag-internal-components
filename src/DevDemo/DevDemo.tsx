@@ -8,6 +8,7 @@ import NavBarContent from './NavBarContent';
 import SaladBarDemo from './SaladBarDemo';
 import SomeRandomDemo from './SomeRandomDemo';
 import SpecialPageDemo from './SpecialPageDemo';
+import FetchAutocompleteDemo from './FetchAutocompleteDemo';
 import SettingsEtcPlaceholder from '../layouts/AppLayout/NavBar/SettingsEtcPlaceholder';
 
 export default function DevDemo() {
@@ -29,6 +30,7 @@ export default function DevDemo() {
           <Route path="/specialDemo" element={<SpecialPageDemo />} />
           <Route path="/someRandom" element={<SomeRandomDemo />} />
           <Route path="/domainCode" element={<DomainCodeDemo />} />
+          <Route path="/autocomplete" element={<FetchAutocompleteDemo />} />
         </Routes>
       </AppLayout>
     </BrowserRouter>
