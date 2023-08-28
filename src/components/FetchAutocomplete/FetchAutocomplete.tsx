@@ -8,6 +8,8 @@ import {
   Tooltip,
   CircularProgress,
   FilterOptionsState,
+  Theme,
+  SxProps,
 } from '@mui/material';
 import { Cancel as CancelIcon, ArrowDropDown as DefaultPopupIcon } from '@mui/icons-material';
 import parse from 'autosuggest-highlight/parse';
@@ -69,6 +71,8 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   error?: boolean;
   helperText?: React.ReactNode;
   enableHighlighting?: boolean;
+  sx?: SxProps<Theme>;
+  textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 }
 
 /**
@@ -84,6 +88,8 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   label,
   value,
   dataTestidPrefix,
+  sx,
+  textFieldColor,
   loadingText = 'Loading...',
   noOptionsText = 'No options',
   popupIcon = <DefaultPopupIcon />,
@@ -164,6 +170,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   return (
     <>
       <Autocomplete
+        sx={sx}
         data-testid={dataTestidPrefix ? dataTestidPrefix + 'Autocomplete' : undefined}
         disablePortal
         multiple
@@ -211,6 +218,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 event.stopPropagation();
               }
             }}
+            color={textFieldColor}
           />
         )}
         // We render tags/chips below the component

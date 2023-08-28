@@ -1,5 +1,4 @@
 import { SyntheticEvent, useState } from 'react';
-import { Box } from '@mui/material';
 
 import {
   FetchAutocomplete,
@@ -72,31 +71,32 @@ export default function FetchAutocompleteDemo() {
           really is more an uninhabited Australian territory than a country...)
         </i>
       </p>
-      <Box sx={{ width: '300px' }}>
-        <FetchAutocomplete
-          minLength={3}
-          lookup={pretendLookup}
-          label="Select a country"
-          value={selectedItems}
-          onChange={handleOnChange}
-          loadingText="Looking for countries..."
-          noOptionsText="No countries found"
-        />
-      </Box>
+
+      <FetchAutocomplete
+        minLength={3}
+        lookup={pretendLookup}
+        label="Select a country"
+        value={selectedItems}
+        onChange={handleOnChange}
+        loadingText="Looking for countries..."
+        noOptionsText="No countries found"
+        sx={{ width: '300px' }}
+        textFieldColor="primary"
+      />
       <h2>SingleAutocomplete example</h2>
       <p>Enter a country name here, but now you only get to select one. </p>
       <p>
         <i>(You still get to select territories as well as real countries.)</i>
       </p>
-      <Box sx={{ width: '300px' }}>
-        <SingleAutocomplete
-          minLength={3}
-          lookup={pretendLookup}
-          label="Select a country"
-          value={singleItem}
-          onChange={handleSingleItemChange}
-        />
-      </Box>
+      <SingleAutocomplete
+        minLength={3}
+        lookup={pretendLookup}
+        label="Select a country"
+        value={singleItem}
+        onChange={handleSingleItemChange}
+        sx={{ width: '300px' }}
+        textFieldColor="info"
+      />
     </>
   );
 }

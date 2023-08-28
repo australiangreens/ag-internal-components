@@ -1,4 +1,4 @@
-import { Autocomplete, Stack, TextField } from '@mui/material';
+import { Autocomplete, Stack, SxProps, TextField, Theme } from '@mui/material';
 import React, { SyntheticEvent, useState } from 'react';
 import { AutocompleteGenericEntity } from '../types';
 
@@ -26,6 +26,8 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
 
   minLength?: number;
   hideButton?: boolean;
+  sx?: SxProps<Theme>;
+  textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -33,6 +35,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   onChange,
   label,
   value,
+  sx,
+  textFieldColor,
   dataTestidPrefix = '',
   minLength = 3,
 }: Props<EntityType>) => {
@@ -59,9 +63,9 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
     <>
       <Stack direction="row" spacing={1}>
         <Autocomplete
+          sx={sx}
           data-testid={dataTestidPrefix + '-Autocomplete'}
           loading={loading}
-          sx={{ width: '100%' }}
           options={options}
           onChange={(event, newValue) => {
             onChange(event, newValue);
@@ -75,6 +79,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               {...params}
               variant="filled"
               label={label}
+              color={textFieldColor}
             />
           )}
           isOptionEqualToValue={(option, v) => option.id === v.id}
