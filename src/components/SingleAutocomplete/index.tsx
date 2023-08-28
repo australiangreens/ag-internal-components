@@ -64,7 +64,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
       <Stack direction="row" spacing={1}>
         <Autocomplete
           sx={sx}
-          data-testid={dataTestidPrefix + '-Autocomplete'}
+          data-testid={dataTestidPrefix ? dataTestidPrefix + 'Autocomplete' : undefined}
           loading={loading}
           options={options}
           onChange={(event, newValue) => {
@@ -75,7 +75,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           getOptionLabel={(option) => option.label}
           renderInput={(params) => (
             <TextField
-              data-testid={dataTestidPrefix + '-Textfield'}
+              data-testid={dataTestidPrefix ? dataTestidPrefix + 'TextField' : undefined}
               {...params}
               variant="filled"
               label={label}
