@@ -17,7 +17,7 @@ import {
   AutocompleteGenericEntity,
   AutocompleteGenericEntityIdType,
   FetchAutocompleteChangeReason,
-} from './types';
+} from '../types';
 
 export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity> {
   /**

@@ -9,3 +9,6 @@ export * from './AgDialog';
 
 export { default as FetchAutocomplete } from './FetchAutocomplete';
 export * from './FetchAutocomplete';
+
+export { default as SingleAutocomplete } from './SingleAutocomplete';
+export * from './SingleAutocomplete';

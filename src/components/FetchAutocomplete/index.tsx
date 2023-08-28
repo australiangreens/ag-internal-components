@@ -1,3 +1,3 @@
 export { default } from './FetchAutocomplete';
 export * from './FetchAutocomplete';
-export * from './types';
+export * from '../types';

@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FetchAutocomplete from '.';
-import { AutocompleteGenericEntity } from './types';
+import { AutocompleteGenericEntity } from '../types';
 
 const genericLookupMethod = async () => {
   return [

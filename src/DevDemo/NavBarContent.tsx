@@ -74,7 +74,7 @@ export default function NavBarContent() {
         <ListItemIcon>
           <AutoCompleteDemoIcon />
         </ListItemIcon>
-        <ListItemText primary="FetchAutocomplete" />
+        <ListItemText primary="Autocomplete Demo" />
       </ListItemButton>
 
       <ListItemButton

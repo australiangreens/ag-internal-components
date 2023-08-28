@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Box } from '@mui/material';
 
 import {
   FetchAutocomplete,
   FetchAutocompleteChangeReason,
   AutocompleteGenericEntity,
+  SingleAutocomplete,
 } from 'ag-internal-components';
 import countryList from './countries.json';
 
@@ -46,19 +47,29 @@ const pretendLookup = async (lookupValue: string): Promise<Country[]> => {
 export default function FetchAutocompleteDemo() {
   const [selectedItems, setSelectedItems] = useState<Country[]>([]);
 
+  const [singleItem, setSingleItem] = useState<Country | null>(null);
+
   const handleOnChange = (newValue: Country[], reason: FetchAutocompleteChangeReason) => {
     console.log(`onChange reason = ${reason}`);
     setSelectedItems(newValue);
   };
 
+  const handleSingleItemChange = (
+    event: SyntheticEvent<Element, Event>,
+    newValue: Country | null
+  ) => {
+    setSingleItem(newValue);
+  };
+
   return (
     <>
-      <h1>FetchAutocomplete example</h1>
+      <h1>Autocomplete Demo</h1>
+      <h2>FetchAutocomplete example</h2>
       <p>Enter some country names here. Select as many as you like. </p>
       <p>
         <i>
-          (You can even select items like &quot;Heard Island and Mcdonald Islands&quot;, which are
-          strictly Australian territories...)
+          (You can even select items like &quot;Heard Island and Mcdonald Islands&quot;, which
+          really is more an uninhabited Australian territory than a country...)
         </i>
       </p>
       <Box sx={{ width: '300px' }}>
@@ -70,6 +81,20 @@ export default function FetchAutocompleteDemo() {
           onChange={handleOnChange}
           loadingText="Looking for countries..."
           noOptionsText="No countries found"
+        />
+      </Box>
+      <h2>SingleAutocomplete example</h2>
+      <p>Enter a country name here, but now you only get to select one. </p>
+      <p>
+        <i>(You still get to select territories as well as real countries.)</i>
+      </p>
+      <Box sx={{ width: '300px' }}>
+        <SingleAutocomplete
+          minLength={3}
+          lookup={pretendLookup}
+          label="Select a country"
+          value={singleItem}
+          onChange={handleSingleItemChange}
         />
       </Box>
     </>
