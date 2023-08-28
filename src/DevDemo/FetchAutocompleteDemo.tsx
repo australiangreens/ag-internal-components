@@ -53,15 +53,23 @@ export default function FetchAutocompleteDemo() {
 
   return (
     <>
-      <Box sx={{ width: '300px', marginLeft: 10 }}>
+      <h1>FetchAutocomplete example</h1>
+      <p>Enter some country names here. Select as many as you like. </p>
+      <p>
+        <i>
+          (You can even select items like &quot;Heard Island and Mcdonald Islands&quot;, which are
+          strictly Australian territories...)
+        </i>
+      </p>
+      <Box sx={{ width: '300px' }}>
         <FetchAutocomplete
           minLength={3}
           lookup={pretendLookup}
-          label="Select an item"
+          label="Select a country"
           value={selectedItems}
           onChange={handleOnChange}
-          loadingText="Looking for items..."
-          noOptionsText="No items found"
+          loadingText="Looking for countries..."
+          noOptionsText="No countries found"
         />
       </Box>
     </>
