@@ -1,7 +1,7 @@
 {
   "name": "@australiangreens/ag-internal-components",
   "private": false,
-  "version": "0.0.66",
+  "version": "0.0.61",
   "type": "module",
   "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
