@@ -28,6 +28,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   hideButton?: boolean;
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  textFieldVariant?: 'filled' | 'outlined' | 'standard';
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -37,6 +38,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   value,
   sx,
   textFieldColor,
+  textFieldVariant = 'filled',
   dataTestidPrefix = '',
   minLength = 3,
 }: Props<EntityType>) => {
@@ -77,7 +79,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             <TextField
               data-testid={dataTestidPrefix ? dataTestidPrefix + 'TextField' : undefined}
               {...params}
-              variant="filled"
+              variant={textFieldVariant}
               label={label}
               color={textFieldColor}
             />

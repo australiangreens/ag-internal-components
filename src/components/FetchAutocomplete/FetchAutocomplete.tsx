@@ -73,6 +73,7 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   enableHighlighting?: boolean;
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  textFieldVariant?: 'filled' | 'outlined' | 'standard';
 }
 
 /**
@@ -90,6 +91,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   dataTestidPrefix,
   sx,
   textFieldColor,
+  textFieldVariant = 'filled',
   loadingText = 'Loading...',
   noOptionsText = 'No options',
   popupIcon = <DefaultPopupIcon />,
@@ -200,7 +202,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             {...params}
             label={label}
             fullWidth
-            variant="filled"
+            variant={textFieldVariant}
             error={error}
             helperText={helperText}
             InputProps={{

@@ -96,6 +96,7 @@ export default function FetchAutocompleteDemo() {
         onChange={handleSingleItemChange}
         sx={{ width: '300px' }}
         textFieldColor="info"
+        textFieldVariant="outlined"
       />
     </>
   );
