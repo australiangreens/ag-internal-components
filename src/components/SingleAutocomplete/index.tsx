@@ -24,6 +24,10 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
 
   dataTestidPrefix?: string;
 
+  /**If true, the Popper content will be under the DOM hierarchy of the parent
+   * component. Passed directly to underlying MUI Autocomplete component.*/
+  disablePortal?: boolean;
+
   minLength?: number;
   hideButton?: boolean;
   sx?: SxProps<Theme>;
@@ -41,6 +45,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   textFieldVariant = 'filled',
   dataTestidPrefix = '',
   minLength = 3,
+  disablePortal = false,
 }: Props<EntityType>) => {
   const [options, setOptions] = useState<readonly EntityType[]>([]);
   const [loading, setLoading] = useState(false);
@@ -72,6 +77,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           onChange={(event, newValue) => {
             onChange(event, newValue);
           }}
+          disablePortal={disablePortal}
           filterOptions={(option) => option}
           value={value}
           getOptionLabel={(option) => option.label}
