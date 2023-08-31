@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, SyntheticEvent } from 'react';
+import { useState, useEffect, useMemo, SyntheticEvent, ReactNode } from 'react';
 import {
   Autocomplete,
   TextField,
@@ -58,7 +58,11 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   preLoadedOptions?: EntityType[] | undefined;
 
   /** The popup icon */
-  popupIcon?: React.ReactNode;
+  popupIcon?: ReactNode;
+
+  /**If true, the Popper content will be under the DOM hierarchy of the parent
+   * component. Passed directly to underlying MUI Autocomplete component.*/
+  disablePortal?: boolean;
 
   /**
    * When testing, it is useful to give data-testid attributes to parts inside
@@ -69,7 +73,7 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   loadingText?: string;
   noOptionsText?: string;
   error?: boolean;
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
   enableHighlighting?: boolean;
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
@@ -98,6 +102,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   error = false,
   helperText = '',
   preLoadedOptions = undefined,
+  disablePortal = false,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState<readonly EntityType[]>(preLoadedOptions || []);
@@ -174,7 +179,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
       <Autocomplete
         sx={sx}
         data-testid={dataTestidPrefix ? dataTestidPrefix + 'Autocomplete' : undefined}
-        disablePortal
+        disablePortal={disablePortal}
         multiple
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
         filterOptions={filterOptions}
