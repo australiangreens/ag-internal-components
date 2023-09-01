@@ -1,7 +1,8 @@
 import { Box, CssBaseline } from '@mui/material';
-import { ComponentProps, PropsWithChildren, useEffect } from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
 import NavBar, { NavBarProps } from './NavBar';
 import PageContainer from './PageContainer';
 import TopBar from './TopBar';
@@ -71,25 +72,16 @@ export default function AppLayout({
   user,
   domainCode,
 }: AppLayoutProps) {
-  const [navBarOpen, setNavBarOpen] = useAtom(navBarOpenAtom);
+  useHydrateAtoms([
+    [navBarOpenAtom, initialNavBarOpen ?? true],
+    [titleTextAtom, initialTitleText ?? ''],
+  ]);
+  const navBarOpen = useAtomValue(navBarOpenAtom);
   const [navBarWidthOpen] = useAtom(navBarWidthOpenAtom);
   const [navBarWidthClosed] = useAtom(navBarWidthClosedAtom);
-  const [titleText, setTitleText] = useAtom(titleTextAtom);
+  const titleText = useAtomValue(titleTextAtom);
   const [topBarHeight] = useAtom(topBarHeightAtom);
   const [navBarTop] = useAtom(navBarTopAtom);
-
-  // Allow open state of navbar to start differently than the default. Unlike
-  // changing widths and such, this could be a common scenario.
-  useEffect(() => {
-    if (initialTitleText !== undefined) setTitleText(initialTitleText);
-  }, [initialTitleText, setTitleText]);
-
-  // Similarly for navbar open state.
-  useEffect(() => {
-    if (initialNavBarOpen !== undefined) setNavBarOpen(initialNavBarOpen);
-  }, [initialNavBarOpen, setNavBarOpen]);
-
-  // Can't imagine initial prop values for other states would be useful
 
   return (
     <Box>
