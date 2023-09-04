@@ -20,6 +20,7 @@ export type AgDialogProps = PropsWithChildren<{
   maxWidth?: false | Breakpoint;
   primaryButton?: AgDialogButtonConfig;
   secondaryButton?: AgDialogButtonConfig;
+  'data-testid'?: string;
   onClose: () => void;
 }>;
 
@@ -35,6 +36,7 @@ const AgDialog = ({
   primaryButton,
   secondaryButton,
   onClose: handleClose,
+  'data-testid': dataTestId,
 }: AgDialogProps) => {
   const [areButtonsDisabled, setButtonsDisabled] = useState(false);
 
@@ -47,6 +49,7 @@ const AgDialog = ({
       }}
       fullWidth
       maxWidth={maxWidth ?? 'xs'}
+      data-testid={dataTestId}
     >
       <DialogTitle>{dialogTitle}</DialogTitle>
       <DialogContent sx={{ '& > :last-child': { marginBottom: 0 } }}>{children}</DialogContent>
