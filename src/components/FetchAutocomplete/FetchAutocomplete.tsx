@@ -223,7 +223,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 </>
               ),
             }}
-            data-testid={dataTestId ? `${dataTestId}:TextField` : undefined}
+            data-testid={dataTestId ? `${dataTestId}:Autocomplete:TextField` : undefined}
             onKeyDown={(event: React.KeyboardEvent) => {
               if (event.key === 'Backspace' || event.key === 'Delete') {
                 event.stopPropagation();
