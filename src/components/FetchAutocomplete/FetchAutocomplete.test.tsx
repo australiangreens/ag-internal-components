@@ -24,13 +24,13 @@ describe('FetchAutocomplete', () => {
         value={[]}
         onChange={() => []}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
       />
     );
 
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('getstuffAutocomplete');
+    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
     await act(async () => {
       autocompleteStuff.focus();
     });
@@ -53,14 +53,14 @@ describe('FetchAutocomplete', () => {
         value={[]}
         onChange={() => []}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         preLoadedOptions={[]}
       />
     );
 
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('getstuffAutocomplete');
+    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
     await act(async () => {
       autocompleteStuff.focus();
     });
@@ -88,13 +88,13 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         minLength={3}
       />
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('getstuffAutocomplete');
+    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
     await act(async () => {
       autocompleteStuff.focus();
     });
@@ -146,7 +146,6 @@ describe('FetchAutocomplete', () => {
 
     // We need to rerender the compoent with new value properties.
     // This shows us the chip.
-
     rerender(
       <FetchAutocomplete
         lookup={genericLookupMethod}
@@ -154,14 +153,14 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         minLength={3}
       />
     );
 
     // This line would throw an error if the chip wasn't there.
-    screen.getByTestId('getstuffChip1');
-    const firstChipDelete = screen.getByTestId('getstuffChipDelete1');
+    screen.getByTestId('TestFetch:Chip(1)');
+    const firstChipDelete = screen.getByTestId('TestFetch:Chip(1):deleteIcon');
 
     // Now let's click on the 'BBB'
 
@@ -188,13 +187,13 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         minLength={3}
       />
     );
 
-    screen.getByTestId('getstuffChip2');
-    const secondChipDelete = screen.getByTestId('getstuffChipDelete2');
+    screen.getByTestId('TestFetch:Chip(2)');
+    const secondChipDelete = screen.getByTestId('TestFetch:Chip(2):deleteIcon');
 
     // Now click the first chip to make it go away.
 
@@ -208,14 +207,14 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         minLength={3}
       />
     );
 
     // That chip is now gone.
 
-    const firstChipQuery = screen.queryByTestId('getstuffChip1');
+    const firstChipQuery = screen.queryByTestId('TestFetch:Chip(1)');
     expect(firstChipQuery).toBeNull();
 
     // Now click on the second chip to make it disappear.
@@ -231,14 +230,14 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         minLength={3}
       />
     );
 
     // All the chips are gone.
 
-    const secondChipQuery = screen.queryByTestId('getstuffChip1');
+    const secondChipQuery = screen.queryByTestId('TestFetch:Chip(1)');
     expect(secondChipQuery).toBeNull();
   });
 
@@ -261,13 +260,13 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
       />
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('getstuffAutocomplete');
+    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
     await act(async () => {
       autocompleteStuff.focus();
     });
@@ -306,14 +305,14 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
       />
     );
 
     // This line would throw an error if the chip wasn't there.
-    screen.getByTestId('getstuffChip1');
-    const firstChipDelete = screen.getByTestId('getstuffChipDelete1');
+    screen.getByTestId('TestFetch:Chip(1)');
+    const firstChipDelete = screen.getByTestId('TestFetch:Chip(1):deleteIcon');
 
     // Now let's click on the 'BBB'
 
@@ -339,13 +338,13 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
       />
     );
 
-    screen.getByTestId('getstuffChip2');
-    const secondChipDelete = screen.getByTestId('getstuffChipDelete2');
+    screen.getByTestId('TestFetch:Chip(2)');
+    const secondChipDelete = screen.getByTestId('TestFetch:Chip(2):deleteIcon');
 
     // Now click the first chip to make it go away.
 
@@ -358,14 +357,14 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
       />
     );
 
     // That chip is now gone.
 
-    const firstChipQuery = screen.queryByTestId('getstuffChip1');
+    const firstChipQuery = screen.queryByTestId('TestFetch:Chip(1)');
     expect(firstChipQuery).toBeNull();
 
     // Now click on the second chip to make it disappear.
@@ -380,14 +379,14 @@ describe('FetchAutocomplete', () => {
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
         noOptionsText={nostufftext}
-        dataTestidPrefix="getstuff"
+        data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
       />
     );
 
     // All the chips are gone.
 
-    const secondChipQuery = screen.queryByTestId('getstuffChip1');
+    const secondChipQuery = screen.queryByTestId('TestFetch:Chip(1)');
     expect(secondChipQuery).toBeNull();
   });
 });

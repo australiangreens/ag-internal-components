@@ -65,11 +65,15 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   disablePortal?: boolean;
 
   /**
-   * When testing, it is useful to give data-testid attributes to parts inside
-   * the component. This prefix is useful to distinguish one FetchAutocomplete
-   * instance from others.
+   * Used for the data-testid value of the outer most component. The underlying
+   * AutoComplete component has the id of this, followed by a colon then
+   * 'AutoComplete', while the text field is followed by 'TextField'.
+   *
+   * Currently has no default to avoid collisions. May change in future to
+   * simply be 'FetchAutocomplete' if that is not an issue.
    */
-  dataTestidPrefix?: string;
+  'data-testid'?: string;
+
   loadingText?: string;
   noOptionsText?: string;
   error?: boolean;
@@ -92,7 +96,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   minLength,
   label,
   value,
-  dataTestidPrefix,
+  'data-testid': dataTestId,
   sx,
   textFieldColor,
   textFieldVariant = 'filled',
@@ -175,10 +179,10 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   }, [preLoadedOptions]);
 
   return (
-    <>
+    <div data-testid={dataTestId}>
       <Autocomplete
         sx={sx}
-        data-testid={dataTestidPrefix ? dataTestidPrefix + 'Autocomplete' : undefined}
+        data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
         disablePortal={disablePortal}
         multiple
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
@@ -219,7 +223,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 </>
               ),
             }}
-            data-testid={dataTestidPrefix ? dataTestidPrefix + 'TextField' : undefined}
+            data-testid={dataTestId ? `${dataTestId}:TextField` : undefined}
             onKeyDown={(event: React.KeyboardEvent) => {
               if (event.key === 'Backspace' || event.key === 'Delete') {
                 event.stopPropagation();
@@ -244,7 +248,9 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 {...props}
                 key={option.id}
                 data-testid={
-                  dataTestidPrefix ? dataTestidPrefix + 'li' + option.id.toString() : undefined
+                  dataTestId
+                    ? `${dataTestId}:Autocomplete:renderOption(${option.id.toString()})`
+                    : undefined
                 }
               >
                 <div>
@@ -267,7 +273,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 {...props}
                 key={option.id}
                 data-testid={
-                  dataTestidPrefix ? dataTestidPrefix + 'li' + option.id.toString() : undefined
+                  dataTestId ? `${dataTestId}:renderOption(${option.id.toString()})` : undefined
                 }
               >
                 {option.label}
@@ -307,16 +313,12 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                     </Typography>
                   </Tooltip>
                 }
-                data-testid={
-                  dataTestidPrefix ? dataTestidPrefix + 'Chip' + val.id.toString() : undefined
-                }
+                data-testid={dataTestId ? `${dataTestId}:Chip(${val.id.toString()})` : undefined}
                 onDelete={(e) => handleDelete(e, val.id)}
                 deleteIcon={
                   <CancelIcon
                     data-testid={
-                      dataTestidPrefix
-                        ? dataTestidPrefix + 'ChipDelete' + val.id.toString()
-                        : 'CancelIcon'
+                      dataTestId ? `${dataTestId}:Chip(${val.id.toString()}):deleteIcon` : undefined
                     }
                   />
                 }
@@ -325,6 +327,6 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           })}
         </Box>
       )}
-    </>
+    </div>
   );
 }
