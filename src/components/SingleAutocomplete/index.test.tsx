@@ -22,7 +22,7 @@ describe('SingleAutocomplete', () => {
         label={testlabel}
         value={null}
         onChange={() => []}
-        dataTestidPrefix="getstuff"
+        data-testid="TestSingle"
       />
     );
 
@@ -47,13 +47,13 @@ describe('SingleAutocomplete', () => {
         label={testlabel}
         value={singleAutocompleteContents}
         onChange={handleSingleAutocompleteContents}
-        dataTestidPrefix="getstuff"
+        data-testid="TestSingle"
         minLength={3}
       />
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('getstuffAutocomplete');
+    const autocompleteStuff = screen.getByTestId('TestSingle:Autocomplete');
     await act(async () => {
       autocompleteStuff.focus();
     });
@@ -100,7 +100,7 @@ describe('SingleAutocomplete', () => {
         label={testlabel}
         value={singleAutocompleteContents}
         onChange={handleSingleAutocompleteContents}
-        dataTestidPrefix="getstuff"
+        data-testid="TestSingle"
         minLength={3}
       />
     );
@@ -112,7 +112,7 @@ describe('SingleAutocomplete', () => {
 
     await act(async () => {
       autocompleteStuff.focus();
-      const clearButton = screen.getByTestId('CloseIcon');
+      const clearButton = screen.getByRole('button', { name: 'Clear' });
       expect(clearButton).toBeInTheDocument();
 
       // See https://github.com/testing-library/user-event/issues/874
@@ -130,7 +130,7 @@ describe('SingleAutocomplete', () => {
         label={testlabel}
         value={singleAutocompleteContents}
         onChange={handleSingleAutocompleteContents}
-        dataTestidPrefix="getstuff"
+        data-testid="TestSingle"
         minLength={3}
       />
     );

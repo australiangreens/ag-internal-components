@@ -249,7 +249,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 key={option.id}
                 data-testid={
                   dataTestId
-                    ? `${dataTestId}:Autocomplete:renderOption(${option.id.toString()})`
+                    ? `${dataTestId}:Autocomplete:option(${option.id.toString()})`
                     : undefined
                 }
               >
@@ -273,7 +273,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 {...props}
                 key={option.id}
                 data-testid={
-                  dataTestId ? `${dataTestId}:renderOption(${option.id.toString()})` : undefined
+                  dataTestId ? `${dataTestId}:option(${option.id.toString()})` : undefined
                 }
               >
                 {option.label}

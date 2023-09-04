@@ -22,7 +22,15 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
     abortSignal: AbortSignal
   ) => Promise<EntityType[] | undefined | null | void>;
 
-  dataTestidPrefix?: string;
+  /**
+   * Used for the data-testid value of the outer most component. The underlying
+   * AutoComplete component has the id of this, followed by a colon then
+   * 'AutoComplete', while the text field is followed by 'TextField'.
+   *
+   * Currently has no default to avoid collisions. May change in future to
+   * simply be 'FetchAutocomplete' if that is not an issue.
+   */
+  'data-testid'?: string;
 
   /**If true, the Popper content will be under the DOM hierarchy of the parent
    * component. Passed directly to underlying MUI Autocomplete component.*/
@@ -43,7 +51,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   sx,
   textFieldColor,
   textFieldVariant = 'filled',
-  dataTestidPrefix = '',
+  'data-testid': dataTestId,
   minLength = 3,
   disablePortal = false,
 }: Props<EntityType>) => {
@@ -67,11 +75,11 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   };
 
   return (
-    <>
+    <div data-testid={dataTestId}>
       <Stack direction="row" spacing={1}>
         <Autocomplete
           sx={sx}
-          data-testid={dataTestidPrefix ? dataTestidPrefix + 'Autocomplete' : undefined}
+          data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
           loading={loading}
           options={options}
           onChange={(event, newValue) => {
@@ -83,7 +91,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           getOptionLabel={(option) => option.label}
           renderInput={(params) => (
             <TextField
-              data-testid={dataTestidPrefix ? dataTestidPrefix + 'TextField' : undefined}
+              data-testid={dataTestId ? `${dataTestId}:Autocomplete:TextField` : undefined}
               {...params}
               variant={textFieldVariant}
               label={label}
@@ -103,7 +111,9 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
                 {...props}
                 key={option.id}
                 data-testid={
-                  dataTestidPrefix ? dataTestidPrefix + 'li' + option.id.toString() : undefined
+                  dataTestId
+                    ? `${dataTestId}:Autocomplete:option(${option.id.toString()})`
+                    : undefined
                 }
               >
                 {option.label}
@@ -112,7 +122,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           }}
         />
       </Stack>
-    </>
+    </div>
   );
 };
 
