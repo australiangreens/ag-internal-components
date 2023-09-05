@@ -1,4 +1,4 @@
-import { Breakpoint } from '@mui/material';
+import { Breakpoint, SxProps, Theme } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -22,6 +22,7 @@ export type AgDialogProps = PropsWithChildren<{
   secondaryButton?: AgDialogButtonConfig;
   'data-testid'?: string;
   onClose: () => void;
+  sx?: SxProps<Theme>;
 }>;
 
 /**
@@ -36,6 +37,7 @@ const AgDialog = ({
   primaryButton,
   secondaryButton,
   onClose: handleClose,
+  sx,
   'data-testid': dataTestId,
 }: AgDialogProps) => {
   const [areButtonsDisabled, setButtonsDisabled] = useState(false);
@@ -43,13 +45,18 @@ const AgDialog = ({
   return (
     <Dialog
       open={isOpen}
-      onClose={() => {
+      onClose={async () => {
         if (areButtonsDisabled) return;
-        handleClose();
+        if (secondaryButton?.onClick) {
+          await secondaryButton.onClick();
+        } else {
+          handleClose();
+        }
       }}
       fullWidth
       maxWidth={maxWidth ?? 'xs'}
       data-testid={dataTestId}
+      sx={sx}
     >
       <DialogTitle>{dialogTitle}</DialogTitle>
       <DialogContent sx={{ '& > :last-child': { marginBottom: 0 } }}>{children}</DialogContent>
