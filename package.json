@@ -34,6 +34,12 @@
   ],
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",

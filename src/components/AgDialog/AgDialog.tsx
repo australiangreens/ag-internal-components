@@ -1,9 +1,14 @@
-import { Breakpoint, SxProps, Theme } from '@mui/material';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import {
+  Breakpoint,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  SxProps,
+  Theme,
+} from '@mui/material';
+
 import { PropsWithChildren, useState } from 'react';
 
 export type AgDialogButtonConfig = {
