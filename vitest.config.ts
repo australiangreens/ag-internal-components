@@ -14,5 +14,11 @@ export default defineConfig({
       // Now causing warnings, see [EVNT-51]
       registerNodeLoader: true,
     },
+    // [EVNT-84]
+    onConsoleLog: (log) => {
+      if (log.includes('Download the React DevTools for a better development experience')) {
+        return false;
+      }
+    },
   },
 });
