@@ -97,6 +97,7 @@ export default function FetchAutocompleteDemo() {
         sx={{ width: '300px' }}
         textFieldColor="info"
         textFieldVariant="outlined"
+        noOptionsText="No countries found"
       />
     </>
   );
