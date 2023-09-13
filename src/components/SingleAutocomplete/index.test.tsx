@@ -30,6 +30,35 @@ describe('SingleAutocomplete', () => {
     expect(labelElement).toBeInTheDocument();
   });
 
+  it('should display custom no options text', async () => {
+    const user = userEvent.setup();
+    const testLabel = 'NoOptionsTest';
+    const testNoOptionsText = 'No options found';
+
+    render(
+      <SingleAutocomplete
+        lookup={async () => []}
+        label={testLabel}
+        noOptionsText={testNoOptionsText}
+        value={null}
+        onChange={() => []}
+        data-testid="TestSingle"
+      />
+    );
+
+    const labelElement = screen.getByLabelText(testLabel);
+    expect(labelElement).toBeInTheDocument();
+    const autocompleteElement = screen.getByTestId('TestSingle:Autocomplete');
+    await act(async () => {
+      autocompleteElement.focus();
+    });
+    await user.click(autocompleteElement);
+    await act(async () => {
+      fireEvent.change(labelElement, { target: { value: 'XYZ'} });
+    })
+    expect(screen.getByText(testNoOptionsText)).toBeInTheDocument();
+  })
+
   it('should allow an item to be added and removed', async () => {
     const user = userEvent.setup();
     const testlabel = 'This is a label';
@@ -91,7 +120,7 @@ describe('SingleAutocomplete', () => {
       fireEvent.keyDown(autocompleteStuff, { key: 'Enter' });
     });
 
-    // We need to rerender the compoent with new value properties.
+    // We need to rerender the component with new value properties.
     // This shows us the item.
 
     rerender(

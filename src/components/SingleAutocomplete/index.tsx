@@ -36,6 +36,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    * component. Passed directly to underlying MUI Autocomplete component.*/
   disablePortal?: boolean;
 
+  noOptionsText?: string;
   minLength?: number;
   hideButton?: boolean;
   sx?: SxProps<Theme>;
@@ -52,6 +53,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   textFieldColor,
   textFieldVariant = 'filled',
   'data-testid': dataTestId,
+  noOptionsText = 'No options',
   minLength = 3,
   disablePortal = false,
 }: Props<EntityType>) => {
@@ -88,6 +90,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           disablePortal={disablePortal}
           filterOptions={(option) => option}
           value={value}
+          noOptionsText={noOptionsText}
           getOptionLabel={(option) => option.label}
           renderInput={(params) => (
             <TextField
