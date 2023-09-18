@@ -1,16 +1,17 @@
 import {
-  Add as AddIcon,
-  Drafts as DraftsIcon,
+  Search as AutoCompleteDemoIcon,
+  PieChart as DomainCodeDemoIcon,
+  Send as ExampleComponentIcon,
   ExpandLess as ExpandLessIcon,
   ExpandMore as ExpandMoreIcon,
-  Inbox as InboxIcon,
-  PieChart as PieChartIcon,
-  Send as SendIcon,
-  Search as AutoCompleteDemoIcon,
+  Add as NavBarTopDemoIcon,
+  Inbox as RandomPageIcon,
+  Drafts as SaladBarDemoIcon,
+  BorderTop as TopBarMiddleDemoIcon,
 } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { navBarOpenAtom } from 'ag-internal-components';
 
@@ -28,7 +29,7 @@ export default function NavBarContent() {
         selected={pathname === '/exampleComponentDemo'}
       >
         <ListItemIcon>
-          <SendIcon />
+          <ExampleComponentIcon />
         </ListItemIcon>
         <ListItemText primary="Example Component" />
       </ListItemButton>
@@ -39,20 +40,31 @@ export default function NavBarContent() {
         selected={pathname === '/saladBarDemo'}
       >
         <ListItemIcon>
-          <DraftsIcon />
+          <SaladBarDemoIcon />
         </ListItemIcon>
         <ListItemText primary="SaladBar Demo" />
       </ListItemButton>
 
       <ListItemButton
         component={RouterLink}
-        to={'/specialDemo'}
-        selected={pathname === '/specialDemo'}
+        to={'/navBarTopDemo'}
+        selected={pathname === '/navBarTopDemo'}
       >
         <ListItemIcon>
-          <AddIcon />
+          <NavBarTopDemoIcon />
         </ListItemIcon>
         <ListItemText primary="NavBarTop Demo" />
+      </ListItemButton>
+
+      <ListItemButton
+        component={RouterLink}
+        to={'/topBarMiddleDemo'}
+        selected={pathname === '/topBarMiddleDemo'}
+      >
+        <ListItemIcon>
+          <TopBarMiddleDemoIcon />
+        </ListItemIcon>
+        <ListItemText primary="TopBarMiddle Demo" />
       </ListItemButton>
 
       <ListItemButton
@@ -61,7 +73,7 @@ export default function NavBarContent() {
         selected={pathname === '/domaincode'}
       >
         <ListItemIcon>
-          <PieChartIcon />
+          <DomainCodeDemoIcon />
         </ListItemIcon>
         <ListItemText primary="DomainCode Demo" />
       </ListItemButton>
@@ -83,7 +95,7 @@ export default function NavBarContent() {
         selected={pathname.startsWith('/someRandom')}
       >
         <ListItemIcon>
-          <InboxIcon />
+          <RandomPageIcon />
         </ListItemIcon>
         <ListItemText primary="Random Page" />
         {menuOpen && navBarOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}

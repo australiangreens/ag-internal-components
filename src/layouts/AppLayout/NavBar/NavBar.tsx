@@ -23,7 +23,8 @@ export interface NavBarProps {
    * function */
   'data-testid'?: string;
 
-  /** The contents to be displayed at the top, specific to the current page */
+  /** The contents to be displayed at the top, intended to be specific to the
+   * current page */
   top?: ReactNode;
 
   /**

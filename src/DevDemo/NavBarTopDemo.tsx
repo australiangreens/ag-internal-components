@@ -15,9 +15,9 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { useAtomValue, useSetAtom } from 'jotai';
 
 import { navBarOpenAtom, navBarTopAtom } from 'ag-internal-components';
 
@@ -56,7 +56,7 @@ function NavBarTopContent({ open }: { open: boolean }) {
   );
 }
 
-export default function SpecialPageDemo() {
+export default function NavBarTopDemo() {
   const location = useLocation();
   const lastHash = useRef('');
   const navBarOpen = useAtomValue(navBarOpenAtom);

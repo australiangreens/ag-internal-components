@@ -2,6 +2,7 @@ import { ViewHeadline as HamburgerIcon } from '@mui/icons-material';
 import { IconButton, Paper, Typography, useTheme } from '@mui/material';
 
 import { useSetAtom } from 'jotai';
+import { ReactNode } from 'react';
 import { useSmallScreen } from './mobile';
 import { navBarOpenAtom } from './stateAtoms';
 
@@ -9,6 +10,14 @@ const PREFIX = 'TopBar';
 
 export interface TopBarProps {
   titleText?: string;
+
+  /**
+   * The contents to be displayed to the right of the titleText, left aligned to
+   * the starting position of the navbar. There is no right content, so at the
+   * moment it fills up the remaining space
+   */
+  middle?: ReactNode;
+
   height: number;
   'data-testid'?: string;
 }
@@ -22,7 +31,12 @@ export const classes = {
  * the scroll bar will not appear for the whole page, instead just the page
  * content
  */
-export default function TopBar({ titleText = '', height, 'data-testid': dataTestId }: TopBarProps) {
+export default function TopBar({
+  titleText = '',
+  height,
+  'data-testid': dataTestId,
+  middle,
+}: TopBarProps) {
   const setNavBarOpen = useSetAtom(navBarOpenAtom);
 
   const toggleNavBar = () => setNavBarOpen((prevVal) => !prevVal);
@@ -52,6 +66,8 @@ export default function TopBar({ titleText = '', height, 'data-testid': dataTest
         <Typography className={classes.titleText} variant="h6">
           {titleText}
         </Typography>
+
+        {middle}
       </Paper>
     </header>
   );

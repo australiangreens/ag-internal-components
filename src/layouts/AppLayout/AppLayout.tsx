@@ -13,6 +13,7 @@ import {
   navBarWidthOpenAtom,
   titleTextAtom,
   topBarHeightAtom,
+  topBarMiddleAtom,
 } from './stateAtoms';
 
 export interface BaseAppLayoutProps {
@@ -81,12 +82,18 @@ export default function AppLayout({
   const [navBarWidthClosed] = useAtom(navBarWidthClosedAtom);
   const titleText = useAtomValue(titleTextAtom);
   const [topBarHeight] = useAtom(topBarHeightAtom);
+  const [topBarMiddle] = useAtom(topBarMiddleAtom);
   const [navBarTop] = useAtom(navBarTopAtom);
 
   return (
     <Box>
       <CssBaseline />
-      <TopBar titleText={titleText} data-testid={topBarDataTestId} height={topBarHeight} />
+      <TopBar
+        titleText={titleText}
+        data-testid={topBarDataTestId}
+        height={topBarHeight}
+        middle={topBarMiddle}
+      />
 
       <Box sx={{ display: 'flex' }}>
         <NavBar
