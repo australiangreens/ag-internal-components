@@ -1,12 +1,15 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 
 import {
   AutocompleteGenericEntity,
   FetchAutocomplete,
   FetchAutocompleteChangeReason,
   SingleAutocomplete,
+  navBarTopAtom,
+  topBarMiddleAtom,
 } from 'ag-internal-components';
 import countryList from './countries.json';
+import { useSetAtom } from 'jotai';
 
 interface Country extends AutocompleteGenericEntity {
   id: string;
@@ -45,8 +48,14 @@ const pretendLookup = async (lookupValue: string): Promise<Country[]> => {
 
 export default function FetchAutocompleteDemo() {
   const [selectedItems, setSelectedItems] = useState<Country[]>([]);
-
   const [singleItem, setSingleItem] = useState<Country | null>(null);
+  const setNavBarTop = useSetAtom(navBarTopAtom);
+  const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
+
+  useEffect(() => {
+    setNavBarTop(undefined);
+    setTopBarMiddle(undefined);
+  }, [setNavBarTop, setTopBarMiddle]);
 
   const handleOnChange = (newValue: Country[], reason: FetchAutocompleteChangeReason) => {
     console.log(`onChange reason = ${reason}`);

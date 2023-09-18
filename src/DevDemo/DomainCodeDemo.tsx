@@ -1,10 +1,20 @@
 import { Button } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { DomainCodeDialog } from 'ag-internal-components';
+import { DomainCodeDialog, navBarTopAtom, topBarMiddleAtom } from 'ag-internal-components';
+import { useSetAtom } from 'jotai';
 
 const DomainCodeDemo = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const setNavBarTop = useSetAtom(navBarTopAtom);
+  const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
+
+  useEffect(() => {
+    setNavBarTop(undefined);
+    setTopBarMiddle(undefined);
+  }, [setNavBarTop, setTopBarMiddle]);
+
   return (
     <div>
       <h1>DomainCode example</h1>

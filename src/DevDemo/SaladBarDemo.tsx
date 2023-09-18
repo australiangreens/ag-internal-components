@@ -1,17 +1,19 @@
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
 import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
 
-import { navBarTopAtom, useSaladBar } from 'ag-internal-components';
+import { navBarTopAtom, topBarMiddleAtom, useSaladBar } from 'ag-internal-components';
 
 export default function SaladBarDemo() {
   const [saladCount, setSaladCount] = useState(0);
   const { enqueueNotification } = useSaladBar();
   const setNavBarTop = useSetAtom(navBarTopAtom);
+  const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
 
   useEffect(() => {
     setNavBarTop(undefined);
-  }, [setNavBarTop]);
+    setTopBarMiddle(undefined);
+  }, [setNavBarTop, setTopBarMiddle]);
 
   return (
     <>

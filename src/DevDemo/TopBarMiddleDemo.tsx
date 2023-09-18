@@ -2,7 +2,7 @@ import { Add as FirstButtonIcon, AirlineStops as SecondButtonIcon } from '@mui/i
 import { Box, Button, Switch, useTheme } from '@mui/material';
 import { useSetAtom } from 'jotai';
 
-import { topBarMiddleAtom } from 'ag-internal-components';
+import { navBarTopAtom, topBarMiddleAtom } from 'ag-internal-components';
 import { useEffect, useState } from 'react';
 import { DEFAULT_NAV_BAR_WIDTH_OPEN } from '../layouts/AppLayout/defaults';
 
@@ -31,9 +31,13 @@ export function TopBarMiddleContent({ showBoth }: { showBoth: boolean }) {
 }
 
 export default function NavBarTopDemo() {
-  // const topBarMiddle = useAtomValue(topBarMiddleAtom);
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
+  const setNavBarTop = useSetAtom(navBarTopAtom);
   const [switchChecked, setSwitchChecked] = useState(true);
+
+  useEffect(() => {
+    setNavBarTop(undefined);
+  }, [setNavBarTop]);
 
   useEffect(() => {
     setTopBarMiddle(<TopBarMiddleContent showBoth={switchChecked} />);
@@ -41,7 +45,10 @@ export default function NavBarTopDemo() {
 
   return (
     <>
-      <Switch onChange={(_e, checked) => setSwitchChecked(checked)}></Switch>
+      <Switch
+        onChange={(_e, checked) => setSwitchChecked(checked)}
+        checked={switchChecked}
+      ></Switch>
       <Box sx={{ padding: 2 }}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper ligula at posuere
