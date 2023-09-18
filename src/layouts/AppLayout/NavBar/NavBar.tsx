@@ -23,12 +23,13 @@ export interface NavBarProps {
    * function */
   'data-testid'?: string;
 
-  /** The contents to be displayed at the top, specified to the current page */
+  /** The contents to be displayed at the top, specific to the current page */
   top?: ReactNode;
 
-  /** Display be below the top section, always the same regardless of page. Can
-   * be provided either as a node directly, or an array of objects that will be
-   * used to generate a standard navbar menu.
+  /**
+   * Display be below the top section, intended to always be the same,
+   * regardless of the current route. Can be provided either as a node directly,
+   * or an array of objects that will be used to generate a standard navbar menu.
    *
    * @example
    *
@@ -55,7 +56,10 @@ export interface NavBarProps {
   /** Displayed below the user information when available */
   domainCode?: DomainCode;
 
-  /** The contents to be displayed at the bottom, specified to the current page */
+  /**
+   * The contents to be displayed at the bottom, intended to always be the
+   * same, regardless of current route.
+   */
   bottom?: ReactNode;
 }
 
