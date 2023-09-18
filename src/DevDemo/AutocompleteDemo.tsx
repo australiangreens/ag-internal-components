@@ -1,9 +1,9 @@
 import { SyntheticEvent, useState } from 'react';
 
 import {
+  AutocompleteGenericEntity,
   FetchAutocomplete,
   FetchAutocompleteChangeReason,
-  AutocompleteGenericEntity,
   SingleAutocomplete,
 } from 'ag-internal-components';
 import countryList from './countries.json';
