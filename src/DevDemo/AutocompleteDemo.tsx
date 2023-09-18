@@ -1,9 +1,9 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 
 import {
-  AutocompleteGenericEntity,
   FetchAutocomplete,
   FetchAutocompleteChangeReason,
+  AutocompleteGenericEntity,
   SingleAutocomplete,
   navBarTopAtom,
   topBarMiddleAtom,

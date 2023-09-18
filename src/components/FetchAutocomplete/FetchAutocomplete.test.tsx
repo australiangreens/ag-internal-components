@@ -1,9 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { wrap } from 'souvlaki';
 
 import FetchAutocomplete from '.';
-import { withQueryClient } from '../../testing';
 import { AutocompleteGenericEntity } from '../types';
 
 const genericLookupMethod = async () => {
@@ -27,8 +25,7 @@ describe('FetchAutocomplete', () => {
         onChange={() => []}
         noOptionsText={nostufftext}
         data-testid="TestFetch"
-      />,
-      { wrapper: wrap(withQueryClient()) }
+      />
     );
 
     const labelElement = screen.getByLabelText(testlabel);
@@ -41,7 +38,7 @@ describe('FetchAutocomplete', () => {
     await act(async () => {
       fireEvent.change(labelElement, { target: { value: 'Mel' } });
     });
-    const noStuffElement = await screen.findByText(nostufftext);
+    const noStuffElement = screen.getByText(nostufftext);
     expect(noStuffElement).toBeInTheDocument();
   });
 
@@ -58,8 +55,7 @@ describe('FetchAutocomplete', () => {
         noOptionsText={nostufftext}
         data-testid="TestFetch"
         preLoadedOptions={[]}
-      />,
-      { wrapper: wrap(withQueryClient()) }
+      />
     );
 
     const labelElement = screen.getByLabelText(testlabel);
@@ -72,7 +68,7 @@ describe('FetchAutocomplete', () => {
     await act(async () => {
       fireEvent.change(labelElement, { target: { value: 'Mel' } });
     });
-    const noStuffElement = await screen.findByText(nostufftext);
+    const noStuffElement = screen.getByText(nostufftext);
     expect(noStuffElement).toBeInTheDocument();
   });
 
@@ -80,7 +76,7 @@ describe('FetchAutocomplete', () => {
     const user = userEvent.setup();
     const testlabel = 'This is a label';
     const nostufftext = 'No stuff found';
-    let fetchAutocompleteContents: AutocompleteGenericEntity[] = [];
+    let fetchAutocompleteContents = [] as AutocompleteGenericEntity[];
     const handleFetchAutocompleteContents = (newValue: AutocompleteGenericEntity[]) => {
       fetchAutocompleteContents = newValue;
     };
@@ -94,8 +90,7 @@ describe('FetchAutocomplete', () => {
         noOptionsText={nostufftext}
         data-testid="TestFetch"
         minLength={3}
-      />,
-      { wrapper: wrap(withQueryClient()) }
+      />
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
@@ -117,7 +112,7 @@ describe('FetchAutocomplete', () => {
 
     // No stuff to be found.
 
-    expect(await screen.findByText(nostufftext)).toBeInTheDocument();
+    expect(screen.getByText(nostufftext)).toBeInTheDocument();
 
     await act(async () => {
       autocompleteStuff.focus();
@@ -129,7 +124,7 @@ describe('FetchAutocomplete', () => {
 
     // Still no stuff to be found.
 
-    expect(await screen.findByText(nostufftext)).toBeInTheDocument();
+    expect(screen.getByText(nostufftext)).toBeInTheDocument();
 
     await act(async () => {
       fireEvent.change(labelElement, { target: { value: 'AAA' } });
@@ -249,7 +244,7 @@ describe('FetchAutocomplete', () => {
   it('should allow an item to be selected and turned into a chip (which is later removed) with preLoadedOptions', async () => {
     const testlabel = 'This is a label';
     const nostufftext = 'No stuff found';
-    let fetchAutocompleteContents: AutocompleteGenericEntity[] = [];
+    let fetchAutocompleteContents = [] as AutocompleteGenericEntity[];
     const handleFetchAutocompleteContents = (newValue: AutocompleteGenericEntity[]) => {
       fetchAutocompleteContents = newValue;
     };
@@ -267,8 +262,7 @@ describe('FetchAutocomplete', () => {
         noOptionsText={nostufftext}
         data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
-      />,
-      { wrapper: wrap(withQueryClient()) }
+      />
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();

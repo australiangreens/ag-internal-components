@@ -1,20 +1,20 @@
-import { Cancel as CancelIcon, ArrowDropDown as DefaultPopupIcon } from '@mui/icons-material';
+import { useState, useEffect, useMemo, SyntheticEvent, ReactNode } from 'react';
 import {
   Autocomplete,
-  Box,
-  Chip,
-  CircularProgress,
-  SxProps,
   TextField,
-  Theme,
-  Tooltip,
+  Chip,
+  Box,
   Typography,
+  Tooltip,
+  CircularProgress,
+  FilterOptionsState,
+  Theme,
+  SxProps,
 } from '@mui/material';
-import match from 'autosuggest-highlight/match';
+import { Cancel as CancelIcon, ArrowDropDown as DefaultPopupIcon } from '@mui/icons-material';
 import parse from 'autosuggest-highlight/parse';
-import { ReactNode, SyntheticEvent, useState } from 'react';
+import match from 'autosuggest-highlight/match';
 
-import { useQuery } from '@tanstack/react-query';
 import {
   AutocompleteGenericEntity,
   AutocompleteGenericEntityIdType,
@@ -46,7 +46,10 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   label: string;
 
   /** The lookup function, for looking up EntityType options from a remote resource. */
-  lookup?: (lookupValue: string) => Promise<EntityType[] | undefined | null | void>;
+  lookup?: (
+    lookupValue: string,
+    abortSignal: AbortSignal
+  ) => Promise<EntityType[] | undefined | null | void>;
 
   /** If you have your EntityType options at hand, preload them instead, and save the
    * user's time. They should all be available when the user clicks on the drop down
@@ -106,6 +109,9 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   disablePortal = false,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
+  const [options, setOptions] = useState<readonly EntityType[]>(preLoadedOptions || []);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleDelete = (
     e: SyntheticEvent<Element, Event>,
@@ -115,17 +121,62 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
     onChange(newInternalValue, 'delete', e);
   };
 
-  const { data: options, isLoading } = useQuery({
-    queryFn: () => {
-      if (minLength && inputValue.length < minLength) return preLoadedOptions ?? [];
-      if (preLoadedOptions)
-        return preLoadedOptions.filter((option) =>
-          option.label.toLowerCase().includes(inputValue.toLowerCase())
+  useEffect(() => {
+    let abortController: AbortController;
+
+    const fetchAndSet = async () => {
+      abortController = new AbortController();
+      try {
+        const entities = await lookup(inputValue, abortController.signal);
+        setOptions(entities ?? []);
+        setLoading(false);
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name === 'AbortError') {
+          console.debug('Previous lookup request was cancelled');
+        } else {
+          throw err;
+        }
+      }
+    };
+
+    if (inputValue === '') {
+      return undefined;
+    }
+
+    if ((!minLength || inputValue.length >= minLength) && !preLoadedOptions) {
+      setLoading(true);
+      fetchAndSet();
+    } else {
+      setLoading(false);
+    }
+
+    return function cleanup() {
+      if (abortController) abortController.abort();
+    };
+  }, [inputValue, lookup, minLength, preLoadedOptions]);
+
+  useEffect(() => {
+    if (!open && !preLoadedOptions) setOptions([]);
+    if (!open && preLoadedOptions) setOptions(preLoadedOptions);
+  }, [open, preLoadedOptions]);
+
+  const filterOptions = useMemo(() => {
+    if (preLoadedOptions) {
+      // If there are preloaded options, currentOptions will never be updated,
+      // so we need to filter it so only the matches for the current inputValue
+      // are shown. Otherwise we'll just highlights that aren't always visible.
+      return (currentOptions: EntityType[], state: FilterOptionsState<EntityType>) =>
+        currentOptions.filter((x) =>
+          x.label.toLowerCase().includes(state.inputValue.toLowerCase())
         );
-      return lookup(inputValue);
-    },
-    queryKey: ['autocomplete', label, inputValue],
-  });
+    } else {
+      // When there are no preloaded options, then the currentOptions were just
+      // fetched based on the inputValue and will already be filtered to the
+      // ones matching/containing the input - there is no need further filtering
+      // needed.
+      return (currentOptions: EntityType[]) => currentOptions;
+    }
+  }, [preLoadedOptions]);
 
   return (
     <div data-testid={dataTestId}>
@@ -135,18 +186,21 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
         disablePortal={disablePortal}
         multiple
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
-        loading={isLoading}
+        filterOptions={filterOptions}
+        loading={loading}
         // See https://github.com/mui/material-ui/issues/18514
         // TODO: Is this still relevant?
-        options={[...value, ...(options ?? [])]}
+        options={[...value, ...options]}
         // However we hide the selected ones from the dropdown, since most of
         // the time they won't contain what the user typed next
         filterSelectedOptions
         // autoComplete// This doesn't work at time of writing https://github.com/mui-org/material-ui/issues/22648
         includeInputInList
         value={value}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         onChange={(event, newValue, reason) => {
-          onChange(newValue as EntityType[], reason, event);
+          onChange(newValue, reason, event);
         }}
         onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
         noOptionsText={noOptionsText}
@@ -164,7 +218,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
                   {params.InputProps.endAdornment}
                 </>
               ),
