@@ -163,12 +163,6 @@
       "italic": false
     }
   ],
-  "patternlinks.rules": [
-    {
-      "linkPattern": "LIST-\\d+",
-      "linkTarget": "https://australiangreens.atlassian.net/jira/software/projects/LIST/boards/4?selectedIssue=LIST-$0"
-    }
-  ]
 
   // MAY BE USEFUL BUT NOT NECESSARILY RECOMMENDED
   // This increases the indentation in the file explorer. Depends on icon
