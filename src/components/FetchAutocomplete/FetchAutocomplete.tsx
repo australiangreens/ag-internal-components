@@ -21,7 +21,33 @@ import {
   FetchAutocompleteChangeReason,
 } from '../types';
 
-export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity> {
+export const useAutocompleteOptions = <EntityType extends AutocompleteGenericEntity>({
+  minLength,
+  preLoadedOptions,
+  lookup,
+  label,
+  inputValue,
+}: {
+  minLength: number;
+  preLoadedOptions: EntityType[] | undefined;
+  lookup: (lookupValue: string) => Promise<EntityType[] | undefined | null | void>;
+  label: string;
+  inputValue: string;
+}) => {
+  return useQuery({
+    queryFn: () => {
+      if (minLength && inputValue.length < minLength) return preLoadedOptions ?? [];
+      if (preLoadedOptions)
+        return preLoadedOptions.filter((option) =>
+          option.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+      return lookup(inputValue);
+    },
+    queryKey: ['autocomplete', label, inputValue],
+  });
+};
+
+export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity> = {
   /**
    * Callback fired when the value changes. This is passed directly to the
    * underlying Autocomplete, but it is triggered by the Autocomplete's own
@@ -79,7 +105,7 @@ export interface FetchAutocompleteProps<EntityType extends AutocompleteGenericEn
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
-}
+};
 
 /**
  * A wrapper around MUI's Autocomplete component, specifically for use with live
@@ -115,16 +141,12 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
     onChange(newInternalValue, 'delete', e);
   };
 
-  const { data: options, isLoading } = useQuery({
-    queryFn: () => {
-      if (minLength && inputValue.length < minLength) return preLoadedOptions ?? [];
-      if (preLoadedOptions)
-        return preLoadedOptions.filter((option) =>
-          option.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
-      return lookup(inputValue);
-    },
-    queryKey: ['autocomplete', label, inputValue],
+  const { data: options, isLoading } = useAutocompleteOptions({
+    inputValue,
+    label,
+    lookup,
+    minLength: minLength ?? 0,
+    preLoadedOptions,
   });
 
   return (

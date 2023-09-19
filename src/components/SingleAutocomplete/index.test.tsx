@@ -1,9 +1,11 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import SingleAutocomplete from '.';
-import { AutocompleteGenericEntity } from '../types';
 import { SyntheticEvent } from 'react';
+import { wrap } from 'souvlaki';
+import SingleAutocomplete from '.';
+import { withQueryClient } from '../../testing';
+import { AutocompleteGenericEntity } from '../types';
 
 const genericLookupMethod = async () => {
   return [
@@ -23,7 +25,10 @@ describe('SingleAutocomplete', () => {
         value={null}
         onChange={() => []}
         data-testid="TestSingle"
-      />
+      />,
+      {
+        wrapper: wrap(withQueryClient()),
+      }
     );
 
     const labelElement = screen.getByLabelText(testlabel);
@@ -43,7 +48,10 @@ describe('SingleAutocomplete', () => {
         value={null}
         onChange={() => []}
         data-testid="TestSingle"
-      />
+      />,
+      {
+        wrapper: wrap(withQueryClient()),
+      }
     );
 
     const labelElement = screen.getByLabelText(testLabel);
@@ -54,10 +62,10 @@ describe('SingleAutocomplete', () => {
     });
     await user.click(autocompleteElement);
     await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'XYZ'} });
-    })
-    expect(screen.getByText(testNoOptionsText)).toBeInTheDocument();
-  })
+      fireEvent.change(labelElement, { target: { value: 'XYZ' } });
+    });
+    expect(await screen.findByText(testNoOptionsText)).toBeInTheDocument();
+  });
 
   it('should allow an item to be added and removed', async () => {
     const user = userEvent.setup();
@@ -78,7 +86,10 @@ describe('SingleAutocomplete', () => {
         onChange={handleSingleAutocompleteContents}
         data-testid="TestSingle"
         minLength={3}
-      />
+      />,
+      {
+        wrapper: wrap(withQueryClient()),
+      }
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();

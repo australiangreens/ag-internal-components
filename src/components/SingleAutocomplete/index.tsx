@@ -1,5 +1,6 @@
 import { Autocomplete, Stack, SxProps, TextField, Theme } from '@mui/material';
-import React, { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
+import { useAutocompleteOptions } from '../FetchAutocomplete';
 import { AutocompleteGenericEntity } from '../types';
 
 type Props<EntityType extends AutocompleteGenericEntity> = {
@@ -10,17 +11,25 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    * own onChange.
    */
   onChange: (event: SyntheticEvent<Element, Event>, newValue: EntityType | null) => unknown;
-
   value: EntityType | null;
+
+  /**
+   * A minimum length of characters in the Autocomplete before the lookup is called. If not set,
+   * then the lookup is called every time.
+   */
+  minLength?: number;
 
   /** A nice label for the autocomplete. */
   label: string;
 
   /** The lookup function, for looking up EntityType options from a remote resource. */
-  lookup: (
-    lookupValue: string,
-    abortSignal: AbortSignal
-  ) => Promise<EntityType[] | undefined | null | void>;
+  lookup: (lookupValue: string) => Promise<EntityType[] | undefined | null | void>;
+
+  preLoadedOptions?: EntityType[] | undefined;
+
+  /**If true, the Popper content will be under the DOM hierarchy of the parent
+   * component. Passed directly to underlying MUI Autocomplete component.*/
+  disablePortal?: boolean;
 
   /**
    * Used for the data-testid value of the outer most component. The underlying
@@ -32,13 +41,8 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    */
   'data-testid'?: string;
 
-  /**If true, the Popper content will be under the DOM hierarchy of the parent
-   * component. Passed directly to underlying MUI Autocomplete component.*/
-  disablePortal?: boolean;
-
-  noOptionsText?: string;
-  minLength?: number;
   hideButton?: boolean;
+  noOptionsText?: string;
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
@@ -56,25 +60,17 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   noOptionsText = 'No options',
   minLength = 3,
   disablePortal = false,
+  preLoadedOptions,
 }: Props<EntityType>) => {
-  const [options, setOptions] = useState<readonly EntityType[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
-  let abortController: AbortController;
-  const fetchAndSet = async (newInputValue: string) => {
-    abortController = new AbortController();
-    try {
-      const entities = await lookup(newInputValue, abortController.signal);
-      setOptions(entities ?? []);
-      setLoading(false);
-    } catch (err: unknown) {
-      if (err instanceof Error && err.name === 'AbortError') {
-        console.debug('Previous lookup request was cancelled');
-      } else {
-        throw err;
-      }
-    }
-  };
+  const { data: options, isLoading } = useAutocompleteOptions({
+    inputValue,
+    label,
+    lookup,
+    minLength: minLength ?? 0,
+    preLoadedOptions,
+  });
 
   return (
     <div data-testid={dataTestId}>
@@ -82,8 +78,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
         <Autocomplete
           sx={sx}
           data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
-          loading={loading}
-          options={options}
+          loading={isLoading}
+          options={options ?? []}
           onChange={(event, newValue) => {
             onChange(event, newValue);
           }}
@@ -103,10 +99,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           )}
           isOptionEqualToValue={(option, v) => option.id === v.id}
           onInputChange={(_event, newInputValue) => {
-            if (newInputValue?.length >= minLength) {
-              setLoading(true);
-              fetchAndSet(newInputValue);
-            }
+            setInputValue(newInputValue);
           }}
           renderOption={(props, option) => {
             return (

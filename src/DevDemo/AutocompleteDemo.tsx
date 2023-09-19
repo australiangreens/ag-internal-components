@@ -8,8 +8,8 @@ import {
   navBarTopAtom,
   topBarMiddleAtom,
 } from 'ag-internal-components';
-import countryList from './countries.json';
 import { useSetAtom } from 'jotai';
+import countryList from './countries.json';
 
 interface Country extends AutocompleteGenericEntity {
   id: string;
