@@ -116,7 +116,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   lookup = async () => {},
   enableHighlighting = true,
   onChange,
-  minLength,
+  minLength = 0,
   label,
   value,
   'data-testid': dataTestId,
@@ -145,9 +145,11 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
     inputValue,
     label,
     lookup,
-    minLength: minLength ?? 0,
+    minLength,
     preLoadedOptions,
   });
+
+  const isInputMinimumLength = inputValue.length >= minLength;
 
   return (
     <div data-testid={dataTestId}>
@@ -157,7 +159,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
         disablePortal={disablePortal}
         multiple
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
-        loading={isLoading}
+        loading={isInputMinimumLength ? isLoading : false}
         // See https://github.com/mui/material-ui/issues/18514
         // TODO: Is this still relevant?
         options={[...value, ...(options ?? [])]}
@@ -171,7 +173,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           onChange(newValue as EntityType[], reason, event);
         }}
         onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
-        noOptionsText={noOptionsText}
+        noOptionsText={isInputMinimumLength ? noOptionsText : 'Start typing to search'}
         loadingText={loadingText}
         popupIcon={popupIcon}
         renderInput={(params) => (

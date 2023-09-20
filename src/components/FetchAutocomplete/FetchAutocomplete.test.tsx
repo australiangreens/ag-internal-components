@@ -79,7 +79,9 @@ describe('FetchAutocomplete', () => {
   it('should allow an item to be selected and turned into a chip (which is later removed)', async () => {
     const user = userEvent.setup();
     const testlabel = 'This is a label';
-    const nostufftext = 'No stuff found';
+    const noStuffText = 'No stuff found';
+    const startTypingToSearchText = 'Start typing to search';
+
     let fetchAutocompleteContents: AutocompleteGenericEntity[] = [];
     const handleFetchAutocompleteContents = (newValue: AutocompleteGenericEntity[]) => {
       fetchAutocompleteContents = newValue;
@@ -91,7 +93,7 @@ describe('FetchAutocomplete', () => {
         label={testlabel}
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
-        noOptionsText={nostufftext}
+        noOptionsText={noStuffText}
         data-testid="TestFetch"
         minLength={3}
       />,
@@ -100,45 +102,38 @@ describe('FetchAutocomplete', () => {
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
     const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
+    // await act(async () => {
+    //   autocompleteStuff.focus();
+    // });
 
     // For this test, we have made the minimum character count 3. We try entering
     // a one character string, then a two character string, then 3.
 
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'A' } });
-    });
+    // await act(async () => {
+    //   autocompleteStuff.focus();
+    // });
+    // await user.click(autocompleteStuff);
+    // await act(async () => {
+    //   fireEvent.change(labelElement, { target: { value: 'Abc' } });
+    // });
+
+    await user.type(autocompleteStuff, 'a');
 
     // No stuff to be found.
 
-    expect(await screen.findByText(nostufftext)).toBeInTheDocument();
+    expect(await screen.findByText(startTypingToSearchText)).toBeInTheDocument();
 
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'AA' } });
-    });
+    await user.type(autocompleteStuff, 'a');
 
     // Still no stuff to be found.
 
-    expect(await screen.findByText(nostufftext)).toBeInTheDocument();
+    expect(await screen.findByText(startTypingToSearchText)).toBeInTheDocument();
 
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'AAA' } });
-    });
-    await user.click(autocompleteStuff);
+    await user.type(autocompleteStuff, 'a');
 
     // Stuff has been found.
 
-    expect(screen.queryByText(nostufftext)).toBeNull();
+    expect(screen.queryByText(startTypingToSearchText)).toBeNull();
 
     // And we go one item down to select the 'AAA'.
 
@@ -157,7 +152,7 @@ describe('FetchAutocomplete', () => {
         label={testlabel}
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
-        noOptionsText={nostufftext}
+        noOptionsText={noStuffText}
         data-testid="TestFetch"
         minLength={3}
       />
@@ -191,7 +186,7 @@ describe('FetchAutocomplete', () => {
         label={testlabel}
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
-        noOptionsText={nostufftext}
+        noOptionsText={noStuffText}
         data-testid="TestFetch"
         minLength={3}
       />
@@ -211,7 +206,7 @@ describe('FetchAutocomplete', () => {
         label={testlabel}
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
-        noOptionsText={nostufftext}
+        noOptionsText={noStuffText}
         data-testid="TestFetch"
         minLength={3}
       />
@@ -234,7 +229,7 @@ describe('FetchAutocomplete', () => {
         label={testlabel}
         value={fetchAutocompleteContents}
         onChange={handleFetchAutocompleteContents}
-        noOptionsText={nostufftext}
+        noOptionsText={noStuffText}
         data-testid="TestFetch"
         minLength={3}
       />

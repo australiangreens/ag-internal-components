@@ -72,13 +72,15 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
     preLoadedOptions,
   });
 
+  const isInputMinimumLength = inputValue.length >= minLength;
+
   return (
     <div data-testid={dataTestId}>
       <Stack direction="row" spacing={1}>
         <Autocomplete
           sx={sx}
           data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
-          loading={isLoading}
+          loading={isInputMinimumLength ? isLoading : false}
           options={options ?? []}
           onChange={(event, newValue) => {
             onChange(event, newValue);
@@ -86,7 +88,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           disablePortal={disablePortal}
           filterOptions={(option) => option}
           value={value}
-          noOptionsText={noOptionsText}
+          noOptionsText={isInputMinimumLength ? noOptionsText : 'Start typing to search'}
           getOptionLabel={(option) => option.label}
           renderInput={(params) => (
             <TextField
