@@ -23,7 +23,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   label: string;
 
   /** The lookup function, for looking up EntityType options from a remote resource. */
-  lookup: (lookupValue: string) => Promise<EntityType[] | undefined | null | void>;
+  lookup?: (lookupValue: string) => Promise<EntityType[] | undefined | null | void>;
 
   preLoadedOptions?: EntityType[] | undefined;
 
@@ -49,7 +49,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
-  lookup,
+  lookup = async () => {},
   onChange,
   label,
   value,
