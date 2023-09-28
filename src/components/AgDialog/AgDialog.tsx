@@ -28,6 +28,7 @@ export type AgDialogProps = PropsWithChildren<{
   'data-testid'?: string;
   onClose: () => void;
   sx?: SxProps<Theme>;
+  disableCloseOnBackdropOrEscape?: boolean;
 }>;
 
 /**
@@ -44,13 +45,20 @@ const AgDialog = ({
   onClose: handleClose,
   sx,
   'data-testid': dataTestId,
+  disableCloseOnBackdropOrEscape = false,
 }: AgDialogProps) => {
   const [areButtonsDisabled, setButtonsDisabled] = useState(false);
 
   return (
     <Dialog
       open={isOpen}
-      onClose={async () => {
+      onClose={async (_event, reason) => {
+        if (
+          disableCloseOnBackdropOrEscape &&
+          (reason === 'backdropClick' || reason === 'escapeKeyDown')
+        ) {
+          return;
+        }
         if (areButtonsDisabled) return;
         if (secondaryButton?.onClick) {
           await secondaryButton.onClick();

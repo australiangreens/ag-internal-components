@@ -62,7 +62,12 @@ export default function SettingsEtcPlaceholder() {
           <ListItemText primary="Log out" />
         </ListItemButton>
       </List>
-      <AgDialog isOpen={dialogOpen} dialogTitle={dialogValue} onClose={handleDialogClose}>
+      <AgDialog
+        isOpen={dialogOpen}
+        dialogTitle={dialogValue}
+        onClose={handleDialogClose}
+        disableCloseOnBackdropOrEscape
+      >
         <p>
           You just pressed the <em>{dialogValue}</em> menu item.
         </p>
