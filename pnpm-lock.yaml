@@ -11,12 +11,6 @@ dependencies:
   '@australiangreens/ag-error-jest':
     specifier: ^0.1.9
     version: 0.1.9
-  '@auth0/auth0-react':
-    specifier: ^2.2.1
-    version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
-  '@auth0/auth0-spa-js':
-    specifier: ^2.1.2
-    version: 2.1.2
   '@tanstack/react-query':
     specifier: ^4.35.3
     version: 4.35.3(react-dom@18.2.0)(react@18.2.0)
@@ -40,6 +34,12 @@ dependencies:
     version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
+  '@auth0/auth0-react':
+    specifier: ^2.2.1
+    version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
+  '@auth0/auth0-spa-js':
+    specifier: ^2.1.2
+    version: 2.1.2
   '@emotion/react':
     specifier: ^11.11.1
     version: 11.11.1(@types/react@18.2.0)(react@18.2.0)
@@ -233,11 +233,11 @@ packages:
       '@auth0/auth0-spa-js': 2.1.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
+    dev: true
 
   /@auth0/auth0-spa-js@2.1.2:
     resolution: {integrity: sha512-xdA65Z/U7++Y7L9Uwh8Q8OVOs6qgFz+fb7GAzHFjpr1icO37B//xdzLXm7ZRgA19RWrsNe1nme3h896igJSvvw==}
-    dev: false
+    dev: true
 
   /@aw-web-design/x-default-browser@1.4.88:
     resolution: {integrity: sha512-AkEmF0wcwYC2QkhK703Y83fxWARttIWXDmQN8+cof8FmFZ5BRhnNXGymeb1S73bOCLfWjYELxtujL56idCN/XA==}
