@@ -11,6 +11,12 @@ dependencies:
   '@australiangreens/ag-error-jest':
     specifier: ^0.1.9
     version: 0.1.9
+  '@auth0/auth0-react':
+    specifier: ^2.2.1
+    version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
+  '@auth0/auth0-spa-js':
+    specifier: ^2.1.2
+    version: 2.1.2
   '@tanstack/react-query':
     specifier: ^4.35.3
     version: 4.35.3(react-dom@18.2.0)(react@18.2.0)
@@ -20,6 +26,9 @@ dependencies:
   autosuggest-highlight:
     specifier: ^3.3.4
     version: 3.3.4
+  buffer:
+    specifier: ^6.0.3
+    version: 6.0.3
   jotai:
     specifier: ^2.3.1
     version: 2.3.1(@types/react@18.2.0)(react@18.2.0)
@@ -213,6 +222,21 @@ packages:
 
   /@australiangreens/ag-error@0.1.7:
     resolution: {integrity: sha512-ltcA6ZZ4vpx2mx9ogWnUcXMCLw3KiM4gr63HzzSp9hf6Wk+30WulXPZYo4O8270dyqsm4JOtO973ueR2/x8jZg==}
+    dev: false
+
+  /@auth0/auth0-react@2.2.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-4L4FZvSqIwzVk5mwWFbWzfJ4Zq11dgS0v4KIGKro5tL9dgOnBGq+Ino/1mzexPV1LJHBkfwXG4+IaPiQNz5CGg==}
+    peerDependencies:
+      react: ^16.11.0 || ^17 || ^18
+      react-dom: ^16.11.0 || ^17 || ^18
+    dependencies:
+      '@auth0/auth0-spa-js': 2.1.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@auth0/auth0-spa-js@2.1.2:
+    resolution: {integrity: sha512-xdA65Z/U7++Y7L9Uwh8Q8OVOs6qgFz+fb7GAzHFjpr1icO37B//xdzLXm7ZRgA19RWrsNe1nme3h896igJSvvw==}
     dev: false
 
   /@aw-web-design/x-default-browser@1.4.88:
@@ -5971,7 +5995,6 @@ packages:
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
-    dev: true
 
   /better-opn@2.1.1:
     resolution: {integrity: sha512-kIPXZS5qwyKiX/HcRvDYfmBQUa8XP17I0mYZZ0y4UhpYOSvtsLHDYqmomS+Mj20aDvD3knEiQ0ecQy2nhio3yA==}
@@ -6086,6 +6109,13 @@ packages:
       base64-js: 1.5.1
       ieee754: 1.2.1
     dev: true
+
+  /buffer@6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+    dev: false
 
   /bytes@3.0.0:
     resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
@@ -8054,7 +8084,6 @@ packages:
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
-    dev: true
 
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}

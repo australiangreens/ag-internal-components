@@ -12,3 +12,6 @@ export * from './FetchAutocomplete';
 
 export { default as SingleAutocomplete } from './SingleAutocomplete';
 export * from './SingleAutocomplete';
+
+export { default as SessionExpiryDialog } from './SessionExpiryDialog';
+export * from './SessionExpiryDialog';

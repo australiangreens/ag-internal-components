@@ -19,7 +19,7 @@ import {NavBar, NavBarProvider} from '@australiangreens/ag-internal-components';
       <NavBar>
       {/* Navbar contents */}
       </NavBar>
-      <PageLayout
+      <PageLayout>
         {/* props */}
       </PageLayout>
     </NavBarProvider>
