@@ -1,18 +1,21 @@
-export { default as ExampleComponent } from './ExampleComponent';
 export * from './ExampleComponent';
+export { default as ExampleComponent } from './ExampleComponent';
 
-export { default as NavBar } from './NavBar';
 export * from './NavBar';
+export { default as NavBar } from './NavBar';
 
-export { default as AgDialog } from './AgDialog';
 export * from './AgDialog';
+export { default as AgDialog } from './AgDialog';
 
-export { default as FetchAutocomplete } from './FetchAutocomplete';
 export * from './FetchAutocomplete';
+export { default as FetchAutocomplete } from './FetchAutocomplete';
 
-export { default as SingleAutocomplete } from './SingleAutocomplete';
 export * from './SingleAutocomplete';
+export { default as SingleAutocomplete } from './SingleAutocomplete';
 
 // Broken - see EVNT-143.
 // export { default as SessionExpiryDialog } from './SessionExpiryDialog';
 // export * from './SessionExpiryDialog';
+
+export * from './AuthGuard';
+export { default as AuthGuard } from './AuthGuard';
