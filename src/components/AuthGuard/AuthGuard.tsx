@@ -17,6 +17,10 @@ import {
   isOAuthError,
 } from './auth0ErrorParsing';
 
+export interface AuthGuardProps {
+  appName?: string;
+}
+
 /**
  * Use as parent of main app (but within Auth0Provider) so when an anonymous
  * user visits the will be redirected to the login page and returned to the page
@@ -30,7 +34,10 @@ import {
  *
  * Do not use this if any routes need to be accessible to anonymous users.
  */
-export default function AuthGuard({ children }: PropsWithChildren) {
+export default function AuthGuard({
+  children,
+  appName = 'the app',
+}: PropsWithChildren<AuthGuardProps>) {
   const { isAuthenticated, isLoading, error, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
@@ -51,11 +58,10 @@ export default function AuthGuard({ children }: PropsWithChildren) {
 
     if (errorFromApplicationAccessRejection(error)) {
       title = 'Unauthorised';
-      message = 'You are not authorised to access the app.';
+      message = `You are not authorised to access ${appName}.`;
     } else if (errorFromUserNotAuthorisingApp(error)) {
       title = 'App not authorised';
-      message =
-        'You have not authorised the application to access your user profile. This is necessary to use the app.';
+      message = `You have not authorised ${appName} to access your user profile. This is necessary to use ${appName}.`;
     } else if (errorFromAuthorisationFailure(error)) {
       title = 'Unauthorised';
       message = 'Authorisation with auth0 failed for an unknown reason.';

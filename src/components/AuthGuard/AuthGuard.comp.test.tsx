@@ -72,27 +72,37 @@ describe('AuthGuard', () => {
     mockUseAuth0Hook({
       error: generateAuth0Error(
         'access_denied',
-        'You do not have the required authorization to access the app'
+        'You do not have the required authorization to access The Application Name'
       ),
     });
-    commonRender();
+    render(
+      <AuthGuard appName="The Name of the Application">
+        <SomeComponent />
+      </AuthGuard>
+    );
 
     expect(screen.queryByText('This is the child component')).not.toBeInTheDocument();
     expect(screen.queryByText('Unauthorised')).toBeInTheDocument();
-    expect(screen.queryByText('You are not authorised to access the app.')).toBeInTheDocument();
+    expect(
+      screen.queryByText('You are not authorised to access The Name of the Application.')
+    ).toBeInTheDocument();
   });
 
   it('renders appropriate message in case of user not authorising app to access profile', async () => {
     mockUseAuth0Hook({
       error: generateAuth0Error('access_denied', 'User did not authorize the request'),
     });
-    commonRender();
+    render(
+      <AuthGuard appName="The Name of the Application">
+        <SomeComponent />
+      </AuthGuard>
+    );
 
     expect(screen.queryByText('This is the child component')).not.toBeInTheDocument();
     expect(screen.queryByText('App not authorised')).toBeInTheDocument();
     expect(
       screen.queryByText(
-        'You have not authorised the application to access your user profile. This is necessary to use the app.'
+        'You have not authorised The Name of the Application to access your user profile. This is necessary to use The Name of the Application.'
       )
     ).toBeInTheDocument();
   });
