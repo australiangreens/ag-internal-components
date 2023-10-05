@@ -13,9 +13,8 @@ export { default as FetchAutocomplete } from './FetchAutocomplete';
 export * from './SingleAutocomplete';
 export { default as SingleAutocomplete } from './SingleAutocomplete';
 
-// Broken - see EVNT-143.
-// export { default as SessionExpiryDialog } from './SessionExpiryDialog';
-// export * from './SessionExpiryDialog';
+export { default as SessionExpiryDialog } from './SessionExpiryDialog';
+export * from './SessionExpiryDialog';
 
 export * from './AuthGuard';
 export { default as AuthGuard } from './AuthGuard';
