@@ -1,5 +1,5 @@
 import { Autocomplete, Stack, SxProps, TextField, Theme } from '@mui/material';
-import { SyntheticEvent, useState } from 'react';
+import { ReactNode, SyntheticEvent, useState } from 'react';
 import { useAutocompleteOptions } from '../FetchAutocomplete';
 import { AutocompleteGenericEntity } from '../types';
 
@@ -46,6 +46,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
+  helperText?: ReactNode;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -61,6 +62,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   minLength = 3,
   disablePortal = false,
   preLoadedOptions,
+  helperText = '',
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -97,6 +99,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               variant={textFieldVariant}
               label={label}
               color={textFieldColor}
+              helperText={helperText}
             />
           )}
           isOptionEqualToValue={(option, v) => option.id === v.id}
