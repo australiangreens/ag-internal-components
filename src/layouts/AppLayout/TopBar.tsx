@@ -60,7 +60,12 @@ export default function TopBar({
           zIndex: isSmallScreen ? 0 : theme.zIndex.drawer + 1,
         }}
       >
-        <IconButton size="medium" color="inherit" sx={{ padding: 1.5 }} onClick={toggleNavBar}>
+        <IconButton
+          size="medium"
+          color="inherit"
+          sx={{ padding: 1.5, marginLeft: '12px' }}
+          onClick={toggleNavBar}
+        >
           <HamburgerIcon fontSize="medium" />
         </IconButton>
         <Typography className={classes.titleText} variant="h6">

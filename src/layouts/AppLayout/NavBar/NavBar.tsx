@@ -103,7 +103,7 @@ export default function NavBar({
         {top && (
           <Box flexGrow="0">
             {top}
-            <Divider variant="middle" />
+            <Divider variant="middle" sx={{ marginY: '0.5rem' }} />
           </Box>
         )}
 
@@ -113,7 +113,7 @@ export default function NavBar({
         </Box>
 
         <Box flexGrow="0">
-          <Divider variant="middle" />
+          <Divider variant="middle" sx={{ marginY: '0.5rem' }} />
           <UserInfo user={user} domainCode={domainCode} open={open} />
 
           {bottom && <>{bottom}</>}
@@ -122,6 +122,3 @@ export default function NavBar({
     </Root>
   );
 }
-
-// TODO: This is a temporary fix, library clients shouldn't need this
-// export { classes as navBarClasses } from './Styling';

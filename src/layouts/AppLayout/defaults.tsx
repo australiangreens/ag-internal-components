@@ -18,5 +18,5 @@
 export const DEFAULT_INITIAL_NAV_BAR_OPEN = true;
 
 export const DEFAULT_TOP_BAR_HEIGHT = 64;
-export const DEFAULT_NAV_BAR_WIDTH_CLOSED = 64;
+export const DEFAULT_NAV_BAR_WIDTH_CLOSED = 72;
 export const DEFAULT_NAV_BAR_WIDTH_OPEN = 256;
