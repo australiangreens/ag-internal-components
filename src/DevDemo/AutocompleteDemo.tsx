@@ -89,7 +89,8 @@ export default function FetchAutocompleteDemo() {
         onChange={handleOnChange}
         loadingText="Looking for countries..."
         noOptionsText="No countries found"
-        sx={{ width: '300px' }}
+        sx={{ width: '50%' }}
+        boxSx={{ width: '50%' }}
         textFieldColor="primary"
       />
       <h2>SingleAutocomplete example</h2>
@@ -103,7 +104,7 @@ export default function FetchAutocompleteDemo() {
         label="Select a country"
         value={singleItem}
         onChange={handleSingleItemChange}
-        sx={{ width: '300px' }}
+        sx={{ width: '50%' }}
         textFieldColor="info"
         textFieldVariant="outlined"
         noOptionsText="No countries found"

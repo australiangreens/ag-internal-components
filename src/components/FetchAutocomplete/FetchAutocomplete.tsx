@@ -105,6 +105,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
+  boxSx?: SxProps<Theme>;
 };
 
 /**
@@ -121,6 +122,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   value,
   'data-testid': dataTestId,
   sx,
+  boxSx,
   textFieldColor,
   textFieldVariant = 'filled',
   loadingText = 'Loading...',
@@ -253,7 +255,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
         }}
       />
       {value.length > 0 && (
-        <Box>
+        <Box sx={boxSx}>
           {value.map((val) => {
             return (
               <Chip
