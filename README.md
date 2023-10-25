@@ -32,3 +32,8 @@ As over v0.0.50 we have moved from React 17 to React 18 (also Node 16 to Node
 18). This breaks the peer dependency compatibility with some of our older apps.
 They will need be upgraded in the future to use newer versions, but for now can
 only use v0.0.50 of this library.
+
+## Move to pnpm
+
+Because it is faster than yarn.
+
