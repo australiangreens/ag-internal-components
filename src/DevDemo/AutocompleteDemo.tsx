@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState, PropsWithChildren } from 'react';
 
 import {
   AutocompleteGenericEntity,
@@ -9,7 +9,16 @@ import {
   topBarMiddleAtom,
 } from 'ag-internal-components';
 import { useSetAtom } from 'jotai';
+import { Box, Divider, Typography } from '@mui/material';
+import LayersIcon from '@mui/icons-material/Layers';
+import { Settings as TitleIcon } from '@mui/icons-material';
 import countryList from './countries.json';
+
+const FormGroupBox = ({ children }: PropsWithChildren) => (
+  <Box display="flex" gap="18px" flexDirection="column">
+    {children}
+  </Box>
+);
 
 interface Country extends AutocompleteGenericEntity {
   id: string;
@@ -71,44 +80,74 @@ export default function FetchAutocompleteDemo() {
 
   return (
     <>
-      <h1>Autocomplete Demo</h1>
-      <h2>FetchAutocomplete example</h2>
-      <p>Enter some country names here. Select as many as you like. </p>
-      <p>
-        <i>
-          (You can even select items like &quot;Heard Island and Mcdonald Islands&quot;, which
-          really is more an uninhabited Australian territory than a country...)
-        </i>
-      </p>
+      <Box display="flex" flexDirection="column" padding="1rem" gap="26px">
+        <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+          <TitleIcon sx={{ height: '2.75rem', width: '2.75rem' }} color="primary" />
+          <Typography variant="h5" sx={{ fontWeight: 500 }}>
+            Autocomplete Demo
+          </Typography>
+        </Box>
 
-      <FetchAutocomplete
-        minLength={3}
-        lookup={pretendLookup}
-        label="Select a country"
-        value={selectedItems}
-        onChange={handleOnChange}
-        loadingText="Looking for countries..."
-        noOptionsText="No countries found"
-        sx={{ width: '50%' }}
-        boxSx={{ width: '50%' }}
-        textFieldColor="primary"
-      />
-      <h2>SingleAutocomplete example</h2>
-      <p>Enter a country name here, but now you only get to select one. </p>
-      <p>
-        <i>(You still get to select territories as well as real countries.)</i>
-      </p>
-      <SingleAutocomplete
-        minLength={3}
-        lookup={pretendLookup}
-        label="Select a country"
-        value={singleItem}
-        onChange={handleSingleItemChange}
-        sx={{ width: '50%' }}
-        textFieldColor="info"
-        textFieldVariant="outlined"
-        noOptionsText="No countries found"
-      />
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            columnGap: '24px',
+            rowGap: '26px',
+          }}
+        >
+          <Divider light />
+          <FormGroupBox>
+            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+              <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
+              <Typography variant="h6">FetchAutocomplete example</Typography>
+            </Box>
+            <Typography>
+              Enter some country names here. Select as many as you like.{' '}
+              <i>
+                (You can even select items like &quot;Heard Island and Mcdonald Islands&quot;, which
+                really is more an uninhabited Australian territory than a country...)
+              </i>
+            </Typography>
+            <div>
+              <FetchAutocomplete
+                minLength={3}
+                lookup={pretendLookup}
+                label="Select a country"
+                value={selectedItems}
+                onChange={handleOnChange}
+                loadingText="Looking for countries..."
+                noOptionsText="No countries found"
+                sx={{ width: '50%' }}
+                boxSx={{ width: '50%' }}
+                textFieldColor="primary"
+              />
+            </div>
+          </FormGroupBox>
+          <Divider light />
+          <FormGroupBox>
+            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+              <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
+              <Typography variant="h6">SingleAutocomplete example</Typography>
+            </Box>
+            <Typography>
+              Enter a country name here, but now you only get to select one.{' '}
+              <i>(You still get to select territories as well as real countries.)</i>
+            </Typography>
+            <SingleAutocomplete
+              minLength={3}
+              lookup={pretendLookup}
+              label="Select a country"
+              value={singleItem}
+              onChange={handleSingleItemChange}
+              sx={{ width: '50%' }}
+              textFieldColor="info"
+              textFieldVariant="outlined"
+              noOptionsText="No countries found"
+            />
+          </FormGroupBox>
+        </form>
+      </Box>
     </>
   );
 }
