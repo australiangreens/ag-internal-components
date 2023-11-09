@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  LinearProgress,
   SxProps,
   Theme,
 } from '@mui/material';
@@ -29,6 +30,7 @@ export type AgDialogProps = PropsWithChildren<{
   onClose: () => void;
   sx?: SxProps<Theme>;
   disableCloseOnBackdropOrEscape?: boolean;
+  isLoading?: boolean;
 }>;
 
 /**
@@ -46,6 +48,7 @@ const AgDialog = ({
   sx,
   'data-testid': dataTestId,
   disableCloseOnBackdropOrEscape = false,
+  isLoading = false,
 }: AgDialogProps) => {
   const [areButtonsDisabled, setButtonsDisabled] = useState(false);
 
@@ -71,6 +74,7 @@ const AgDialog = ({
       data-testid={dataTestId}
       sx={sx}
     >
+      {isLoading && <LinearProgress sx={{ height: '4px', marginBottom: '-4px' }} />}
       <DialogTitle>{dialogTitle}</DialogTitle>
       <DialogContent sx={{ '& > :last-child': { marginBottom: 0 } }}>{children}</DialogContent>
       <DialogActions>
