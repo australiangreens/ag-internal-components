@@ -1,5 +1,5 @@
+import { Box, Container, ContainerProps } from '@mui/material';
 import { PropsWithChildren } from 'react';
-import { Container, Box, ContainerProps } from '@mui/material';
 
 // const NavBarAwareMargins = styled('div', {
 //   shouldForwardProp: (prop) => !(['leftPanel', 'rightPanel'] as Array<PropertyKey>).includes(prop),
@@ -31,6 +31,7 @@ interface PageContainerProps {
 
   /** Passed to underlying Container. False be default.*/
   maxWidth?: ContainerProps['maxWidth'];
+  noPadding?: boolean;
 }
 
 /**
@@ -41,6 +42,7 @@ function PageContainer({
   children,
   topBarHeight,
   maxWidth = false,
+  noPadding,
 }: PropsWithChildren<PageContainerProps>) {
   return (
     <Box
@@ -52,14 +54,20 @@ function PageContainer({
         flexGrow: 1,
       }}
     >
-      <Container
-        component="main"
-        id="main-content"
-        maxWidth={maxWidth}
-        sx={{ paddingTop: 3, paddingBottom: 3, flexGrow: 1 }}
-      >
-        {children}
-      </Container>
+      {noPadding ? (
+        <Box component="main" id="main-content">
+          {children}
+        </Box>
+      ) : (
+        <Container
+          component="main"
+          id="main-content"
+          maxWidth={maxWidth}
+          sx={{ paddingTop: 3, paddingBottom: 3, flexGrow: 1 }}
+        >
+          {children}
+        </Container>
+      )}
     </Box>
   );
 }
