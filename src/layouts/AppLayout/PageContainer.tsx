@@ -55,7 +55,7 @@ function PageContainer({
       }}
     >
       {noPadding ? (
-        <Box component="main" id="main-content">
+        <Box component="main" id="main-content" height="inherit">
           {children}
         </Box>
       ) : (
