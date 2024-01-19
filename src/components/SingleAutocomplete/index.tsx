@@ -47,6 +47,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
   helperText?: ReactNode;
+  disabled?: boolean;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -63,6 +64,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   disablePortal = false,
   preLoadedOptions,
   helperText = '',
+  disabled,
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -106,21 +108,20 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           onInputChange={(_event, newInputValue) => {
             setInputValue(newInputValue);
           }}
-          renderOption={(props, option) => {
-            return (
-              <li
-                {...props}
-                key={option.id}
-                data-testid={
-                  dataTestId
-                    ? `${dataTestId}:Autocomplete:option(${option.id.toString()})`
-                    : undefined
-                }
-              >
-                {option.label}
-              </li>
-            );
-          }}
+          renderOption={(props, option) => (
+            <li
+              {...props}
+              key={option.id}
+              data-testid={
+                dataTestId
+                  ? `${dataTestId}:Autocomplete:option(${option.id.toString()})`
+                  : undefined
+              }
+            >
+              {option.label}
+            </li>
+          )}
+          disabled={disabled}
         />
       </Stack>
     </div>
