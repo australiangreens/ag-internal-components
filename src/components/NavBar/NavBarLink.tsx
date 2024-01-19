@@ -12,7 +12,7 @@ import {
 import { useAtom } from 'jotai';
 import { ReactNode, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { navBarOpenAtom } from 'src/layouts';
+import { navBarOpenAtom } from '../../layouts';
 
 type BaseNavLink = {
   label: string;
