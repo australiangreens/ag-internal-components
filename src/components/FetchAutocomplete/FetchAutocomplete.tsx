@@ -106,6 +106,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
   boxSx?: SxProps<Theme>;
+  disableIconFlip?: boolean;
 };
 
 /**
@@ -132,6 +133,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   helperText = '',
   preLoadedOptions = undefined,
   disablePortal = false,
+  disableIconFlip = false,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
 
@@ -156,7 +158,12 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   return (
     <div data-testid={dataTestId}>
       <Autocomplete
-        sx={sx}
+        sx={{
+          ...sx,
+          ...(disableIconFlip
+            ? { '.MuiAutocomplete-popupIndicatorOpen': { transform: 'rotate(0deg)' } }
+            : {}),
+        }}
         data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
         disablePortal={disablePortal}
         multiple
