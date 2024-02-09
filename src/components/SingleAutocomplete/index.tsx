@@ -48,6 +48,8 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
   helperText?: ReactNode;
   disabled?: boolean;
+  popupIcon?: ReactNode;
+  disableIconFlip?: boolean;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -65,6 +67,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   preLoadedOptions,
   helperText = '',
   disabled,
+  popupIcon,
+  disableIconFlip,
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -82,7 +86,12 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
     <div data-testid={dataTestId}>
       <Stack direction="row" spacing={1}>
         <Autocomplete
-          sx={sx}
+          sx={{
+            ...sx,
+            ...(disableIconFlip
+              ? { '.MuiAutocomplete-popupIndicatorOpen': { transform: 'rotate(0deg)' } }
+              : {}),
+          }}
           data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
           loading={isInputMinimumLength ? isLoading : false}
           options={options ?? []}
@@ -94,6 +103,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           value={value}
           noOptionsText={isInputMinimumLength ? noOptionsText : 'Start typing to search'}
           getOptionLabel={(option) => option.label}
+          popupIcon={popupIcon}
           renderInput={(params) => (
             <TextField
               data-testid={dataTestId ? `${dataTestId}:Autocomplete:TextField` : undefined}
