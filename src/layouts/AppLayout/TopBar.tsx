@@ -68,7 +68,7 @@ export default function TopBar({
         >
           <HamburgerIcon fontSize="medium" />
         </IconButton>
-        <Typography className={classes.titleText} variant="h6">
+        <Typography className={classes.titleText} variant="h1">
           {titleText}
         </Typography>
 

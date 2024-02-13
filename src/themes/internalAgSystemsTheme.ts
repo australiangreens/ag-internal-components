@@ -76,6 +76,12 @@ const theme = createTheme({
     },
   },
   typography: {
+    h1: {
+      fontSize: '1.5rem',
+      fontWeight: 400,
+      lineHeight: '1.334',
+      letterSpacing: '0em',
+    },
     // I couldn't think of what to call this. It is an attempt to match
     // https://www.figma.com/file/atonRPl2YD9A1NCntbDtKR/List-Filter-and-Product-Concept?node-id=1187%3A43730
     // but not sure if line height should be changed
