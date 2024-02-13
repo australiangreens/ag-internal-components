@@ -49,8 +49,6 @@ function PageContainer({
       sx={{
         overflow: 'auto',
         height: `calc(100vh - ${topBarHeight}px)`,
-        scrollbarGutter: 'stable',
-        // scrollbarGutter: 'stable both-edges',
         flexGrow: 1,
       }}
     >
