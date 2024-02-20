@@ -76,11 +76,12 @@ const theme = createTheme({
     },
   },
   typography: {
-    h1: {
-      fontSize: '1.5rem',
-      fontWeight: 400,
-      lineHeight: '1.334',
-      letterSpacing: '0em',
+    h4: {
+      fontSize: '1.88rem',
+      fontWeight: 500,
+    },
+    h5: {
+      fontWeight: 500,
     },
     // I couldn't think of what to call this. It is an attempt to match
     // https://www.figma.com/file/atonRPl2YD9A1NCntbDtKR/List-Filter-and-Product-Concept?node-id=1187%3A43730
@@ -88,10 +89,6 @@ const theme = createTheme({
     explainer: {
       fontSize: '14px',
       marginBlockStart: '1em',
-    },
-    h3: {
-      fontSize: '1rem',
-      fontWeight: 700,
     },
   },
   navBar: {
