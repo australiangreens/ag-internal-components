@@ -9,6 +9,8 @@ export interface NavBarLink {
 
 export interface User {
   name?: string;
+  given_name?: string;
+  family_name?: string;
 
   /** URL of user's avatar image*/
   picture?: string;

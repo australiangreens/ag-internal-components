@@ -34,10 +34,28 @@ export interface UserInfoProps {
  * If user is undefined or the name is undefined, a generic empty avatar image
  * will be displayed.
  *
+ * Note: the name should be dereived from the given and family name in CiviCRM,
+ * well before being derived from Auth0.
+ *
  */
 
 export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
   const theme = useTheme();
+
+  let derivedName: string;
+
+  if (user) {
+    if (user.given_name && user.family_name) {
+      derivedName = `${user.given_name} ${user.family_name}`;
+    } else if (user.name) {
+      derivedName = user.name;
+    } else {
+      derivedName = '';
+    }
+  } else {
+    derivedName = '';
+  }
+
   return (
     <Box
       sx={{
@@ -57,16 +75,16 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
           aspectRatio: 1,
         }}
       >
-        {user?.name ? (
+        {derivedName ? (
           <Avatar
             src={user?.picture}
             sx={{
               width: '100%',
               height: '100%',
-              bgcolor: avatarColours[Math.abs(simpleHashCode(user.name)) % avatarColours.length],
+              bgcolor: avatarColours[Math.abs(simpleHashCode(derivedName)) % avatarColours.length],
             }}
           >
-            {extractInitials(user.name)}
+            {extractInitials(derivedName)}
           </Avatar>
         ) : (
           <Avatar sx={{ width: '100%', height: '100%' }} />
@@ -75,8 +93,8 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
       <NavbarCollapse sx={{ width: '100%' }} in={open}>
         <Fade in={open}>
           <Box width="100%" display="flex" flexDirection="column" alignItems="center">
-            {user?.name ? (
-              <Typography>{user.name}</Typography>
+            {derivedName ? (
+              <Typography>{derivedName}</Typography>
             ) : (
               <Skeleton animation={false} width={'50%'} />
             )}
