@@ -34,8 +34,8 @@ export default function DevDemo() {
     ],
     given_name: 'Given',
     family_name: 'Family',
-    nickname: 'Given Family',
-    name: 'Deadname Family', // We shouldn't get data from here if possible!!
+    nickname: 'Nickname',
+    name: 'Auth0 Username', // This should be the single source of truth!!
     picture: 'https://greens.org.au/themes/greens/logo.svg', //
     updated_at: '2024-02-21T04:09:13.094Z',
     email: 'givenfamily@gmail.com',
