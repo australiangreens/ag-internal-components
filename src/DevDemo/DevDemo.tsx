@@ -36,7 +36,7 @@ export default function DevDemo() {
     family_name: 'Family',
     nickname: 'Nickname',
     name: 'Auth0 Username', // This should be the single source of truth!!
-    picture: '/public/AustralianGreensLogo_official.png',
+    picture: '/AustralianGreensLogo_official.png',
     updated_at: '2024-02-21T04:09:13.094Z',
     email: 'givenfamily@gmail.com',
     email_verified: true,

@@ -1,21 +1,8 @@
-import { Box, Fade, Avatar as OtherAvatar, Skeleton, Typography, useTheme } from '@mui/material';
+import { Box, Fade, Skeleton, Typography, useTheme } from '@mui/material';
 import Avatar from 'react-avatar';
 import { DomainCode } from '../../../domainCode';
-import { simpleHashCode } from '../../../utils';
 import { NavbarCollapse, navbarTransition } from './Styling';
 import { User } from './types';
-
-// These all have good contrast against our typical navbar background colour
-const avatarColours = ['#A62A21', '#7e3794', '#0B51C1', '#3A6024', '#A81563', '#B3003C'];
-
-const extractInitials = (name: string) =>
-  name
-    .split(/\s/)
-    .map((part) => part.substring(0, 1).toUpperCase())
-    .filter((v) => !!v)
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
 
 export interface UserInfoProps {
   user?: User;
@@ -50,32 +37,6 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
         gap: '0.5rem',
       }}
     >
-      <Box
-        sx={{
-          width: open ? '5rem' : '2rem',
-          transition: open
-            ? navbarTransition(theme, ['width', 'height'], 'entering')
-            : navbarTransition(theme, ['width', 'height'], 'leaving'),
-          aspectRatio: 1,
-        }}
-      >
-        {user?.name ? (
-          <>
-            <OtherAvatar
-              src={user?.picture}
-              sx={{
-                width: '100%',
-                height: '100%',
-                bgcolor: avatarColours[Math.abs(simpleHashCode(user?.name)) % avatarColours.length],
-              }}
-            >
-              {extractInitials(user?.name)}
-            </OtherAvatar>
-          </>
-        ) : (
-          <OtherAvatar sx={{ width: '100%', height: '100%' }} />
-        )}
-      </Box>
       <Box
         sx={{
           width: open ? '5rem' : '2rem',
