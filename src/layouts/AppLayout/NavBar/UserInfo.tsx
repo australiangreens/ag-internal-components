@@ -1,5 +1,5 @@
-import { Avatar, Box, Fade, Skeleton, Typography, useTheme } from '@mui/material';
-
+import { Box, Fade, Avatar as OtherAvatar, Skeleton, Typography, useTheme } from '@mui/material';
+import Avatar from 'react-avatar';
 import { DomainCode } from '../../../domainCode';
 import { simpleHashCode } from '../../../utils';
 import { NavbarCollapse, navbarTransition } from './Styling';
@@ -39,7 +39,7 @@ export interface UserInfoProps {
 
 export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
   const theme = useTheme();
-
+  console.log(user);
   return (
     <Box
       sx={{
@@ -60,20 +60,40 @@ export default function UserInfo({ user, domainCode, open }: UserInfoProps) {
         }}
       >
         {user?.name ? (
-          <Avatar
-            src={user?.picture}
-            sx={{
-              width: '100%',
-              height: '100%',
-              bgcolor: avatarColours[Math.abs(simpleHashCode(user?.name)) % avatarColours.length],
-            }}
-          >
-            {extractInitials(user?.name)}
-          </Avatar>
+          <>
+            <OtherAvatar
+              src={user?.picture}
+              sx={{
+                width: '100%',
+                height: '100%',
+                bgcolor: avatarColours[Math.abs(simpleHashCode(user?.name)) % avatarColours.length],
+              }}
+            >
+              {extractInitials(user?.name)}
+            </OtherAvatar>
+          </>
         ) : (
-          <Avatar sx={{ width: '100%', height: '100%' }} />
+          <OtherAvatar sx={{ width: '100%', height: '100%' }} />
         )}
       </Box>
+      <Box
+        sx={{
+          width: open ? '5rem' : '2rem',
+          transition: open
+            ? navbarTransition(theme, ['width', 'height'], 'entering')
+            : navbarTransition(theme, ['width', 'height'], 'leaving'),
+          aspectRatio: 1,
+        }}
+      >
+        {user?.name ? (
+          <>
+            <Avatar src={user?.picture} name={user?.name} round={true} size={'80'} />
+          </>
+        ) : (
+          <Avatar />
+        )}
+      </Box>
+
       <NavbarCollapse sx={{ width: '100%' }} in={open}>
         <Fade in={open}>
           <Box width="100%" display="flex" flexDirection="column" alignItems="center">

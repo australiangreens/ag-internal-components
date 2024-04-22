@@ -53,6 +53,7 @@
     "autosuggest-highlight": "^3.3.4",
     "buffer": "^6.0.3",
     "jotai": "^2.3.1",
+    "react-avatar": "^5.0.3",
     "react-transition-group": "^4.4.5",
     "souvlaki": "^0.3.0"
   },
