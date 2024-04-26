@@ -50,15 +50,27 @@ describe('NavBar', () => {
     expect(screen.queryByText('WA')).not.toBeInTheDocument();
   });
 
-  it('Renders user as initials and name when open; user has no picture', async () => {
+  it('Renders user as initials and name when open; user has no picture (old avatar)', async () => {
     render(<NavBar {...commonProps} open={true} user={userWithoutPicture} />);
     expect(screen.getByText('Rosio Cinelli')).toBeVisible();
     expect(screen.getByText('RC')).toBeVisible();
   });
 
-  it('Renders user as initials (but not name) when closed; user has no picture', async () => {
+  it('Renders user as initials (but not name) when closed; user has no picture (old avatar)', async () => {
     render(<NavBar {...commonProps} open={false} user={userWithoutPicture} />);
     expect(screen.getByText('RC')).toBeVisible();
+    expect(screen.queryByText('Rosio Cinelli')).not.toBeVisible();
+  });
+
+  it('Renders user as name but not initials with open; user has no picture (new avatar)', async () => {
+    render(<NavBar {...commonProps} open={true} user={userWithoutPicture} useNewAvatar={true} />);
+    expect(screen.getByText('Rosio Cinelli')).toBeVisible();
+    expect(screen.queryByText('RC')).toBeNull();
+  });
+
+  it('Does not renders user as name or initials when closed; user has no picture (new avatar)', async () => {
+    render(<NavBar {...commonProps} open={false} user={userWithoutPicture} useNewAvatar={true} />);
+    expect(screen.queryByText('RC')).toBeNull();
     expect(screen.queryByText('Rosio Cinelli')).not.toBeVisible();
   });
 

@@ -107,6 +107,7 @@ export default function AppLayout({
           widthClosed={navBarWidthClosed}
           offsetTop={topBarHeight}
           data-testid={navBarDataTestId}
+          useNewAvatar={true}
         />
 
         <PageContainer

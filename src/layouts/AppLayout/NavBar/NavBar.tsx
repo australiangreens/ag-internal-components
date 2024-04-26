@@ -62,6 +62,10 @@ export interface NavBarProps {
    * same, regardless of current route.
    */
   bottom?: ReactNode;
+
+  /* The NavBar can use the old Avatar code, or the new Avatar code. */
+
+  useNewAvatar?: boolean;
 }
 
 /**
@@ -79,6 +83,7 @@ export default function NavBar({
   bottom,
   user,
   domainCode,
+  useNewAvatar = false,
 }: NavBarProps) {
   const isSmallScreen = useSmallScreen();
   const setNavBarOpen = useSetAtom(navBarOpenAtom);
@@ -114,7 +119,7 @@ export default function NavBar({
 
         <Box flexGrow="0">
           <Divider variant="middle" sx={{ marginY: '0.5rem' }} />
-          <UserInfo user={user} domainCode={domainCode} open={open} useNewAvatar={false} />
+          <UserInfo user={user} domainCode={domainCode} open={open} useNewAvatar={useNewAvatar} />
 
           {bottom && <>{bottom}</>}
         </Box>
