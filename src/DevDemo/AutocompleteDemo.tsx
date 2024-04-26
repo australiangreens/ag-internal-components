@@ -1,5 +1,8 @@
-import { SyntheticEvent, useEffect, useState, PropsWithChildren } from 'react';
+import { PropsWithChildren, SyntheticEvent, useEffect, useState } from 'react';
 
+import { Settings as TitleIcon } from '@mui/icons-material';
+import LayersIcon from '@mui/icons-material/Layers';
+import { Box, Divider, Typography } from '@mui/material';
 import {
   AutocompleteGenericEntity,
   FetchAutocomplete,
@@ -9,9 +12,6 @@ import {
   topBarMiddleAtom,
 } from 'ag-internal-components';
 import { useSetAtom } from 'jotai';
-import { Box, Divider, Typography } from '@mui/material';
-import LayersIcon from '@mui/icons-material/Layers';
-import { Settings as TitleIcon } from '@mui/icons-material';
 import countryList from './countries.json';
 
 const FormGroupBox = ({ children }: PropsWithChildren) => (

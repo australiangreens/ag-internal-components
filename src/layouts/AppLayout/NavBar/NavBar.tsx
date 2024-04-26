@@ -114,7 +114,7 @@ export default function NavBar({
 
         <Box flexGrow="0">
           <Divider variant="middle" sx={{ marginY: '0.5rem' }} />
-          <UserInfo user={user} domainCode={domainCode} open={open} />
+          <UserInfo user={user} domainCode={domainCode} open={open} useNewAvatar={false} />
 
           {bottom && <>{bottom}</>}
         </Box>
