@@ -1,7 +1,7 @@
 import { Box, Fade, Avatar as OtherAvatar, Skeleton, Typography, useTheme } from '@mui/material';
 import Avatar from 'react-avatar';
-import { simpleHashCode } from 'src/utils';
 import { DomainCode } from '../../../domainCode';
+import { simpleHashCode } from '../../../utils';
 import { NavbarCollapse, navbarTransition } from './Styling';
 import { User } from './types';
 
