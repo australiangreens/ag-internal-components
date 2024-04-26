@@ -53,6 +53,7 @@ export default function DevDemo() {
           initialTitleText="OurAppName"
           domainCode={domainCode}
           user={user}
+          useNewAvatar={true}
         >
           <Routes>
             <Route index element={<ExampleComponentDemo />} />

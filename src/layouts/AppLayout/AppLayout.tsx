@@ -56,6 +56,9 @@ export interface BaseAppLayoutProps {
 
   /** Display under the user's name */
   domainCode?: NavBarProps['domainCode'];
+
+  //** Do we use the old avatar code or the new one? */
+  useNewAvatar?: boolean;
 }
 
 type AppLayoutProps = PropsWithChildren<BaseAppLayoutProps>;
@@ -72,6 +75,7 @@ export default function AppLayout({
   navBarBottom,
   user,
   domainCode,
+  useNewAvatar = false,
 }: AppLayoutProps) {
   useHydrateAtoms([
     [navBarOpenAtom, initialNavBarOpen ?? true],
@@ -107,7 +111,7 @@ export default function AppLayout({
           widthClosed={navBarWidthClosed}
           offsetTop={topBarHeight}
           data-testid={navBarDataTestId}
-          useNewAvatar={true}
+          useNewAvatar={useNewAvatar}
         />
 
         <PageContainer
