@@ -14,15 +14,6 @@ export function isOAuthError(error: Error): error is OAuthError {
  * Application-Access and Role-Based-Application-Access actions in the login
  * flow of auth0 tenant. See README.md for detail
  */
-export function errorFromAuthorisationFailure(errorObject: OAuthError) {
-  return errorObject.error === 'access_denied';
-}
-
-/**
- * Will only return true if the error looks like it was caused by our custom
- * Application-Access and Role-Based-Application-Access actions in the login
- * flow of auth0 tenant. See README.md for detail
- */
 export function errorFromApplicationAccessRejection(errorObject: OAuthError) {
   const error = errorObject.error;
   const errorDescription = errorObject?.error_description ?? '';

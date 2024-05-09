@@ -12,13 +12,24 @@ import { PropsWithChildren, useEffect } from 'react';
 
 import {
   errorFromApplicationAccessRejection,
-  errorFromAuthorisationFailure,
   errorFromUserNotAuthorisingApp,
   isOAuthError,
 } from './auth0ErrorParsing';
 
 export interface AuthGuardProps {
   appName?: string;
+
+  /** Defaults to 'none'. If set to 'all', will always re-throw the error, so
+   * won't display the normal message to user and be handled elsewhere in the
+   * app. If set to 'unknown', this will only be done if the failure reason
+   * couldn't be inferred from the error description etc. */
+  throwErrors?: 'none' | 'unknown' | 'all';
+
+  /** Called in case of an authentication error, regardless of if its recognised
+   * or not */
+  onError?: (error: Error) => void;
+
+  disableConsoleLogging?: boolean;
 }
 
 /**
@@ -37,8 +48,16 @@ export interface AuthGuardProps {
 export default function AuthGuard({
   children,
   appName = 'the app',
+  throwErrors,
+  disableConsoleLogging = false,
+  onError = () => {},
 }: PropsWithChildren<AuthGuardProps>) {
   const { isAuthenticated, isLoading, error, loginWithRedirect, logout } = useAuth0();
+
+  // Wrapped in a useEffect to avoid re-renders doubling it up
+  useEffect(() => {
+    if (error) onError(error);
+  }, [error, onError]);
 
   useEffect(() => {
     if (isLoading || isAuthenticated || error) return;
@@ -50,36 +69,57 @@ export default function AuthGuard({
     };
 
     loginWithRedirect(options);
-  }, [isLoading, isAuthenticated, error, loginWithRedirect]);
+  }, [isLoading, isAuthenticated, error, loginWithRedirect, onError]);
 
-  if (error && isOAuthError(error)) {
-    let title = 'Auth error';
-    let message = 'An unknown Auth0 error occurred.';
-
-    if (errorFromApplicationAccessRejection(error)) {
-      title = 'Unauthorised';
-      message = `You are not authorised to access ${appName}.`;
-    } else if (errorFromUserNotAuthorisingApp(error)) {
-      title = 'App not authorised';
-      message = `You have not authorised ${appName} to access your user profile. This is necessary to use ${appName}.`;
-    } else if (errorFromAuthorisationFailure(error)) {
-      title = 'Unauthorised';
-      message = 'Authorisation with auth0 failed for an unknown reason.';
+  if (error) {
+    if (!disableConsoleLogging) {
+      console.error(
+        `Error detected in AuthGuard [isAuthenticated=${isAuthenticated},isLoading=${isLoading}]`,
+        error
+      );
     }
 
-    return (
-      <Dialog open>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
-          <Typography>{message}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-            Logout
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
+    if (isOAuthError(error)) {
+      let title = 'Auth error';
+      let message = 'An unknown Auth0 error occurred.';
+      let errorIsKnown = false;
+
+      if (errorFromApplicationAccessRejection(error)) {
+        title = 'Unauthorised';
+        message = `You are not authorised to access ${appName}.`;
+        errorIsKnown = true;
+      } else if (errorFromUserNotAuthorisingApp(error)) {
+        title = 'App not authorised';
+        message = `You have not authorised ${appName} to access your user profile. This is necessary to use ${appName}.`;
+        errorIsKnown = true;
+      }
+
+      if (throwErrors === 'all') {
+        throw error;
+      } else if (throwErrors === 'unknown' && !errorIsKnown) {
+        throw error;
+      }
+
+      return (
+        <Dialog open>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogContent>
+            <Typography>{message}</Typography>
+            <br />
+            <Typography variant="subtitle2">Details from Auth0</Typography>
+            <Typography variant="body2">error: {error?.error ?? 'N/A'}</Typography>
+            <Typography variant="body2">
+              description: {error?.error_description ?? 'N/A'}
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+              Logout
+            </Button>
+          </DialogActions>
+        </Dialog>
+      );
+    }
   }
 
   if (isAuthenticated) {
