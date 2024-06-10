@@ -20,10 +20,11 @@ import {
 export interface AuthGuardProps {
   appName?: string;
 
-  /** Defaults to 'none'. If set to 'all', will always re-throw the error, so
+  /** Defaults to 'unknown'. If set to 'all', will always re-throw the error, so
    * won't display the normal message to user and be handled elsewhere in the
    * app. If set to 'unknown', this will only be done if the failure reason
-   * couldn't be inferred from the error description etc. */
+   * couldn't be inferred from the error description etc or if its a completely
+   * unknown error without a description etc.*/
   throwErrors?: 'none' | 'unknown' | 'all';
 
   /** Called in case of an authentication error, regardless of if its recognised
@@ -49,7 +50,7 @@ export interface AuthGuardProps {
 export default function AuthGuard({
   children,
   appName = 'the app',
-  throwErrors,
+  throwErrors = 'none',
   disableConsoleLogging = false,
   onError = () => {},
 }: PropsWithChildren<AuthGuardProps>) {
@@ -80,29 +81,23 @@ export default function AuthGuard({
       );
     }
 
-    if (isOAuthError(error)) {
+    if (throwErrors === 'all') {
+      throw error;
+    } else if (isOAuthError(error)) {
       let title = 'Auth error';
       let message = 'An unknown Auth0 error occurred.';
-      let errorIsKnown = false;
 
       if (errorFromApplicationAccessRejection(error)) {
         title = 'Unauthorised';
         message = `You are not authorised to access ${appName}.`;
-        errorIsKnown = true;
       } else if (errorFromUserNotAuthorisingApp(error)) {
         title = 'App not authorised';
         message = `You have not authorised ${appName} to access your user profile. This is necessary to use ${appName}.`;
-        errorIsKnown = true;
       } else if (errorFromScriptExecutionTimeout(error)) {
         title = 'Auth0 script execution time exceeded';
         message = `The Auth0 login flow exceeded the time limit (20s). Try again in a minute.`;
-        errorIsKnown = true;
-      }
-
-      if (throwErrors === 'all') {
-        throw error;
-      } else if (throwErrors === 'unknown' && !errorIsKnown) {
-        throw error;
+      } else {
+        if (throwErrors === 'unknown') throw error;
       }
 
       return (
@@ -124,6 +119,8 @@ export default function AuthGuard({
           </DialogActions>
         </Dialog>
       );
+    } else {
+      if (throwErrors === 'unknown') throw error;
     }
   }
 

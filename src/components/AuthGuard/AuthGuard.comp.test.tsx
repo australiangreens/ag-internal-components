@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { describe } from 'vitest';
 
 import { buildAuth0ContextInterface } from '../../testHelpers/testBuilders';
-import AuthGuard from './AuthGuard';
+import AuthGuard, { AuthGuardProps } from './AuthGuard';
 
 vi.mock('@auth0/auth0-react');
 const mockedUseAuth0 = vi.mocked(useAuth0);
@@ -22,7 +22,7 @@ const commonRender = () => {
   );
 };
 
-const generateAuth0Error = (errorName: string, errorDescription: string) =>
+const generateOAuthError = (errorName: string, errorDescription: string) =>
   // Our custom authorisation actions in auth0 result in an AuthenticationError
   // since there is no special AuthorisationError
   new AuthenticationError(errorName, errorDescription, 'Does not matter what this string is');
@@ -46,7 +46,7 @@ describe('AuthGuard', () => {
 
   it('renders appropriate message in case of unknown auth0 error', async () => {
     mockUseAuth0Hook({
-      error: generateAuth0Error('something', 'Some description'),
+      error: generateOAuthError('something', 'Some description'),
     });
     commonRender();
 
@@ -57,7 +57,7 @@ describe('AuthGuard', () => {
 
   it('renders appropriate message in case of auth0 error indicating user is not authorised', async () => {
     mockUseAuth0Hook({
-      error: generateAuth0Error(
+      error: generateOAuthError(
         'access_denied',
         'You do not have the required authorization to access The Application Name'
       ),
@@ -77,7 +77,7 @@ describe('AuthGuard', () => {
 
   it('renders appropriate message in case of user not authorising app to access profile', async () => {
     mockUseAuth0Hook({
-      error: generateAuth0Error('access_denied', 'User did not authorize the request'),
+      error: generateOAuthError('access_denied', 'User did not authorize the request'),
     });
     render(
       <AuthGuard appName="The Name of the Application" disableConsoleLogging>
@@ -96,7 +96,7 @@ describe('AuthGuard', () => {
 
   it('renders appropriate message in case script execution time being exceeded', async () => {
     mockUseAuth0Hook({
-      error: generateAuth0Error('access_denied', 'Script execution time exceeded'),
+      error: generateOAuthError('access_denied', 'Script execution time exceeded'),
     });
     render(
       <AuthGuard appName="The Name of the Application" disableConsoleLogging>
@@ -118,7 +118,7 @@ describe('AuthGuard', () => {
 
     const mockLogout = vi.fn();
     mockUseAuth0Hook({
-      error: generateAuth0Error('access_denied', 'User did not authorize the request'),
+      error: generateOAuthError('access_denied', 'User did not authorize the request'),
       logout: mockLogout,
     });
     commonRender();
@@ -149,7 +149,7 @@ describe('AuthGuard', () => {
   });
 
   it('Calls onError()', async () => {
-    const mockError = generateAuth0Error('access_denied', 'User did not authorize the request');
+    const mockError = generateOAuthError('access_denied', 'User did not authorize the request');
     const mockOnError = vi.fn();
 
     mockUseAuth0Hook({
@@ -165,9 +165,9 @@ describe('AuthGuard', () => {
     expect(mockOnError).toHaveBeenCalledExactlyOnceWith(mockError);
   });
 
-  it(`throws an error if throwErrors='all'`, async () => {
+  it(`throws an error if throwErrors='all' if OAuthError`, async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
-    const mockError = generateAuth0Error('access_denied', 'User did not authorize the request');
+    const mockError = generateOAuthError('access_denied', 'User did not authorize the request');
 
     mockUseAuth0Hook({
       error: mockError,
@@ -182,9 +182,9 @@ describe('AuthGuard', () => {
     vi.restoreAllMocks();
   });
 
-  it(`does not throw error if throwErrors='unknown' and error is known`, async () => {
+  it(`does not throw error if throwErrors='unknown' and error is a known OAuthError`, async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
-    const mockError = generateAuth0Error('access_denied', 'User did not authorize the request');
+    const mockError = generateOAuthError('access_denied', 'User did not authorize the request');
     mockUseAuth0Hook({
       error: mockError,
     });
@@ -195,6 +195,47 @@ describe('AuthGuard', () => {
           disableConsoleLogging
           throwErrors="unknown"
         >
+          <SomeComponent />
+        </AuthGuard>
+      )
+    ).not.toThrowError();
+    vi.restoreAllMocks();
+  });
+
+  // This is to detect some bad logic that previously existed where it was only
+  // re-throwing if it was first detected as an OAuthError
+  it.each([['all'], ['unknown']])(
+    `throws an error if throwErrors='%s' and error is not an OAuthError`,
+    async (throwErrors) => {
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      const mockError = new Error('Some random error');
+      mockUseAuth0Hook({
+        error: mockError,
+      });
+      expect(() =>
+        render(
+          <AuthGuard
+            appName="The Name of the Application"
+            disableConsoleLogging
+            throwErrors={throwErrors as AuthGuardProps['throwErrors']}
+          >
+            <SomeComponent />
+          </AuthGuard>
+        )
+      ).toThrowError();
+      vi.restoreAllMocks();
+    }
+  );
+  // Ditto
+  it(`throws an error if throwErrors='none' and error is not an OAuthError`, async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    const mockError = new Error('Some random error');
+    mockUseAuth0Hook({
+      error: mockError,
+    });
+    expect(() =>
+      render(
+        <AuthGuard appName="The Name of the Application" disableConsoleLogging throwErrors="none">
           <SomeComponent />
         </AuthGuard>
       )
