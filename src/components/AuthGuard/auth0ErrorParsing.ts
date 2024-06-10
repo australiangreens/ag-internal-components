@@ -37,3 +37,16 @@ export function errorFromUserNotAuthorisingApp(errorObject: OAuthError) {
     error === 'access_denied' && errorDescription.startsWith('User did not authorize the request')
   );
 }
+
+/**
+ * Will only return true if the error looks like it was due to script execution
+ * time issue. Specifically, the execution of custom actions in the login flow
+ * exceeded the time limit (20s at time of writing). Mostly likely issues
+ * syncing user data with AG internal systems.
+ */
+export function errorFromScriptExecutionTimeout(errorObject: OAuthError) {
+  const error = errorObject.error;
+  const errorDescription = errorObject?.error_description ?? '';
+
+  return error === 'access_denied' && errorDescription.match(/Script.*time.*exceeded/);
+}

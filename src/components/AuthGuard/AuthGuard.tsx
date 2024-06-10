@@ -12,6 +12,7 @@ import { PropsWithChildren, useEffect } from 'react';
 
 import {
   errorFromApplicationAccessRejection,
+  errorFromScriptExecutionTimeout,
   errorFromUserNotAuthorisingApp,
   isOAuthError,
 } from './auth0ErrorParsing';
@@ -91,6 +92,10 @@ export default function AuthGuard({
       } else if (errorFromUserNotAuthorisingApp(error)) {
         title = 'App not authorised';
         message = `You have not authorised ${appName} to access your user profile. This is necessary to use ${appName}.`;
+        errorIsKnown = true;
+      } else if (errorFromScriptExecutionTimeout(error)) {
+        title = 'Auth0 script execution time exceeded';
+        message = `The Auth0 login flow exceeded the time limit (20s). Try again in a minute.`;
         errorIsKnown = true;
       }
 

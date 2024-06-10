@@ -94,6 +94,25 @@ describe('AuthGuard', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders appropriate message in case script execution time being exceeded', async () => {
+    mockUseAuth0Hook({
+      error: generateAuth0Error('access_denied', 'Script execution time exceeded'),
+    });
+    render(
+      <AuthGuard appName="The Name of the Application" disableConsoleLogging>
+        <SomeComponent />
+      </AuthGuard>
+    );
+
+    expect(screen.queryByText('This is the child component')).not.toBeInTheDocument();
+    expect(screen.queryByText('Auth0 script execution time exceeded')).toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'The Auth0 login flow exceeded the time limit (20s). Try again in a minute.'
+      )
+    ).toBeInTheDocument();
+  });
+
   it('logout button on error returns to origin', async () => {
     const user = userEvent.setup();
 
