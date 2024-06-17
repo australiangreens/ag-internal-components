@@ -63,7 +63,7 @@ const DomainCodeDialog = ({
   const handleConfirmDomainCode = async () => {
     if (selectedDomainCode) {
       setDomainCode(selectedDomainCode);
-      enqueueSuccessNotification(`Set domain to ${selectedDomainCode}`);
+      enqueueSuccessNotification(`Set organisation to ${selectedDomainCode}`);
       handleClose();
     } else setDomainCode('');
   };
