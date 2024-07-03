@@ -74,7 +74,10 @@ export default function AuthGuard({
     };
 
     if (withPopup) {
-      loginWithPopup();
+      const popupButton = document.createElement('button');
+      popupButton.onclick = () => loginWithPopup();
+      popupButton.click();
+      popupButton.remove();
     } else loginWithRedirect(options);
   }, [isLoading, isAuthenticated, error, loginWithRedirect, onError, withPopup, loginWithPopup]);
 
