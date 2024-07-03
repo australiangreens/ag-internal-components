@@ -32,6 +32,7 @@ export interface AuthGuardProps {
   onError?: (error: Error) => void;
 
   disableConsoleLogging?: boolean;
+  withPopup?: boolean;
 }
 
 /**
@@ -53,8 +54,10 @@ export default function AuthGuard({
   throwErrors = 'none',
   disableConsoleLogging = false,
   onError = () => {},
+  withPopup = false,
 }: PropsWithChildren<AuthGuardProps>) {
-  const { isAuthenticated, isLoading, error, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, isLoading, error, loginWithRedirect, loginWithPopup, logout } =
+    useAuth0();
 
   // Wrapped in a useEffect to avoid re-renders doubling it up
   useEffect(() => {
@@ -70,8 +73,10 @@ export default function AuthGuard({
       },
     };
 
-    loginWithRedirect(options);
-  }, [isLoading, isAuthenticated, error, loginWithRedirect, onError]);
+    if (withPopup) {
+      loginWithPopup();
+    } else loginWithRedirect(options);
+  }, [isLoading, isAuthenticated, error, loginWithRedirect, onError, withPopup, loginWithPopup]);
 
   if (error) {
     if (!disableConsoleLogging) {
