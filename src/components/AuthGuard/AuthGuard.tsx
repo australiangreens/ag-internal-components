@@ -133,6 +133,7 @@ export default function AuthGuard({
   }
 
   if (isAuthenticated) {
+    localStorage.removeItem('auth0_redirect_count');
     return <>{children}</>;
   }
 
