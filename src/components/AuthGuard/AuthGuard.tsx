@@ -1,4 +1,4 @@
-import { useAuth0 } from '@auth0/auth0-react';
+import { AppState, RedirectLoginOptions, useAuth0 } from '@auth0/auth0-react';
 import {
   Button,
   Dialog,
@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useMemo } from 'react';
 
 import {
   errorFromApplicationAccessRejection,
@@ -32,7 +32,6 @@ export interface AuthGuardProps {
   onError?: (error: Error) => void;
 
   disableConsoleLogging?: boolean;
-  withPopup?: boolean;
 }
 
 /**
@@ -54,32 +53,27 @@ export default function AuthGuard({
   throwErrors = 'none',
   disableConsoleLogging = false,
   onError = () => {},
-  withPopup = false,
 }: PropsWithChildren<AuthGuardProps>) {
-  const { isAuthenticated, isLoading, error, loginWithRedirect, loginWithPopup, logout } =
-    useAuth0();
+  const { isAuthenticated, isLoading, error, loginWithRedirect, logout } = useAuth0();
 
   // Wrapped in a useEffect to avoid re-renders doubling it up
   useEffect(() => {
     if (error) onError(error);
   }, [error, onError]);
 
-  useEffect(() => {
-    if (isLoading || isAuthenticated || error) return;
-
-    const options = {
+  const options: RedirectLoginOptions<AppState> = useMemo(
+    () => ({
       appState: {
         returnTo: `${window.location.pathname}${window.location.search}`,
       },
-    };
+    }),
+    []
+  );
+  useEffect(() => {
+    if (isLoading || isAuthenticated || error) return;
 
-    if (withPopup) {
-      const popupButton = document.createElement('button');
-      popupButton.onclick = () => loginWithPopup();
-      popupButton.click();
-      popupButton.remove();
-    } else loginWithRedirect(options);
-  }, [isLoading, isAuthenticated, error, loginWithRedirect, onError, withPopup, loginWithPopup]);
+    loginWithRedirect(options);
+  }, [isLoading, isAuthenticated, error, loginWithRedirect, onError, options]);
 
   if (error) {
     if (!disableConsoleLogging) {
@@ -127,6 +121,12 @@ export default function AuthGuard({
           </DialogActions>
         </Dialog>
       );
+    } else if (error.message === 'Invalid state') {
+      const redirectCount = localStorage.getItem('auth0_redirect_count');
+      if (redirectCount && parseInt(redirectCount) < 2) {
+        localStorage.setItem('auth0_redirect_count', String(parseInt(redirectCount) + 1));
+        loginWithRedirect(options);
+      }
     } else {
       if (throwErrors === 'unknown') throw error;
     }
