@@ -108,7 +108,7 @@ describe('AuthGuard', () => {
     expect(screen.queryByText('Auth0 script execution time exceeded')).toBeInTheDocument();
     expect(
       screen.queryByText(
-        'The Auth0 login flow exceeded the time limit (20s). Try again in a minute.'
+        'The Auth0 login flow exceeded the time limit (20s). Try again in a minute by clicking the RELOAD button below.'
       )
     ).toBeInTheDocument();
   });

@@ -97,7 +97,16 @@ export default function AuthGuard({
         message = `You have not authorised ${appName} to access your user profile. This is necessary to use ${appName}.`;
       } else if (errorFromScriptExecutionTimeout(error)) {
         title = 'Auth0 script execution time exceeded';
-        message = `The Auth0 login flow exceeded the time limit (20s). Try again in a minute.`;
+        message = `The Auth0 login flow exceeded the time limit (20s). Try again in a minute by clicking the RELOAD button below.`;
+      } else if (error.message === 'Invalid state') {
+        const redirectCount = localStorage.getItem('auth0_redirect_count');
+        if (!redirectCount) {
+          localStorage.setItem('auth0_redirect_count', '1');
+          loginWithRedirect(options);
+        } else if (redirectCount && parseInt(redirectCount) < 2) {
+          localStorage.setItem('auth0_redirect_count', String(parseInt(redirectCount) + 1));
+          loginWithRedirect(options);
+        }
       } else {
         if (throwErrors === 'unknown') throw error;
       }
@@ -115,18 +124,15 @@ export default function AuthGuard({
             </Typography>
           </DialogContent>
           <DialogActions>
+            {title === 'Auth0 script execution time exceeded' && (
+              <Button href={window.location.origin + window.location.pathname}>Reload</Button>
+            )}
             <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
               Logout
             </Button>
           </DialogActions>
         </Dialog>
       );
-    } else if (error.message === 'Invalid state') {
-      const redirectCount = localStorage.getItem('auth0_redirect_count');
-      if (redirectCount && parseInt(redirectCount) < 2) {
-        localStorage.setItem('auth0_redirect_count', String(parseInt(redirectCount) + 1));
-        loginWithRedirect(options);
-      }
     } else {
       if (throwErrors === 'unknown') throw error;
     }
