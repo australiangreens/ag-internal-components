@@ -57,7 +57,7 @@ export default function TopBar({
           gap: 2,
           flexShrink: 0,
           height,
-          zIndex: isSmallScreen ? 0 : theme.zIndex.drawer + 1,
+          zIndex: isSmallScreen ? 0 : theme.zIndex.drawer + 101,
         }}
       >
         <IconButton
