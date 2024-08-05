@@ -1,4 +1,11 @@
-import { Autocomplete, Stack, SxProps, TextField, Theme } from '@mui/material';
+import {
+  Autocomplete,
+  AutocompleteChangeReason,
+  Stack,
+  SxProps,
+  TextField,
+  Theme,
+} from '@mui/material';
 import { ReactNode, SyntheticEvent, useState } from 'react';
 import { useAutocompleteOptions } from '../FetchAutocomplete';
 import { AutocompleteGenericEntity } from '../types';
@@ -10,7 +17,11 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    * to the underlying Autocomplete, but it is triggered by the Autocomplete's
    * own onChange.
    */
-  onChange: (event: SyntheticEvent<Element, Event>, newValue: EntityType | null) => unknown;
+  onChange: (
+    event: SyntheticEvent<Element, Event>,
+    newValue: EntityType | null,
+    reason: AutocompleteChangeReason
+  ) => unknown;
   value: EntityType | null;
 
   /**
@@ -95,8 +106,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
           loading={isInputMinimumLength ? isLoading : false}
           options={options ?? []}
-          onChange={(event, newValue) => {
-            onChange(event, newValue);
+          onChange={(event, newValue, reason) => {
+            onChange(event, newValue, reason);
           }}
           disablePortal={disablePortal}
           filterOptions={(option) => option}
