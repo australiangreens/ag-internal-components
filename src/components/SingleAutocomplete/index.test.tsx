@@ -7,14 +7,27 @@ import SingleAutocomplete from '.';
 import { withQueryClient } from '../../testing';
 import { AutocompleteGenericEntity } from '../types';
 
-const genericLookupMethod = async () => {
-  return [
-    { id: 1, label: 'AAA' },
-    { id: 2, label: 'BBB' },
-  ];
+const mockOptionAAA = { id: 1, label: 'AAA' };
+const mockOptionBBB = { id: 2, label: 'BBB' };
+const mockOptionCCC = { id: 3, label: 'CCC' };
+
+const mockLookup = async (containing: string) => {
+  const containingLowercase = containing.toLowerCase();
+  // Spread to ensure we don't rely on references matching
+  return [{ ...mockOptionAAA }, { ...mockOptionBBB }, { ...mockOptionCCC }].filter((x) =>
+    x.label.toLowerCase().includes(containingLowercase)
+  );
 };
 
+const commonRenderOptions = () => ({
+  wrapper: wrap(withQueryClient()),
+});
+
 describe('SingleAutocomplete', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it('should display the label text', async () => {
     const testlabel = 'This is a label';
 
@@ -26,9 +39,7 @@ describe('SingleAutocomplete', () => {
         onChange={() => []}
         data-testid="TestSingle"
       />,
-      {
-        wrapper: wrap(withQueryClient()),
-      }
+      commonRenderOptions()
     );
 
     const labelElement = screen.getByLabelText(testlabel);
@@ -49,9 +60,7 @@ describe('SingleAutocomplete', () => {
         onChange={() => []}
         data-testid="TestSingle"
       />,
-      {
-        wrapper: wrap(withQueryClient()),
-      }
+      commonRenderOptions()
     );
 
     const labelElement = screen.getByLabelText(testLabel);
@@ -80,16 +89,14 @@ describe('SingleAutocomplete', () => {
 
     const { rerender } = render(
       <SingleAutocomplete
-        lookup={genericLookupMethod}
+        lookup={mockLookup}
         label={testlabel}
         value={singleAutocompleteContents}
         onChange={handleSingleAutocompleteContents}
         data-testid="TestSingle"
         minLength={3}
       />,
-      {
-        wrapper: wrap(withQueryClient()),
-      }
+      commonRenderOptions()
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
@@ -136,7 +143,7 @@ describe('SingleAutocomplete', () => {
 
     rerender(
       <SingleAutocomplete
-        lookup={genericLookupMethod}
+        lookup={mockLookup}
         label={testlabel}
         value={singleAutocompleteContents}
         onChange={handleSingleAutocompleteContents}
@@ -166,7 +173,7 @@ describe('SingleAutocomplete', () => {
 
     rerender(
       <SingleAutocomplete
-        lookup={genericLookupMethod}
+        lookup={mockLookup}
         label={testlabel}
         value={singleAutocompleteContents}
         onChange={handleSingleAutocompleteContents}
