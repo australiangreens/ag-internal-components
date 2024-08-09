@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import userEvent, { PointerEventsCheckLevel } from '@testing-library/user-event';
 
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { wrap } from 'souvlaki';
 import SingleAutocomplete from '.';
 import { withQueryClient } from '../../testing';
@@ -186,5 +186,76 @@ describe('SingleAutocomplete', () => {
 
     const labelledTextFieldElement = screen.queryByDisplayValue('AAA');
     expect(labelledTextFieldElement).toBeNull();
+  });
+
+  describe('handles displaying old value even when its not in current match list', () => {
+    // Turns out its not an error, but just a console warning from MUI Still
+    // want to be sure we avoid it, so we spy on the console. For good measure
+    // we check of possible levels
+    const muiWarningRegex = /MUI: The value provided to.*is invalid/i;
+
+    const levels: Array<keyof Console> = ['error', 'warn', 'info', 'debug', 'log'];
+
+    beforeEach(() => {
+      for (const level of levels) {
+        vi.spyOn(console, level);
+        console[level] = vitest.fn().mockImplementation((f) => f);
+      }
+    });
+
+    const MockParent = ({ initialValue }: { initialValue: AutocompleteGenericEntity | null }) => {
+      const [value, setValue] = useState<AutocompleteGenericEntity | null>(initialValue);
+
+      const handleOnChange = (
+        _event: SyntheticEvent<Element, Event>,
+        newValue: AutocompleteGenericEntity | null
+      ) => {
+        setValue(newValue);
+      };
+
+      return (
+        <SingleAutocomplete
+          lookup={mockLookup}
+          label="This is a label"
+          value={value}
+          onChange={handleOnChange}
+          minLength={3}
+        />
+      );
+    };
+
+    it('works when initial value is null', async () => {
+      const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
+
+      render(<MockParent initialValue={null} />, commonRenderOptions());
+
+      const comboBox = screen.getByRole('combobox', { name: 'This is a label' });
+
+      // Select option AAA
+      await user.type(comboBox, 'aaa');
+      await user.type(comboBox, '{ArrowDown}{Enter}');
+
+      // Now replace text with that matches option CCC but not option AAA
+      await user.type(comboBox, 'ccc', { initialSelectionStart: 0, initialSelectionEnd: 3 });
+
+      for (const level of levels) {
+        expect(console[level]).not.toHaveBeenCalledWith(expect.stringMatching(muiWarningRegex));
+      }
+    });
+
+    it('works when initial value is already set', async () => {
+      const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
+
+      render(<MockParent initialValue={mockOptionAAA} />, commonRenderOptions());
+
+      const comboBox = screen.getByRole('combobox', { name: 'This is a label' });
+
+      // Option AAA already 'selected' so replace text with that matches option CCC but not option AAA
+      await user.type(comboBox, 'ccc', { initialSelectionStart: 0, initialSelectionEnd: 3 });
+
+      for (const level of levels) {
+        expect(console[level]).not.toHaveBeenCalledWith(expect.stringMatching(muiWarningRegex));
+      }
+    });
   });
 });
