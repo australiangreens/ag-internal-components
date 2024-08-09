@@ -10,6 +10,15 @@ import { ReactNode, SyntheticEvent, useState } from 'react';
 import { useAutocompleteOptions } from '../FetchAutocomplete';
 import { AutocompleteGenericEntity } from '../types';
 
+/**
+ * MUI Autocomplete has a harmless warning when the available options do not
+ * include the old selected value of the auto complete (its skipped in
+ * production). This regex can be used as as supressConsoleMessages('warn',
+ * MUI_AUTOCOMPLETE_VALUE_WARNING_REGEX) to avoid it in development
+ * environments.
+ */
+export const MUI_AUTOCOMPLETE_VALUE_WARNING_REGEX = /MUI: The value provided to.*is invalid/i;
+
 type Props<EntityType extends AutocompleteGenericEntity> = {
   /**
    * Callback fired when the value changes. reason is one of "createOption",
