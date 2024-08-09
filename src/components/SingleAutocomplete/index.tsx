@@ -13,7 +13,7 @@ import { AutocompleteGenericEntity } from '../types';
 /**
  * MUI Autocomplete has a harmless warning when the available options do not
  * include the old selected value of the auto complete (its skipped in
- * production). This regex can be used as as supressConsoleMessages('warn',
+ * production). This regex can be used as as suppressConsole('warn',
  * MUI_AUTOCOMPLETE_VALUE_WARNING_REGEX) to avoid it in development
  * environments.
  */
