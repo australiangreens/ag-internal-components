@@ -1,2 +1,2 @@
-export * from './consoleSupression';
+export * from './consoleSuppression';
 export * from './simpleHashCode';
