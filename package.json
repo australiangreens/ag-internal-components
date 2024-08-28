@@ -74,7 +74,7 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
-    "@storybook/addon-essentials": "^7.0.26",
+    "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
     "@storybook/blocks": "^8.2.9",
