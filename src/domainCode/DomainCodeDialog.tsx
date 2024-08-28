@@ -38,12 +38,14 @@ type Props = PropsWithChildren<{
   domainOptions: DomainCode[];
   applicationName: string;
   handleLogout: () => void;
+  onDomainChange?: (domainCode: DomainCode) => void;
 }>;
 
 const DomainCodeDialog = ({
   isLoading,
   isOpen,
   onClose: handleClose,
+  onDomainChange,
   domainOptions,
   applicationName,
   handleLogout,
@@ -63,9 +65,13 @@ const DomainCodeDialog = ({
   const handleConfirmDomainCode = async () => {
     if (selectedDomainCode) {
       setDomainCode(selectedDomainCode);
+      onDomainChange?.(selectedDomainCode);
       enqueueSuccessNotification(`Set organisation to ${selectedDomainCode}`);
       handleClose();
-    } else setDomainCode('');
+    } else {
+      setDomainCode('');
+      onDomainChange?.('');
+    }
   };
 
   const handleDialogClose = async () => {
