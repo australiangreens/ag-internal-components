@@ -19,7 +19,7 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "### LIFECYCLE SCRIPTS ###": "",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prepublishOnly": "pnpm eslint && pnpm test && pnpm build",
     "### HUSKY GIT HOOKS ###": "Called by husky pre-commit and pre-push scripts",
     "prepush": "sh ./scripts/githooks/pre-push.sh",
