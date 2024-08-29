@@ -119,9 +119,9 @@
     "storybook": "^8.2.9",
     "typescript": "^5.5.4",
     "vite": "^5.4.2",
-    "vite-plugin-dts": "^3.5.2",
+    "vite-plugin-dts": "^4.0.3",
     "vite-plugin-linter": "^2.0.2",
-    "vite-tsconfig-paths": "^4.2.0",
+    "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^0.34.4"
   },
   "husky": {
