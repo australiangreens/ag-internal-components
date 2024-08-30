@@ -80,7 +80,6 @@
     "@storybook/blocks": "^8.2.9",
     "@storybook/react": "^8.2.9",
     "@storybook/react-vite": "^8.2.9",
-    "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
