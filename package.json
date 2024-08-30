@@ -55,7 +55,8 @@
     "jotai": "^2.9.3",
     "react-avatar": "^5.0.3",
     "react-transition-group": "^4.4.5",
-    "souvlaki": "^0.3.0"
+    "souvlaki": "^0.3.0",
+    "test": "^3.3.0"
   },
   "peerDependencies": {
     "@auth0/auth0-react": "^2.2.1",
@@ -81,7 +82,7 @@
     "@storybook/react": "^8.2.9",
     "@storybook/react-vite": "^8.2.9",
     "@testing-library/dom": "^9.3.1",
-    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/autosuggest-highlight": "^3.2.3",
