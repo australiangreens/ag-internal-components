@@ -12,8 +12,8 @@ dependencies:
     specifier: ^0.1.9
     version: 0.1.9
   '@tanstack/react-query':
-    specifier: ^5.52.2
-    version: 5.52.2(react@18.3.1)
+    specifier: ^5.52.3
+    version: 5.52.3(react@18.3.1)
   '@types/react-transition-group':
     specifier: ^4.4.11
     version: 4.4.11
@@ -28,7 +28,7 @@ dependencies:
     version: 2.9.3(@types/react@18.3.4)(react@18.3.1)
   react-avatar:
     specifier: ^5.0.3
-    version: 5.0.3(@babel/runtime@7.25.4)(core-js-pure@3.38.1)(prop-types@15.8.1)(react@18.3.1)
+    version: 5.0.3(@babel/runtime@7.25.6)(core-js-pure@3.38.1)(prop-types@15.8.1)(react@18.3.1)
   react-transition-group:
     specifier: ^4.4.5
     version: 4.4.5(react-dom@18.3.1)(react@18.3.1)
@@ -155,8 +155,8 @@ devDependencies:
     specifier: ^0.2.17
     version: 0.2.17
   happy-dom:
-    specifier: ^15.3.1
-    version: 15.3.1
+    specifier: ^15.6.0
+    version: 15.6.0
   husky:
     specifier: ^9.1.5
     version: 9.1.5
@@ -201,7 +201,7 @@ devDependencies:
     version: 5.0.1(typescript@5.5.4)(vite@5.4.2)
   vitest:
     specifier: ^0.34.4
-    version: 0.34.4(happy-dom@15.3.1)
+    version: 0.34.4(happy-dom@15.6.0)
 
 packages:
 
@@ -1591,6 +1591,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+    dev: true
+
+  /@babel/runtime@7.25.6:
+    resolution: {integrity: sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+    dev: false
 
   /@babel/template@7.25.0:
     resolution: {integrity: sha512-aOOgh1/5XzKvg1jvVz7AVrx2piJ2XBi227DHmbY6y+bM9H2FlN+IfecYu4Xl0cNiiVejlsCri89LUsbj8vJD9Q==}
@@ -3470,16 +3478,16 @@ packages:
       '@swc/counter': 0.1.3
     dev: true
 
-  /@tanstack/query-core@5.52.2:
-    resolution: {integrity: sha512-9vvbFecK4A0nDnrc/ks41e3UHONF1DAnGz8Tgbxkl59QcvKWmc0ewhYuIKRh8NC4ja5LTHT9EH16KHbn2AIYWA==}
+  /@tanstack/query-core@5.52.3:
+    resolution: {integrity: sha512-+Gh7lXn+eoAsarvvnndgqBeJ5lOjup8qgQnrTsFuhNTEAo0H934DxEPro4s3TlmvITfDTJ3UDCy7kY8Azm0qsA==}
     dev: false
 
-  /@tanstack/react-query@5.52.2(react@18.3.1):
-    resolution: {integrity: sha512-d4OwmobpP+6+SvuAxW1RzAY95Pv87Gu+0GjtErzFOUXo+n0FGcwxKvzhswCsXKxsgnAr3bU2eJ2u+GXQAutkCQ==}
+  /@tanstack/react-query@5.52.3(react@18.3.1):
+    resolution: {integrity: sha512-1K7l2hkqlWuh5SdaTYPSwMmHJF5dDk5INK+EtiEwUZW4+usWTXZx7QeHuk078oSzTzaVkEFyT3VquK7F0hYkUw==}
     peerDependencies:
       react: ^18 || ^19
     dependencies:
-      '@tanstack/query-core': 5.52.2
+      '@tanstack/query-core': 5.52.3
       react: 18.3.1
     dev: false
 
@@ -3551,7 +3559,7 @@ packages:
       dom-accessibility-api: 0.5.16
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 0.34.4(happy-dom@15.3.1)
+      vitest: 0.34.4(happy-dom@15.6.0)
     dev: true
 
   /@testing-library/jest-dom@6.4.5(vitest@0.34.4):
@@ -3583,7 +3591,7 @@ packages:
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 0.34.4(happy-dom@15.3.1)
+      vitest: 0.34.4(happy-dom@15.6.0)
     dev: true
 
   /@testing-library/react@14.0.0(react-dom@18.3.1)(react@18.3.1):
@@ -4122,7 +4130,7 @@ packages:
       std-env: 3.3.3
       test-exclude: 6.0.0
       v8-to-istanbul: 9.1.0
-      vitest: 0.34.4(happy-dom@15.3.1)
+      vitest: 0.34.4(happy-dom@15.6.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6354,8 +6362,8 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /happy-dom@15.3.1:
-    resolution: {integrity: sha512-3nwi8abkBUHzdq/6UhseErN6b6J1obWZFl5XKKMUEp+OL4Vq7AIiLSVDmXQp83qykJHjhdrBxsae3CTA5nB36A==}
+  /happy-dom@15.6.0:
+    resolution: {integrity: sha512-M2ikOwrC5+KVofexnA0DZbQ0/hSHm2ZFKCmS3Ora11KGNHgHBdlRzZ/dzpDDPxQyqko3yNohFepJclG2T0GeZQ==}
     engines: {node: '>=18.0.0'}
     dependencies:
       entities: 4.5.0
@@ -7863,7 +7871,7 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-avatar@5.0.3(@babel/runtime@7.25.4)(core-js-pure@3.38.1)(prop-types@15.8.1)(react@18.3.1):
+  /react-avatar@5.0.3(@babel/runtime@7.25.6)(core-js-pure@3.38.1)(prop-types@15.8.1)(react@18.3.1):
     resolution: {integrity: sha512-DNc+qkWH9QehSEZqHBhqpXWsPY+rU9W7kD68QFHfu8Atfsvx/3ML0DzAePgTUd96nCXQQ3KZMcC3LKYT8FiBIg==}
     peerDependencies:
       '@babel/runtime': '>=7'
@@ -7871,7 +7879,7 @@ packages:
       prop-types: ^15.0.0 || ^16.0.0
       react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.25.4
+      '@babel/runtime': 7.25.6
       core-js-pure: 3.38.1
       is-retina: 1.0.3
       md5: 2.3.0
@@ -9229,7 +9237,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@0.34.4(happy-dom@15.3.1):
+  /vitest@0.34.4(happy-dom@15.6.0):
     resolution: {integrity: sha512-SE/laOsB6995QlbSE6BtkpXDeVNLJc1u2LHRG/OpnN4RsRzM3GQm4nm3PQCK5OBtrsUqnhzLdnT7se3aeNGdlw==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -9273,7 +9281,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.7
       debug: 4.3.4
-      happy-dom: 15.3.1
+      happy-dom: 15.6.0
       local-pkg: 0.4.3
       magic-string: 0.30.2
       pathe: 1.1.1
