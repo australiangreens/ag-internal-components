@@ -1,18 +1,17 @@
-import { Box } from '@mui/material';
-import type { Meta, StoryObj } from '@storybook/react';
-import { ListItemButton, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import { Home as Page1Icon, List as Page2Icon } from '@mui/icons-material';
-import { Link as RouterLink, MemoryRouter, useLocation } from 'react-router-dom';
-import { Description, Stories, Markdown } from '@storybook/blocks';
+import { Box, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Description, Markdown, Stories } from '@storybook/blocks';
+import type { Meta, StoryObj } from '@storybook/react';
+import { MemoryRouter, Link as RouterLink, useLocation } from 'react-router-dom';
 
 import PageLayout from '.';
-import Readme from './README.md?raw';
 import NavBar, {
-  NavBarProvider,
-  NavBarDarkStyledList,
-  NAVBAR_WIDTH_OPENED,
   NAVBAR_WIDTH_CLOSED,
+  NAVBAR_WIDTH_OPENED,
+  NavBarDarkStyledList,
+  NavBarProvider,
 } from '../../components/NavBar';
+import Readme from './README.md?raw';
 
 const iconTableItems = [
   {
@@ -76,7 +75,7 @@ const meta: Meta<typeof PageLayout> = {
   ],
   argTypes: {
     children: {
-      control: { type: null },
+      control: { type: undefined },
       description: 'Contents of the navbar',
     },
   },

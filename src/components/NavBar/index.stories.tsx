@@ -1,15 +1,15 @@
+import HomeIcon from '@mui/icons-material/Home';
+import ListIcon from '@mui/icons-material/List';
 import { Box } from '@mui/material';
-import type { Meta, StoryObj } from '@storybook/react';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListIcon from '@mui/icons-material/List';
-import HomeIcon from '@mui/icons-material/Home';
-import { Link as RouterLink, MemoryRouter, useLocation } from 'react-router-dom';
-import { Title, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import { Controls, Description, Primary, Stories, Title } from '@storybook/blocks';
+import type { Meta, StoryObj } from '@storybook/react';
+import { MemoryRouter, Link as RouterLink, useLocation } from 'react-router-dom';
 
-import NavBar, { NavBarProvider, NavBarDarkStyledList } from '.';
+import NavBar, { NavBarDarkStyledList, NavBarProvider } from '.';
 
 // TODO: It shouldn't be encessary to have this explicit type annotation here.
 // It is a workaround for https://github.com/microsoft/TypeScript/issues/48212
@@ -27,7 +27,7 @@ const meta: Meta<typeof NavBar> = {
   ],
   argTypes: {
     children: {
-      control: { type: null },
+      control: { type: undefined },
       description: 'Contents of the navbar',
     },
   },

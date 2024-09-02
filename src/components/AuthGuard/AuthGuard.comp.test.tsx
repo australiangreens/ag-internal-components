@@ -127,9 +127,10 @@ describe('AuthGuard', () => {
     const logoutButton = screen.getByRole('button', { name: 'Logout' });
     await user.click(logoutButton);
 
-    expect(mockLogout).toHaveBeenCalledExactlyOnceWith({
+    expect(mockLogout).toHaveBeenCalledWith({
       logoutParams: { returnTo: window.location.origin },
     });
+    expect(mockLogout).toHaveBeenCalledTimes(1);
   });
 
   it('redirects to login (with return to set to current url) if user not already authed', async () => {
@@ -143,9 +144,10 @@ describe('AuthGuard', () => {
     commonRender();
 
     const currentUrl = `${window.location.pathname}${window.location.search}`;
-    expect(mockLoginWithRedirect).toHaveBeenCalledExactlyOnceWith({
+    expect(mockLoginWithRedirect).toHaveBeenCalledWith({
       appState: { returnTo: currentUrl },
     });
+    expect(mockLoginWithRedirect).toHaveBeenCalledTimes(1);
   });
 
   it('Calls onError()', async () => {
@@ -162,7 +164,8 @@ describe('AuthGuard', () => {
       </AuthGuard>
     );
 
-    expect(mockOnError).toHaveBeenCalledExactlyOnceWith(mockError);
+    expect(mockOnError).toHaveBeenCalledWith(mockError);
+    expect(mockOnError).toHaveBeenCalledTimes(1);
   });
 
   it(`throws an error if throwErrors='all' if OAuthError`, async () => {

@@ -155,8 +155,8 @@ devDependencies:
     specifier: ^0.2.17
     version: 0.2.17
   happy-dom:
-    specifier: ^15.6.0
-    version: 15.6.0
+    specifier: ^15.7.3
+    version: 15.7.3
   husky:
     specifier: ^9.1.5
     version: 9.1.5
@@ -191,8 +191,8 @@ devDependencies:
     specifier: ^5.4.2
     version: 5.4.2(@types/node@22.5.2)
   vite-plugin-dts:
-    specifier: ^4.0.3
-    version: 4.0.3(@types/node@22.5.2)(typescript@5.5.4)(vite@5.4.2)
+    specifier: ^4.1.0
+    version: 4.1.0(@types/node@22.5.2)(typescript@5.5.4)(vite@5.4.2)
   vite-plugin-linter:
     specifier: ^2.0.2
     version: 2.0.2
@@ -201,7 +201,7 @@ devDependencies:
     version: 5.0.1(typescript@5.5.4)(vite@5.4.2)
   vitest:
     specifier: ^0.34.4
-    version: 0.34.4(happy-dom@15.6.0)
+    version: 0.34.4(happy-dom@15.7.3)
 
 packages:
 
@@ -3484,7 +3484,7 @@ packages:
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 0.34.4(happy-dom@15.6.0)
+      vitest: 0.34.4(happy-dom@15.7.3)
     dev: true
 
   /@testing-library/jest-dom@6.5.0:
@@ -4026,7 +4026,7 @@ packages:
       std-env: 3.3.3
       test-exclude: 6.0.0
       v8-to-istanbul: 9.1.0
-      vitest: 0.34.4(happy-dom@15.6.0)
+      vitest: 0.34.4(happy-dom@15.7.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6391,8 +6391,8 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /happy-dom@15.6.0:
-    resolution: {integrity: sha512-M2ikOwrC5+KVofexnA0DZbQ0/hSHm2ZFKCmS3Ora11KGNHgHBdlRzZ/dzpDDPxQyqko3yNohFepJclG2T0GeZQ==}
+  /happy-dom@15.7.3:
+    resolution: {integrity: sha512-w3RUaYNXFJX5LiNVhOJLK4GqCB1bFj1FvELtpon3HrN8gUpS09V0Vvm4/BBRRj7mLUE1+ch8PKv1JxEp/0IHjA==}
     engines: {node: '>=18.0.0'}
     dependencies:
       entities: 4.5.0
@@ -9288,8 +9288,8 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-dts@4.0.3(@types/node@22.5.2)(typescript@5.5.4)(vite@5.4.2):
-    resolution: {integrity: sha512-+xnTsaONwU2kV6zhRjtbRJSGN41uFR/whqmcb4k4fftLFDJElxthp0PP5Fq8gMeM9ytWMt1yk5gGgekLREWYQQ==}
+  /vite-plugin-dts@4.1.0(@types/node@22.5.2)(typescript@5.5.4)(vite@5.4.2):
+    resolution: {integrity: sha512-sRlmt9k2q8MrX4F2058N3KmB6WyJ3Ao6QaExOv1X99F3j0GhPziEz1zscWQ1q2r1PeFc96L7GIUu8Pl2DPr2Hg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       typescript: '*'
@@ -9422,7 +9422,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@0.34.4(happy-dom@15.6.0):
+  /vitest@0.34.4(happy-dom@15.7.3):
     resolution: {integrity: sha512-SE/laOsB6995QlbSE6BtkpXDeVNLJc1u2LHRG/OpnN4RsRzM3GQm4nm3PQCK5OBtrsUqnhzLdnT7se3aeNGdlw==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -9466,7 +9466,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.7
       debug: 4.3.4
-      happy-dom: 15.6.0
+      happy-dom: 15.7.3
       local-pkg: 0.4.3
       magic-string: 0.30.2
       pathe: 1.1.1
