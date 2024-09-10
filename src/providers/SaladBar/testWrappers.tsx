@@ -6,10 +6,10 @@ import SaladBarProvider, { SaladBarProviderProps } from './SaladBarContext';
 
 export const withSaladBarProvider = createHelper(
   (
-      props: SaladBarProviderProps = { autoHideDuration: 1 },
-      state: Partial<unknown> = {},
-      actions: Partial<unknown> = {}
-    ) =>
+    props: SaladBarProviderProps = { autoHideDuration: 1 },
+    state: Partial<unknown> = {},
+    actions: Partial<unknown> = {}
+  ) =>
     ({ children }) => {
       return (
         <SaladBarProvider {...props} overrideState={state} overrideActions={actions}>

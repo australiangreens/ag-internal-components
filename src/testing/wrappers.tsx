@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider, WritableAtom, useAtomValue } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { PropsWithChildren } from 'react';
@@ -15,6 +14,7 @@ import {
   titleTextAtom,
   topBarHeightAtom,
 } from '../layouts/AppLayout';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 /**
  * When you need to want to set an initial value for an atom, you can use either:
@@ -59,21 +59,20 @@ export const HydrateAtoms = <T,>({
 
 export const withOverrideDefaults = createHelper(
   (overrides: Partial<AtomConfig>) =>
-    ({ children }) =>
-      (
-        <HydrateAtoms
-          // Typescript doesn't type Object.entries well yet
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          initialValues={(Object.entries(overrides) as any).map(
-            <T extends AtomConfigOption>([key, value]: [T, AtomConfigValue<T>]) => [
-              atomsToOverride[key],
-              value,
-            ]
-          )}
-        >
-          {children}
-        </HydrateAtoms>
-      )
+    ({ children }) => (
+      <HydrateAtoms
+        // Typescript doesn't type Object.entries well yet
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        initialValues={(Object.entries(overrides) as any).map(
+          <T extends AtomConfigOption>([key, value]: [T, AtomConfigValue<T>]) => [
+            atomsToOverride[key],
+            value,
+          ]
+        )}
+      >
+        {children}
+      </HydrateAtoms>
+    )
 );
 
 export const withQueryClient = createHelper(() => ({ children }) => {

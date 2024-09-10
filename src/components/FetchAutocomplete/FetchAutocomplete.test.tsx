@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { wrap } from 'souvlaki';
 
 import FetchAutocomplete from '.';
-import { withQueryClient } from '../../testing';
+import { withQueryClient } from '../../testing/wrappers';
 import { AutocompleteGenericEntity } from '../types';
 
 const genericLookupMethod = async () => {

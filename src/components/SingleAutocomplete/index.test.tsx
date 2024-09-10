@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { SyntheticEvent } from 'react';
 import { wrap } from 'souvlaki';
 import SingleAutocomplete from '.';
-import { withQueryClient } from '../../testing';
+import { withQueryClient } from '../../testing/wrappers';
 import { AutocompleteGenericEntity } from '../types';
 
 const mockOptionAAA = { id: 1, label: 'AAA' };
