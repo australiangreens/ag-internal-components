@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ContextError } from 'src/errors';
+import { ContextError } from '../../errors';
 import { Context } from './SaladBarContext';
 
 /**
