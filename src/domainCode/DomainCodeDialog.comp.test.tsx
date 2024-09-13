@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { wrap } from 'souvlaki';
-import { withAtomProvider, withOverrideDefaults } from '../testing/wrappers';
 import { withSaladBarProvider } from '../providers';
+import { withAtomProvider, withOverrideDefaults } from '../testing/wrappers';
 import DomainCodeDialog from './DomainCodeDialog';
 
 describe('domaincodedialog', () => {
@@ -16,7 +16,10 @@ describe('domaincodedialog', () => {
         handleLogout={vitest.fn()}
       />,
       {
-        wrapper: wrap(withSaladBarProvider(), withOverrideDefaults({ domainCode: 'ag' })),
+        wrapper: wrap(
+          withSaladBarProvider(),
+          withOverrideDefaults({ domainCode: 'ag' })
+        ) as React.FC,
       }
     );
     expect(
@@ -39,7 +42,10 @@ describe('domaincodedialog', () => {
         handleLogout={() => {}}
       />,
       {
-        wrapper: wrap(withOverrideDefaults({ domainCode: 'qld' }), withSaladBarProvider()),
+        wrapper: wrap(
+          withOverrideDefaults({ domainCode: 'qld' }),
+          withSaladBarProvider()
+        ) as React.FC,
       }
     );
     expect(await screen.findByText(/logout/i)).toBeInTheDocument();
@@ -61,7 +67,7 @@ describe('domaincodedialog', () => {
         handleLogout={() => {}}
       />,
       {
-        wrapper: wrap(withSaladBarProvider(), withAtomProvider()),
+        wrapper: wrap(withSaladBarProvider(), withAtomProvider()) as React.FC,
       }
     );
     expect(await screen.findByText(/logout/i)).toBeInTheDocument();

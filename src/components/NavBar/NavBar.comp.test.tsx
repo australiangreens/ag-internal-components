@@ -1,7 +1,7 @@
-import { wrap } from 'souvlaki';
 import { render, screen } from '@testing-library/react';
+import { wrap } from 'souvlaki';
 
-import NavBar, { withNavBarProvider, NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './NavBar';
+import NavBar, { NAVBAR_WIDTH_CLOSED, NAVBAR_WIDTH_OPENED, withNavBarProvider } from './NavBar';
 
 const NAVBAR_TEST_ID = 'the-nav-bar';
 
@@ -14,7 +14,7 @@ describe('NavBar', () => {
         <Contents />
       </NavBar>,
       {
-        wrapper: wrap(withNavBarProvider({ open: true })),
+        wrapper: wrap(withNavBarProvider({ open: true })) as React.FC,
       }
     );
 
@@ -23,7 +23,7 @@ describe('NavBar', () => {
 
   it('has expected width when open', async () => {
     render(<NavBar data-testid={NAVBAR_TEST_ID} />, {
-      wrapper: wrap(withNavBarProvider({ open: true })),
+      wrapper: wrap(withNavBarProvider({ open: true })) as React.FC,
     });
 
     const navBar = screen.getByTestId(NAVBAR_TEST_ID);
@@ -39,7 +39,7 @@ describe('NavBar', () => {
 
   it('has expected width when closed', async () => {
     render(<NavBar data-testid={NAVBAR_TEST_ID} />, {
-      wrapper: wrap(withNavBarProvider({ open: false })),
+      wrapper: wrap(withNavBarProvider({ open: false })) as React.FC,
     });
 
     const navBar = screen.getByTestId(NAVBAR_TEST_ID);

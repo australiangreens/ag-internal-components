@@ -20,7 +20,7 @@ const mockLookup = async (containing: string) => {
 };
 
 const commonRenderOptions = () => ({
-  wrapper: wrap(withQueryClient()),
+  wrapper: wrap(withQueryClient()) as React.FC,
 });
 
 describe('SingleAutocomplete', () => {

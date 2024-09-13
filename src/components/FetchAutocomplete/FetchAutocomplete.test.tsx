@@ -28,7 +28,7 @@ describe('FetchAutocomplete', () => {
         noOptionsText={nostufftext}
         data-testid="TestFetch"
       />,
-      { wrapper: wrap(withQueryClient()) }
+      { wrapper: wrap(withQueryClient()) as React.FC }
     );
 
     const labelElement = screen.getByLabelText(testlabel);
@@ -59,7 +59,7 @@ describe('FetchAutocomplete', () => {
         data-testid="TestFetch"
         preLoadedOptions={[]}
       />,
-      { wrapper: wrap(withQueryClient()) }
+      { wrapper: wrap(withQueryClient()) as React.FC }
     );
 
     const labelElement = screen.getByLabelText(testlabel);
@@ -97,7 +97,7 @@ describe('FetchAutocomplete', () => {
         data-testid="TestFetch"
         minLength={3}
       />,
-      { wrapper: wrap(withQueryClient()) }
+      { wrapper: wrap(withQueryClient()) as React.FC }
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
@@ -263,7 +263,7 @@ describe('FetchAutocomplete', () => {
         data-testid="TestFetch"
         preLoadedOptions={preLoadedOptions}
       />,
-      { wrapper: wrap(withQueryClient()) }
+      { wrapper: wrap(withQueryClient()) as React.FC }
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
