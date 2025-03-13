@@ -7,11 +7,11 @@ function fromKebab(string: string) {
   );
 }
 
-export function determineUserLevelFromClaims(
+export function determineUserLevelFromClaims<T extends string>(
   claims: IdToken | undefined,
   domainCode: DomainCode,
-  roleMapping: Record<string, string[]>,
-  rolePriority: string[]
+  roleMapping: Record<T, string[]>,
+  rolePriority: T[]
 ) {
   if (!claims) return 'None';
 
