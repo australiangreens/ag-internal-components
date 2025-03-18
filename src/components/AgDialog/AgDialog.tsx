@@ -26,6 +26,7 @@ export type AgDialogProps = PropsWithChildren<{
   maxWidth?: false | Breakpoint;
   primaryButton?: AgDialogButtonConfig;
   secondaryButton?: AgDialogButtonConfig;
+  additionalButtons?: AgDialogButtonConfig[];
   'data-testid'?: string;
   onClose: () => void;
   sx?: SxProps<Theme>;
@@ -44,6 +45,7 @@ const AgDialog = ({
   maxWidth,
   primaryButton,
   secondaryButton,
+  additionalButtons,
   onClose: handleClose,
   sx,
   'data-testid': dataTestId,
@@ -86,6 +88,20 @@ const AgDialog = ({
         >
           {secondaryButton?.text ?? 'Cancel'}
         </Button>
+        {additionalButtons &&
+          additionalButtons.map((buttonConfig, idx) => {
+            return (
+              <Button
+                key={idx}
+                onClick={buttonConfig?.onClick}
+                data-testid={buttonConfig?.testId}
+                disabled={buttonConfig?.disabled || areButtonsDisabled}
+                color={buttonConfig?.buttonColor}
+              >
+                {buttonConfig.text ?? `Button ${idx}`}
+              </Button>
+            );
+          })}
         {primaryButton && (
           <Button
             onClick={async () => {

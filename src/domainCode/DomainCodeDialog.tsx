@@ -28,7 +28,7 @@ const DOMAIN_CODE_LABELS = {
 export type DomainCode = keyof typeof DOMAIN_CODE_LABELS;
 
 const getOptionLabel = (domainCode: DomainCode | null) => {
-  return domainCode === null ? 'N/A' : DOMAIN_CODE_LABELS[domainCode] ?? '';
+  return domainCode === null ? 'N/A' : (DOMAIN_CODE_LABELS[domainCode] ?? '');
 };
 
 type Props = PropsWithChildren<{
