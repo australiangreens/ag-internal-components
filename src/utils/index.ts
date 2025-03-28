@@ -1,3 +1,3 @@
+export * from './auth';
 export * from './consoleSuppression';
-export * from './determineUserLevel';
 export * from './simpleHashCode';
