@@ -55,7 +55,7 @@
     "jotai": "^2.13.1",
     "react-avatar": "^5.0.4",
     "react-transition-group": "^4.4.5",
-    "souvlaki": "^0.3.0"
+    "souvlaki": "^0.3.1"
   },
   "peerDependencies": {
     "@auth0/auth0-react": "^2.2.4",

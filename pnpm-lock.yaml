@@ -33,8 +33,8 @@ importers:
         specifier: ^4.4.5
         version: 4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       souvlaki:
-        specifier: ^0.3.0
-        version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.3.1
+        version: 0.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@auth0/auth0-react':
         specifier: ^2.2.4
@@ -3627,8 +3627,8 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
-  souvlaki@0.3.0:
-    resolution: {integrity: sha512-UZgG10yhl0gXzMLiVJf5Bt7g9CAfWf4y1ZYg4vD2OVc76Ppb+wExhW58z0mesqmWwr9jTA6tHRvd4BNb+azuWg==}
+  souvlaki@0.3.1:
+    resolution: {integrity: sha512-Zew9Bq0e6bOdIsOt3WQlRMnYY4OIOjyAj2iJq8uJvIIHxazlNZmsBG8BaFLNb3uCVDG9UYpr8rc17SKcBErTFg==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -8090,7 +8090,7 @@ snapshots:
 
   source-map@0.6.1: {}
 
-  souvlaki@0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  souvlaki@0.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)

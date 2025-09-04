@@ -13,7 +13,7 @@ export const withSaladBarProvider = createHelper(
     ({ children }) => {
       return (
         <SaladBarProvider {...props} overrideState={state} overrideActions={actions}>
-          {children}
+          <>{children}</>
         </SaladBarProvider>
       );
     }
