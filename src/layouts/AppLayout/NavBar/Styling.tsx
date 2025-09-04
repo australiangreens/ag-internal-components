@@ -104,10 +104,10 @@ interface NavDrawerProps {
 // TODO: Explicit type annotation needed until following issue fixed:
 // https://github.com/microsoft/TypeScript/issues/48212
 // We also use the second Generic parameter
-export const NavDrawer: StyledComponent<DrawerProps, NavDrawerProps> = styled(Drawer, {
+export const NavDrawer: StyledComponent<DrawerProps & NavDrawerProps> = styled(Drawer, {
   shouldForwardProp: (prop) =>
     !['widthOpen', 'widthClosed', 'isSmallScreen'].includes(prop as string),
-})<NavDrawerProps>(({ theme, open, widthOpen, widthClosed, isSmallScreen }) => ({
+})<DrawerProps & NavDrawerProps>(({ theme, open, widthOpen, widthClosed, isSmallScreen }) => ({
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
