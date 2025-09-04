@@ -36,5 +36,6 @@ export const buildAuth0ContextInterface: Builder<Auth0ContextInterface<User>> = 
   buildAuthorizeUrl: async () => '',
   buildLogoutUrl: () => '',
   handleRedirectCallback: vitest.fn(),
+  error: undefined,
   ...overrides,
 });
