@@ -108,7 +108,7 @@
     "eslint-plugin-tsdoc": "^0.3.0",
     "happy-dom": "^18.0.1",
     "husky": "^9.1.7",
-    "jest-extended": "^4.0.2",
+    "jest-extended": "^6.0.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
