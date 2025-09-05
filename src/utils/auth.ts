@@ -2,7 +2,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { IdToken } from '@auth0/auth0-spa-js';
 import { useQuery } from '@tanstack/react-query';
 import { DomainCode } from 'src/domainCode';
-import { T } from 'vitest/dist/chunks/environment.C5eAp3K6';
 
 function fromKebab(string: string) {
   return string.replace(/(^|-)([a-z])/g, (_, separator, char) =>
@@ -54,7 +53,8 @@ export const useValidDomains = (appValidBusinessRoles: string[]) => {
   });
 };
 
-export const getValidBusinessRoles = (roleMapping: Record<T, string[]>) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getValidBusinessRoles = (roleMapping: Record<any, string[]>) =>
   Object.values(roleMapping).reduce(
     (prev, curr) => [...new Set([...prev, ...curr])],
     [] as string[]
