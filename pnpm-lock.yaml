@@ -113,7 +113,7 @@ importers:
         version: 3.7.0(vite@5.4.4(@types/node@22.5.4))
       '@vitest/coverage-v8':
         specifier: ^2.1.0
-        version: 2.1.0(vitest@2.1.0(@types/node@22.5.4)(happy-dom@15.7.4))
+        version: 2.1.0(vitest@2.1.0(@types/node@22.5.4)(happy-dom@18.0.1))
       eslint:
         specifier: ^8.47.0
         version: 8.57.0
@@ -151,8 +151,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       happy-dom:
-        specifier: ^15.7.4
-        version: 15.7.4
+        specifier: ^18.0.1
+        version: 18.0.1
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -197,7 +197,7 @@ importers:
         version: 5.1.4(typescript@5.9.2)(vite@5.4.4(@types/node@22.5.4))
       vitest:
         specifier: ^2.1.0
-        version: 2.1.0(@types/node@22.5.4)(happy-dom@15.7.4)
+        version: 2.1.0(@types/node@22.5.4)(happy-dom@18.0.1)
 
 packages:
 
@@ -1276,6 +1276,9 @@ packages:
   '@types/minimatch@5.1.2':
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
+  '@types/node@20.19.13':
+    resolution: {integrity: sha512-yCAeZl7a0DxgNVteXFHt9+uyFbqXGy/ShC4BlcHkoE0AfGXYv/BUiplV72DjMYXHDBXFjhvr6DD1NiRVfB4j8g==}
+
   '@types/node@22.5.4':
     resolution: {integrity: sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==}
 
@@ -1309,6 +1312,9 @@ packages:
 
   '@types/uuid@9.0.8':
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
+
+  '@types/whatwg-mimetype@3.0.2':
+    resolution: {integrity: sha512-c2AKvDT8ToxLIOUlN51gTiHXflsfIFisS4pO7pDPoKouJCESkhZnEy623gwP9laCy5lnLDAw1vAzu2vM2YLOrA==}
 
   '@typescript-eslint/eslint-plugin@5.62.0':
     resolution: {integrity: sha512-TiZzBSJja/LbhNPvk6yc0JrX9XqhQ0hdh6M2svYfsHGejaKFIAGd9MQ+ERIMzLGlN/kZoYIgdxFV0PuljTKXag==}
@@ -2458,9 +2464,9 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  happy-dom@15.7.4:
-    resolution: {integrity: sha512-r1vadDYGMtsHAAsqhDuk4IpPvr6N8MGKy5ntBo7tSdim+pWDxus2PNqOcOt8LuDZ4t3KJHE+gCuzupcx/GKnyQ==}
-    engines: {node: '>=18.0.0'}
+  happy-dom@18.0.1:
+    resolution: {integrity: sha512-qn+rKOW7KWpVTtgIUi6RVmTBZJSe2k0Db0vh1f7CWrWclkkc7/Q+FrOfkZIb2eiErLyqu5AXEzE7XthO9JVxRA==}
+    engines: {node: '>=20.0.0'}
 
   has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
@@ -3900,6 +3906,9 @@ packages:
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
@@ -4023,10 +4032,6 @@ packages:
 
   vscode-uri@3.0.8:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
-
-  webidl-conversions@7.0.0:
-    resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
-    engines: {node: '>=12'}
 
   webpack-sources@3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
@@ -5264,6 +5269,10 @@ snapshots:
 
   '@types/minimatch@5.1.2': {}
 
+  '@types/node@20.19.13':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/node@22.5.4':
     dependencies:
       undici-types: 6.19.8
@@ -5293,6 +5302,8 @@ snapshots:
   '@types/semver@7.5.8': {}
 
   '@types/uuid@9.0.8': {}
+
+  '@types/whatwg-mimetype@3.0.2': {}
 
   '@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.9.2))(eslint@8.57.0)(typescript@5.9.2)':
     dependencies:
@@ -5398,7 +5409,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@2.1.0(vitest@2.1.0(@types/node@22.5.4)(happy-dom@15.7.4))':
+  '@vitest/coverage-v8@2.1.0(vitest@2.1.0(@types/node@22.5.4)(happy-dom@18.0.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -5412,7 +5423,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.1.0(@types/node@22.5.4)(happy-dom@15.7.4)
+      vitest: 2.1.0(@types/node@22.5.4)(happy-dom@18.0.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -6883,10 +6894,10 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  happy-dom@15.7.4:
+  happy-dom@18.0.1:
     dependencies:
-      entities: 4.5.0
-      webidl-conversions: 7.0.0
+      '@types/node': 20.19.13
+      '@types/whatwg-mimetype': 3.0.2
       whatwg-mimetype: 3.0.0
 
   has-bigints@1.0.2: {}
@@ -8388,6 +8399,8 @@ snapshots:
 
   undici-types@6.19.8: {}
 
+  undici-types@6.21.0: {}
+
   universalify@2.0.1: {}
 
   unpipe@1.0.0: {}
@@ -8492,7 +8505,7 @@ snapshots:
       '@types/node': 22.5.4
       fsevents: 2.3.3
 
-  vitest@2.1.0(@types/node@22.5.4)(happy-dom@15.7.4):
+  vitest@2.1.0(@types/node@22.5.4)(happy-dom@18.0.1):
     dependencies:
       '@vitest/expect': 2.1.0
       '@vitest/mocker': 2.1.0(@vitest/spy@2.1.0)(vite@5.4.4(@types/node@22.5.4))
@@ -8515,7 +8528,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.5.4
-      happy-dom: 15.7.4
+      happy-dom: 18.0.1
     transitivePeerDependencies:
       - less
       - lightningcss
@@ -8528,8 +8541,6 @@ snapshots:
       - terser
 
   vscode-uri@3.0.8: {}
-
-  webidl-conversions@7.0.0: {}
 
   webpack-sources@3.2.3: {}
 
