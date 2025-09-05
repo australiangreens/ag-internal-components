@@ -47,7 +47,7 @@
     "url": "https://github.com/australiangreens/ag-internal-components.git"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.85.9",
+    "@tanstack/react-query": "^5.86.0",
     "@types/react-transition-group": "^4.4.12",
     "autosuggest-highlight": "^3.3.4",
     "buffer": "^6.0.3",
@@ -63,7 +63,7 @@
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
-    "@tanstack/react-query": "^5.85.9",
+    "@tanstack/react-query": "^5.86.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
