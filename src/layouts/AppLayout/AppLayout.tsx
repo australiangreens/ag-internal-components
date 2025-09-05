@@ -1,6 +1,7 @@
-import { Box, CssBaseline } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import { ComponentProps, PropsWithChildren } from 'react';
 
+import Box from '@mui/material/Box';
 import { useAtom, useAtomValue } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import NavBar, { NavBarProps } from './NavBar';
