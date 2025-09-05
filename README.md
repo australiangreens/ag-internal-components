@@ -26,14 +26,27 @@ with](https://mui.com/material-ui/customization/theming/#createtheme-options-arg
 with `internalAgSystemsTheme` or just ensure all required properties in the
 `AgCustomTheme` interface are provided.
 
-## Move to React 18
+## The development environment
 
-As over v0.0.50 we have moved from React 17 to React 18 (also Node 16 to Node
-18). This breaks the peer dependency compatibility with some of our older apps.
-They will need be upgraded in the future to use newer versions, but for now can
-only use v0.0.50 of this library.
+We are now at version 22 of node, with React 19 and Vite 7. We use pnpm for
+development.
 
-## Move to pnpm
+## Development with pnpm link.
 
-Because it is faster than yarn.
+If you wish to give the latest version of `ag-internal-components` a red hot go with
+your calling application (like ListManager), add this to its `package.json`, or
+similar. (The part after `link:` will depend on your path on your machine.)
 
+```
+  "pnpm": {
+    "overrides": {
+      "@australiangreens/ag-internal-components": "link:/home/peter/projects/greens/ag-internal-components"
+    }
+  }
+```
+
+Then run `pnpm i`. (You may need to run `pnpm dev --force` first to get the app running.)
+
+To disconnect it, remove this from ListManager's (or other
+calling application's) `package.json`, and run `pnpm i` again; that will revert
+to the installed `ag-internal-components` library.
