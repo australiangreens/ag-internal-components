@@ -37,5 +37,11 @@ export const buildAuth0ContextInterface: Builder<Auth0ContextInterface<User>> = 
   buildLogoutUrl: () => '',
   handleRedirectCallback: vitest.fn(),
   error: undefined,
+  getDpopNonce: async (id?: string) => {
+    return id;
+  },
+  setDpopNonce: async () => {},
+  generateDpopProof: async () => '',
+  createFetcher: vitest.fn(),
   ...overrides,
 });
