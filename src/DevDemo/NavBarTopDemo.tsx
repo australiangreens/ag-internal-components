@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router';
 
 import { navBarOpenAtom, navBarTopAtom } from 'ag-internal-components';
 

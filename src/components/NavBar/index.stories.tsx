@@ -7,7 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Controls, Description, Primary, Stories, Title } from '@storybook/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
-import { MemoryRouter, Link as RouterLink, useLocation } from 'react-router-dom';
+import { MemoryRouter, Link as RouterLink, useLocation } from 'react-router';
 
 import NavBar, { NavBarDarkStyledList, NavBarProvider } from '.';
 

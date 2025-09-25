@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useAtom } from 'jotai';
 import { ReactNode, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 import { navBarOpenAtom } from '../../layouts';
 
 type BaseNavLink = {

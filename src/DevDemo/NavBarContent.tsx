@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAtomValue } from 'jotai';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router';
 
 import { navBarOpenAtom } from 'ag-internal-components';
 

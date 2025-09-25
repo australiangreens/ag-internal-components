@@ -2,7 +2,7 @@
 /* eslint-disable react/display-name */
 import { createHelper } from 'souvlaki';
 
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { NavBarActions, NavBarProvider, NavBarState } from './NavBarContext';
 
 export type Builder<T> = (overrides?: Partial<T>) => T;

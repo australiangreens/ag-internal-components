@@ -6,7 +6,7 @@ import {
 import { Box, Paper, Typography } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { navBarTopAtom, topBarMiddleAtom } from 'ag-internal-components';
 
