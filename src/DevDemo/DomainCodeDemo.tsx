@@ -24,7 +24,7 @@ const DomainCodeDemo = () => {
         handleLogout={() => console.log('Logout')}
         isOpen={isDialogOpen}
         onClose={async () => setIsDialogOpen(false)}
-        domainOptions={['act', 'nsw']}
+        domainOptions={['act', 'nsw', 'qld', 'fedmps', 'sa', 'vic', 'ag', 'wa', 'tas', 'nt']}
         isLoading={false}
         key={isDialogOpen ? 'domainCodeDialogOpen' : 'domainCodeDialogClosed'}
       />

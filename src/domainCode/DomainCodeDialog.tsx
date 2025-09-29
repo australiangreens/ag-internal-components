@@ -118,7 +118,7 @@ const DomainCodeDialog = ({
         value={selectedDomainCode !== '' ? selectedDomainCode : null}
         onChange={(_, value) => setSelectedDomainCode(value ?? '')}
         getOptionLabel={getOptionLabel}
-        options={[...domainOptions]}
+        options={[...domainOptions.toSorted()]}
         renderInput={(params) => (
           <TextField
             {...params}
