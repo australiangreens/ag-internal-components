@@ -27,7 +27,7 @@ type NavLink = BaseNavLink & {
   subMenuInitialOpen?: boolean;
 };
 
-export default function NavBarLink({
+export function NavBarLink({
   label,
   to,
   icon,

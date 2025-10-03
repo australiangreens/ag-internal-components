@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { wrap } from 'souvlaki';
 
-import NavBar, { NAVBAR_WIDTH_CLOSED, NAVBAR_WIDTH_OPENED, withNavBarProvider } from './NavBar';
+import NavBar, { NAVBAR_WIDTH_CLOSED, NAVBAR_WIDTH_OPENED } from './NavBar';
+import { withNavBarProvider } from './testWrappers';
+
 
 const NAVBAR_TEST_ID = 'the-nav-bar';
 

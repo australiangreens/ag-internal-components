@@ -1,10 +1,10 @@
-import { PropsWithChildren } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
+import { PropsWithChildren } from 'react';
 
-import { classes, Root, NavDrawer } from './Styling';
 import { useNavBar } from './NavBarContext';
+import { classes, NavDrawer, Root } from './Styling';
 
-export { NAVBAR_WIDTH_OPENED, NAVBAR_WIDTH_CLOSED } from './Styling';
+export { NAVBAR_WIDTH_CLOSED, NAVBAR_WIDTH_OPENED } from './Styling';
 
 export type NavbarProps = {
   /** Set the datatest-id on the root element for using reactdom's getByTestId()
@@ -47,12 +47,3 @@ export default function NavBar({
     </Root>
   );
 }
-
-export * from './NavBarContext';
-export * from './testWrappers';
-
-export * from './NavBarDarkStyledList';
-export * from './NavBarLightStyledList';
-
-// TODO: This is a temporary fix, library clients shouldn't need this
-export { classes as navBarClasses } from './Styling';

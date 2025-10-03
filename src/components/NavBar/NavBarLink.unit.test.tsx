@@ -1,7 +1,7 @@
 import { ArrowBack } from '@mui/icons-material';
 import { render, screen } from '@testing-library/react';
 import { wrap } from 'souvlaki';
-import NavBarLink from './NavBarLink';
+import { NavBarLink } from './NavBarLink';
 import { withBrowserRouter } from './testWrappers';
 
 describe('NavBarLink', () => {
