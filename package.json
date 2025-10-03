@@ -21,7 +21,7 @@
     "test:watch": "vitest",
     "### LIFECYCLE SCRIPTS ###": "",
     "prepare": "husky",
-    "prepublishOnly": "pnpm eslint && pnpm test && pnpm build",
+    "prepublishOnly": "pnpm lint && pnpm test && pnpm build",
     "### HUSKY GIT HOOKS ###": "Called by husky pre-commit and pre-push scripts",
     "prepush": "sh ./scripts/githooks/pre-push.sh",
     "precommit": "sh ./scripts/githooks/pre-commit.sh",
