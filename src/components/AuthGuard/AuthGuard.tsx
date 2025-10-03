@@ -58,6 +58,10 @@ export default function AuthGuard({
 
   // Wrapped in a useEffect to avoid re-renders doubling it up
   useEffect(() => {
+    // The no-pass-data-to-parent rule doesn't apply in this case since we are
+    // deliberately converting the first occurrence of an error into an event so
+    // the parent can act on it
+    // eslint-disable-next-line react-you-might-not-need-an-effect/no-pass-data-to-parent
     if (error) onError(error);
   }, [error, onError]);
 
