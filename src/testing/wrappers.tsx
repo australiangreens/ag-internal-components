@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider, WritableAtom, useAtomValue } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { PropsWithChildren } from 'react';
@@ -14,7 +14,6 @@ import {
   titleTextAtom,
   topBarHeightAtom,
 } from '../layouts/AppLayout';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 /**
  * When you need to want to set an initial value for an atom, you can use either:
