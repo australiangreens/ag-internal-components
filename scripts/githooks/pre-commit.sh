@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo -n "Running eslint on staged files..."
+echo -n "Running linting on staged files..."
 if !(pnpm lint-staged); then
-    echo "Error: eslint failed"
+    echo "Error: linting failed"
     exit 1
 fi
 echo "Done"

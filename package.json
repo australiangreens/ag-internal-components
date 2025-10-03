@@ -14,8 +14,8 @@
     "dev": "vite",
     "build": "vite build && sh ./scripts/post-build.sh",
     "preview": "vite preview",
-    "eslint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "checkall": "pnpm eslint && pnpm tsc",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "checkall": "pnpm lint && pnpm tsc",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
@@ -128,7 +128,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": "eslint"
+    "src/**/*.{js,jsx,ts,tsx}": "pnpm lint"
   },
   "eslintConfig": {
     "extends": [
