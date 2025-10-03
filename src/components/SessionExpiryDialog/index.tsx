@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import AgDialog, { AgDialogButtonConfig } from '../AgDialog';
-import { useEffect, useState } from 'react';
 import { Buffer } from 'buffer';
+
+import AgDialog, { AgDialogButtonConfig } from '../AgDialog';
 
 // This gets the auth0 expiry value for a token. If the token cannot be
 // parsed, then -1 is returned.
@@ -50,7 +50,7 @@ export const getAuth0Expiry = (token: string) => {
       return jsonParsedPayload.exp as number;
     }
     return -1;
-  } catch (e) {
+  } catch {
     return -1;
   }
 };
@@ -68,28 +68,16 @@ const SessionExpiryDialog = ({
 }: SessionExpiryDialogProps) => {
   const { logout, getAccessTokenSilently } = useAuth0();
 
-  const [calledContinue, setCalledContinue] = useState(0);
-
   const handleDialogClose = async () => {
     logout({ logoutParams: { returnTo: `${window.location.origin}` } });
   };
 
   const handleDialogSuccess = async () => {
-    setCalledContinue(calledContinue + 1);
+    const tokenSecond = await getAccessTokenSilently({ cacheMode: 'off' });
+    const tokenExp = getAuth0Expiry(tokenSecond) * 1000;
+    setAuth0ExpiryTime(tokenExp);
     closeHandler();
   };
-
-  useEffect(() => {
-    const updateAuth0Expiry = async () => {
-      if (calledContinue > 0) {
-        const tokenSecond = await getAccessTokenSilently({ cacheMode: 'off' });
-        const tokenExp = getAuth0Expiry(tokenSecond) * 1000;
-        setAuth0ExpiryTime(tokenExp);
-      }
-    };
-
-    updateAuth0Expiry();
-  }, [calledContinue, getAccessTokenSilently, setAuth0ExpiryTime]);
 
   const successButtonConfig = {
     text: 'Continue',
