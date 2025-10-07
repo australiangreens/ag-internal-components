@@ -193,14 +193,16 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             variant={textFieldVariant}
             error={error}
             helperText={helperText}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
+            slotProps={{
+              input: {
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }
             }}
             data-testid={dataTestId ? `${dataTestId}:Autocomplete:TextField` : undefined}
             onKeyDown={(event: React.KeyboardEvent) => {
@@ -212,7 +214,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           />
         )}
         // We render tags/chips below the component
-        renderTags={() => null}
+        renderValue={() => null}
         isOptionEqualToValue={(option, v) => option.id === v.id}
         renderOption={(props, option, state) => {
           if (enableHighlighting) {
