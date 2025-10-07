@@ -21,7 +21,7 @@ import {
   AutocompleteGenericEntityIdType,
   FetchAutocompleteChangeReason,
 } from '../types';
-import { DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS } from './const';
+import { DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS, MOUSE_EVENT_BUTTONS } from './const';
 
 export const useAutocompleteOptions = <EntityType extends AutocompleteGenericEntity>({
   minLength,
@@ -112,6 +112,23 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   chipToolTipSlotProps?: TooltipProps['slotProps'];
   isPlaceholder?: boolean;
   placeHolderText?: string;
+
+  /**
+   * Called when a right click is detected.
+   */
+  onRightClick?: (event: SyntheticEvent<Element, Event>) => void;
+
+  /**
+   * If set to true, the default right click behaviour will be overridden: the
+   * dropdown/prompt will not appear and neither will the browser context menu.
+   *
+   * Use in combination with onRightClick to override the behaviour.
+   *
+   * Note: This can't just be done by passing through onRightClick having it
+   * prevent the event default, because there are two events that need to be
+   * listened for.
+   */
+  disableDefaultRightClickBehaviour?: boolean;
 };
 
 /**
@@ -142,6 +159,8 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   chipToolTipSlotProps = DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS,
   isPlaceholder = false,
   placeHolderText = undefined,
+  onRightClick = () => {},
+  disableDefaultRightClickBehaviour = false,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
 
@@ -281,6 +300,22 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 {option.label}
               </li>
             );
+          }
+        }}
+        // If we want to capture right click, we need to listen for two events
+        onMouseDownCapture={(event) => {
+          if (event.button === MOUSE_EVENT_BUTTONS.right) {
+            if (disableDefaultRightClickBehaviour) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            onRightClick(event);
+          }
+        }}
+        onContextMenuCapture={(event) => {
+          if (disableDefaultRightClickBehaviour) {
+            event.preventDefault();
+            event.stopPropagation();
           }
         }}
       />

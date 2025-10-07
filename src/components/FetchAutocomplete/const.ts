@@ -10,3 +10,9 @@ export const DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS = {
     ],
   },
 };
+
+export const MOUSE_EVENT_BUTTONS = {
+  left: 0,
+  middle: 1,
+  right: 2,
+};
