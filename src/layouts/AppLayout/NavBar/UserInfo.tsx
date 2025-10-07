@@ -1,6 +1,6 @@
 import { Box, Fade, Avatar as OtherAvatar, Skeleton, Typography, useTheme } from '@mui/material';
 import Avatar from 'react-avatar';
-import { DomainCode } from '../../../domainCode';
+import { DomainCode, getDomainOptionLabel } from '../../../domainCode';
 import { simpleHashCode } from '../../../utils';
 import { NavbarCollapse, navbarTransition } from './Styling';
 import { User } from './types';
@@ -111,7 +111,7 @@ export default function UserInfo({ user, domainCode, open, useNewAvatar = false 
               <Skeleton animation={false} width={'50%'} />
             )}
             {domainCode ? (
-              <Typography>{domainCode.toUpperCase()}</Typography>
+              <Typography>{getDomainOptionLabel(domainCode)}</Typography>
             ) : (
               <Skeleton animation={false} width={'25%'} />
             )}

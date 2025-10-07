@@ -21,13 +21,13 @@ const DOMAIN_CODE_LABELS = {
   vic: 'VIC',
   wa: 'WA',
   ag: 'AG',
-  fedmps: 'Fedmps',
+  fedmps: 'FedMPs',
   '': '',
 } as const;
 
 export type DomainCode = keyof typeof DOMAIN_CODE_LABELS;
 
-const getOptionLabel = (domainCode: DomainCode | null) => {
+export const getDomainOptionLabel = (domainCode: DomainCode | null) => {
   return domainCode === null ? 'N/A' : (DOMAIN_CODE_LABELS[domainCode] ?? '');
 };
 
@@ -117,7 +117,7 @@ const DomainCodeDialog = ({
         disableClearable={false}
         value={selectedDomainCode !== '' ? selectedDomainCode : null}
         onChange={(_, value) => setSelectedDomainCode(value ?? '')}
-        getOptionLabel={getOptionLabel}
+        getOptionLabel={getDomainOptionLabel}
         options={[...domainOptions.toSorted()]}
         renderInput={(params) => (
           <TextField
