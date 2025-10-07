@@ -8,6 +8,7 @@ import {
   TextField,
   Theme,
   Tooltip,
+  TooltipProps,
   Typography,
 } from '@mui/material';
 import match from 'autosuggest-highlight/match';
@@ -20,6 +21,7 @@ import {
   AutocompleteGenericEntityIdType,
   FetchAutocompleteChangeReason,
 } from '../types';
+import { DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS } from './const';
 
 export const useAutocompleteOptions = <EntityType extends AutocompleteGenericEntity>({
   minLength,
@@ -107,6 +109,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
   boxSx?: SxProps<Theme>;
   disableIconFlip?: boolean;
+  chipToolTipSlotProps?: TooltipProps['slotProps'];
 };
 
 /**
@@ -134,6 +137,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   preLoadedOptions = undefined,
   disablePortal = false,
   disableIconFlip = false,
+  chipToolTipSlotProps = DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
 
@@ -202,7 +206,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                     {params.InputProps.endAdornment}
                   </>
                 ),
-              }
+              },
             }}
             data-testid={dataTestId ? `${dataTestId}:Autocomplete:TextField` : undefined}
             onKeyDown={(event: React.KeyboardEvent) => {
@@ -276,18 +280,9 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
                 }}
                 label={
                   <Tooltip
-                    title={val.tooltipContent || ''}
+                    title={val.tooltipContent ?? ''}
                     placement="bottom-start"
-                    PopperProps={{
-                      modifiers: [
-                        {
-                          name: 'offset',
-                          options: {
-                            offset: [115, -15],
-                          },
-                        },
-                      ],
-                    }}
+                    slotProps={chipToolTipSlotProps}
                   >
                     <Typography style={{ whiteSpace: 'normal' }}>
                       {val.chipLabel ? val.chipLabel : val.label}
