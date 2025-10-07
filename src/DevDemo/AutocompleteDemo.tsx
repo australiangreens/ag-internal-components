@@ -146,6 +146,54 @@ export default function FetchAutocompleteDemo() {
               noOptionsText="No countries found"
             />
           </FormGroupBox>
+
+          <Divider light />
+          <FormGroupBox>
+            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+              <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
+              <Typography variant="h6">FetchAutocomplete placeholder</Typography>
+            </Box>
+            <Typography>
+              Enter some country names here... if you can. Sorry - it is a placeholder.
+            </Typography>
+            <div>
+              <FetchAutocomplete
+                lookup={pretendLookup}
+                label="Select a country"
+                value={[]}
+                onChange={() => {}}
+                noOptionsText="Why are you typing? This is a search template."
+                sx={{ width: '50%' }}
+                boxSx={{ width: '50%' }}
+                textFieldColor="info"
+                isPlaceholder
+                placeHolderText="Placeholder"
+              />
+            </div>
+          </FormGroupBox>
+          <Divider light />
+          <FormGroupBox>
+            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+              <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
+              <Typography variant="h6">SingleAutocomplete placeholder</Typography>
+            </Box>
+            <Typography>
+              Enter some country names here... if you can. Sorry - it is yet another placeholder.
+            </Typography>
+            <div>
+              <SingleAutocomplete
+                lookup={pretendLookup}
+                label="Select a country"
+                value={null}
+                onChange={() => {}}
+                noOptionsText="Why are you typing? This is a search template."
+                sx={{ width: '50%' }}
+                textFieldColor="info"
+                isPlaceholder
+                placeHolderText="Placeholder"
+              />
+            </div>
+          </FormGroupBox>
         </form>
       </Box>
     </>

@@ -110,6 +110,8 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   boxSx?: SxProps<Theme>;
   disableIconFlip?: boolean;
   chipToolTipSlotProps?: TooltipProps['slotProps'];
+  isPlaceholder?: boolean;
+  placeHolderText?: string;
 };
 
 /**
@@ -138,6 +140,8 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   disablePortal = false,
   disableIconFlip = false,
   chipToolTipSlotProps = DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS,
+  isPlaceholder = false,
+  placeHolderText = undefined,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
 
@@ -158,6 +162,17 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   });
 
   const isInputMinimumLength = inputValue.length >= minLength;
+
+  const placeholderStyle = isPlaceholder
+    ? {
+        sx: {
+          '& .MuiFilledInput-root.Mui-focused': {
+            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
+          },
+        },
+        focused: true,
+      }
+    : {};
 
   return (
     <div data-testid={dataTestId}>
@@ -215,6 +230,8 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
               }
             }}
             color={textFieldColor}
+            placeholder={placeHolderText}
+            {...placeholderStyle}
           />
         )}
         // We render tags/chips below the component

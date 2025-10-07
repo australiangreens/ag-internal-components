@@ -71,6 +71,8 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   disabled?: boolean;
   popupIcon?: ReactNode;
   disableIconFlip?: boolean;
+  isPlaceholder?: boolean;
+  placeHolderText?: string;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -91,6 +93,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   disabled,
   popupIcon,
   disableIconFlip,
+  isPlaceholder = false,
+  placeHolderText = undefined,
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -103,6 +107,17 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   });
 
   const isInputMinimumLength = inputValue.length >= minLength;
+
+  const placeholderStyle = isPlaceholder
+    ? {
+        sx: {
+          '& .MuiFilledInput-root.Mui-focused': {
+            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
+          },
+        },
+        focused: true,
+      }
+    : {};
 
   return (
     <div data-testid={dataTestId}>
@@ -135,6 +150,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               color={textFieldColor}
               error={error}
               helperText={helperText}
+              placeholder={placeHolderText}
+              {...placeholderStyle}
             />
           )}
           isOptionEqualToValue={(option, v) => option.id === v.id}
