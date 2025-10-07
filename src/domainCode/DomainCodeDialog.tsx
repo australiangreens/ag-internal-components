@@ -11,7 +11,7 @@ import AgDialog from '../components/AgDialog';
 import { useSaladBar } from '../providers';
 import { domainCodeAtom } from './hooks';
 
-const DOMAIN_CODE_LABELS = {
+export const DOMAIN_CODE_LABELS = {
   act: 'ACT',
   nsw: 'NSW',
   nt: 'NT',
