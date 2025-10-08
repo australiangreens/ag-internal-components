@@ -187,4 +187,59 @@ describe('SingleAutocomplete', () => {
     const labelledTextFieldElement = screen.queryByDisplayValue('AAA');
     expect(labelledTextFieldElement).toBeNull();
   });
+
+  describe('when disableDefaultRightClickBehaviour is not set or false', () => {
+    it.each([false, undefined])(
+      'should call onRightClick(), show context menu and prompt when right click is performed',
+      async (disableDefaultRightClickBehaviour) => {
+        const handleOnRightClick = vitest.fn();
+
+        const testlabel = 'This is a label';
+        let singleAutocompleteContents = null as null | AutocompleteGenericEntity;
+        const handleSingleAutocompleteContents = (
+          event: SyntheticEvent<Element, Event>,
+          newValue: AutocompleteGenericEntity | null
+        ) => {
+          singleAutocompleteContents = newValue;
+        };
+        const user = userEvent.setup();
+        render(
+          <SingleAutocomplete
+            lookup={mockLookup}
+            label={testlabel}
+            value={singleAutocompleteContents}
+            onChange={handleSingleAutocompleteContents}
+            data-testid="TestSingle"
+            onRightClick={handleOnRightClick}
+            disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
+          />,
+          { wrapper: wrap(withQueryClient()) as React.FC }
+        );
+
+        // const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete:TextField');
+        const autocompleteStuff = screen.getByRole('combobox');
+
+        // TODO: The behaviour of the dropdown seems weird when repeated, best test it separately.
+
+        // First left click
+        await user.click(autocompleteStuff);
+        expect(handleOnRightClick).not.toHaveBeenCalled();
+        // expect(screen.getByText('Start typing to search')).toBeInTheDocument();
+
+        // First right click, will open context menu but close the dropdown
+        await user.pointer({ keys: '[MouseRight>]', target: autocompleteStuff });
+        expect(handleOnRightClick).toHaveBeenCalledOnce();
+        // expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
+
+        // Second left click will NOT cause it to reappear
+        await user.click(autocompleteStuff);
+        // expect(screen.getByText('Start typing to search')).not.toBeInTheDocument();
+
+        // Second right click will cause it to reappear
+        await user.pointer({ keys: '[MouseRight>]', target: autocompleteStuff });
+        expect(handleOnRightClick).toHaveBeenCalledTimes(2);
+        // expect(screen.getByText('Start typing to search')).toBeInTheDocument();
+      }
+    );
+  });
 });

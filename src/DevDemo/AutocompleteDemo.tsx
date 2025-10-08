@@ -168,6 +168,9 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
+                onRightClick={() => {
+                  alert('This has been right clicked.');
+                }}
               />
             </div>
           </FormGroupBox>
@@ -191,6 +194,9 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
+                onRightClick={() => {
+                  alert('This has been right clicked.');
+                }}
               />
             </div>
           </FormGroupBox>
