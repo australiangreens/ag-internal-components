@@ -68,6 +68,41 @@ export default function FetchAutocompleteDemo() {
     setAnchorEl(null);
   };
 
+  const [contextMenu, setContextMenu] = useState<{
+    mouseX: number;
+    mouseY: number;
+  } | null>(null);
+
+  const handleContextMenu = (event: React.MouseEvent) => {
+    event.preventDefault();
+
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX + 2,
+            mouseY: event.clientY - 6,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null
+    );
+
+    // Prevent text selection lost after opening the context menu on Safari and Firefox
+    const selection = document.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+
+      setTimeout(() => {
+        selection.addRange(range);
+      });
+    }
+  };
+
+  const handleCloseAlt = () => {
+    setContextMenu(null);
+  };
+
   useEffect(() => {
     setNavBarTop(undefined);
     setTopBarMiddle(undefined);
@@ -155,10 +190,7 @@ export default function FetchAutocompleteDemo() {
               textFieldColor="info"
               textFieldVariant="outlined"
               noOptionsText="No countries found"
-              onRightClick={(event: SyntheticEvent<Element, Event>) => {
-                setAnchorEl(event.currentTarget as HTMLElement);
-              }}
-              disableDefaultRightClickBehaviour
+              onRightClick={handleContextMenu}
             />
           </FormGroupBox>
 
@@ -207,7 +239,7 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                disableDefaultRightClickBehaviour
+                onRightClick={(e) => e.preventDefault()}
               />
             </div>
           </FormGroupBox>
@@ -225,6 +257,19 @@ export default function FetchAutocompleteDemo() {
         }}
       >
         <MenuItem onClick={handleClose}>Set as place holder</MenuItem>
+        <MenuItem disabled>Combine with existing placeholder</MenuItem>
+        <MenuItem disabled>Remove placeholder</MenuItem>
+      </Menu>
+
+      <Menu
+        open={contextMenu !== null}
+        onClose={handleCloseAlt}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
+        }
+      >
+        <MenuItem onClick={handleCloseAlt}>Set as place holder</MenuItem>
         <MenuItem disabled>Combine with existing placeholder</MenuItem>
         <MenuItem disabled>Remove placeholder</MenuItem>
       </Menu>

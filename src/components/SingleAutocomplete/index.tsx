@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import { ReactNode, SyntheticEvent, useState } from 'react';
 import { useAutocompleteOptions } from '../FetchAutocomplete';
-import { MOUSE_EVENT_BUTTONS } from '../FetchAutocomplete/const';
 import { AutocompleteGenericEntity } from '../types';
 
 /**
@@ -78,19 +77,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   /**
    * Called when a right click is detected.
    */
-  onRightClick?: (event: SyntheticEvent<Element, Event>) => void;
-
-  /**
-   * If set to true, the default right click behaviour will be overridden: the
-   * dropdown/prompt will not appear and neither will the browser context menu.
-   *
-   * Use in combination with onRightClick to override the behaviour.
-   *
-   * Note: This can't just be done by passing through onRightClick having it
-   * prevent the event default, because there are two events that need to be
-   * listened for.
-   */
-  disableDefaultRightClickBehaviour?: boolean;
+  onRightClick?: (event: React.MouseEvent) => void;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -114,7 +101,6 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   isPlaceholder = false,
   placeHolderText = undefined,
   onRightClick = () => {},
-  disableDefaultRightClickBehaviour = false,
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -141,7 +127,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
 
   return (
     <div data-testid={dataTestId}>
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} onContextMenu={onRightClick}>
         <Autocomplete
           sx={{
             ...sx,
@@ -192,22 +178,6 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             </li>
           )}
           disabled={disabled}
-          // If we want to capture right click, we need to listen for two events
-          onMouseDownCapture={(event) => {
-            if (event.button === MOUSE_EVENT_BUTTONS.right) {
-              if (disableDefaultRightClickBehaviour) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              onRightClick(event);
-            }
-          }}
-          onContextMenuCapture={(event) => {
-            if (disableDefaultRightClickBehaviour) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-          }}
         />
       </Stack>
     </div>
