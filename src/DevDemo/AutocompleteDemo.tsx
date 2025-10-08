@@ -1,8 +1,10 @@
 import { PropsWithChildren, SyntheticEvent, useEffect, useState } from 'react';
 
 import { Settings as TitleIcon } from '@mui/icons-material';
+import CheckIcon from '@mui/icons-material/Check';
 import LayersIcon from '@mui/icons-material/Layers';
-import { Box, Divider, Menu, MenuItem, Typography } from '@mui/material';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { Box, Divider, Menu, MenuItem, ToggleButton, Typography } from '@mui/material';
 import {
   AutocompleteGenericEntity,
   FetchAutocomplete,
@@ -58,6 +60,8 @@ const pretendLookup = async (lookupValue: string): Promise<Country[]> => {
 export default function FetchAutocompleteDemo() {
   const [selectedItems, setSelectedItems] = useState<Country[]>([]);
   const [singleItem, setSingleItem] = useState<Country | null>(null);
+  const [hasContextMenu, setHasContextMenu] = useState(false);
+  const [isSearchDeletedonRightClick, setIsSearchDeletedonRightClick] = useState(false);
   const setNavBarTop = useSetAtom(navBarTopAtom);
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
 
@@ -75,31 +79,33 @@ export default function FetchAutocompleteDemo() {
     mouseY: number;
   } | null>(null);
 
-  const handleContextMenu = (event: React.MouseEvent) => {
-    event.preventDefault();
+  const handleContextMenu = !hasContextMenu
+    ? undefined
+    : (event: React.MouseEvent) => {
+        event.preventDefault();
 
-    setContextMenu(
-      contextMenu === null
-        ? {
-            mouseX: event.clientX + 2,
-            mouseY: event.clientY - 6,
-          }
-        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
-          // Other native context menus might behave different.
-          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
-          null
-    );
+        setContextMenu(
+          contextMenu === null
+            ? {
+                mouseX: event.clientX + 2,
+                mouseY: event.clientY - 6,
+              }
+            : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+              // Other native context menus might behave different.
+              // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+              null
+        );
 
-    // Prevent text selection lost after opening the context menu on Safari and Firefox
-    const selection = document.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
+        // Prevent text selection lost after opening the context menu on Safari and Firefox
+        const selection = document.getSelection();
+        if (selection && selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
 
-      setTimeout(() => {
-        selection.addRange(range);
-      });
-    }
-  };
+          setTimeout(() => {
+            selection.addRange(range);
+          });
+        }
+      };
 
   const handleCloseAlt = () => {
     setContextMenu(null);
@@ -130,6 +136,34 @@ export default function FetchAutocompleteDemo() {
           <Typography variant="h5" sx={{ fontWeight: 500 }}>
             Autocomplete Demo
           </Typography>
+        </Box>
+        <Divider light />
+
+        <Box display="flex" flexDirection="row" gap={3} alignItems="center">
+          <Box display="flex" flexDirection="column" gap={1} alignItems="center">
+            <QuestionMarkIcon sx={{ height: '32px', width: '32px' }} color="primary" />
+            <Typography variant="h6">Is there a context menu?</Typography>
+            <ToggleButton
+              value="check"
+              selected={hasContextMenu}
+              onChange={() => setHasContextMenu((prevContextMenu) => !prevContextMenu)}
+            >
+              <CheckIcon />
+            </ToggleButton>
+          </Box>
+          <Box display="flex" flexDirection="column" gap={1} alignItems="center">
+            <QuestionMarkIcon sx={{ height: '32px', width: '32px' }} color="primary" />
+            <Typography variant="h6">Is the search deleted on the right click?</Typography>
+            <ToggleButton
+              value="check"
+              selected={isSearchDeletedonRightClick}
+              onChange={() =>
+                setIsSearchDeletedonRightClick((prevSearchDeleted) => !prevSearchDeleted)
+              }
+            >
+              <CheckIcon />
+            </ToggleButton>
+          </Box>
         </Box>
 
         <form
@@ -165,10 +199,14 @@ export default function FetchAutocompleteDemo() {
                 sx={{ width: '50%' }}
                 boxSx={{ width: '50%' }}
                 textFieldColor="primary"
-                onRightClick={(event: SyntheticEvent<Element, Event>) => {
-                  setAnchorEl(event.currentTarget as HTMLElement);
-                }}
-                disableDefaultRightClickBehaviour
+                onRightClick={
+                  !hasContextMenu
+                    ? undefined
+                    : (event: SyntheticEvent<Element, Event>) => {
+                        setAnchorEl(event.currentTarget as HTMLElement);
+                      }
+                }
+                disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />
             </div>
           </FormGroupBox>
@@ -193,6 +231,7 @@ export default function FetchAutocompleteDemo() {
               textFieldVariant="outlined"
               noOptionsText="No countries found"
               onRightClick={handleContextMenu}
+              disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
             />
           </FormGroupBox>
 
@@ -217,7 +256,14 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                disableDefaultRightClickBehaviour
+                onRightClick={
+                  !hasContextMenu
+                    ? undefined
+                    : (event: SyntheticEvent<Element, Event>) => {
+                        setAnchorEl(event.currentTarget as HTMLElement);
+                      }
+                }
+                disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />
             </div>
           </FormGroupBox>
@@ -241,7 +287,8 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                disableDefaultRightClickBehaviour
+                onRightClick={handleContextMenu}
+                disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />
             </div>
           </FormGroupBox>
