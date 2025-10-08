@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { ReactNode, SyntheticEvent, useState } from 'react';
 import { useAutocompleteOptions } from '../FetchAutocomplete';
+import { MOUSE_EVENT_BUTTONS } from '../FetchAutocomplete/const';
 import { AutocompleteGenericEntity } from '../types';
 
 /**
@@ -78,6 +79,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    * Called when a right click is detected.
    */
   onRightClick?: (event: React.MouseEvent) => void;
+  disableDefaultRightClickBehaviour?: boolean;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -101,6 +103,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   isPlaceholder = false,
   placeHolderText = undefined,
   onRightClick = () => {},
+  disableDefaultRightClickBehaviour = false,
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -127,7 +130,25 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
 
   return (
     <div data-testid={dataTestId}>
-      <Stack direction="row" spacing={1} onContextMenu={onRightClick}>
+      <Stack
+        direction="row"
+        spacing={1}
+        onContextMenu={onRightClick}
+        onMouseDownCapture={(event) => {
+          if (event.button === MOUSE_EVENT_BUTTONS.right) {
+            if (disableDefaultRightClickBehaviour) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+          }
+        }}
+        onContextMenuCapture={(event) => {
+          if (disableDefaultRightClickBehaviour) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }}
+      >
         <Autocomplete
           sx={{
             ...sx,

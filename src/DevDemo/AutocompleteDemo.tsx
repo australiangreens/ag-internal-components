@@ -68,6 +68,8 @@ export default function FetchAutocompleteDemo() {
     setAnchorEl(null);
   };
 
+  // The following code is adapted from here.
+
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
@@ -239,7 +241,7 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                onRightClick={(e) => e.preventDefault()}
+                disableDefaultRightClickBehaviour
               />
             </div>
           </FormGroupBox>
