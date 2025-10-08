@@ -116,7 +116,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   /**
    * Called when a right click is detected.
    */
-  onRightClick?: (event: SyntheticEvent<Element, Event>) => void;
+  onRightClick?: (event: React.MouseEvent) => void;
 
   /**
    * If set to true, the default right click behaviour will be overridden: the
@@ -302,14 +302,13 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             );
           }
         }}
-        // If we want to capture right click, we need to listen for two events
+        onContextMenu={onRightClick}
         onMouseDownCapture={(event) => {
           if (event.button === MOUSE_EVENT_BUTTONS.right) {
             if (disableDefaultRightClickBehaviour) {
               event.preventDefault();
               event.stopPropagation();
             }
-            onRightClick(event);
           }
         }}
         onContextMenuCapture={(event) => {

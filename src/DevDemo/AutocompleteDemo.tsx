@@ -65,13 +65,6 @@ export default function FetchAutocompleteDemo() {
   const setNavBarTop = useSetAtom(navBarTopAtom);
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   // The following code is adapted from here.
 
   const [contextMenu, setContextMenu] = useState<{
@@ -199,13 +192,7 @@ export default function FetchAutocompleteDemo() {
                 sx={{ width: '50%' }}
                 boxSx={{ width: '50%' }}
                 textFieldColor="primary"
-                onRightClick={
-                  !hasContextMenu
-                    ? undefined
-                    : (event: SyntheticEvent<Element, Event>) => {
-                        setAnchorEl(event.currentTarget as HTMLElement);
-                      }
-                }
+                onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />
             </div>
@@ -256,13 +243,7 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                onRightClick={
-                  !hasContextMenu
-                    ? undefined
-                    : (event: SyntheticEvent<Element, Event>) => {
-                        setAnchorEl(event.currentTarget as HTMLElement);
-                      }
-                }
+                onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />
             </div>
@@ -294,22 +275,6 @@ export default function FetchAutocompleteDemo() {
           </FormGroupBox>
         </form>
       </Box>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        slotProps={{
-          list: {
-            'aria-labelledby': 'basic-button',
-          },
-        }}
-      >
-        <MenuItem onClick={handleClose}>Set as place holder</MenuItem>
-        <MenuItem disabled>Combine with existing placeholder</MenuItem>
-        <MenuItem disabled>Remove placeholder</MenuItem>
-      </Menu>
-
       <Menu
         open={contextMenu !== null}
         onClose={handleCloseAlt}
