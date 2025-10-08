@@ -2,7 +2,7 @@ import { PropsWithChildren, SyntheticEvent, useEffect, useState } from 'react';
 
 import { Settings as TitleIcon } from '@mui/icons-material';
 import LayersIcon from '@mui/icons-material/Layers';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider, Menu, MenuItem, Typography } from '@mui/material';
 import {
   AutocompleteGenericEntity,
   FetchAutocomplete,
@@ -60,6 +60,13 @@ export default function FetchAutocompleteDemo() {
   const [singleItem, setSingleItem] = useState<Country | null>(null);
   const setNavBarTop = useSetAtom(navBarTopAtom);
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     setNavBarTop(undefined);
@@ -121,6 +128,10 @@ export default function FetchAutocompleteDemo() {
                 sx={{ width: '50%' }}
                 boxSx={{ width: '50%' }}
                 textFieldColor="primary"
+                onRightClick={(event: SyntheticEvent<Element, Event>) => {
+                  setAnchorEl(event.currentTarget as HTMLElement);
+                }}
+                disableDefaultRightClickBehaviour
               />
             </div>
           </FormGroupBox>
@@ -144,6 +155,10 @@ export default function FetchAutocompleteDemo() {
               textFieldColor="info"
               textFieldVariant="outlined"
               noOptionsText="No countries found"
+              onRightClick={(event: SyntheticEvent<Element, Event>) => {
+                setAnchorEl(event.currentTarget as HTMLElement);
+              }}
+              disableDefaultRightClickBehaviour
             />
           </FormGroupBox>
 
@@ -168,9 +183,7 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                onRightClick={() => {
-                  alert('This has been right clicked.');
-                }}
+                disableDefaultRightClickBehaviour
               />
             </div>
           </FormGroupBox>
@@ -194,14 +207,27 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
-                onRightClick={() => {
-                  alert('This has been right clicked.');
-                }}
+                disableDefaultRightClickBehaviour
               />
             </div>
           </FormGroupBox>
         </form>
       </Box>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          list: {
+            'aria-labelledby': 'basic-button',
+          },
+        }}
+      >
+        <MenuItem onClick={handleClose}>Set as place holder</MenuItem>
+        <MenuItem disabled>Combine with existing placeholder</MenuItem>
+        <MenuItem disabled>Remove placeholder</MenuItem>
+      </Menu>
     </>
   );
 }
