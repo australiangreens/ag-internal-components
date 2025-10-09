@@ -66,6 +66,7 @@ export default function FetchAutocompleteDemo() {
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
 
   // The following code is adapted from here.
+  // https://mui.com/material-ui/react-menu/#context-menu
 
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
@@ -268,6 +269,7 @@ export default function FetchAutocompleteDemo() {
                 textFieldColor="info"
                 isPlaceholder
                 placeHolderText="Placeholder"
+                textFieldVariant="outlined"
                 onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />

@@ -123,6 +123,9 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           '& .MuiFilledInput-root.Mui-focused': {
             backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
           },
+          '& .MuiOutlinedInput-root.Mui-focused': {
+            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
+          },
         },
         focused: true,
       }
