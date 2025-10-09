@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { Box } from '@mui/material';
 import { SyntheticEvent } from 'react';
 import { wrap } from 'souvlaki';
 import SingleAutocomplete from '.';
@@ -188,58 +189,78 @@ describe('SingleAutocomplete', () => {
     expect(labelledTextFieldElement).toBeNull();
   });
 
-  describe('when disableDefaultRightClickBehaviour is not set or false', () => {
-    it.each([false, undefined])(
-      'should call onRightClick(), show context menu and prompt when right click is performed',
-      async (disableDefaultRightClickBehaviour) => {
-        const handleOnRightClick = vitest.fn();
+  const commonClickSetup = (disableDefaultRightClickBehaviour?: boolean) => {
+    const mockHandleOnRightClick = vitest.fn();
+    const mockOuterOnContextMenu = vitest.fn();
 
-        const testlabel = 'This is a label';
-        let singleAutocompleteContents = null as null | AutocompleteGenericEntity;
-        const handleSingleAutocompleteContents = (
-          event: SyntheticEvent<Element, Event>,
-          newValue: AutocompleteGenericEntity | null
-        ) => {
-          singleAutocompleteContents = newValue;
-        };
-        const user = userEvent.setup();
-        render(
-          <SingleAutocomplete
-            lookup={mockLookup}
-            label={testlabel}
-            value={singleAutocompleteContents}
-            onChange={handleSingleAutocompleteContents}
-            data-testid="TestSingle"
-            onRightClick={handleOnRightClick}
-            disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
-          />,
-          { wrapper: wrap(withQueryClient()) as React.FC }
-        );
+    const user = userEvent.setup();
 
-        // const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete:TextField');
-        const autocompleteStuff = screen.getByRole('combobox');
-
-        // TODO: The behaviour of the dropdown seems weird when repeated, best test it separately.
-
-        // First left click
-        await user.click(autocompleteStuff);
-        expect(handleOnRightClick).not.toHaveBeenCalled();
-        // expect(screen.getByText('Start typing to search')).toBeInTheDocument();
-
-        // First right click, will open context menu but close the dropdown
-        await user.pointer({ keys: '[MouseRight>]', target: autocompleteStuff });
-        expect(handleOnRightClick).toHaveBeenCalledOnce();
-        // expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
-
-        // Second left click will NOT cause it to reappear
-        await user.click(autocompleteStuff);
-        // expect(screen.getByText('Start typing to search')).not.toBeInTheDocument();
-
-        // Second right click will cause it to reappear
-        await user.pointer({ keys: '[MouseRight>]', target: autocompleteStuff });
-        expect(handleOnRightClick).toHaveBeenCalledTimes(2);
-        // expect(screen.getByText('Start typing to search')).toBeInTheDocument();
-      }
+    // Its not possible to detect anything about the browser's own context
+    // menu, but we can detect the event bubbling up
+    render(
+      <Box onContextMenu={mockOuterOnContextMenu}>
+        <SingleAutocomplete
+          lookup={mockLookup}
+          label={'This is a label'}
+          value={null}
+          onChange={() => {}}
+          onRightClick={mockHandleOnRightClick}
+          disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
+        />
+        ,
+      </Box>,
+      { wrapper: wrap(withQueryClient()) }
     );
+
+    const autoCompleteEl = screen.getByRole('combobox');
+
+    return {
+      mockHandleOnRightClick,
+      user,
+      autoCompleteEl,
+      mockOuterOnContextMenu,
+    };
+  };
+
+  describe('on a right click', () => {
+    it('Shows search prompt and allows contextMenu event to bubble up if disableDefaultRightClickBehaviour = unset', async () => {
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonClickSetup(undefined);
+      await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
+      expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
+      expect(mockOuterOnContextMenu).toHaveBeenCalledOnce();
+    });
+
+    it('Shows search prompt and allows contextMenu event to bubble up if disableDefaultRightClickBehaviour = false', async () => {
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonClickSetup(false);
+      await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
+      expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
+      expect(mockOuterOnContextMenu).toHaveBeenCalledOnce();
+    });
+
+    it('Hides search prompt and prevents contextMenu event bubbling up if disableDefaultRightClickBehaviour = true', async () => {
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonClickSetup(true);
+      await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
+      expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
+      expect(mockOuterOnContextMenu).not.toHaveBeenCalled();
+    });
+
+    describe('Calls onRightClick regardless of disableDefaultRightClickBehaviour value', () => {
+      it.each([
+        [undefined],
+        [false],
+        [true], // !FAILING
+      ])('%s', async (ddrcb) => {
+        const { mockHandleOnRightClick, user, autoCompleteEl } = commonClickSetup(ddrcb);
+        await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
+        expect(mockHandleOnRightClick).toHaveBeenCalledOnce();
+      });
+    });
+  });
+
+  it('on a left click does not call onRightClick', async () => {
+    const { user, autoCompleteEl, mockHandleOnRightClick } = commonClickSetup(true);
+    await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
+    expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
+    expect(mockHandleOnRightClick).not.toHaveBeenCalled();
   });
 });
