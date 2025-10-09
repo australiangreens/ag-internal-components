@@ -450,11 +450,7 @@ describe('FetchAutocomplete', () => {
     });
 
     describe('Calls onRightClick regardless of disableDefaultRightClickBehaviour value', () => {
-      it.each([
-        [undefined],
-        [false],
-        [true], // !FAILING
-      ])('%s', async (ddrcb) => {
+      it.each([[undefined], [false], [true]])('%s', async (ddrcb) => {
         const { mockHandleOnRightClick, user, autoCompleteEl } = commonClickSetup(ddrcb);
         await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
         expect(mockHandleOnRightClick).toHaveBeenCalledOnce();

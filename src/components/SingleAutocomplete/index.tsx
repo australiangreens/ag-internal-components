@@ -79,6 +79,17 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    * Called when a right click is detected.
    */
   onRightClick?: (event: React.MouseEvent) => void;
+
+  /**
+   * If set to true, the default right click behaviour will be overridden: the
+   * dropdown/prompt will not appear AND neither will the browser context menu.
+   *
+   * Use in combination with onRightClick to override the behaviour.
+   *
+   * Note: This can't just be done by passing through onRightClick having it
+   * prevent the event default, because there are two events that need to be
+   * listened for.
+   */
   disableDefaultRightClickBehaviour?: boolean;
 };
 
@@ -136,7 +147,6 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
       <Stack
         direction="row"
         spacing={1}
-        onContextMenu={onRightClick}
         onMouseDownCapture={(event) => {
           if (event.button === MOUSE_EVENT_BUTTONS.right) {
             if (disableDefaultRightClickBehaviour) {
@@ -150,6 +160,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             event.preventDefault();
             event.stopPropagation();
           }
+          onRightClick(event);
         }}
       >
         <Autocomplete

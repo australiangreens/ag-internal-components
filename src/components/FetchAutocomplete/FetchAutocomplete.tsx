@@ -120,7 +120,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
 
   /**
    * If set to true, the default right click behaviour will be overridden: the
-   * dropdown/prompt will not appear and neither will the browser context menu.
+   * dropdown/prompt will not appear AND neither will the browser context menu.
    *
    * Use in combination with onRightClick to override the behaviour.
    *
@@ -305,13 +305,10 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             );
           }
         }}
-        onContextMenu={onRightClick}
         onMouseDownCapture={(event) => {
-          if (event.button === MOUSE_EVENT_BUTTONS.right) {
-            if (disableDefaultRightClickBehaviour) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
+          if (event.button === MOUSE_EVENT_BUTTONS.right && disableDefaultRightClickBehaviour) {
+            event.preventDefault();
+            event.stopPropagation();
           }
         }}
         onContextMenuCapture={(event) => {
@@ -319,6 +316,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             event.preventDefault();
             event.stopPropagation();
           }
+          onRightClick(event);
         }}
       />
       {value.length > 0 && (

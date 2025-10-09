@@ -76,8 +76,6 @@ export default function FetchAutocompleteDemo() {
   const handleContextMenu = !hasContextMenu
     ? undefined
     : (event: React.MouseEvent) => {
-        event.preventDefault();
-
         setContextMenu(
           contextMenu === null
             ? {
@@ -89,12 +87,10 @@ export default function FetchAutocompleteDemo() {
               // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
               null
         );
-
         // Prevent text selection lost after opening the context menu on Safari and Firefox
         const selection = document.getSelection();
         if (selection && selection.rangeCount > 0) {
           const range = selection.getRangeAt(0);
-
           setTimeout(() => {
             selection.addRange(range);
           });
@@ -131,12 +127,15 @@ export default function FetchAutocompleteDemo() {
             Autocomplete Demo
           </Typography>
         </Box>
-        <Divider light />
+        <Divider sx={{ opacity: 0.6 }} />
 
         <Box display="flex" flexDirection="row" gap={3} alignItems="center">
           <Box display="flex" flexDirection="column" gap={1} alignItems="center">
             <QuestionMarkIcon sx={{ height: '32px', width: '32px' }} color="primary" />
-            <Typography variant="h6">Is there a context menu?</Typography>
+            <Typography variant="h6">Show custom context menu on right click</Typography>
+            <Typography variant="subtitle2">
+              (This will also hide the search prompt due to how {'<Menu>'} works.)
+            </Typography>
             <ToggleButton
               value="check"
               selected={hasContextMenu}
@@ -147,7 +146,10 @@ export default function FetchAutocompleteDemo() {
           </Box>
           <Box display="flex" flexDirection="column" gap={1} alignItems="center">
             <QuestionMarkIcon sx={{ height: '32px', width: '32px' }} color="primary" />
-            <Typography variant="h6">Is the search deleted on the right click?</Typography>
+            <Typography variant="h6">Disable default right click behaviour</Typography>
+            <Typography variant="subtitle2">
+              (Hide search prompt and browser context menu)
+            </Typography>
             <ToggleButton
               value="check"
               selected={isSearchDeletedonRightClick}
@@ -168,7 +170,7 @@ export default function FetchAutocompleteDemo() {
             rowGap: '26px',
           }}
         >
-          <Divider light />
+          <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
             <Box display="flex" flexDirection="row" gap={1} alignItems="center">
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
@@ -223,7 +225,7 @@ export default function FetchAutocompleteDemo() {
             />
           </FormGroupBox>
 
-          <Divider light />
+          <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
             <Box display="flex" flexDirection="row" gap={1} alignItems="center">
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
