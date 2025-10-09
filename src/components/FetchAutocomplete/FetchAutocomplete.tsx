@@ -61,6 +61,13 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
     event: SyntheticEvent<Element, Event>
   ) => unknown;
 
+  /** Generally only useful for testing */
+  onInputChange?: (
+    newValue: EntityType[],
+    reason: string,
+    event: SyntheticEvent<Element, Event>
+  ) => void;
+
   /** The sequence of entity types returned. */
   value: EntityType[];
 
@@ -140,6 +147,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   lookup = async () => {},
   enableHighlighting = true,
   onChange,
+  onInputChange,
   minLength = 0,
   label,
   value,
@@ -222,7 +230,10 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
         onChange={(event, newValue, reason) => {
           onChange(newValue as EntityType[], reason, event);
         }}
-        onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
+        onInputChange={(event, newInputValue, reason) => {
+          setInputValue(newInputValue);
+          if (onInputChange) onInputChange(value, reason, event);
+        }}
         noOptionsText={isInputMinimumLength ? noOptionsText : 'Start typing to search'}
         loadingText={loadingText}
         popupIcon={popupIcon}
@@ -318,6 +329,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           }
           onRightClick(event);
         }}
+        readOnly={isPlaceholder}
       />
       {value.length > 0 && (
         <Box sx={boxSx}>
