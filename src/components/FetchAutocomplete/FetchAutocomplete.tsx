@@ -63,7 +63,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
 
   /** Generally only useful for testing */
   onInputChange?: (
-    newValue: EntityType[],
+    newValue: EntityType[] | null,
     reason: string,
     event: SyntheticEvent<Element, Event>
   ) => void;

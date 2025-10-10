@@ -32,6 +32,14 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
     newValue: EntityType | null,
     reason: AutocompleteChangeReason
   ) => unknown;
+
+  /** Generally only useful for testing */
+  onInputChange?: (
+    newValue: string | null,
+    reason: string,
+    event: SyntheticEvent<Element, Event>
+  ) => void;
+
   value: EntityType | null;
 
   /**
@@ -73,7 +81,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   popupIcon?: ReactNode;
   disableIconFlip?: boolean;
   isPlaceholder?: boolean;
-  placeHolderText?: string;
+  placeholderText?: string;
 
   /**
    * Called when a right click is detected.
@@ -96,6 +104,7 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   lookup = async () => {},
   onChange,
+  onInputChange,
   label,
   value,
   sx,
@@ -112,7 +121,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   popupIcon,
   disableIconFlip,
   isPlaceholder = false,
-  placeHolderText = undefined,
+  placeholderText = undefined,
   onRightClick = () => {},
   disableDefaultRightClickBehaviour = false,
 }: Props<EntityType>) => {
@@ -139,6 +148,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           },
         },
         focused: true,
+        slotProps: { input: { endAdornment: undefined } },
       }
     : {};
 
@@ -191,13 +201,15 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               color={textFieldColor}
               error={error}
               helperText={helperText}
-              placeholder={placeHolderText}
+              // Default placeholderText if isPlaceholder is true
+              placeholder={placeholderText ?? (isPlaceholder ? 'Placeholder field' : undefined)}
               {...placeholderStyle}
             />
           )}
           isOptionEqualToValue={(option, v) => option.id === v.id}
-          onInputChange={(_event, newInputValue) => {
+          onInputChange={(event, newInputValue, reason) => {
             setInputValue(newInputValue);
+            if (onInputChange) onInputChange(newInputValue, reason, event);
           }}
           renderOption={(props, option) => (
             <li
@@ -213,6 +225,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             </li>
           )}
           disabled={disabled}
+          readOnly={isPlaceholder}
         />
       </Stack>
     </div>

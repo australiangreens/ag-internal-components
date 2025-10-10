@@ -218,7 +218,7 @@ export default function FetchAutocompleteDemo() {
               onChange={handleSingleItemChange}
               sx={{ width: '50%' }}
               textFieldColor="info"
-              textFieldVariant="outlined"
+              textFieldVariant="filled"
               noOptionsText="No countries found"
               onRightClick={handleContextMenu}
               disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
@@ -270,8 +270,8 @@ export default function FetchAutocompleteDemo() {
                 sx={{ width: '50%' }}
                 textFieldColor="info"
                 isPlaceholder
-                placeHolderText="Placeholder"
-                textFieldVariant="outlined"
+                placeholderText="Placeholder"
+                textFieldVariant="filled"
                 onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />

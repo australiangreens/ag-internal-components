@@ -393,9 +393,9 @@ describe('FetchAutocomplete', () => {
   });
 
   const commonSetup = (
-    isPlaceHolder: boolean,
+    isPlaceholder: boolean,
     disableDefaultRightClickBehaviour?: boolean,
-    placeHolderText?: string
+    placeholderText?: string
   ) => {
     const mockHandleOnRightClick = vitest.fn();
     const mockOuterOnContextMenu = vitest.fn();
@@ -418,8 +418,8 @@ describe('FetchAutocomplete', () => {
           noOptionsText={'Start typing to search'}
           onRightClick={mockHandleOnRightClick}
           disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
-          isPlaceholder={isPlaceHolder}
-          placeholderText={placeHolderText}
+          isPlaceholder={isPlaceholder}
+          placeholderText={placeholderText}
         />
       </Box>,
       { wrapper: wrap(withQueryClient()) }
