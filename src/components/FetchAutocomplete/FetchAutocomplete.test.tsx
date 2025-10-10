@@ -495,5 +495,22 @@ describe('FetchAutocomplete', () => {
       await user.keyboard('Some text');
       expect(mockOnInputChange).not.toHaveBeenCalled();
     });
+
+    it('applies default placeholder text if not overridden', async () => {
+      const comp = (placeholderText?: string) => (
+        <FetchAutocomplete
+          lookup={async () => []}
+          label={'This is a label'}
+          value={[]}
+          onChange={() => {}}
+          isPlaceholder
+          placeHolderText={placeholderText}
+        />
+      );
+      const { rerender } = render(comp(undefined), { wrapper: wrap(withQueryClient()) });
+      expect(screen.getByPlaceholderText('Placeholder field')).toBeInTheDocument();
+      rerender(comp('Custom placeholder text'));
+      expect(screen.getByPlaceholderText('Custom placeholder text')).toBeInTheDocument();
+    });
   });
 });

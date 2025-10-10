@@ -263,7 +263,8 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
               }
             }}
             color={textFieldColor}
-            placeholder={placeHolderText}
+            // Default placeholderText if isPlaceholder is true
+            placeholder={placeHolderText ?? (isPlaceholder ? 'Placeholder field' : undefined)}
             {...placeholderStyle}
           />
         )}
