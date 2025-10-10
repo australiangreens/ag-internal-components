@@ -13,7 +13,7 @@ Generally, all that will be needed is to use a theme provider with the
 components:
 
 ```ts
-import {internalAgSystemsTheme} from '@australiagreens/ag-internal-components';
+import {internalAgSystemsTheme} from '@australiangreens/ag-internal-components';
 
 <ThemeProvider theme={fed21Theme}>
   <App />
@@ -31,7 +31,7 @@ with `internalAgSystemsTheme` or just ensure all required properties in the
 We are now at version 22 of node, with React 19 and Vite 7. We use pnpm for
 development.
 
-## Development with pnpm link.
+## Development with pnpm link
 
 If you wish to give the latest version of `ag-internal-components` a red hot go with
 your calling application (like ListManager), add this to its `package.json`, or
