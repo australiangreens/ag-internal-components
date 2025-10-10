@@ -245,7 +245,7 @@ export default function FetchAutocompleteDemo() {
                 boxSx={{ width: '50%' }}
                 textFieldColor="info"
                 isPlaceholder
-                placeHolderText="Placeholder"
+                placeholderText="Placeholder"
                 onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />

@@ -419,7 +419,7 @@ describe('FetchAutocomplete', () => {
           onRightClick={mockHandleOnRightClick}
           disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
           isPlaceholder={isPlaceHolder}
-          placeHolderText={placeHolderText}
+          placeholderText={placeHolderText}
         />
       </Box>,
       { wrapper: wrap(withQueryClient()) }

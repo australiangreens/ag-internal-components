@@ -118,7 +118,7 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   disableIconFlip?: boolean;
   chipToolTipSlotProps?: TooltipProps['slotProps'];
   isPlaceholder?: boolean;
-  placeHolderText?: string;
+  placeholderText?: string;
 
   /**
    * Called when a right click is detected.
@@ -166,7 +166,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   disableIconFlip = false,
   chipToolTipSlotProps = DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS,
   isPlaceholder = false,
-  placeHolderText = undefined,
+  placeholderText = undefined,
   onRightClick = () => {},
   disableDefaultRightClickBehaviour = false,
 }: FetchAutocompleteProps<EntityType>) {
@@ -264,7 +264,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             }}
             color={textFieldColor}
             // Default placeholderText if isPlaceholder is true
-            placeholder={placeHolderText ?? (isPlaceholder ? 'Placeholder field' : undefined)}
+            placeholder={placeholderText ?? (isPlaceholder ? 'Placeholder field' : undefined)}
             {...placeholderStyle}
           />
         )}
