@@ -392,9 +392,10 @@ describe('FetchAutocomplete', () => {
     expect(secondChipQuery).toBeNull();
   });
 
-  const commonClickSetup = (
+  const commonSetup = (
     isPlaceHolder: boolean,
-    disableDefaultRightClickBehaviour?: boolean
+    disableDefaultRightClickBehaviour?: boolean,
+    placeHolderText?: string
   ) => {
     const mockHandleOnRightClick = vitest.fn();
     const mockOuterOnContextMenu = vitest.fn();
@@ -418,6 +419,7 @@ describe('FetchAutocomplete', () => {
           onRightClick={mockHandleOnRightClick}
           disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
           isPlaceholder={isPlaceHolder}
+          placeHolderText={placeHolderText}
         />
       </Box>,
       { wrapper: wrap(withQueryClient()) }
@@ -436,21 +438,21 @@ describe('FetchAutocomplete', () => {
 
   describe('on a right click', () => {
     it('Shows search prompt and allows contextMenu event to bubble up if disableDefaultRightClickBehaviour = unset', async () => {
-      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonClickSetup(false, undefined);
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup(false, undefined);
       await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
       expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
       expect(mockOuterOnContextMenu).toHaveBeenCalledOnce();
     });
 
     it('Shows search prompt and allows contextMenu event to bubble up if disableDefaultRightClickBehaviour = false', async () => {
-      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonClickSetup(false, false);
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup(false, false);
       await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
       expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
       expect(mockOuterOnContextMenu).toHaveBeenCalledOnce();
     });
 
     it('Hides search prompt and prevents contextMenu event bubbling up if disableDefaultRightClickBehaviour = true', async () => {
-      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonClickSetup(false, true);
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup(false, true);
       await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
       expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
       expect(mockOuterOnContextMenu).not.toHaveBeenCalled();
@@ -458,7 +460,7 @@ describe('FetchAutocomplete', () => {
 
     describe('Calls onRightClick regardless of disableDefaultRightClickBehaviour value', () => {
       it.each([[undefined], [false], [true]])('%s', async (ddrcb) => {
-        const { mockHandleOnRightClick, user, autoCompleteEl } = commonClickSetup(false, ddrcb);
+        const { mockHandleOnRightClick, user, autoCompleteEl } = commonSetup(false, ddrcb);
         await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
         expect(mockHandleOnRightClick).toHaveBeenCalledOnce();
       });
@@ -466,7 +468,7 @@ describe('FetchAutocomplete', () => {
   });
 
   it('on a left click does not call onRightClick', async () => {
-    const { user, autoCompleteEl, mockHandleOnRightClick } = commonClickSetup(false, true);
+    const { user, autoCompleteEl, mockHandleOnRightClick } = commonSetup(false, true);
     await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
     expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
     expect(mockHandleOnRightClick).not.toHaveBeenCalled();
@@ -474,7 +476,7 @@ describe('FetchAutocomplete', () => {
 
   describe('isPlaceholder behaviour', () => {
     it('when false can click and type', async () => {
-      const { user, autoCompleteEl, mockOnInputChange } = commonClickSetup(false);
+      const { user, autoCompleteEl, mockOnInputChange } = commonSetup(false);
       await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
       await user.click(autoCompleteEl);
       expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
@@ -486,8 +488,8 @@ describe('FetchAutocomplete', () => {
       // expect(screen.queryByText('Some text')).toBeInTheDocument();
     });
 
-    it('when false prevents clicking and typing', async () => {
-      const { user, autoCompleteEl, mockOnInputChange } = commonClickSetup(true);
+    it('when true prevents clicking and typing', async () => {
+      const { user, autoCompleteEl, mockOnInputChange } = commonSetup(true);
       await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
       await user.click(autoCompleteEl);
       expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
@@ -496,21 +498,19 @@ describe('FetchAutocomplete', () => {
       expect(mockOnInputChange).not.toHaveBeenCalled();
     });
 
-    it('applies default placeholder text if not overridden', async () => {
-      const comp = (placeholderText?: string) => (
-        <FetchAutocomplete
-          lookup={async () => []}
-          label={'This is a label'}
-          value={[]}
-          onChange={() => {}}
-          isPlaceholder
-          placeHolderText={placeholderText}
-        />
-      );
-      const { rerender } = render(comp(undefined), { wrapper: wrap(withQueryClient()) });
+    it('when true applies default placeholder text', async () => {
+      commonSetup(true);
       expect(screen.getByPlaceholderText('Placeholder field')).toBeInTheDocument();
-      rerender(comp('Custom placeholder text'));
+    });
+
+    it('when true shows custom placeholder text if specified', async () => {
+      commonSetup(true, undefined, 'Custom placeholder text');
       expect(screen.getByPlaceholderText('Custom placeholder text')).toBeInTheDocument();
+    });
+
+    it('when true hides end adornment button', async () => {
+      commonSetup(true);
+      expect(screen.queryByRole('button', { name: 'Open' })).not.toBeInTheDocument();
     });
   });
 });

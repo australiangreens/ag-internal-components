@@ -248,7 +248,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             slotProps={{
               input: {
                 ...params.InputProps,
-                endAdornment: (
+                endAdornment: isPlaceholder ? undefined : (
                   <>
                     {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
                     {params.InputProps.endAdornment}
