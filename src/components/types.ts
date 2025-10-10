@@ -1,14 +1,18 @@
 export type AutocompleteGenericEntityIdType = number | string;
 
-/** These are an extension of the reasons for MUI's Autocomplete. We add delete
- * reason. */
+/**
+ * These are an extension of the reasons for MUI's Autocomplete. We add
+ * 'delete', 'setIsTemplatePlaceholder' and 'unsetIsTemplatePlaceholder' reason.
+ */
 export type FetchAutocompleteChangeReason =
   | 'createOption'
   | 'selectOption'
   | 'removeOption'
   | 'blur'
   | 'clear'
-  | 'delete';
+  | 'delete'
+  | 'setIsTemplatePlaceholder'
+  | 'unsetIsTemplatePlaceholder';
 
 export interface AutocompleteGenericEntity {
   id: AutocompleteGenericEntityIdType;
