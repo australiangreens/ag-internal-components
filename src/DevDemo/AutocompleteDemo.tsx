@@ -1,10 +1,11 @@
-import { PropsWithChildren, SyntheticEvent, useEffect, useState } from 'react';
-
 import { Settings as TitleIcon } from '@mui/icons-material';
 import CheckIcon from '@mui/icons-material/Check';
 import LayersIcon from '@mui/icons-material/Layers';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { Box, Divider, Menu, MenuItem, ToggleButton, Typography } from '@mui/material';
+import { useSetAtom } from 'jotai';
+import { PropsWithChildren, SyntheticEvent, useEffect, useState } from 'react';
+
 import {
   AutocompleteGenericEntity,
   FetchAutocomplete,
@@ -13,7 +14,6 @@ import {
   navBarTopAtom,
   topBarMiddleAtom,
 } from 'ag-internal-components';
-import { useSetAtom } from 'jotai';
 import countryList from './countries.json';
 
 const FormGroupBox = ({ children }: PropsWithChildren) => (
@@ -200,7 +200,7 @@ export default function FetchAutocompleteDemo() {
               />
             </div>
           </FormGroupBox>
-          <Divider light />
+          <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
             <Box display="flex" flexDirection="row" gap={1} alignItems="center">
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
@@ -229,7 +229,7 @@ export default function FetchAutocompleteDemo() {
           <FormGroupBox>
             <Box display="flex" flexDirection="row" gap={1} alignItems="center">
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
-              <Typography variant="h6">FetchAutocomplete placeholder</Typography>
+              <Typography variant="h6">FetchAutocomplete template placeholder</Typography>
             </Box>
             <Typography>
               Enter some country names here... if you can. Sorry - it is a placeholder.
@@ -244,18 +244,18 @@ export default function FetchAutocompleteDemo() {
                 sx={{ width: '50%' }}
                 boxSx={{ width: '50%' }}
                 textFieldColor="info"
-                isPlaceholder
+                isTemplatePlaceholder
                 placeholderText="Placeholder"
                 onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
               />
             </div>
           </FormGroupBox>
-          <Divider light />
+          <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
             <Box display="flex" flexDirection="row" gap={1} alignItems="center">
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
-              <Typography variant="h6">SingleAutocomplete placeholder</Typography>
+              <Typography variant="h6">SingleAutocomplete template placeholder</Typography>
             </Box>
             <Typography>
               Enter some country names here... if you can. Sorry - it is yet another placeholder.
@@ -269,7 +269,7 @@ export default function FetchAutocompleteDemo() {
                 noOptionsText="Why are you typing? This is a search template."
                 sx={{ width: '50%' }}
                 textFieldColor="info"
-                isPlaceholder
+                isTemplatePlaceholder
                 placeholderText="Placeholder"
                 textFieldVariant="filled"
                 onRightClick={handleContextMenu}

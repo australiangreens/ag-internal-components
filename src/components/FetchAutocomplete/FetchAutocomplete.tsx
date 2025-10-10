@@ -117,7 +117,17 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   boxSx?: SxProps<Theme>;
   disableIconFlip?: boolean;
   chipToolTipSlotProps?: TooltipProps['slotProps'];
-  isPlaceholder?: boolean;
+
+  /**
+   * Changes component style to be blue, with the text "Placeholder field"
+   * shown, no end adornment and is made read-only. State is retained.
+   */
+  isTemplatePlaceholder?: boolean;
+
+  /**
+   * The placeholder used in the underlying input element. Will be shown
+   * regardless of isTemplatePlaceholder
+   */
   placeholderText?: string;
 
   /**
@@ -165,7 +175,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   disablePortal = false,
   disableIconFlip = false,
   chipToolTipSlotProps = DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS,
-  isPlaceholder = false,
+  isTemplatePlaceholder = false,
   placeholderText = undefined,
   onRightClick = () => {},
   disableDefaultRightClickBehaviour = false,
@@ -190,7 +200,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
 
   const isInputMinimumLength = inputValue.length >= minLength;
 
-  const placeholderStyle = isPlaceholder
+  const placeholderStyle = isTemplatePlaceholder
     ? {
         sx: {
           '& .MuiFilledInput-root.Mui-focused': {
@@ -248,7 +258,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             slotProps={{
               input: {
                 ...params.InputProps,
-                endAdornment: isPlaceholder ? undefined : (
+                endAdornment: isTemplatePlaceholder ? undefined : (
                   <>
                     {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
                     {params.InputProps.endAdornment}
@@ -263,8 +273,10 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
               }
             }}
             color={textFieldColor}
-            // Default placeholderText if isPlaceholder is true
-            placeholder={placeholderText ?? (isPlaceholder ? 'Placeholder field' : undefined)}
+            // Default placeholderText if isTemplatePlaceholder is true
+            placeholder={
+              placeholderText ?? (isTemplatePlaceholder ? 'Placeholder field' : undefined)
+            }
             {...placeholderStyle}
           />
         )}
@@ -330,7 +342,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           }
           onRightClick(event);
         }}
-        readOnly={isPlaceholder}
+        readOnly={isTemplatePlaceholder}
       />
       {value.length > 0 && (
         <Box sx={boxSx}>

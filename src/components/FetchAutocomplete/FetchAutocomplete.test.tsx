@@ -393,7 +393,7 @@ describe('FetchAutocomplete', () => {
   });
 
   const commonSetup = (
-    isPlaceholder: boolean,
+    isTemplatePlaceholder: boolean,
     disableDefaultRightClickBehaviour?: boolean,
     placeholderText?: string
   ) => {
@@ -418,7 +418,7 @@ describe('FetchAutocomplete', () => {
           noOptionsText={'Start typing to search'}
           onRightClick={mockHandleOnRightClick}
           disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
-          isPlaceholder={isPlaceholder}
+          isTemplatePlaceholder={isTemplatePlaceholder}
           placeholderText={placeholderText}
         />
       </Box>,
@@ -474,7 +474,7 @@ describe('FetchAutocomplete', () => {
     expect(mockHandleOnRightClick).not.toHaveBeenCalled();
   });
 
-  describe('isPlaceholder behaviour', () => {
+  describe('isTemplatePlaceholder behaviour', () => {
     it('when false can click and type', async () => {
       const { user, autoCompleteEl, mockOnInputChange } = commonSetup(false);
       await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });

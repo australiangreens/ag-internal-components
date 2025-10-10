@@ -80,7 +80,17 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   disabled?: boolean;
   popupIcon?: ReactNode;
   disableIconFlip?: boolean;
-  isPlaceholder?: boolean;
+
+  /**
+   * Changes component style to be blue, with the text "Placeholder field"
+   * shown, no end adornment and is made read-only. State is retained.
+   */
+  isTemplatePlaceholder?: boolean;
+
+  /**
+   * The placeholder used in the underlying input element. Will be shown
+   * regardless of isTemplatePlaceholder
+   */
   placeholderText?: string;
 
   /**
@@ -120,7 +130,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   disabled,
   popupIcon,
   disableIconFlip,
-  isPlaceholder = false,
+  isTemplatePlaceholder = false,
   placeholderText = undefined,
   onRightClick = () => {},
   disableDefaultRightClickBehaviour = false,
@@ -137,7 +147,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
 
   const isInputMinimumLength = inputValue.length >= minLength;
 
-  const placeholderStyle = isPlaceholder
+  const placeholderStyle = isTemplatePlaceholder
     ? {
         sx: {
           '& .MuiFilledInput-root.Mui-focused': {
@@ -201,8 +211,10 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               color={textFieldColor}
               error={error}
               helperText={helperText}
-              // Default placeholderText if isPlaceholder is true
-              placeholder={placeholderText ?? (isPlaceholder ? 'Placeholder field' : undefined)}
+              // Default placeholderText if isTemplatePlaceholder is true
+              placeholder={
+                placeholderText ?? (isTemplatePlaceholder ? 'Placeholder field' : undefined)
+              }
               {...placeholderStyle}
             />
           )}
@@ -225,7 +237,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             </li>
           )}
           disabled={disabled}
-          readOnly={isPlaceholder}
+          readOnly={isTemplatePlaceholder}
         />
       </Stack>
     </div>
