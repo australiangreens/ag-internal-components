@@ -112,22 +112,16 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
   helperText?: ReactNode;
   enableHighlighting?: boolean;
   sx?: SxProps<Theme>;
+
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
+  textFieldFocused?: boolean;
+  textFieldSx?: SxProps<Theme>;
+
   boxSx?: SxProps<Theme>;
   disableIconFlip?: boolean;
   chipToolTipSlotProps?: TooltipProps['slotProps'];
 
-  /**
-   * Changes component style to be blue, with the text "Placeholder field"
-   * shown, no end adornment and is made read-only. State is retained.
-   */
-  isTemplatePlaceholder?: boolean;
-
-  /**
-   * The placeholder used in the underlying input element. Will be shown
-   * regardless of isTemplatePlaceholder
-   */
   placeholderText?: string;
 
   /**
@@ -146,6 +140,10 @@ export type FetchAutocompleteProps<EntityType extends AutocompleteGenericEntity>
    * listened for.
    */
   disableDefaultRightClickBehaviour?: boolean;
+
+  readOnly?: boolean;
+
+  hideInputEndAdornment?: boolean;
 };
 
 /**
@@ -166,6 +164,8 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   boxSx,
   textFieldColor,
   textFieldVariant = 'filled',
+  textFieldFocused,
+  textFieldSx,
   loadingText = 'Loading...',
   noOptionsText = 'No options',
   popupIcon = <DefaultPopupIcon />,
@@ -175,10 +175,11 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   disablePortal = false,
   disableIconFlip = false,
   chipToolTipSlotProps = DEFAULT_CHIP_TOOL_TIP_SLOT_PROPS,
-  isTemplatePlaceholder = false,
   placeholderText = undefined,
   onRightClick = () => {},
   disableDefaultRightClickBehaviour = false,
+  readOnly,
+  hideInputEndAdornment,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
 
@@ -199,20 +200,6 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   });
 
   const isInputMinimumLength = inputValue.length >= minLength;
-
-  const placeholderStyle = isTemplatePlaceholder
-    ? {
-        sx: {
-          '& .MuiFilledInput-root.Mui-focused': {
-            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
-          },
-          '& .MuiOutlinedInput-root.Mui-focused': {
-            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
-          },
-        },
-        focused: true,
-      }
-    : {};
 
   return (
     <div data-testid={dataTestId}>
@@ -258,7 +245,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             slotProps={{
               input: {
                 ...params.InputProps,
-                endAdornment: isTemplatePlaceholder ? undefined : (
+                endAdornment: hideInputEndAdornment ? undefined : (
                   <>
                     {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
                     {params.InputProps.endAdornment}
@@ -273,11 +260,9 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
               }
             }}
             color={textFieldColor}
-            // Default placeholderText if isTemplatePlaceholder is true
-            placeholder={
-              placeholderText ?? (isTemplatePlaceholder ? 'Placeholder field' : undefined)
-            }
-            {...placeholderStyle}
+            placeholder={placeholderText}
+            sx={textFieldSx}
+            focused={textFieldFocused}
           />
         )}
         // We render tags/chips below the component
@@ -342,7 +327,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           }
           onRightClick(event);
         }}
-        readOnly={isTemplatePlaceholder}
+        readOnly={readOnly}
       />
       {value.length > 0 && (
         <Box sx={boxSx}>

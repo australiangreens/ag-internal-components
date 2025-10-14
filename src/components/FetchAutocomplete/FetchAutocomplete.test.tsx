@@ -473,44 +473,4 @@ describe('FetchAutocomplete', () => {
     expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
     expect(mockHandleOnRightClick).not.toHaveBeenCalled();
   });
-
-  describe('isTemplatePlaceholder behaviour', () => {
-    it('when false can click and type', async () => {
-      const { user, autoCompleteEl, mockOnInputChange } = commonSetup(false);
-      await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
-      await user.click(autoCompleteEl);
-      expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
-
-      await user.keyboard('Some text');
-      // Checking if the text came up wasn't working as intended, so just check
-      // the input change event was never triggered
-      expect(mockOnInputChange).toHaveBeenCalledTimes(9);
-      // expect(screen.queryByText('Some text')).toBeInTheDocument();
-    });
-
-    it('when true prevents clicking and typing', async () => {
-      const { user, autoCompleteEl, mockOnInputChange } = commonSetup(true);
-      await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
-      await user.click(autoCompleteEl);
-      expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
-
-      await user.keyboard('Some text');
-      expect(mockOnInputChange).not.toHaveBeenCalled();
-    });
-
-    it('when true applies default placeholder text', async () => {
-      commonSetup(true);
-      expect(screen.getByPlaceholderText('Placeholder field')).toBeInTheDocument();
-    });
-
-    it('when true shows custom placeholder text if specified', async () => {
-      commonSetup(true, undefined, 'Custom placeholder text');
-      expect(screen.getByPlaceholderText('Custom placeholder text')).toBeInTheDocument();
-    });
-
-    it('when true hides end adornment button', async () => {
-      commonSetup(true);
-      expect(screen.queryByRole('button', { name: 'Open' })).not.toBeInTheDocument();
-    });
-  });
 });

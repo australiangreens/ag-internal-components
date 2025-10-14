@@ -243,11 +243,22 @@ export default function FetchAutocompleteDemo() {
                 noOptionsText="Why are you typing? This is a search template."
                 sx={{ width: '50%' }}
                 boxSx={{ width: '50%' }}
-                textFieldColor="info"
-                isTemplatePlaceholder
-                placeholderText="Placeholder"
                 onRightClick={handleContextMenu}
                 disableDefaultRightClickBehaviour={isSearchDeletedonRightClick}
+                // The following gives it the placeholder styling
+                textFieldColor="info"
+                placeholderText="Placeholder field"
+                textFieldFocused={true}
+                textFieldSx={{
+                  '& .MuiFilledInput-root.Mui-focused': {
+                    backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
+                  },
+                  '& .MuiOutlinedInput-root.Mui-focused': {
+                    backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
+                  },
+                }}
+                readOnly={true}
+                hideInputEndAdornment={true}
               />
             </div>
           </FormGroupBox>
@@ -268,7 +279,6 @@ export default function FetchAutocompleteDemo() {
                 onChange={() => {}}
                 noOptionsText="Why are you typing? This is a search template."
                 sx={{ width: '50%' }}
-                textFieldColor="info"
                 isTemplatePlaceholder
                 placeholderText="Placeholder"
                 textFieldVariant="filled"
