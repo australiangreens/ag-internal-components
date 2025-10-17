@@ -392,11 +392,15 @@ describe('FetchAutocomplete', () => {
     expect(secondChipQuery).toBeNull();
   });
 
-  const commonSetup = (
-    isTemplatePlaceholder: boolean,
-    disableDefaultRightClickBehaviour?: boolean,
-    placeholderText?: string
-  ) => {
+  const commonSetup = ({
+    disableDefaultRightClickBehaviour,
+    placeholderText,
+    hideInputEndAdornment,
+  }: {
+    disableDefaultRightClickBehaviour?: boolean;
+    placeholderText?: string;
+    hideInputEndAdornment?: boolean;
+  }) => {
     const mockHandleOnRightClick = vitest.fn();
     const mockOuterOnContextMenu = vitest.fn();
     const mockOnInputChange = vitest.fn();
@@ -418,8 +422,8 @@ describe('FetchAutocomplete', () => {
           noOptionsText={'Start typing to search'}
           onRightClick={mockHandleOnRightClick}
           disableDefaultRightClickBehaviour={disableDefaultRightClickBehaviour}
-          isTemplatePlaceholder={isTemplatePlaceholder}
           placeholderText={placeholderText}
+          hideInputEndAdornment={hideInputEndAdornment}
         />
       </Box>,
       { wrapper: wrap(withQueryClient()) }
@@ -438,21 +442,25 @@ describe('FetchAutocomplete', () => {
 
   describe('on a right click', () => {
     it('Shows search prompt and allows contextMenu event to bubble up if disableDefaultRightClickBehaviour = unset', async () => {
-      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup(false, undefined);
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup({});
       await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
       expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
       expect(mockOuterOnContextMenu).toHaveBeenCalledOnce();
     });
 
     it('Shows search prompt and allows contextMenu event to bubble up if disableDefaultRightClickBehaviour = false', async () => {
-      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup(false, false);
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup({
+        disableDefaultRightClickBehaviour: false,
+      });
       await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
       expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
       expect(mockOuterOnContextMenu).toHaveBeenCalledOnce();
     });
 
     it('Hides search prompt and prevents contextMenu event bubbling up if disableDefaultRightClickBehaviour = true', async () => {
-      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup(false, true);
+      const { user, autoCompleteEl, mockOuterOnContextMenu } = commonSetup({
+        disableDefaultRightClickBehaviour: true,
+      });
       await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
       expect(screen.queryByText('Start typing to search')).not.toBeInTheDocument();
       expect(mockOuterOnContextMenu).not.toHaveBeenCalled();
@@ -460,7 +468,9 @@ describe('FetchAutocomplete', () => {
 
     describe('Calls onRightClick regardless of disableDefaultRightClickBehaviour value', () => {
       it.each([[undefined], [false], [true]])('%s', async (ddrcb) => {
-        const { mockHandleOnRightClick, user, autoCompleteEl } = commonSetup(false, ddrcb);
+        const { mockHandleOnRightClick, user, autoCompleteEl } = commonSetup({
+          disableDefaultRightClickBehaviour: ddrcb,
+        });
         await user.pointer({ keys: '[MouseRight>]', target: autoCompleteEl });
         expect(mockHandleOnRightClick).toHaveBeenCalledOnce();
       });
@@ -468,9 +478,16 @@ describe('FetchAutocomplete', () => {
   });
 
   it('on a left click does not call onRightClick', async () => {
-    const { user, autoCompleteEl, mockHandleOnRightClick } = commonSetup(false, true);
+    const { user, autoCompleteEl, mockHandleOnRightClick } = commonSetup({
+      disableDefaultRightClickBehaviour: true,
+    });
     await user.pointer({ keys: '[MouseLeft>]', target: autoCompleteEl });
     expect(screen.queryByText('Start typing to search')).toBeInTheDocument();
     expect(mockHandleOnRightClick).not.toHaveBeenCalled();
+  });
+
+  it('hides end adornment button if hideInputEndAdornment=true', async () => {
+    commonSetup({ hideInputEndAdornment: true });
+    expect(screen.queryByRole('button', { name: 'Open' })).not.toBeInTheDocument();
   });
 });
