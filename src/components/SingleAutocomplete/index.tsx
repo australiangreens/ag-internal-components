@@ -72,26 +72,19 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
   'data-testid'?: string;
 
   hideButton?: boolean;
+  loadingText?: string;
   noOptionsText?: string;
   sx?: SxProps<Theme>;
   textFieldColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   textFieldVariant?: 'filled' | 'outlined' | 'standard';
+  textFieldFocused?: boolean;
+  textFieldSx?: SxProps<Theme>;
   error?: boolean;
   helperText?: ReactNode;
   disabled?: boolean;
   popupIcon?: ReactNode;
   disableIconFlip?: boolean;
 
-  /**
-   * Changes component style to be blue, with the text "Placeholder field"
-   * shown, no end adornment and is made read-only. State is retained.
-   */
-  isTemplatePlaceholder?: boolean;
-
-  /**
-   * The placeholder used in the underlying input element. Will be shown
-   * regardless of isTemplatePlaceholder
-   */
   placeholderText?: string;
 
   /**
@@ -110,6 +103,10 @@ type Props<EntityType extends AutocompleteGenericEntity> = {
    * listened for.
    */
   disableDefaultRightClickBehaviour?: boolean;
+
+  readOnly?: boolean;
+
+  hideInputEndAdornment?: boolean;
 };
 
 const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
@@ -121,8 +118,11 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   sx,
   textFieldColor,
   textFieldVariant = 'filled',
+  textFieldFocused,
+  textFieldSx,
   error = false,
   'data-testid': dataTestId,
+  loadingText = 'Loading...',
   noOptionsText = 'No options',
   minLength = 3,
   disablePortal = false,
@@ -131,10 +131,11 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   disabled,
   popupIcon,
   disableIconFlip,
-  isTemplatePlaceholder = false,
   placeholderText = undefined,
   onRightClick = () => {},
   disableDefaultRightClickBehaviour = false,
+  readOnly,
+  hideInputEndAdornment,
 }: Props<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -147,21 +148,6 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   });
 
   const isInputMinimumLength = inputValue.length >= minLength;
-
-  const placeholderStyle = isTemplatePlaceholder
-    ? {
-        sx: {
-          '& .MuiFilledInput-root.Mui-focused': {
-            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
-          },
-          '& .MuiOutlinedInput-root.Mui-focused': {
-            backgroundColor: 'hsla(201, 98%, 41%, 0.08)',
-          },
-        },
-        focused: true,
-        slotProps: { input: { endAdornment: undefined } },
-      }
-    : {};
 
   return (
     <div data-testid={dataTestId}>
@@ -201,6 +187,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
           filterOptions={(option) => option}
           value={value}
           noOptionsText={isInputMinimumLength ? noOptionsText : 'Start typing to search'}
+          loadingText={loadingText}
           getOptionLabel={(option) => option.label}
           popupIcon={popupIcon}
           renderInput={(params) => (
@@ -215,7 +202,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               slotProps={{
                 input: {
                   ...params.InputProps,
-                  endAdornment: (
+                  endAdornment: hideInputEndAdornment ? undefined : (
                     <>
                       {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
                       {params.InputProps.endAdornment}
@@ -223,11 +210,9 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
                   ),
                 },
               }}
-              // Default placeholderText if isTemplatePlaceholder is true
-              placeholder={
-                placeholderText ?? (isTemplatePlaceholder ? 'Placeholder field' : undefined)
-              }
-              {...placeholderStyle}
+              placeholder={placeholderText}
+              sx={textFieldSx}
+              focused={textFieldFocused}
             />
           )}
           isOptionEqualToValue={(option, v) => option.id === v.id}
@@ -249,7 +234,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             </li>
           )}
           disabled={disabled}
-          readOnly={isTemplatePlaceholder}
+          readOnly={readOnly}
         />
       </Stack>
     </div>
