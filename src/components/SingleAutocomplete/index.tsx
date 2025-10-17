@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   AutocompleteChangeReason,
+  CircularProgress,
   Stack,
   SxProps,
   TextField,
@@ -211,6 +212,17 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               color={textFieldColor}
               error={error}
               helperText={helperText}
+              slotProps={{
+                input: {
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                },
+              }}
               // Default placeholderText if isTemplatePlaceholder is true
               placeholder={
                 placeholderText ?? (isTemplatePlaceholder ? 'Placeholder field' : undefined)
