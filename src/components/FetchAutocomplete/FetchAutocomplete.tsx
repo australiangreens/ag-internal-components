@@ -11,11 +11,11 @@ import {
   TooltipProps,
   Typography,
 } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { ReactNode, SyntheticEvent, useState } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
 import {
   AutocompleteGenericEntity,
   AutocompleteGenericEntityIdType,

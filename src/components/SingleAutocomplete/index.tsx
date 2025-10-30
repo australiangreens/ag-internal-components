@@ -21,7 +21,7 @@ import { AutocompleteGenericEntity } from '../types';
  */
 export const MUI_AUTOCOMPLETE_VALUE_WARNING_REGEX = /MUI: The value provided to.*is invalid/i;
 
-type Props<EntityType extends AutocompleteGenericEntity> = {
+export type SingleAutocompleteProps<EntityType extends AutocompleteGenericEntity> = {
   /**
    * Callback fired when the value changes. reason is one of "createOption",
    * "selectOption", "removeOption", "blur" or "clear". This is passed directly
@@ -136,7 +136,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   disableDefaultRightClickBehaviour = false,
   readOnly,
   hideInputEndAdornment,
-}: Props<EntityType>) => {
+}: SingleAutocompleteProps<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
 
   const { data: options, isLoading } = useAutocompleteOptions({
