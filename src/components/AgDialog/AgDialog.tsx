@@ -9,8 +9,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, ReactElement, useState } from 'react';
 
 export type AgDialogButtonConfig = {
   text: string;
@@ -22,7 +21,7 @@ export type AgDialogButtonConfig = {
 
 export type AgDialogProps = PropsWithChildren<{
   isOpen: boolean;
-  dialogTitle: string;
+  dialogTitle: string | ReactElement;
   maxWidth?: false | Breakpoint;
   primaryButton?: AgDialogButtonConfig;
   secondaryButton?: AgDialogButtonConfig;
