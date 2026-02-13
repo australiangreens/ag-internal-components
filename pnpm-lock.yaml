@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@sentry/react':
+        specifier: ^10.38.0
+        version: 10.38.0(react@19.1.1)
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.90.2(react@19.1.1)
@@ -25,7 +28,7 @@ importers:
         version: 3.45.1
       jotai:
         specifier: ^2.14.0
-        version: 2.14.0(@babel/core@7.28.3)(@babel/template@7.27.2)(@types/react@19.1.13)(react@19.1.1)
+        version: 2.14.0(@babel/core@7.25.2)(@babel/template@7.27.2)(@types/react@19.1.13)(react@19.1.1)
       react-avatar:
         specifier: ^5.0.4
         version: 5.0.4(@babel/runtime@7.28.3)(core-js-pure@3.45.1)(prop-types@15.8.1)(react@19.1.1)
@@ -1024,6 +1027,36 @@ packages:
 
   '@rushstack/ts-command-line@5.0.2':
     resolution: {integrity: sha512-+AkJDbu1GFMPIU8Sb7TLVXDv/Q7Mkvx+wAjEl8XiXVVq+p1FmWW6M3LYpJMmoHNckSofeMecgWg5lfMwNAAsEQ==}
+
+  '@sentry-internal/browser-utils@10.38.0':
+    resolution: {integrity: sha512-UOJtYmdcxHCcV0NPfXFff/a95iXl/E0EhuQ1y0uE0BuZDMupWSF5t2BgC4HaE5Aw3RTjDF3XkSHWoIF6ohy7eA==}
+    engines: {node: '>=18'}
+
+  '@sentry-internal/feedback@10.38.0':
+    resolution: {integrity: sha512-JXneg9zRftyfy1Fyfc39bBlF/Qd8g4UDublFFkVvdc1S6JQPlK+P6q22DKz3Pc8w3ySby+xlIq/eTu9Pzqi4KA==}
+    engines: {node: '>=18'}
+
+  '@sentry-internal/replay-canvas@10.38.0':
+    resolution: {integrity: sha512-OXWM9jEqNYh4VTvrMu7v+z1anz+QKQ/fZXIZdsO7JTT2lGNZe58UUMeoq386M+Saxen8F9SUH7yTORy/8KI5qw==}
+    engines: {node: '>=18'}
+
+  '@sentry-internal/replay@10.38.0':
+    resolution: {integrity: sha512-YWIkL6/dnaiQyFiZXJ/nN+NXGv/15z45ia86bE/TMq01CubX/DUOilgsFz0pk2v/pg3tp/U2MskLO9Hz0cnqeg==}
+    engines: {node: '>=18'}
+
+  '@sentry/browser@10.38.0':
+    resolution: {integrity: sha512-3phzp1YX4wcQr9mocGWKbjv0jwtuoDBv7+Y6Yfrys/kwyaL84mDLjjQhRf4gL5SX7JdYkhBp4WaiNlR0UC4kTA==}
+    engines: {node: '>=18'}
+
+  '@sentry/core@10.38.0':
+    resolution: {integrity: sha512-1pubWDZE5y5HZEPMAZERP4fVl2NH3Ihp1A+vMoVkb3Qc66Diqj1WierAnStlZP7tCx0TBa0dK85GTW/ZFYyB9g==}
+    engines: {node: '>=18'}
+
+  '@sentry/react@10.38.0':
+    resolution: {integrity: sha512-3UiKo6QsqTyPGUt0XWRY9KLaxc/cs6Kz4vlldBSOXEL6qPDL/EfpwNJT61osRo81VFWu8pKu7ZY2bvLPryrnBQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: ^16.14.0 || 17.x || 18.x || 19.x
 
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -5013,6 +5046,40 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
+  '@sentry-internal/browser-utils@10.38.0':
+    dependencies:
+      '@sentry/core': 10.38.0
+
+  '@sentry-internal/feedback@10.38.0':
+    dependencies:
+      '@sentry/core': 10.38.0
+
+  '@sentry-internal/replay-canvas@10.38.0':
+    dependencies:
+      '@sentry-internal/replay': 10.38.0
+      '@sentry/core': 10.38.0
+
+  '@sentry-internal/replay@10.38.0':
+    dependencies:
+      '@sentry-internal/browser-utils': 10.38.0
+      '@sentry/core': 10.38.0
+
+  '@sentry/browser@10.38.0':
+    dependencies:
+      '@sentry-internal/browser-utils': 10.38.0
+      '@sentry-internal/feedback': 10.38.0
+      '@sentry-internal/replay': 10.38.0
+      '@sentry-internal/replay-canvas': 10.38.0
+      '@sentry/core': 10.38.0
+
+  '@sentry/core@10.38.0': {}
+
+  '@sentry/react@10.38.0(react@19.1.1)':
+    dependencies:
+      '@sentry/browser': 10.38.0
+      '@sentry/core': 10.38.0
+      react: 19.1.1
+
   '@sinclair/typebox@0.27.8': {}
 
   '@storybook/addon-docs@9.1.10(@types/react@19.1.13)(storybook@9.1.8(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.1.7(@types/node@24.5.2)(yaml@2.5.0)))':
@@ -7185,9 +7252,9 @@ snapshots:
 
   jju@1.4.0: {}
 
-  jotai@2.14.0(@babel/core@7.28.3)(@babel/template@7.27.2)(@types/react@19.1.13)(react@19.1.1):
+  jotai@2.14.0(@babel/core@7.25.2)(@babel/template@7.27.2)(@types/react@19.1.13)(react@19.1.1):
     optionalDependencies:
-      '@babel/core': 7.28.3
+      '@babel/core': 7.25.2
       '@babel/template': 7.27.2
       '@types/react': 19.1.13
       react: 19.1.1
