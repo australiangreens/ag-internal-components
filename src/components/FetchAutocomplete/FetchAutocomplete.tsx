@@ -242,6 +242,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             variant={textFieldVariant}
             error={error}
             helperText={helperText}
+            autoComplete='off'
             slotProps={{
               input: {
                 ...params.InputProps,

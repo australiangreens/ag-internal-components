@@ -199,6 +199,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               color={textFieldColor}
               error={error}
               helperText={helperText}
+              autoComplete='off'
               slotProps={{
                 input: {
                   ...params.InputProps,
