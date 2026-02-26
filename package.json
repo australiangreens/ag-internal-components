@@ -1,7 +1,7 @@
 {
   "name": "@australiangreens/ag-internal-components",
   "private": false,
-  "version": "0.3.13",
+  "version": "0.3.14",
   "type": "module",
   "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
@@ -28,7 +28,9 @@
     "commitmsg": "sh ./scripts/githooks/commit-msg.sh",
     "storybook": "storybook dev -p 6006",
     "storybook:no": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "node scripts/release.js",
+    "ship": "pnpm publish"
   },
   "files": [
     "dist/*"
