@@ -2,12 +2,9 @@
 
 ## Steps
 
-TODO: Put some of this in a script
+1. Stage and commit your changes via `git add ...`, `git commit ...`, etc., on the `main` branch
 
-1. Ensure the version in package.json is updated and correct.
+2. Run `pnpm release patch|minor|major` (pick whichever option is most appropriate)
 
-2. Make the final commit and tag it with the semver preceeded by a "v". E.g.
-   version 1.2.4 would be tagged as "v1.2.4"
-
-3. Run `npm publish`. This will do a lint check, run tests, do a production
-   build and then publish it to npmjs.com
+3. Run `pnpm ship`. This will do a lint check, run tests, do a production
+   build and then publish it to npmjs.com. You'll be asked to authenticate
