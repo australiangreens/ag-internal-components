@@ -23,7 +23,7 @@
     "prepare": "husky",
     "prepublishOnly": "pnpm lint && pnpm test && pnpm build",
     "release": "node scripts/release.js",
-    "ship": "pnpm publish",
+    "ship": "pnpm publish --no-git-checks",
     "### HUSKY GIT HOOKS ###": "Called by husky pre-commit and pre-push scripts",
     "prepush": "sh ./scripts/githooks/pre-push.sh",
     "precommit": "sh ./scripts/githooks/pre-commit.sh",
