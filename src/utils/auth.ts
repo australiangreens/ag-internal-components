@@ -12,23 +12,38 @@ function fromKebab(string: string) {
 export function determineUserLevelFromClaims<T extends string>(
   claims: IdToken | undefined,
   domainCode: DomainCode,
-  roleMapping: Record<T, string[]>,
-  rolePriority: T[]
+  roleMapping: Record<T, readonly string[]>,
+  rolePriority: readonly T[]
 ) {
   if (!claims) return 'None';
 
-  const businessRoleClaimsForDomain = Object.entries(claims).filter(
-    ([name, value]) => name.startsWith('https://greens.org.au/roles/') && value.includes(domainCode)
-  );
-  const roles = businessRoleClaimsForDomain.map(([claimName]) =>
-    fromKebab(claimName.split('/').at(-1) ?? '')
-  );
+  const rolesClaim = claims['https://greens.org.au/roles'] as
+    | Record<string, string[]>
+    | undefined;
+  if (!rolesClaim) return 'None';
+
+  const roles = Object.entries(rolesClaim)
+    .filter(([, domains]) => domains.includes(domainCode))
+    .map(([roleName]) => fromKebab(roleName));
 
   return (
     rolePriority.find((userLevel) =>
-      roleMapping[userLevel].some((requiredRole) => roles.includes(requiredRole))
+      roleMapping[userLevel].some((requiredRole) => roles.includes(requiredRole)),
     ) ?? 'None'
   );
+}
+
+export function getDomainsFromRolesClaim(
+  rolesClaim: Record<string, string[]>,
+  appValidBusinessRoles: string[],
+): DomainCode[] {
+  return Object.entries(rolesClaim).reduce((prev, [roleName, domains]) => {
+    const roleTitle = fromKebab(roleName);
+    const validDomains = appValidBusinessRoles.includes(roleTitle)
+      ? (domains as DomainCode[])
+      : [];
+    return [...new Set([...prev, ...validDomains])];
+  }, [] as DomainCode[]);
 }
 
 export const useValidDomains = (appValidBusinessRoles: string[]) => {
@@ -37,18 +52,14 @@ export const useValidDomains = (appValidBusinessRoles: string[]) => {
     queryKey: ['availableDomains', user?.sub],
     queryFn: async (): Promise<DomainCode[]> => {
       const claims = await getIdTokenClaims();
-
       if (!claims) return [];
 
-      return Object.entries(claims).reduce((prev, [name, value]) => {
-        const roleName = fromKebab(name.split('/').at(-1) ?? '');
-        const domains =
-          name.startsWith('https://greens.org.au/roles/') &&
-          appValidBusinessRoles.includes(roleName)
-            ? value
-            : [];
-        return [...new Set([...prev, ...domains])];
-      }, [] as DomainCode[]);
+      const rolesClaim = claims['https://greens.org.au/roles'] as
+        | Record<string, string[]>
+        | undefined;
+      if (!rolesClaim) return [];
+
+      return getDomainsFromRolesClaim(rolesClaim, appValidBusinessRoles);
     },
   });
 };
