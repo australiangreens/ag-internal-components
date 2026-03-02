@@ -53,12 +53,11 @@ function PageContainer({
       }}
     >
       {noPadding ? (
-        <Box component="main" id="main-content" height="inherit">
+        <Box id="main-content" height="inherit">
           {children}
         </Box>
       ) : (
         <Container
-          component="main"
           id="main-content"
           maxWidth={maxWidth}
           sx={{ paddingTop: 3, paddingBottom: 3, flexGrow: 1 }}
