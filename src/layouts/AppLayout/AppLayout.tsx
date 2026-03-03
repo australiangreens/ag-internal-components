@@ -45,6 +45,9 @@ export interface BaseAppLayoutProps {
   /** Passed directly as prop of TopBar component */
   topBarDataTestId?: string;
 
+  /** Accessible label for the hamburger menu button. Defaults to "Open navigation menu". */
+  menuButtonAriaLabel?: string;
+
   /** Passed directly as prop of PageContainer component */
   pageContentDataTestId?: string;
 
@@ -71,6 +74,7 @@ export default function AppLayout({
   pageContainerProps,
   pageContentDataTestId,
   topBarDataTestId,
+  menuButtonAriaLabel,
   navBarDataTestId,
   navBarMiddle,
   navBarBottom,
@@ -98,6 +102,7 @@ export default function AppLayout({
         data-testid={topBarDataTestId}
         height={topBarHeight}
         middle={topBarMiddle}
+        menuButtonAriaLabel={menuButtonAriaLabel}
       />
 
       <Box sx={{ display: 'flex' }}>

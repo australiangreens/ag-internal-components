@@ -18,6 +18,9 @@ export interface TopBarProps {
    */
   middle?: ReactNode;
 
+  /** Accessible label for the hamburger menu button. Defaults to "Open navigation menu". */
+  menuButtonAriaLabel?: string;
+
   height: number;
   'data-testid'?: string;
 }
@@ -36,6 +39,7 @@ export default function TopBar({
   height,
   'data-testid': dataTestId,
   middle,
+  menuButtonAriaLabel = 'Open navigation menu',
 }: TopBarProps) {
   const setNavBarOpen = useSetAtom(navBarOpenAtom);
 
@@ -65,6 +69,7 @@ export default function TopBar({
           color="inherit"
           sx={{ padding: 1.5, marginLeft: '12px' }}
           onClick={toggleNavBar}
+          aria-label={menuButtonAriaLabel}
         >
           <HamburgerIcon fontSize="medium" />
         </IconButton>
