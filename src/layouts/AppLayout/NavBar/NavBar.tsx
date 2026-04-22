@@ -8,7 +8,7 @@ import { navBarOpenAtom } from '../stateAtoms';
 import { LinksMenu } from './LinksMenu';
 import { NavDrawer, Root, classes } from './Styling';
 import UserInfo from './UserInfo';
-import { NavBarLink, User } from './types';
+import { NavBarLinkType, User } from './types';
 
 export interface NavBarProps {
   open: boolean;
@@ -49,7 +49,7 @@ export interface NavBarProps {
    * ]}/>
    * ```
    */
-  middle: ReactNode | NavBarLink[];
+  middle: ReactNode | NavBarLinkType[];
 
   /** User information displayed at bottom of navabar when it is open*/
   user?: User;
@@ -114,7 +114,11 @@ export default function NavBar({
 
         <Box flexGrow="1">
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
-          {Array.isArray(middle) ? <LinksMenu links={middle as unknown as NavBarLink[]} /> : middle}
+          {Array.isArray(middle) ? (
+            <LinksMenu links={middle as unknown as NavBarLinkType[]} />
+          ) : (
+            middle
+          )}
         </Box>
 
         <Box flexGrow="0">

@@ -46,6 +46,7 @@ function PageContainer({
 }: PropsWithChildren<PageContainerProps>) {
   return (
     <Box
+      tabIndex={0}
       sx={{
         overflow: 'auto',
         height: `calc(100vh - ${topBarHeight}px)`,

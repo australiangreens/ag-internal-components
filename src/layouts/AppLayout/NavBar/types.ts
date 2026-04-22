@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface NavBarLink {
+export interface NavBarLinkType {
   label: string;
   destPathname: string;
   icon?: ReactNode;

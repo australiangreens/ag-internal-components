@@ -1,9 +1,9 @@
 // import { Link as RouterLink } from 'react-router';
 
-import { NavBarLink } from './types';
+import { NavBarLinkType } from './types';
 
 export interface LinksMenuProps {
-  links: NavBarLink[];
+  links: NavBarLinkType[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
