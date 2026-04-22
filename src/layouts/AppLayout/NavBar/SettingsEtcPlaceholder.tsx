@@ -1,16 +1,15 @@
-import { useState } from 'react';
 import {
-  SpaceDashboard as SwitchToIcon,
-  Settings as SettingsIcon,
   Logout as LogoutIcon,
-  ExpandLess as ExpandLessIcon,
-  ExpandMore as ExpandMoreIcon,
+  School as SchoolIcon,
+  Settings as SettingsIcon,
+  SpaceDashboard as SwitchToIcon,
 } from '@mui/icons-material';
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { List } from '@mui/material';
+import { useState } from 'react';
+import { NavBarLink } from 'src/components';
 import AgDialog from '../../../components/AgDialog/AgDialog';
 
 export default function SettingsEtcPlaceholder() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -26,41 +25,34 @@ export default function SettingsEtcPlaceholder() {
   return (
     <>
       <List>
-        <ListItemButton onClick={() => setMenuOpen((prev: boolean) => !prev)}>
-          <ListItemIcon>
-            <SwitchToIcon />
-          </ListItemIcon>
-          <ListItemText primary="Switch to ..." />
-          {menuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </ListItemButton>
+        <NavBarLink
+          label="Training Hub"
+          icon={<SchoolIcon />}
+          to="https://training.greens.org.au/"
+          openInNewWindow
+          tooltip="Where all training guides are found"
+        />
+        <NavBarLink
+          label="Settings"
+          icon={<SettingsIcon />}
+          onClick={() => handleDialogOpen('Settings')}
+        />
+        <NavBarLink
+          label="Switch apps"
+          icon={<SwitchToIcon />}
+          subMenu={[
+            { label: '1. Something', onClick: () => handleDialogOpen('1. Something') },
+            { label: '2. Something else', onClick: () => handleDialogOpen('2. Something else') },
+            { label: '3. Puppies!', onClick: () => handleDialogOpen('3. Puppies!') },
+          ]}
+          extraSubIndentSpace={3}
+        />
 
-        <Collapse in={menuOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 2 }} onClick={() => handleDialogOpen('1. Something')}>
-              <ListItemText primary="1. Something" inset />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 2 }} onClick={() => handleDialogOpen('2. Something else')}>
-              <ListItemText primary="2. Something else" inset />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 2 }} onClick={() => handleDialogOpen('3. Puppies!')}>
-              <ListItemText primary="3. Puppies!" inset />
-            </ListItemButton>
-          </List>
-        </Collapse>
-
-        <ListItemButton onClick={() => handleDialogOpen('Settings')}>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItemButton>
-
-        <ListItemButton onClick={() => handleDialogOpen('Log out')}>
-          <ListItemIcon>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="Log out" />
-        </ListItemButton>
+        <NavBarLink
+          label="Log out"
+          icon={<LogoutIcon />}
+          onClick={() => handleDialogOpen('Log out')}
+        />
       </List>
       <AgDialog
         isOpen={dialogOpen}

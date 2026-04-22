@@ -1,25 +1,15 @@
 import {
-  ExpandLess as ExpandLessIcon,
   AccessAlarm as Step1Icon,
   AddHome as Step2Icon,
   Pets as Step3Icon,
   Edit as TopIcon,
 } from '@mui/icons-material';
-import {
-  Box,
-  Collapse,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-  Typography,
-} from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 
-import { navBarOpenAtom, navBarTopAtom } from 'ag-internal-components';
+import { NavBarLink, navBarOpenAtom, navBarTopAtom } from 'ag-internal-components';
 
 const hackyTitle = {
   color: 'success.contrastText',
@@ -28,30 +18,19 @@ const hackyTitle = {
   padding: 1,
 };
 
-function NavBarTopContent({ open }: { open: boolean }) {
+function NavBarTopContent() {
   return (
     <>
-      <ListItemButton>
-        <ListItemIcon>
-          <TopIcon />
-        </ListItemIcon>
-        <ListItemText primary="Create/Edit" />
-        <ExpandLessIcon />
-      </ListItemButton>
-
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/specialDemo#step1'}>
-            <ListItemText primary="1. Something" inset />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/specialDemo#step2'}>
-            <ListItemText primary="2. Something else" inset />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 2 }} component={RouterLink} to={'/specialDemo#step3'}>
-            <ListItemText primary="3. Puppies!" inset />
-          </ListItemButton>
-        </List>
-      </Collapse>
+      <NavBarLink
+        label="Create/Edit"
+        icon={<TopIcon />}
+        subMenu={[
+          { label: '1. Something', to: '/specialDemo#step1' },
+          { label: '2. Something else', to: '/specialDemo#step2' },
+          { label: '3. Puppies!', to: '/specialDemo#step3' },
+        ]}
+        extraSubIndentSpace={3}
+      />
     </>
   );
 }
@@ -80,7 +59,7 @@ export default function NavBarTopDemo() {
   }, [location]);
 
   useEffect(() => {
-    setNavBarTop(<NavBarTopContent open={navBarOpen} />);
+    setNavBarTop(<NavBarTopContent />);
   }, [setNavBarTop, navBarOpen]);
 
   return (
