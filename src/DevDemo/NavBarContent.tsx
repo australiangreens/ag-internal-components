@@ -13,11 +13,7 @@ import { NavBarLink } from 'ag-internal-components';
 export default function NavBarContent() {
   return (
     <List component="nav">
-      <NavBarLink
-        label="Example Component"
-        icon={<ExampleComponentIcon />}
-        to={'/exampleComponentDemo'}
-      />
+      <NavBarLink label="Example Component" icon={<ExampleComponentIcon />} to={'/'} />
       <NavBarLink label="SaladBar Demo" icon={<SaladBarDemoIcon />} to={'/saladBarDemo'} />
       <NavBarLink label="NavBarTop Demo" icon={<NavBarTopDemoIcon />} to={'/navBarTopDemo'} />
       <NavBarLink

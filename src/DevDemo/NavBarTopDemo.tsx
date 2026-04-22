@@ -30,6 +30,7 @@ function NavBarTopContent() {
           { label: '3. Puppies!', to: '/specialDemo#step3' },
         ]}
         extraSubIndentSpace={3}
+        subMenuInitialOpen
       />
     </>
   );

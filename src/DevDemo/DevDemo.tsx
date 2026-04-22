@@ -57,7 +57,6 @@ export default function DevDemo() {
         >
           <Routes>
             <Route index element={<ExampleComponentDemo />} />
-            <Route path="/exampleComponentDemo" element={<ExampleComponentDemo />} />
             <Route path="/saladBarDemo" element={<SaladBarDemo />} />
             <Route path="/navBarTopDemo" element={<NavBarTopDemo />} />
             <Route path="/topBarMiddleDemo" element={<TopBarMiddleDemo />} />
