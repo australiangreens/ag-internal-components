@@ -36,6 +36,8 @@ export default function SettingsEtcPlaceholder() {
           label="Settings"
           icon={<SettingsIcon />}
           onClick={() => handleDialogOpen('Settings')}
+          tooltipMenuOpen="Settings (expanded)"
+          tooltipMenuClosed="Settings (contracted)"
         />
         <NavBarLink
           label="Switch apps"

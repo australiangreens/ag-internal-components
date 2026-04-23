@@ -30,6 +30,8 @@ export type NavLink = BaseNavLink & {
   extraSubIndentSpace?: number;
   openInNewWindow?: boolean;
   tooltip?: string;
+  tooltipMenuOpen?: string;
+  tooltipMenuClosed?: string;
 };
 
 export const NavBarLinkInner = ({
@@ -43,7 +45,9 @@ export const NavBarLinkInner = ({
   disabled = false,
   openInNewWindow = false,
   extraSubIndentSpace = 0,
-  tooltip,
+  tooltip = '',
+  tooltipMenuOpen = '',
+  tooltipMenuClosed = '',
 }: NavLink) => {
   const [menuOpen, setMenuOpen] = useState(subMenuInitialOpen);
   const [isNavBarOpen, setNavBarOpen] = useAtom(navBarOpenAtom);
@@ -56,7 +60,19 @@ export const NavBarLinkInner = ({
 
   return (
     <>
-      <Tooltip title={tooltip}>
+      <Tooltip
+        title={
+          tooltip
+            ? tooltip
+            : tooltipMenuOpen && isNavBarOpen
+              ? tooltipMenuOpen
+              : tooltipMenuClosed && !isNavBarOpen
+                ? tooltipMenuClosed
+                : ''
+        }
+        arrow
+        placement="right"
+      >
         <ListItemButton
           component={to ? Link : 'button'}
           sx={{ width: '100%' }}
