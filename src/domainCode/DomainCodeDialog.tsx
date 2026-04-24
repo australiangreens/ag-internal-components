@@ -9,23 +9,7 @@ import { useAtom } from 'jotai';
 import { PropsWithChildren, useState } from 'react';
 import AgDialog from '../components/AgDialog';
 import { useSaladBar } from '../providers';
-import { domainCodeAtom } from './hooks';
-
-export const DOMAIN_CODE_LABELS = {
-  act: 'ACT',
-  nsw: 'NSW',
-  nt: 'NT',
-  qld: 'QLD',
-  sa: 'SA',
-  tas: 'TAS',
-  vic: 'VIC',
-  wa: 'WA',
-  ag: 'AG',
-  fedmps: 'FedMPs',
-  '': '',
-} as const;
-
-export type DomainCode = keyof typeof DOMAIN_CODE_LABELS;
+import { DOMAIN_CODE_LABELS, DomainCode, domainCodeAtom } from './hooks';
 
 export const getDomainOptionLabel = (domainCode: DomainCode | null) => {
   return domainCode === null ? 'N/A' : (DOMAIN_CODE_LABELS[domainCode] ?? '');

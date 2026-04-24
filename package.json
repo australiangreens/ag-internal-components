@@ -30,7 +30,8 @@
     "commitmsg": "sh ./scripts/githooks/commit-msg.sh",
     "storybook": "storybook dev -p 6006",
     "storybook:no": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "arch:check": "vitest run --config arch.vitest.config.ts --reporter=verbose"
   },
   "files": [
     "dist/*"
@@ -71,6 +72,7 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@australiangreens/ag-arch-rules": "0.5.0",
     "@australiangreens/eslint-plugin-ag-internal": "^0.3.4",
     "@auth0/auth0-react": "^2.5.0",
     "@auth0/auth0-spa-js": "^2.4.1",
