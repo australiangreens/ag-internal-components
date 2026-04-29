@@ -1,6 +1,5 @@
-import React from 'react';
-import type { Preview } from '@storybook/react';
 import { ThemeProvider } from '@mui/material/styles';
+import type { Preview } from '@storybook/react';
 
 import { internalAgSystemsTheme } from '../src/themes';
 

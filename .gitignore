@@ -54,3 +54,6 @@ Thumbs.db
 
 .eslintcache
 temp
+
+# Output from running pnpm arch:check:json
+arch.violations.json
