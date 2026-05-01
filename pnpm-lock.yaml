@@ -40,8 +40,8 @@ importers:
         version: 0.3.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@australiangreens/ag-arch-rules':
-        specifier: 0.8.0
-        version: 0.8.0(typescript@5.9.2)(vitest@3.2.4(@types/node@24.5.2)(happy-dom@18.0.1)(yaml@2.5.0))
+        specifier: 0.9.1
+        version: 0.9.1(typescript@5.9.2)(vitest@3.2.4(@types/node@24.5.2)(happy-dom@18.0.1)(yaml@2.5.0))
       '@australiangreens/eslint-plugin-ag-internal':
         specifier: ^0.3.4
         version: 0.3.4(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint@9.36.0)(typescript@5.9.2)
@@ -176,8 +176,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@australiangreens/ag-arch-rules@0.8.0':
-    resolution: {integrity: sha512-5jGl1/uVmb14Mt3cAyFkLXQEUZ4rqcZ8hKHjDlP5/7m7oG1/gqDC7bDjZz6lIBmCmbKBLqzfbP5BeOD0YhIXaQ==}
+  '@australiangreens/ag-arch-rules@0.9.1':
+    resolution: {integrity: sha512-fbwOVnf6OcTC66L1qLyV6Qz7I6ZeUwK5MfF2l4bwBNTJzi4FUGnzAfpAKBcJSPN4Y4J1ihR/QpdlnCPvyAWWMQ==}
     peerDependencies:
       vitest: '>=1.0.0'
 
@@ -4664,7 +4664,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@australiangreens/ag-arch-rules@0.8.0(typescript@5.9.2)(vitest@3.2.4(@types/node@24.5.2)(happy-dom@18.0.1)(yaml@2.5.0))':
+  '@australiangreens/ag-arch-rules@0.9.1(typescript@5.9.2)(vitest@3.2.4(@types/node@24.5.2)(happy-dom@18.0.1)(yaml@2.5.0))':
     dependencies:
       archunit: 2.1.69
       glob: 11.1.0
@@ -4682,7 +4682,7 @@ snapshots:
       eslint-config-prettier: 10.1.8(eslint@9.36.0)
       eslint-import-resolver-typescript: 4.4.4(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint@9.36.0))(eslint@9.36.0)
       eslint-plugin-eslint-plugin: 7.0.0(eslint@9.36.0)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint-import-resolver-typescript@4.4.4)(eslint@9.36.0)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint-import-resolver-typescript@4.4.4(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint@9.36.0))(eslint@9.36.0))(eslint@9.36.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.36.0)
       eslint-plugin-react: 7.37.5(eslint@9.36.0)
       eslint-plugin-react-hooks: 6.1.0(eslint@9.36.0)
@@ -7224,7 +7224,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint-import-resolver-typescript@4.4.4)(eslint@9.36.0)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint-import-resolver-typescript@4.4.4(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint@9.36.0))(eslint@9.36.0))(eslint@9.36.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -7245,7 +7245,7 @@ snapshots:
       eslint: 9.36.0
       estraverse: 5.3.0
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint-import-resolver-typescript@4.4.4)(eslint@9.36.0):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint-import-resolver-typescript@4.4.4(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.2))(eslint@9.36.0))(eslint@9.36.0))(eslint@9.36.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9

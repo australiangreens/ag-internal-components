@@ -73,7 +73,7 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@australiangreens/ag-arch-rules": "0.8.0",
+    "@australiangreens/ag-arch-rules": "0.9.1",
     "@australiangreens/eslint-plugin-ag-internal": "^0.3.4",
     "@auth0/auth0-react": "^2.5.0",
     "@auth0/auth0-spa-js": "^2.4.1",
