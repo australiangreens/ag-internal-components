@@ -1,7 +1,7 @@
 {
   "name": "@australiangreens/ag-internal-components",
   "private": false,
-  "version": "0.4.3",
+  "version": "0.5.0",
   "type": "module",
   "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
@@ -68,6 +68,7 @@
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
+    "@mui/x-data-grid": "^8.0.0",
     "@tanstack/react-query": "^5.90.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
@@ -81,6 +82,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
+    "@mui/x-data-grid": "^8.28.1",
     "@storybook/addon-docs": "^9.1.10",
     "@storybook/addon-links": "^9.1.8",
     "@storybook/blocks": "^8.6.14",

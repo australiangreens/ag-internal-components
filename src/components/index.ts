@@ -18,3 +18,6 @@ export { default as AuthGuard } from './AuthGuard';
 
 export * from './NavBarLink';
 export { default as NavBarLink } from './NavBarLink';
+
+export * from './AgDataGrid';
+export { default as AgDataGrid } from './AgDataGrid';

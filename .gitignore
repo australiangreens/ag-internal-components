@@ -7,6 +7,7 @@
 node_modules/
 dist/
 coverage/
+storybook-static/
 
 # Vite config temp file
 vite.config.ts.timestamp*

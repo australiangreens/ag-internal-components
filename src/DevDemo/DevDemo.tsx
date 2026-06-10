@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppLayout, domainCodeAtom } from 'ag-internal-components';
 import SettingsEtcPlaceholder from '../layouts/AppLayout/NavBar/SettingsEtcPlaceholder';
+import AgDataGridDemo from './AgDataGridDemo';
 import AutocompleteDemo from './AutocompleteDemo';
 import DomainCodeDemo from './DomainCodeDemo';
 import ExampleComponentDemo from './ExampleComponentDemo';
@@ -63,6 +64,7 @@ export default function DevDemo() {
             <Route path="/someRandom" element={<SomeRandomDemo />} />
             <Route path="/domainCode" element={<DomainCodeDemo />} />
             <Route path="/autocomplete" element={<AutocompleteDemo />} />
+            <Route path="/agDataGridDemo" element={<AgDataGridDemo />} />
           </Routes>
         </AppLayout>
       </QueryClientProvider>

@@ -1,5 +1,6 @@
 import {
   Search as AutoCompleteDemoIcon,
+  TableChart as AgDataGridDemoIcon,
   PieChart as DomainCodeDemoIcon,
   Send as ExampleComponentIcon,
   Add as NavBarTopDemoIcon,
@@ -24,6 +25,11 @@ export default function NavBarContent() {
 
       <NavBarLink label="DomainCode Demo" icon={<DomainCodeDemoIcon />} to={'/domaincode'} />
       <NavBarLink label="Autocomplete Demo" icon={<AutoCompleteDemoIcon />} to={'/autocomplete'} />
+      <NavBarLink
+        label="AgDataGrid Demo"
+        icon={<AgDataGridDemoIcon />}
+        to={'/agDataGridDemo'}
+      />
       <NavBarLink
         to={'/someRandom'}
         label="Random Page"
