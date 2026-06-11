@@ -91,4 +91,59 @@ describe('AgDataGrid', () => {
     expect(screen.getByText('Row 1')).toBeInTheDocument();
     expect(screen.getByText('Row 50')).toBeInTheDocument();
   });
+
+  it('paginates when footer is hidden and paginationModel is controlled', () => {
+    renderGrid(
+      <AgDataGrid
+        layout="auto"
+        footer="hidden"
+        loadingVariant="none"
+        paginationModel={{ page: 0, pageSize: 10 }}
+        rows={Array.from({ length: 15 }, (_, index) => ({
+          id: index + 1,
+          name: `Row ${index + 1}`,
+        }))}
+        columns={columns}
+      />
+    );
+
+    expect(screen.getByText('Row 1')).toBeInTheDocument();
+    expect(screen.getByText('Row 10')).toBeInTheDocument();
+    expect(screen.queryByText('Row 11')).not.toBeInTheDocument();
+  });
+
+  it('uses a custom pagination slot when footer is custom', () => {
+    renderGrid(
+      <AgDataGrid
+        layout="auto"
+        footer="custom"
+        loadingVariant="none"
+        paginationModel={{ page: 0, pageSize: 10 }}
+        rows={Array.from({ length: 15 }, (_, index) => ({
+          id: index + 1,
+          name: `Row ${index + 1}`,
+        }))}
+        columns={columns}
+        slots={{
+          pagination: () => <div>Custom pagination control</div>,
+        }}
+      />
+    );
+
+    expect(screen.getByText('Custom pagination control')).toBeInTheDocument();
+  });
+
+  it('shows skeleton loading overlay with List Manager defaults', () => {
+    const { container } = renderGrid(
+      <AgDataGrid
+        loading
+        skeletonColumnWidths={[10]}
+        paginationModel={{ page: 0, pageSize: 10 }}
+        rows={[]}
+        columns={columns}
+      />
+    );
+
+    expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument();
+  });
 });
