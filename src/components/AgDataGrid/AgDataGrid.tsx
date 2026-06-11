@@ -48,6 +48,9 @@ const shiftDataGridPanelAboveColumnHeaders = {
 };
 
 const BASE_TABLE_HEIGHT = 111;
+const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_SKELETON_COLUMN_WIDTHS = [10];
+
 const BASE_DATAGRID_SX = {
   backgroundColor: 'white',
   // We don't want a focused cell to have a border
@@ -67,6 +70,10 @@ const BASE_DATAGRID_SX = {
 
 export type PaginationModel = { page: number; pageSize: number };
 
+export type AgDataGridLayout = 'fixed' | 'auto';
+export type AgDataGridFooter = 'standard' | 'hidden' | 'custom';
+export type AgDataGridLoadingVariant = 'skeleton' | 'custom' | 'none';
+
 /** DataGridProps omits some div ARIA attributes from its typings; we forward these to slotProps.main (v7). */
 type GridMainAriaProps = Pick<
   ComponentProps<'div'>,
@@ -74,11 +81,20 @@ type GridMainAriaProps = Pick<
 >;
 
 export type AgDataGridProps = {
-  loading: boolean;
-  skeletonColumnWidths: number[];
-  paginationModel: PaginationModel;
+  loading?: boolean;
+  skeletonColumnWidths?: number[];
+  paginationModel?: PaginationModel;
   onPaginationModelChange?: (model: PaginationModel) => void;
+  /** Fixed height (List Manager default) or auto height (Events Manager default). */
+  layout?: AgDataGridLayout;
+  /** Standard in-grid footer, hidden footer, or custom pagination via `slots.pagination`. */
+  footer?: AgDataGridFooter;
+  /** Skeleton overlay (List Manager), caller-provided overlay, or none. */
+  loadingVariant?: AgDataGridLoadingVariant;
+  /** Partial auto height on the last page when `layout="fixed"`. */
   autoTableHeight?: boolean;
+  /** Cap grid height and scroll rows inside the grid (use with `layout="auto"` and many rows). */
+  maxHeight?: string | number;
   noRowsMessage?: string;
   noResultsMessage?: string;
   paginationMode?: 'client' | 'server';
@@ -95,11 +111,15 @@ type DataGridPanelSlotAugmented = NonNullable<DataGridProps['slotProps']>['panel
 const inTestMode = process.env.NODE_ENV === 'test';
 
 const AgDataGrid = ({
-  loading,
-  skeletonColumnWidths,
+  loading = false,
+  skeletonColumnWidths = DEFAULT_SKELETON_COLUMN_WIDTHS,
   paginationModel,
   onPaginationModelChange,
+  layout = 'fixed',
+  footer = 'standard',
+  loadingVariant = 'skeleton',
   autoTableHeight = false,
+  maxHeight,
   noRowsMessage = 'No rows',
   noResultsMessage = 'No results',
   rowHeight = 52,
@@ -108,6 +128,8 @@ const AgDataGrid = ({
   pageSizeOptions = [5, 10, 25, 50, 100],
   rows,
   sx,
+  hideFooter: hideFooterProp,
+  slots: incomingSlots,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
@@ -116,27 +138,44 @@ const AgDataGrid = ({
 }: AgDataGridProps) => {
   const { main: parentMain, ...parentSlotRest } = incomingSlotProps ?? {};
   const parentPanel = (parentSlotRest.panel ?? {}) as DataGridPanelSlotAugmented;
-  const [internalPaginationModel, setInternalPaginationModel] = useState(paginationModel);
-  const isControlled = onPaginationModelChange !== undefined;
-  const effectivePaginationModel = isControlled ? paginationModel : internalPaginationModel;
+  const defaultPaginationModel: PaginationModel = { page: 0, pageSize: DEFAULT_PAGE_SIZE };
+  const [internalPaginationModel, setInternalPaginationModel] = useState(
+    paginationModel ?? defaultPaginationModel
+  );
+  const isPaginationControlled = paginationModel !== undefined;
+  const paginateInGrid =
+    footer === 'standard' || footer === 'custom' || isPaginationControlled;
+  const effectivePaginationModel = isPaginationControlled
+    ? paginationModel
+    : internalPaginationModel;
   const { pageSize } = effectivePaginationModel;
 
   const tableHeight = BASE_TABLE_HEIGHT + pageSize * rowHeight;
-  const isTableHeightAuto =
+  const isPartialAutoHeightOnLastPage =
+    layout === 'fixed' &&
     autoTableHeight &&
     rows &&
     rows.length !== 0 &&
     effectivePaginationModel.page !== Math.floor(rows.length / pageSize);
+  const isAutoLayout = layout === 'auto';
+  const useScrollableContainer = maxHeight != null;
+  const boxHeight = useScrollableContainer
+    ? maxHeight
+    : isAutoLayout || isPartialAutoHeightOnLastPage
+      ? 'auto'
+      : tableHeight;
+  const dataGridAutoHeight =
+    !useScrollableContainer && (isAutoLayout || isPartialAutoHeightOnLastPage);
+  const hideFooter = footer === 'hidden' || hideFooterProp === true;
 
   const handlePaginationModelChange = (model: PaginationModel) => {
-    if (!isControlled) {
+    if (!isPaginationControlled) {
       setInternalPaginationModel(model);
-    } else {
-      onPaginationModelChange?.(model);
     }
+    onPaginationModelChange?.(model);
   };
 
-  const LoadingOverlay = () => (
+  const SkeletonLoadingOverlay = () => (
     <TableLoadingSkeleton numberOfRows={pageSize} columnWidths={skeletonColumnWidths} />
   );
 
@@ -151,15 +190,30 @@ const AgDataGrid = ({
       {!loading ? noResultsMessage : ''}
     </Stack>
   );
+
+  const defaultSlots: NonNullable<DataGridProps['slots']> = {};
+  if (loadingVariant === 'skeleton') {
+    defaultSlots.loadingOverlay = SkeletonLoadingOverlay;
+  }
+  if (!incomingSlots?.noRowsOverlay) {
+    defaultSlots.noRowsOverlay = NoRowsOverlay;
+  }
+  if (!incomingSlots?.noResultsOverlay) {
+    defaultSlots.noResultsOverlay = NoResultsOverlay;
+  }
+
   const theme = useTheme();
 
   return (
-    <Box height={isTableHeightAuto ? 'auto' : tableHeight} width={'100%'}>
+    <Box
+      height={boxHeight}
+      width={'100%'}
+      sx={useScrollableContainer ? { display: 'flex', flexDirection: 'column', minHeight: 0 } : undefined}
+    >
       <DataGrid
         slots={{
-          loadingOverlay: LoadingOverlay,
-          noRowsOverlay: NoRowsOverlay,
-          noResultsOverlay: NoResultsOverlay,
+          ...defaultSlots,
+          ...incomingSlots,
         }}
         slotProps={{
           ...parentSlotRest,
@@ -193,9 +247,11 @@ const AgDataGrid = ({
         }}
         disableRowSelectionOnClick
         rowHeight={rowHeight}
-        autoHeight={isTableHeightAuto}
+        autoHeight={dataGridAutoHeight}
+        hideFooter={hideFooter}
         sx={{
           ...BASE_DATAGRID_SX,
+          ...(useScrollableContainer ? { height: '100%' } : {}),
           ...sx,
           '&.MuiDataGrid-root .Mui-selected': {
             backgroundColor: `${theme.palette.secondary.main}15`,
@@ -207,8 +263,12 @@ const AgDataGrid = ({
         disableVirtualization={inTestMode}
         loading={loading}
         rows={rows}
-        paginationModel={effectivePaginationModel}
-        onPaginationModelChange={handlePaginationModelChange}
+        {...(paginateInGrid
+          ? {
+              paginationModel: effectivePaginationModel,
+              onPaginationModelChange: handlePaginationModelChange,
+            }
+          : {})}
         paginationMode={paginationMode}
         filterMode={filterMode}
         pageSizeOptions={pageSizeOptions}
