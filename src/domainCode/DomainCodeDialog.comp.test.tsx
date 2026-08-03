@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { wrap } from 'souvlaki';
-import { withSaladBarProvider } from '../providers';
+import { withSaladBarProvider } from '../testing';
 import { withAtomProvider, withOverrideDefaults } from '../testing/wrappers';
 import DomainCodeDialog from './DomainCodeDialog';
 

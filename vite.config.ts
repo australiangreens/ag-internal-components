@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, type LibraryFormats } from 'vite';
 import dts from 'vite-plugin-dts';
 import { EsLinter, linterPlugin } from 'vite-plugin-linter';
 import tsConfigPaths from 'vite-tsconfig-paths';
@@ -15,7 +15,22 @@ export default defineConfig((configEnv) => ({
     }),
     dts({
       include: ['src'],
-      exclude: ['node_modules/**', 'src/DevApp.tsx', 'src/devMain.tsx', 'src/DevDemo/**'],
+      exclude: [
+        'node_modules/**',
+        'src/DevApp.tsx',
+        'src/devMain.tsx',
+        'src/DevDemo/**',
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '**/*.comp.test.ts',
+        '**/*.comp.test.tsx',
+        '**/*.unit.test.ts',
+        '**/*.unit.test.tsx',
+        '**/*.int.test.ts',
+        '**/*.int.test.tsx',
+        '**/testHelpers/**',
+        'src/testing/**',
+      ],
     }),
   ],
   build: {
@@ -29,7 +44,7 @@ export default defineConfig((configEnv) => ({
         index: './src/index.ts',
       },
       name: 'AgInternalComponents',
-      formats: ['es', 'cjs'],
+      formats: ['es', 'cjs'] satisfies LibraryFormats[],
       fileName: determineFileName,
     },
     rollupOptions: {
@@ -56,7 +71,7 @@ export default defineConfig((configEnv) => ({
   },
 }));
 
-function determineFileName(format: 'es' | 'esm' | 'cjs', entryName: string) {
+function determineFileName(format: string, entryName: string) {
   const moduleTypeDir = format === 'es' ? 'esm' : format;
   if (entryName === 'index') {
     return `${moduleTypeDir}/index.${format === 'cjs' ? 'c' : ''}js`;
