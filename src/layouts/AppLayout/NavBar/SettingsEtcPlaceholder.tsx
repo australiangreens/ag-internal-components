@@ -6,7 +6,7 @@ import {
 } from '@mui/icons-material';
 import { List } from '@mui/material';
 import { useState } from 'react';
-import { NavBarLink } from 'src/components';
+import { NavBarLink } from '../../../components';
 import AgDialog from '../../../components/AgDialog/AgDialog';
 
 export default function SettingsEtcPlaceholder() {

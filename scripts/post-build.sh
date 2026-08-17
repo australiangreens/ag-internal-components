@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 AUG_OUT="dist/index.d.ts"
 INDEX_TMP="$AUG_OUT.orig.tmp"

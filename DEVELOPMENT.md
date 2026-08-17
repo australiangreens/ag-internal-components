@@ -64,88 +64,44 @@ export const Root:StyledComponent<BoxProps> = styled(Box, {
 }));
 ```
 
-## Yarn/npm linking
+## Linking a local copy into an app
 
-TODO: Currently experimenting with [pnpm](https://pnpm.io) so this is out of
-date.
+Use the README recipe: a `pnpm.overrides` `link:` entry in the *consuming*
+app, then `pnpm i`. Remove the override and `pnpm i` again to go back to the
+published package. That round-trip was checked against a throwaway consumer on
+pnpm 10.30.3 (symlink to this repo while the override is present; store copy
+after it is removed). It was not re-run inside ListManager or EventsManager.
 
-To use this project for development without publishing new versions, we can use
-`yarn link` to essentially create a symlink between the local folder and the
-node modules.
-
-Complications can arise due to peer dependencies. Ending with errors along the
-lines of:
-
-> Error: Invalid hook call. Hooks can only be called inside of the body of a
-> function component
-
-This is due to multiple versions of react co-existing. Similar things can
-happen with other peer dependencies such as material-ui.
-
-To avoid these issues, we link not just the library but the peer dependencies
-too. As well as some testing related things.
-
-### To link the library to another project
-
-In this project, run:
+`pnpm link` is a weaker second option. On pnpm 10.30.3:
 
 ```sh
-yarn link &&\
-cd node_modules/react &&\
-yarn link &&\
-cd ../react-dom  &&\
-yarn link  &&\
-cd ../@mui/material &&\
-yarn link &&\
-cd ../icons-material &&\
-yarn link &&\
-cd ../../@emotion/react &&\
-yarn link &&\
-cd ../styled &&\
-yarn link &&\
-cd ../../@testing-library/react &&\
-yarn link
+# in this repo — registers the package in the global store
+pnpm link
+
+# in the consuming app — node_modules then points at this repo
+pnpm link @australiangreens/ag-internal-components
 ```
 
-and then in the project using the library as a dependency, run:
+`pnpm link` warns that this library's peerDependencies will not be resolved
+from the app (duplicate React / invalid hook call). There is no `--global`
+flag in `pnpm help link`. `pnpm link --global <name>` from the app errors
+(`Symlink path is the same as the target path`).
+
+`pnpm unlink` / `pnpm unlink <name>` does **not** undo the app-side link
+(prints `Nothing to unlink`; the symlink stays). What did restore the
+published copy in the probe is:
 
 ```sh
-yarn link "@australiangreens/ag-internal-components" &&\
-yarn link react &&\
-yarn link react-dom &&\
-yarn link "@mui/material" &&\
-yarn link "@mui/icons-material" &&\
-yarn link "@emotion/react" &&\
-yarn link "@emotion/styled" &&\
-yarn link "@testing-library/react"
+pnpm add @australiangreens/ag-internal-components@^0.6.1
 ```
 
-### Unlinking
-
-In the project using the library as a dependency, run:
+Drop the global registration with:
 
 ```sh
-yarn unlink react &&\
-yarn unlink react-dom &&\
-yarn unlink "@mui/material" &&\
-yarn unlink "@mui/icons-material" &&\
-yarn unlink "@emotion/react" &&\
-yarn unlink "@emotion/styled" &&\
-yarn unlink "@testing-library/react" &&\
-yarn unlink "@australiangreens/ag-internal-components" &&\
-yarn install --force
+pnpm uninstall --global @australiangreens/ag-internal-components
 ```
 
-There is no need to unlink things on in `ag-internal-components`.
-
-If you are unsure if everything is properly unlinked, you can check using:
-
-```sh
-npm ls --link=true
-```
-
-If you still run into problems after unlinking, removing the `node_modules`
-directory and re-running `yarn` might be the best solution.
+not `pnpm unlink --global`.
 
 ## Typescript module augmentation
 

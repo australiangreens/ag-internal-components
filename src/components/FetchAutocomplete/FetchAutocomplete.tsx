@@ -37,13 +37,13 @@ export const useAutocompleteOptions = <EntityType extends AutocompleteGenericEnt
   inputValue: string;
 }) => {
   return useQuery({
-    queryFn: () => {
+    queryFn: async () => {
       if (minLength && inputValue.length < minLength) return preLoadedOptions ?? [];
       if (preLoadedOptions)
         return preLoadedOptions.filter((option) =>
           option.label.toLowerCase().includes(inputValue.toLowerCase())
         );
-      return lookup(inputValue);
+      return (await lookup(inputValue)) ?? [];
     },
     queryKey: ['autocomplete', label, inputValue],
   });

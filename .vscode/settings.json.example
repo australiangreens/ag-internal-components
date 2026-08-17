@@ -71,6 +71,7 @@
   },
 
   // SPECIFIC TO: DBAEUMER.VSCODE-ESLINT
+  "eslint.packageManager": "pnpm",
   "eslint.format.enable": false, // We use prettier for formatting
 
   // SPECIFIC TO: ORTA.VSCODE-JEST

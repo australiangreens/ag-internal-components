@@ -8,7 +8,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -17,11 +17,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declarationMap": true,
+    "rootDir": "./src",
     "paths": {
-      "ag-internal-components": ["src/index.ts"]
+      "ag-internal-components": ["./src/index.ts"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
-    "baseUrl": "."
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,3 +1,4 @@
+import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type LibraryFormats } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -14,6 +15,7 @@ export default defineConfig((configEnv) => ({
       linters: [new EsLinter({ configEnv })],
     }),
     dts({
+      entryRoot: path.join(import.meta.dirname, 'src'),
       include: ['src'],
       exclude: [
         'node_modules/**',

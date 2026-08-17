@@ -23,25 +23,26 @@ export const buildAuth0UserRecord: Builder<Auth0UserRecord> = (overrides = {}) =
 
 export const buildAuth0ContextInterface: Builder<Auth0ContextInterface<User>> = (
   overrides = {}
-) => ({
-  isAuthenticated: true,
-  user: buildAuth0User(),
-  logout: async () => {},
-  loginWithRedirect: async () => {},
-  getAccessTokenWithPopup: async () => '',
-  getAccessTokenSilently: vitest.fn().mockReturnValue('mocktoken'),
-  getIdTokenClaims: async () => undefined,
-  loginWithPopup: async () => {},
-  isLoading: false,
-  buildAuthorizeUrl: async () => '',
-  buildLogoutUrl: () => '',
-  handleRedirectCallback: vitest.fn(),
-  error: undefined,
-  getDpopNonce: async (id?: string) => {
-    return id;
-  },
-  setDpopNonce: async () => {},
-  generateDpopProof: async () => '',
-  createFetcher: vitest.fn(),
-  ...overrides,
-});
+) =>
+  ({
+    isAuthenticated: true,
+    user: buildAuth0User(),
+    logout: async () => {},
+    loginWithRedirect: async () => {},
+    getAccessTokenWithPopup: async () => '',
+    getAccessTokenSilently: vitest.fn().mockReturnValue('mocktoken'),
+    getIdTokenClaims: async () => undefined,
+    loginWithPopup: async () => {},
+    isLoading: false,
+    buildAuthorizeUrl: async () => '',
+    buildLogoutUrl: () => '',
+    handleRedirectCallback: vitest.fn(),
+    error: undefined,
+    getDpopNonce: async (id?: string) => {
+      return id;
+    },
+    setDpopNonce: async () => {},
+    generateDpopProof: async () => '',
+    createFetcher: vitest.fn(),
+    ...overrides,
+  }) as Auth0ContextInterface<User>;

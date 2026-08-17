@@ -28,7 +28,7 @@ with `internalAgSystemsTheme` or just ensure all required properties in the
 
 ## The development environment
 
-We are now at version 22 of node, with React 19 and Vite 7. We use pnpm for
+We are now at version 24 of node, with React 19 and Vite 7. We use pnpm for
 development.
 
 ## Development with pnpm link
