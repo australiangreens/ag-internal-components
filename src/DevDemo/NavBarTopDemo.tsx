@@ -25,9 +25,9 @@ function NavBarTopContent() {
         label="Create/Edit"
         icon={<TopIcon />}
         subMenu={[
-          { label: '1. Something', to: '/specialDemo#step1' },
-          { label: '2. Something else', to: '/specialDemo#step2' },
-          { label: '3. Puppies!', to: '/specialDemo#step3' },
+          { label: '1. Something', to: '/navBarTopDemo#step1' },
+          { label: '2. Something else', to: '/navBarTopDemo#step2' },
+          { label: '3. Puppies!', to: '/navBarTopDemo#step3' },
         ]}
         extraSubIndentSpace={3}
         subMenuInitialOpen
