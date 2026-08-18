@@ -15,13 +15,13 @@ describe('ExampleComponent', () => {
     const user = userEvent.setup();
 
     expect(
-      screen.getByText('This number will incremember when button pressed: 0')
+      screen.getByText('This number will increment when button pressed: 0')
     ).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Increment' }));
 
     expect(
-      screen.getByText('This number will incremember when button pressed: 1')
+      screen.getByText('This number will increment when button pressed: 1')
     ).toBeInTheDocument();
   });
 });
