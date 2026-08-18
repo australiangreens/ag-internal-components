@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 
 import { internalAgSystemsTheme } from '../src/themes';
 

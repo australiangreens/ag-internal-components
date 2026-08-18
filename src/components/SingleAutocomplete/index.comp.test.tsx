@@ -66,14 +66,9 @@ describe('SingleAutocomplete', () => {
 
     const labelElement = screen.getByLabelText(testLabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteElement = screen.getByTestId('TestSingle:Autocomplete');
-    await act(async () => {
-      autocompleteElement.focus();
-    });
-    await user.click(autocompleteElement);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'XYZ' } });
-    });
+    const input = screen.getByRole('combobox');
+    await user.click(input);
+    await user.type(input, 'XYZ');
     expect(await screen.findByText(testNoOptionsText)).toBeInTheDocument();
   });
 
@@ -101,43 +96,19 @@ describe('SingleAutocomplete', () => {
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('TestSingle:Autocomplete');
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
+    const input = screen.getByRole('combobox');
 
     // For this test, we have made the minimum character count 3. We try entering
     // a one character string, then a two character string, then 3.
 
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'A' } });
-    });
-
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'AA' } });
-    });
-
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'AAA' } });
-    });
-    await user.click(autocompleteStuff);
+    await user.click(input);
+    await user.type(input, 'A');
+    await user.type(input, 'A');
+    await user.type(input, 'A');
 
     // And we go one item down to select the 'AAA'.
 
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'ArrowDown' });
-    });
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'Enter' });
-    });
+    await user.keyboard('{ArrowDown}{Enter}');
 
     // We need to rerender the component with new value properties.
     // This shows us the item.
@@ -159,7 +130,7 @@ describe('SingleAutocomplete', () => {
     // Now it is time to click on the 'Clear' button and make the text go away.
 
     await act(async () => {
-      autocompleteStuff.focus();
+      input.focus();
       const clearButton = screen.getByRole('button', { name: 'Clear' });
       expect(clearButton).toBeInTheDocument();
 

@@ -2,7 +2,7 @@ import agLintPlugin from '@australiangreens/eslint-plugin-ag-internal';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['**/node_modules', '**/dist', '**/coverage']),
+  globalIgnores(['**/node_modules', '**/dist', '**/coverage', '**/storybook-static']),
   agLintPlugin.configs.recommendedReact,
   {
     files: ['**/*.ts', '**/*.tsx'],

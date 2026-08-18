@@ -138,6 +138,7 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
   hideInputEndAdornment,
 }: SingleAutocompleteProps<EntityType>) => {
   const [inputValue, setInputValue] = useState('');
+  const [open, setOpen] = useState(false);
 
   const { data: options, isLoading } = useAutocompleteOptions({
     inputValue,
@@ -159,6 +160,8 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
             if (disableDefaultRightClickBehaviour) {
               event.preventDefault();
               event.stopPropagation();
+            } else {
+              setOpen(true);
             }
           }
         }}
@@ -178,6 +181,9 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               : {}),
           }}
           data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
           loading={isInputMinimumLength ? isLoading : false}
           options={options ?? []}
           onChange={(event, newValue, reason) => {
@@ -201,12 +207,13 @@ const SingleAutocomplete = <EntityType extends AutocompleteGenericEntity>({
               helperText={helperText}
               autoComplete='off'
               slotProps={{
+                ...params.slotProps,
                 input: {
-                  ...params.InputProps,
+                  ...params.slotProps.input,
                   endAdornment: hideInputEndAdornment ? undefined : (
                     <>
                       {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
-                      {params.InputProps.endAdornment}
+                      {params.slotProps.input.endAdornment}
                     </>
                   ),
                 },

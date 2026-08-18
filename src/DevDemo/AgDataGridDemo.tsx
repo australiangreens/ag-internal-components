@@ -37,7 +37,7 @@ const eventsManagerTableSx = {
 };
 
 const CustomLoadingOverlay = () => (
-  <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
     <Skeleton variant="rectangular" width="80%" height={40} />
   </Box>
 );
@@ -81,7 +81,7 @@ export default function AgDataGridDemo() {
       <Typography variant="h5" sx={{ mb: 1 }}>
         AgDataGrid Demo
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+      <Typography variant="body1" sx={{ mb: 2, fontStyle: 'italic' }}>
         Countries and territories by population density. Data from{' '}
         <a
           href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population_density"
@@ -125,7 +125,7 @@ export default function AgDataGridDemo() {
                 pagination: DemoTablePagination,
                 loadingOverlay: CustomLoadingOverlay,
                 noRowsOverlay: () => (
-                  <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <Typography>No rows meet your filter criteria</Typography>
                   </Box>
                 ),

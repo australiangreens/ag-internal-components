@@ -104,7 +104,7 @@ export default function UserInfo({ user, domainCode, open, useNewAvatar = false 
 
       <NavbarCollapse sx={{ width: '100%' }} in={open}>
         <Fade in={open}>
-          <Box width="100%" display="flex" flexDirection="column" alignItems="center">
+          <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {user?.name ? (
               <Typography>{user?.name}</Typography>
             ) : (

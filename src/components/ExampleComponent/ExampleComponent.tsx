@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Button, Paper, Typography } from '@mui/material';
+import { useState } from 'react';
 
 export interface ExampleComponentProps {
   /** Test */
@@ -11,12 +11,12 @@ export default function ExampleComponent({ text }: ExampleComponentProps) {
 
   return (
     <>
-      <Typography variant="h6" color="inherit" component="div" sx={{ fontSize: '22px' }}>
+      <Typography variant="h5" sx={{ mb: 1 }}>
         Hello world
       </Typography>
 
-      <Typography variant="caption" display="block">
-        <span>Just ensuring MUI is working as planned as a peer dependency. v0.0.11</span>
+      <Typography variant="body1" sx={{ mb: 1 }}>
+        <span>We are just checking that MUI keeps working when upgraded to version 9.</span>
       </Typography>
       <Button
         variant="outlined"
@@ -28,7 +28,7 @@ export default function ExampleComponent({ text }: ExampleComponentProps) {
       <p>
         This is some text: <span>{text}</span>
       </p>
-      <Paper>This number will incremember when button pressed: {num}</Paper>
+      <Paper sx={{ p: 2 }}>This number will increment when button pressed: {num}</Paper>
     </>
   );
 }

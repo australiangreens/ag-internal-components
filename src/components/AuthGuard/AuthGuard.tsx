@@ -107,8 +107,8 @@ export default function AuthGuard({
         if (!redirectCount) {
           localStorage.setItem('auth0_redirect_count', '1');
           loginWithRedirect(options);
-        } else if (redirectCount && parseInt(redirectCount) < 2) {
-          localStorage.setItem('auth0_redirect_count', String(parseInt(redirectCount) + 1));
+        } else if (redirectCount && parseInt(redirectCount, 10) < 2) {
+          localStorage.setItem('auth0_redirect_count', String(parseInt(redirectCount, 10) + 1));
           loginWithRedirect(options);
         }
       } else {

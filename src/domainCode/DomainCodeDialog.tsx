@@ -91,7 +91,7 @@ const DomainCodeDialog = ({
       }}
       onClose={shouldLogout ? () => {} : handleClose}
     >
-      <Typography marginBottom={2}>
+      <Typography sx={{ marginBottom: 2 }}>
         Select the default organisation that you want to use with the {applicationName}.
       </Typography>
 
@@ -108,16 +108,19 @@ const DomainCodeDialog = ({
             {...params}
             variant="filled"
             label={'Select organisation'}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {isLoading ? (
-                    <CircularProgress color="inherit" size={20} sx={{ marginTop: '-20px' }} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
+            slotProps={{
+              ...params.slotProps,
+              input: {
+                ...params.slotProps.input,
+                endAdornment: (
+                  <>
+                    {isLoading ? (
+                      <CircularProgress color="inherit" size={20} sx={{ marginTop: '-20px' }} />
+                    ) : null}
+                    {params.slotProps.input.endAdornment}
+                  </>
+                ),
+              },
             }}
           />
         )}

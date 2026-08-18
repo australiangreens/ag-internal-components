@@ -1,7 +1,7 @@
 import { Box, Skeleton, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   gridPageCountSelector,
   gridPageSelector,
@@ -49,7 +49,7 @@ const AgDataGridWithExternalPagination = ({
   );
 
   return (
-    <Box display="flex" flexDirection="column" gap={2} width="100%">
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
       <AgDataGrid
         {...rest}
         rows={rows}
@@ -67,7 +67,7 @@ const AgDataGridWithExternalPagination = ({
 };
 
 const CustomLoadingOverlay = () => (
-  <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
     <Skeleton variant="rectangular" width="80%" height={40} />
   </Box>
 );
@@ -195,7 +195,7 @@ export const EventsManagerCustomPagination: StoryObj = {
         pagination: StorybookTablePagination,
         loadingOverlay: CustomLoadingOverlay,
         noRowsOverlay: () => (
-          <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
             <Typography>No rows meet your filter criteria</Typography>
           </Box>
         ),
@@ -207,7 +207,7 @@ export const EventsManagerCustomPagination: StoryObj = {
 /** Events Manager FeesAndFinance pattern: capped height, all rows, in-grid scroll. */
 export const EventsManagerStaticTable: StoryObj = {
   render: () => (
-    <Box display="flex" flexDirection="column" gap={1} width="100%">
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, width: '100%' }}>
       <AgDataGrid
         layout="auto"
         maxHeight="70vh"

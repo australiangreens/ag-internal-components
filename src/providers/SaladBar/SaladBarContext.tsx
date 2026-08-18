@@ -14,6 +14,11 @@ import {
   defaultEnqueueNotificationOptions,
 } from './defaults';
 
+/* The notification queue lives in a ref so enqueue does not re-render. The
+   current item is read during render when `open` changes. React Compiler rules
+   (react-hooks 7) flag that pattern. */
+/* eslint-disable react-hooks/purity, react-hooks/refs -- queue-in-ref design */
+
 const MAX_QUEUE_LENGTH = 100;
 const MAX_QUEUE_HIT_REPORT_INTERVAL = 2000;
 const SALADBAR_INDEX = 2000;
@@ -201,9 +206,11 @@ export default function SaladBarProvider({
         {...currentNotificationSnackbarProps}
         open={open}
         onClose={handleClose}
-        TransitionProps={{
-          onExited: handleExited,
-          onExit: handleExit,
+        slotProps={{
+          transition: {
+            onExited: handleExited,
+            onExit: handleExit,
+          },
         }}
         sx={{ zIndex: SALADBAR_INDEX }}
       >

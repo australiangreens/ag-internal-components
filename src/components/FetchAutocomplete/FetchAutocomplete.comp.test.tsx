@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { wrap } from 'souvlaki';
 
@@ -34,14 +34,9 @@ describe('FetchAutocomplete', () => {
 
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'Mel' } });
-    });
+    const input = screen.getByRole('combobox');
+    await user.click(input);
+    await user.type(input, 'Mel');
     const noStuffElement = await screen.findByText(nostufftext);
     expect(noStuffElement).toBeInTheDocument();
   });
@@ -65,14 +60,9 @@ describe('FetchAutocomplete', () => {
 
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'Mel' } });
-    });
+    const input = screen.getByRole('combobox');
+    await user.click(input);
+    await user.type(input, 'Mel');
     const noStuffElement = await screen.findByText(nostufftext);
     expect(noStuffElement).toBeInTheDocument();
   });
@@ -102,35 +92,25 @@ describe('FetchAutocomplete', () => {
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
-    // await act(async () => {
-    //   autocompleteStuff.focus();
-    // });
+    const input = screen.getByRole('combobox');
 
     // For this test, we have made the minimum character count 3. We try entering
     // a one character string, then a two character string, then 3.
 
-    // await act(async () => {
-    //   autocompleteStuff.focus();
-    // });
-    // await user.click(autocompleteStuff);
-    // await act(async () => {
-    //   fireEvent.change(labelElement, { target: { value: 'Abc' } });
-    // });
-
-    await user.type(autocompleteStuff, 'a');
+    await user.click(input);
+    await user.type(input, 'a');
 
     // No stuff to be found.
 
     expect(await screen.findByText(startTypingToSearchText)).toBeInTheDocument();
 
-    await user.type(autocompleteStuff, 'a');
+    await user.type(input, 'a');
 
     // Still no stuff to be found.
 
     expect(await screen.findByText(startTypingToSearchText)).toBeInTheDocument();
 
-    await user.type(autocompleteStuff, 'a');
+    await user.type(input, 'a');
 
     // Stuff has been found.
 
@@ -138,12 +118,7 @@ describe('FetchAutocomplete', () => {
 
     // And we go one item down to select the 'AAA'.
 
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'ArrowDown' });
-    });
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'Enter' });
-    });
+    await user.keyboard('{ArrowDown}{Enter}');
 
     // We need to rerender the compoent with new value properties.
     // This shows us the chip.
@@ -165,19 +140,12 @@ describe('FetchAutocomplete', () => {
 
     // Now let's click on the 'BBB'
 
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'BBB' } });
-    });
-    await user.click(autocompleteStuff);
+    await user.clear(input);
+    await user.type(input, 'BBB');
 
     // And we select the 'BBB'.
 
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'ArrowDown' });
-    });
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'Enter' });
-    });
+    await user.keyboard('{ArrowDown}{Enter}');
 
     // Let's rerender it.
 
@@ -268,22 +236,13 @@ describe('FetchAutocomplete', () => {
     );
     const labelElement = screen.getByLabelText(testlabel);
     expect(labelElement).toBeInTheDocument();
-    const autocompleteStuff = screen.getByTestId('TestFetch:Autocomplete');
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
+    const input = screen.getByRole('combobox');
 
     // For this test, we don't have a minium character count 3. All the options
     // should be available.
 
-    await act(async () => {
-      autocompleteStuff.focus();
-    });
-    await user.click(autocompleteStuff);
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'AAA' } });
-    });
-    await user.click(autocompleteStuff);
+    await user.click(input);
+    await user.type(input, 'AAA');
 
     // Stuff has been found.
 
@@ -291,12 +250,7 @@ describe('FetchAutocomplete', () => {
 
     // And we go one item down to select the 'AAA'.
 
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'ArrowDown' });
-    });
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'Enter' });
-    });
+    await user.keyboard('{ArrowDown}{Enter}');
 
     // We need to rerender the compoent with new value properties.
     // This shows us the chip.
@@ -318,19 +272,12 @@ describe('FetchAutocomplete', () => {
 
     // Now let's click on the 'BBB'
 
-    await act(async () => {
-      fireEvent.change(labelElement, { target: { value: 'BBB' } });
-    });
-    await user.click(autocompleteStuff);
+    await user.clear(input);
+    await user.type(input, 'BBB');
 
     // And we select the 'BBB'.
 
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'ArrowDown' });
-    });
-    await act(async () => {
-      fireEvent.keyDown(autocompleteStuff, { key: 'Enter' });
-    });
+    await user.keyboard('{ArrowDown}{Enter}');
 
     // Let's rerender it.
 

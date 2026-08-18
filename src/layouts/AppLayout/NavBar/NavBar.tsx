@@ -96,8 +96,10 @@ export default function NavBar({
         widthClosed={widthClosed}
         anchor="left"
         variant={!isSmallScreen ? 'permanent' : 'temporary'}
-        PaperProps={{
-          component: 'nav',
+        slotProps={{
+          paper: {
+            component: 'nav',
+          },
         }}
         onClose={() => {
           setNavBarOpen(false);
@@ -106,13 +108,13 @@ export default function NavBar({
       >
         {!isSmallScreen && <Toolbar />}
         {top && (
-          <Box flexGrow="0">
+          <Box sx={{ flexGrow: 0 }}>
             {top}
             <Divider variant="middle" sx={{ marginY: '0.5rem' }} />
           </Box>
         )}
 
-        <Box flexGrow="1">
+        <Box sx={{ flexGrow: 1 }}>
           {/* middle is either a ReactNode or an array of NavBarLink objects */}
           {Array.isArray(middle) ? (
             <LinksMenu links={middle as unknown as NavBarLinkType[]} />
@@ -121,7 +123,7 @@ export default function NavBar({
           )}
         </Box>
 
-        <Box flexGrow="0">
+        <Box sx={{ flexGrow: 0 }}>
           <Divider variant="middle" sx={{ marginY: '0.5rem' }} />
           <UserInfo user={user} domainCode={domainCode} open={open} useNewAvatar={useNewAvatar} />
 

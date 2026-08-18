@@ -54,7 +54,7 @@ function PageContainer({
       }}
     >
       {noPadding ? (
-        <Box height="inherit">{children}</Box>
+        <Box sx={{ height: 'inherit' }}>{children}</Box>
       ) : (
         <Container maxWidth={maxWidth} sx={{ paddingTop: 3, paddingBottom: 3, flexGrow: 1 }}>
           {children}

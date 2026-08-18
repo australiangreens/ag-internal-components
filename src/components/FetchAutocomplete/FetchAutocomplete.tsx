@@ -182,6 +182,7 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
   hideInputEndAdornment,
 }: FetchAutocompleteProps<EntityType>) {
   const [inputValue, setInputValue] = useState('');
+  const [open, setOpen] = useState(false);
 
   const handleDelete = (
     e: SyntheticEvent<Element, Event>,
@@ -211,6 +212,9 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             : {}),
         }}
         data-testid={dataTestId ? `${dataTestId}:Autocomplete` : undefined}
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         disablePortal={disablePortal}
         multiple
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
@@ -244,12 +248,13 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
             helperText={helperText}
             autoComplete='off'
             slotProps={{
+              ...params.slotProps,
               input: {
-                ...params.InputProps,
+                ...params.slotProps.input,
                 endAdornment: hideInputEndAdornment ? undefined : (
                   <>
                     {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps.endAdornment}
+                    {params.slotProps.input.endAdornment}
                   </>
                 ),
               },
@@ -316,9 +321,13 @@ export default function FetchAutocomplete<EntityType extends AutocompleteGeneric
           }
         }}
         onMouseDownCapture={(event) => {
-          if (event.button === MOUSE_EVENT_BUTTONS.right && disableDefaultRightClickBehaviour) {
-            event.preventDefault();
-            event.stopPropagation();
+          if (event.button === MOUSE_EVENT_BUTTONS.right) {
+            if (disableDefaultRightClickBehaviour) {
+              event.preventDefault();
+              event.stopPropagation();
+            } else {
+              setOpen(true);
+            }
           }
         }}
         onContextMenuCapture={(event) => {

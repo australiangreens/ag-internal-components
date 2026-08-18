@@ -17,7 +17,7 @@ import {
 import countryList from './countries.json';
 
 const FormGroupBox = ({ children }: PropsWithChildren) => (
-  <Box display="flex" gap="18px" flexDirection="column">
+  <Box sx={{ display: 'flex', gap: '18px', flexDirection: 'column' }}>
     {children}
   </Box>
 );
@@ -120,8 +120,8 @@ export default function FetchAutocompleteDemo() {
 
   return (
     <>
-      <Box display="flex" flexDirection="column" padding="1rem" gap="26px">
-        <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+      <Box sx={{ display: 'flex', flexDirection: 'column', padding: '1rem', gap: '26px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
           <TitleIcon sx={{ height: '2.75rem', width: '2.75rem' }} color="primary" />
           <Typography variant="h5" sx={{ fontWeight: 500 }}>
             Autocomplete Demo
@@ -129,12 +129,12 @@ export default function FetchAutocompleteDemo() {
         </Box>
         <Divider sx={{ opacity: 0.6 }} />
 
-        <Box display="flex" flexDirection="row" gap={3} alignItems="center">
-          <Box display="flex" flexDirection="column" gap={1} alignItems="center">
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center' }}>
             <QuestionMarkIcon sx={{ height: '32px', width: '32px' }} color="primary" />
             <Typography variant="h6">Show custom context menu on right click</Typography>
             <Typography variant="subtitle2">
-              (This will also hide the search prompt due to how {'<Menu>'} works.)
+              (The browser menu still appears unless the other toggle is on.)
             </Typography>
             <ToggleButton
               value="check"
@@ -144,7 +144,7 @@ export default function FetchAutocompleteDemo() {
               <CheckIcon />
             </ToggleButton>
           </Box>
-          <Box display="flex" flexDirection="column" gap={1} alignItems="center">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center' }}>
             <QuestionMarkIcon sx={{ height: '32px', width: '32px' }} color="primary" />
             <Typography variant="h6">Disable default right click behaviour</Typography>
             <Typography variant="subtitle2">
@@ -172,7 +172,7 @@ export default function FetchAutocompleteDemo() {
         >
           <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
-            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
               <Typography variant="h6">FetchAutocomplete example</Typography>
             </Box>
@@ -202,7 +202,7 @@ export default function FetchAutocompleteDemo() {
           </FormGroupBox>
           <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
-            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
               <Typography variant="h6">SingleAutocomplete example</Typography>
             </Box>
@@ -227,7 +227,7 @@ export default function FetchAutocompleteDemo() {
 
           <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
-            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
               <Typography variant="h6">FetchAutocomplete template placeholder</Typography>
             </Box>
@@ -264,7 +264,7 @@ export default function FetchAutocompleteDemo() {
           </FormGroupBox>
           <Divider sx={{ opacity: 0.6 }} />
           <FormGroupBox>
-            <Box display="flex" flexDirection="row" gap={1} alignItems="center">
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
               <LayersIcon sx={{ height: '32px', width: '32px' }} color="primary" />
               <Typography variant="h6">SingleAutocomplete template placeholder</Typography>
             </Box>

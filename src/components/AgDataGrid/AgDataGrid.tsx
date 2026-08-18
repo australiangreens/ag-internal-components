@@ -180,13 +180,13 @@ const AgDataGrid = ({
   );
 
   const NoRowsOverlay = () => (
-    <Stack height="100%" alignItems="center" justifyContent="center">
+    <Stack sx={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
       {!loading ? noRowsMessage : ''}
     </Stack>
   );
 
   const NoResultsOverlay = () => (
-    <Stack height="100%" alignItems="center" justifyContent="center">
+    <Stack sx={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
       {!loading ? noResultsMessage : ''}
     </Stack>
   );
@@ -206,9 +206,11 @@ const AgDataGrid = ({
 
   return (
     <Box
-      height={boxHeight}
-      width={'100%'}
-      sx={useScrollableContainer ? { display: 'flex', flexDirection: 'column', minHeight: 0 } : undefined}
+      sx={{
+        height: boxHeight,
+        width: '100%',
+        ...(useScrollableContainer ? { display: 'flex', flexDirection: 'column', minHeight: 0 } : {}),
+      }}
     >
       <DataGrid
         slots={{
