@@ -21,5 +21,6 @@ try {
   console.log(`\x1b[32m%s\x1b[0m`, `Successfully bumped version and pushed tags!`);
 } catch (error) {
   console.error('\x1b[31m%s\x1b[0m', 'Release failed. Check your git state.');
+  console.error(error);
   process.exit(1);
 }
