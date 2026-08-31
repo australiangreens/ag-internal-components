@@ -28,8 +28,13 @@ with `internalAgSystemsTheme` or just ensure all required properties in the
 
 ## The development environment
 
-We are now at version 24 of node, with React 19 and Vite 7. We use pnpm for
-development.
+We are now at version 24 of Node.js, with React 19 and Vite 7. We use pnpm for
+development. Install [mise](https://mise.jdx.dev/), then run the following from
+the repository root:
+
+```sh
+mise install
+```
 
 ## Development with pnpm link
 
