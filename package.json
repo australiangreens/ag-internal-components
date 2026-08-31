@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.7.0",
   "type": "module",
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@10.33.3",
   "homepage": "https://github.com/australiangreens/ag-internal-components#readme",
   "license": "MIT",
   "description": "Library of components",

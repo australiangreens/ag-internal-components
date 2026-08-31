@@ -69,10 +69,10 @@ export const Root:StyledComponent<BoxProps> = styled(Box, {
 Use the README recipe: a `pnpm.overrides` `link:` entry in the *consuming*
 app, then `pnpm i`. Remove the override and `pnpm i` again to go back to the
 published package. That round-trip was checked against a throwaway consumer on
-pnpm 10.30.3 (symlink to this repo while the override is present; store copy
+pnpm 10.33.3 (symlink to this repo while the override is present; store copy
 after it is removed). It was not re-run inside ListManager or EventsManager.
 
-`pnpm link` is a weaker second option. On pnpm 10.30.3:
+`pnpm link` is a weaker second option. On pnpm 10.33.3:
 
 ```sh
 # in this repo — registers the package in the global store
