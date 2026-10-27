@@ -17,6 +17,7 @@ export const getDomainOptionLabel = (domainCode: DomainCode | null) => {
 
 type Props = PropsWithChildren<{
   isLoading: boolean;
+  isError?: boolean;
   isOpen: boolean;
   onClose: () => void;
   domainOptions: DomainCode[];
@@ -27,6 +28,7 @@ type Props = PropsWithChildren<{
 
 const DomainCodeDialog = ({
   isLoading,
+  isError = false,
   isOpen,
   onClose: handleClose,
   onDomainChange,
@@ -68,8 +70,11 @@ const DomainCodeDialog = ({
   };
 
   let errorMessage: string | undefined;
-  if (userHasNoDomains) {
+  if (isError) {
     errorMessage = 'Unable to retrieve your active organisations. Try logging in again.';
+  } else if (!isLoading && userHasNoDomains) {
+    errorMessage =
+      'You have no roles assigned that are suitable for use with this application. If you think you should, try logging in again.';
   } else if (userHasNoRolesInDomain) {
     errorMessage =
       'You no longer have any roles in your chosen organisation. Please choose another.';

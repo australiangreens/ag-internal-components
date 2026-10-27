@@ -51,9 +51,63 @@ describe('domaincodedialog', () => {
     expect(await screen.findByText(/logout/i)).toBeInTheDocument();
     expect(
       await screen.findByText(
-        /Unable to retrieve your active organisations. Try logging in again./i
+        /You have no roles assigned that are suitable for use with this application\. If you think you should, try logging in again\./i
       )
     ).toBeInTheDocument();
+  });
+
+  it('should show retrieve error when domain options failed to load', async () => {
+    render(
+      <DomainCodeDialog
+        isLoading={false}
+        isError={true}
+        isOpen={true}
+        onClose={() => {}}
+        domainOptions={[]}
+        applicationName={''}
+        handleLogout={() => {}}
+      />,
+      {
+        wrapper: wrap(
+          withOverrideDefaults({ domainCode: 'qld' }),
+          withSaladBarProvider()
+        ) as React.FC,
+      }
+    );
+    expect(
+      await screen.findByText(
+        /Unable to retrieve your active organisations\. Try logging in again\./i
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/You have no roles assigned that are suitable for use with this application/i)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show empty-roles error while loading', async () => {
+    render(
+      <DomainCodeDialog
+        isLoading={true}
+        isOpen={true}
+        onClose={() => {}}
+        domainOptions={[]}
+        applicationName={''}
+        handleLogout={() => {}}
+      />,
+      {
+        wrapper: wrap(
+          withOverrideDefaults({ domainCode: 'qld' }),
+          withSaladBarProvider()
+        ) as React.FC,
+      }
+    );
+    expect(await screen.findByText(/logout/i)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/You have no roles assigned that are suitable for use with this application/i)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Unable to retrieve your active organisations/i)
+    ).not.toBeInTheDocument();
   });
 
   it('should show logout button and blank dialog on first log on', async () => {
