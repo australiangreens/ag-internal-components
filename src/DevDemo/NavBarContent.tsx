@@ -1,6 +1,7 @@
 import {
   Search as AutoCompleteDemoIcon,
   TableChart as AgDataGridDemoIcon,
+  CloudOff as BackendStatusDemoIcon,
   PieChart as DomainCodeDemoIcon,
   Send as ExampleComponentIcon,
   Add as NavBarTopDemoIcon,
@@ -29,6 +30,11 @@ export default function NavBarContent() {
         label="AgDataGrid Demo"
         icon={<AgDataGridDemoIcon />}
         to={'/agDataGridDemo'}
+      />
+      <NavBarLink
+        label="Backend Status Demo"
+        icon={<BackendStatusDemoIcon />}
+        to={'/backendStatusDemo'}
       />
       <NavBarLink
         to={'/someRandom'}

@@ -61,6 +61,7 @@
     "core-js-pure": "^3.50.0",
     "jotai": "^2.20.2",
     "react-avatar": "^5.0.4",
+    "react-error-boundary": "6.1.6",
     "react-transition-group": "^4.4.5",
     "souvlaki": "^0.3.1"
   },

@@ -6,6 +6,7 @@ import { AppLayout, domainCodeAtom } from 'ag-internal-components';
 import SettingsEtcPlaceholder from '../layouts/AppLayout/NavBar/SettingsEtcPlaceholder';
 import AgDataGridDemo from './AgDataGridDemo';
 import AutocompleteDemo from './AutocompleteDemo';
+import BackendStatusDemo from './BackendStatusDemo';
 import DomainCodeDemo from './DomainCodeDemo';
 import ExampleComponentDemo from './ExampleComponentDemo';
 import NavBarContent from './NavBarContent';
@@ -65,6 +66,7 @@ export default function DevDemo() {
             <Route path="/domainCode" element={<DomainCodeDemo />} />
             <Route path="/autocomplete" element={<AutocompleteDemo />} />
             <Route path="/agDataGridDemo" element={<AgDataGridDemo />} />
+            <Route path="/backendStatusDemo" element={<BackendStatusDemo />} />
           </Routes>
         </AppLayout>
       </QueryClientProvider>
