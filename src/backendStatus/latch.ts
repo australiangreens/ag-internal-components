@@ -16,13 +16,17 @@ export const backendStatusAtom = atom<BackendStatus>({
  * Civi/DB dependency outages stay latched until the user clicks "Try again" —
  * otherwise parallel successful non-Civi calls (or health probes) clear the overlay
  * while Civi is still failing and the dialog flickers.
+ *
+ * @returns true if status was cleared (or was not a latched dependency outage);
+ *          false if a dependency outage remains latched.
  */
-export function markBackendUp() {
+export function markBackendUp(): boolean {
   const current = getDefaultStore().get(backendStatusAtom);
   if (current.status === 'DOWN' && isDependencyDownReason(current.reason)) {
-    return;
+    return false;
   }
   getDefaultStore().set(backendStatusAtom, { status: 'UP', reason: '' });
+  return true;
 }
 
 /**

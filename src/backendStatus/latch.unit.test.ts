@@ -21,24 +21,24 @@ describe('backend status latch helpers', () => {
     });
   });
 
-  it('markBackendUp clears a non-dependency outage', () => {
+  it('markBackendUp clears a non-dependency outage and returns true', () => {
     setBackendDown('UNKNOWN');
-    markBackendUp();
+    expect(markBackendUp()).toBe(true);
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: 'UP', reason: '' });
   });
 
-  it('markBackendUp does not clear a latched Civi outage', () => {
+  it('markBackendUp does not clear a latched Civi outage and returns false', () => {
     setBackendDown('CIVI_CRM_UNCONTACTABLE');
-    markBackendUp();
+    expect(markBackendUp()).toBe(false);
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({
       status: 'DOWN',
       reason: 'CIVI_CRM_UNCONTACTABLE',
     });
   });
 
-  it('markBackendUp does not clear a latched database outage', () => {
+  it('markBackendUp does not clear a latched database outage and returns false', () => {
     setBackendDown('DATABASE_UNCONTACTABLE');
-    markBackendUp();
+    expect(markBackendUp()).toBe(false);
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({
       status: 'DOWN',
       reason: 'DATABASE_UNCONTACTABLE',

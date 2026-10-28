@@ -29,9 +29,6 @@ importers:
       core-js-pure:
         specifier: ^3.50.0
         version: 3.50.0
-      jotai:
-        specifier: ^2.20.2
-        version: 2.20.2(@babel/core@7.28.3)(@babel/template@7.27.2)(@types/react@19.2.18)(react@19.2.8)
       react-avatar:
         specifier: ^5.0.4
         version: 5.0.4(@babel/runtime@7.29.7)(core-js-pure@3.50.0)(prop-types@15.8.1)(react@19.2.8)
@@ -129,6 +126,9 @@ importers:
       jest-extended:
         specifier: ^7.0.0
         version: 7.0.0(typescript@6.0.3)
+      jotai:
+        specifier: ^2.20.2
+        version: 2.20.2(@babel/core@7.28.3)(@babel/template@7.27.2)(@types/react@19.2.18)(react@19.2.8)
       lint-staged:
         specifier: ^17.3.0
         version: 17.3.0
