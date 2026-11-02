@@ -15,10 +15,36 @@ describe('backend status latch helpers', () => {
     });
   });
 
-  it('markBackendUp clears a non-dependency outage and returns true', () => {
+  it('setBackendDown stores technical details from a thrown Error', () => {
+    const error = new Error('ECONNREFUSED');
+    error.name = 'ServerUncontactableError';
+    setBackendDown('SERVER_UNCONTACTABLE', error);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({
+      status: 'DOWN',
+      reason: 'SERVER_UNCONTACTABLE',
+      details: {
+        reason: 'SERVER_UNCONTACTABLE',
+        name: 'ServerUncontactableError',
+        message: 'ECONNREFUSED',
+      },
+    });
+  });
+
+  it('setBackendDown without details clears stale details from a prior outage', () => {
+    setBackendDown('SERVER_UNCONTACTABLE', new Error('old'));
     setBackendDown('UNKNOWN');
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({
+      status: 'DOWN',
+      reason: 'UNKNOWN',
+    });
+    expect(getDefaultStore().get(backendStatusAtom).details).toBeUndefined();
+  });
+
+  it('markBackendUp clears a non-dependency outage and returns true', () => {
+    setBackendDown('UNKNOWN', new Error('boom'));
     expect(markBackendUp()).toBe(true);
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: 'UP', reason: '' });
+    expect(getDefaultStore().get(backendStatusAtom).details).toBeUndefined();
   });
 
   it('markBackendUp does not clear a latched Civi outage and returns false', () => {
@@ -31,7 +57,7 @@ describe('backend status latch helpers', () => {
   });
 
   it('markBackendUp clears Civi when clearCivi is set', () => {
-    setBackendDown('CIVI_CRM_UNCONTACTABLE');
+    setBackendDown('CIVI_CRM_UNCONTACTABLE', new Error('civi down'));
     expect(markBackendUp({ clearCivi: true })).toBe(true);
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: 'UP', reason: '' });
   });
@@ -69,12 +95,17 @@ describe('backend status latch helpers', () => {
     });
   });
 
-  it('does not let a network failure overwrite a latched Civi outage', () => {
-    setBackendDown('CIVI_CRM_UNCONTACTABLE');
-    setBackendDown('UNKNOWN');
+  it('does not let a network failure overwrite a latched Civi outage or its details', () => {
+    setBackendDown('CIVI_CRM_UNCONTACTABLE', new Error('civi'));
+    setBackendDown('UNKNOWN', new Error('network'));
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({
       status: 'DOWN',
       reason: 'CIVI_CRM_UNCONTACTABLE',
+      details: {
+        reason: 'CIVI_CRM_UNCONTACTABLE',
+        name: 'Error',
+        message: 'civi',
+      },
     });
   });
 

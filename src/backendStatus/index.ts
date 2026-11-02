@@ -17,10 +17,13 @@ export {
 } from './constants';
 export type { DependencyDownReason } from './constants';
 
+export { detailsFromUnknown } from './detailsFromUnknown';
+
 export { backendStatusAtom, markBackendUp, setBackendDown } from './latch';
 export type { MarkBackendUpOptions } from './latch';
 
 export { detailsForBackendDownReason, messageForBackendDownReason } from './messages';
 export type { BackendDownDetails, BackendDownTechnicalDetails } from './messages';
 
-export type { BackendStatus, BackendStatusReason } from './types';
+export { BACKEND_STATUS_UP } from './types';
+export type { BackendStatus, BackendStatusDetails, BackendStatusReason } from './types';

@@ -47,7 +47,10 @@ export default function BackendStatusDemo() {
 
   const latch = (reason: Exclude<BackendStatusReason, ''>) => {
     setThrowCivi(false);
-    setBackendDown(reason);
+    const demoError = Object.assign(new Error(`Demo latch: ${reason}`), {
+      name: `${reason}_DemoError`,
+    });
+    setBackendDown(reason, demoError);
   };
 
   return (

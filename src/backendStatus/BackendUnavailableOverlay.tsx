@@ -9,7 +9,7 @@ import {
 } from './constants';
 import { backendStatusAtom } from './latch';
 import { detailsForBackendDownReason } from './messages';
-import type { BackendStatusReason } from './types';
+import { BACKEND_STATUS_UP, type BackendStatusReason } from './types';
 
 /**
  * Matches MUI Alert root horizontal padding (`padding: '6px 16px'`).
@@ -77,7 +77,7 @@ export default function BackendUnavailableOverlay({
 
   const dismiss = useCallback(() => {
     // Explicit clear — dependency outages are latched against automatic markBackendUp.
-    setBackendStatus({ status: 'UP', reason: '' });
+    setBackendStatus(BACKEND_STATUS_UP);
     onRecover?.();
   }, [setBackendStatus, onRecover]);
 
@@ -129,7 +129,9 @@ export default function BackendUnavailableOverlay({
     resolveOverride(userMessageOverride, backendStatus.reason) ?? defaults.userMessage;
 
   const technical =
-    resolveOverride(technicalDetailsOverride, backendStatus.reason) ?? defaults.technical;
+    resolveOverride(technicalDetailsOverride, backendStatus.reason) ??
+    backendStatus.details ??
+    defaults.technical;
 
   return (
     <Modal

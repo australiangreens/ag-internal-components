@@ -1,7 +1,12 @@
 import { atom, getDefaultStore } from 'jotai';
 
 import { isDependencyDownReason } from './constants';
-import type { BackendStatus } from './types';
+import { detailsFromUnknown } from './detailsFromUnknown';
+import {
+  BACKEND_STATUS_UP,
+  type BackendStatus,
+  type BackendStatusReason,
+} from './types';
 
 export const backendStatusAtom = atom<BackendStatus>({
   status: '',
@@ -28,16 +33,16 @@ export function markBackendUp(options: MarkBackendUpOptions = {}): boolean {
   const current = getDefaultStore().get(backendStatusAtom);
   if (current.status === 'DOWN' && isDependencyDownReason(current.reason)) {
     if (options.clearRedis && current.reason === 'REDIS_UNCONTACTABLE') {
-      getDefaultStore().set(backendStatusAtom, { status: 'UP', reason: '' });
+      getDefaultStore().set(backendStatusAtom, BACKEND_STATUS_UP);
       return true;
     }
     if (options.clearCivi && current.reason === 'CIVI_CRM_UNCONTACTABLE') {
-      getDefaultStore().set(backendStatusAtom, { status: 'UP', reason: '' });
+      getDefaultStore().set(backendStatusAtom, BACKEND_STATUS_UP);
       return true;
     }
     return false;
   }
-  getDefaultStore().set(backendStatusAtom, { status: 'UP', reason: '' });
+  getDefaultStore().set(backendStatusAtom, BACKEND_STATUS_UP);
   return true;
 }
 
@@ -45,8 +50,14 @@ export function markBackendUp(options: MarkBackendUpOptions = {}): boolean {
  * Latch dependency outages: do not let a parallel network blip overwrite
  * CIVI/DB/Redis DOWN with UNKNOWN/SERVER_UNCONTACTABLE (that re-enables
  * health-probe auto-dismiss and makes the overlay flicker).
+ *
+ * Optional `errorOrDetails` becomes `backendStatus.details` for the overlay
+ * technical section. Omit it to clear any previous details (messages.ts fallback).
  */
-export function setBackendDown(reason: BackendStatus['reason']) {
+export function setBackendDown(
+  reason: Exclude<BackendStatusReason, ''>,
+  errorOrDetails?: unknown
+) {
   const current = getDefaultStore().get(backendStatusAtom);
   if (
     current.status === 'DOWN' &&
@@ -55,5 +66,10 @@ export function setBackendDown(reason: BackendStatus['reason']) {
   ) {
     return;
   }
-  getDefaultStore().set(backendStatusAtom, { status: 'DOWN', reason });
+  const details = detailsFromUnknown(reason, errorOrDetails);
+  getDefaultStore().set(backendStatusAtom, {
+    status: 'DOWN',
+    reason,
+    ...(details ? { details } : {}),
+  });
 }

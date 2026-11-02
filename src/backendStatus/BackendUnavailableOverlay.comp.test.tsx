@@ -149,9 +149,40 @@ describe('BackendUnavailableOverlay', () => {
     });
   });
 
+  it('prefers latched error details over messages.ts defaults', async () => {
+    renderOverlay({
+      status: 'DOWN',
+      reason: 'SERVER_UNCONTACTABLE',
+      details: {
+        reason: 'SERVER_UNCONTACTABLE',
+        name: 'ServerUncontactableError',
+        message: 'ECONNREFUSED 127.0.0.1:3000',
+      },
+    });
+
+    await expectOverlayVisible();
+    expect(screen.getByText(/cannot connect to the backend server/i)).toBeInTheDocument();
+    const technical = screen.getByTestId('backend-unavailable-technical-details');
+    expect(within(technical).getByText(/name = ServerUncontactableError/)).toBeInTheDocument();
+    expect(
+      within(technical).getByText(/message = ECONNREFUSED 127.0.0.1:3000/)
+    ).toBeInTheDocument();
+    expect(
+      within(technical).queryByText(/message = Unable to connect to the backend server/)
+    ).not.toBeInTheDocument();
+  });
+
   it('uses title, userMessage and technicalDetails prop overrides', async () => {
     renderOverlay(
-      { status: 'DOWN', reason: 'SERVER_UNCONTACTABLE' },
+      {
+        status: 'DOWN',
+        reason: 'SERVER_UNCONTACTABLE',
+        details: {
+          reason: 'SERVER_UNCONTACTABLE',
+          name: 'ServerUncontactableError',
+          message: 'should be replaced by prop',
+        },
+      },
       {
         title: 'Custom outage title',
         userMessage: 'Custom outage copy',
@@ -173,5 +204,6 @@ describe('BackendUnavailableOverlay', () => {
     const technical = screen.getByTestId('backend-unavailable-technical-details');
     expect(within(technical).getByText(/code = X1/)).toBeInTheDocument();
     expect(within(technical).getByText(/hint = check logs/)).toBeInTheDocument();
+    expect(within(technical).queryByText(/should be replaced by prop/)).not.toBeInTheDocument();
   });
 });
