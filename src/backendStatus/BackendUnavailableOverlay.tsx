@@ -6,11 +6,10 @@ import {
   BACKEND_RECOVERY_POLL_MS,
   DEPENDENCY_DOWN_OVERLAY_DEBOUNCE_MS,
   isDependencyDownReason,
-  markCiviUncontactableOverlayShown,
-  msUntilCiviUncontactableOverlayCooldownEnds,
 } from './constants';
 import { backendStatusAtom } from './latch';
 import { detailsForBackendDownReason } from './messages';
+import type { BackendStatusReason } from './types';
 
 /**
  * Matches MUI Alert root horizontal padding (`padding: '6px 16px'`).
@@ -19,12 +18,46 @@ import { detailsForBackendDownReason } from './messages';
  */
 const DIALOG_INSET_PX = 16;
 
+export const DEFAULT_BACKEND_UNAVAILABLE_TITLE =
+  'An error has occurred in the application';
+
+export type BackendUnavailableOverlayTechnicalDetails =
+  | string
+  | Record<string, string>;
+
 export type BackendUnavailableOverlayProps = {
   /** App-owned health check (e.g. GET /hashz). Called while the overlay is open for non-dependency downs. */
   probeHealth: () => Promise<unknown>;
   /** Called after the overlay clears status (user dismiss or successful probe). Typically invalidateQueries. */
   onRecover?: () => void;
+  /** Replaces the default alert title for the current outage. */
+  title?: string | ((reason: BackendStatusReason) => string);
+  /** Replaces the default plain-language message for the current outage. */
+  userMessage?: string | ((reason: BackendStatusReason) => string);
+  /** Replaces the default technical-details block for the current outage. */
+  technicalDetails?:
+    | BackendUnavailableOverlayTechnicalDetails
+    | ((reason: BackendStatusReason) => BackendUnavailableOverlayTechnicalDetails);
 };
+
+function resolveOverride<T>(
+  override: T | ((reason: BackendStatusReason) => T) | undefined,
+  reason: BackendStatusReason
+): T | undefined {
+  if (override === undefined) return undefined;
+  return typeof override === 'function'
+    ? (override as (reason: BackendStatusReason) => T)(reason)
+    : override;
+}
+
+function technicalEntries(
+  technical: BackendUnavailableOverlayTechnicalDetails
+): Array<[string, string]> {
+  if (typeof technical === 'string') {
+    return [['details', technical]];
+  }
+  return Object.entries(technical);
+}
 
 /**
  * Blocking overlay shown while backendStatusAtom is DOWN. Keeps the current page
@@ -33,6 +66,9 @@ export type BackendUnavailableOverlayProps = {
 export default function BackendUnavailableOverlay({
   probeHealth,
   onRecover,
+  title: titleOverride,
+  userMessage: userMessageOverride,
+  technicalDetails: technicalDetailsOverride,
 }: BackendUnavailableOverlayProps) {
   const [backendStatus, setBackendStatus] = useAtom(backendStatusAtom);
   const isDown = backendStatus.status === 'DOWN';
@@ -51,28 +87,14 @@ export default function BackendUnavailableOverlay({
       setIsOverlayVisible(false);
       return undefined;
     }
-    if (!isDependencyDown) {
-      setIsOverlayVisible(true);
-      return undefined;
-    }
-    // Debounce blips; also wait out the Civi 1-minute gap so dismiss → retry
-    // does not immediately re-open the dialog (status stays latched meanwhile).
-    const cooldownRemaining =
-      backendStatus.reason === 'CIVI_CRM_UNCONTACTABLE'
-        ? msUntilCiviUncontactableOverlayCooldownEnds()
-        : 0;
-    const delayMs = Math.max(DEPENDENCY_DOWN_OVERLAY_DEBOUNCE_MS, cooldownRemaining);
     const timeoutId = window.setTimeout(() => {
       setIsOverlayVisible(true);
-      if (backendStatus.reason === 'CIVI_CRM_UNCONTACTABLE') {
-        markCiviUncontactableOverlayShown();
-      }
-    }, delayMs);
+    }, DEPENDENCY_DOWN_OVERLAY_DEBOUNCE_MS);
     return () => window.clearTimeout(timeoutId);
-  }, [isDown, isDependencyDown, backendStatus.reason]);
+  }, [isDown, backendStatus.reason]);
 
   useEffect(() => {
-    // App health probes do not prove Civi/DB are back — probing would flicker.
+    // App health probes do not prove Redis/Civi/DB are back — apps own those polls.
     if (!isDown || isDependencyDown) return undefined;
 
     let cancelled = false;
@@ -95,10 +117,19 @@ export default function BackendUnavailableOverlay({
     };
   }, [isDown, isDependencyDown, dismiss, probeHealth]);
 
-  const details = useMemo(
+  const defaults = useMemo(
     () => detailsForBackendDownReason(backendStatus.reason),
     [backendStatus.reason]
   );
+
+  const title =
+    resolveOverride(titleOverride, backendStatus.reason) ?? DEFAULT_BACKEND_UNAVAILABLE_TITLE;
+
+  const userMessage =
+    resolveOverride(userMessageOverride, backendStatus.reason) ?? defaults.userMessage;
+
+  const technical =
+    resolveOverride(technicalDetailsOverride, backendStatus.reason) ?? defaults.technical;
 
   return (
     <Modal
@@ -142,15 +173,30 @@ export default function BackendUnavailableOverlay({
           }}
         >
           <Alert severity="error" variant="outlined">
-            <AlertTitle id="backend-unavailable-title">
-              An error has occurred in the application
-            </AlertTitle>
+            <AlertTitle id="backend-unavailable-title">{title}</AlertTitle>
             <Box id="backend-unavailable-description" sx={{ overflowWrap: 'anywhere' }}>
-              <Typography>{details.message}</Typography>
-              <br />
-              <Typography variant="subtitle2">Details</Typography>
-              <Typography variant="body2">name = {details.name}</Typography>
-              <Typography variant="body2">message = {details.message}</Typography>
+              <Typography>{userMessage}</Typography>
+              <Box
+                component="details"
+                sx={{ mt: 1.5 }}
+                data-testid="backend-unavailable-technical-details"
+              >
+                <Box
+                  component="summary"
+                  sx={{ cursor: 'pointer', userSelect: 'none' }}
+                >
+                  <Typography variant="subtitle2" component="span">
+                    Technical details
+                  </Typography>
+                </Box>
+                <Box sx={{ mt: 1 }}>
+                  {technicalEntries(technical).map(([key, value]) => (
+                    <Typography variant="body2" key={key}>
+                      {key} = {value}
+                    </Typography>
+                  ))}
+                </Box>
+              </Box>
             </Box>
           </Alert>
           <Button variant="contained" type="button" onClick={dismiss}>

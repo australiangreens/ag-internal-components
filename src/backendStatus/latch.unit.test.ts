@@ -1,15 +1,9 @@
 import { getDefaultStore } from 'jotai';
 
-import {
-  isCiviUncontactableOverlayInCooldownoldown,
-  markCiviUncontactableOverlayShown,
-  resetCiviUncontactableOverlayCooldown,
-} from './constants';
 import { backendStatusAtom, markBackendUp, setBackendDown } from './latch';
 
 describe('backend status latch helpers', () => {
   beforeEach(() => {
-    resetCiviUncontactableOverlayCooldown();
     getDefaultStore().set(backendStatusAtom, { status: '', reason: '' });
   });
 
@@ -36,12 +30,42 @@ describe('backend status latch helpers', () => {
     });
   });
 
+  it('markBackendUp clears Civi when clearCivi is set', () => {
+    setBackendDown('CIVI_CRM_UNCONTACTABLE');
+    expect(markBackendUp({ clearCivi: true })).toBe(true);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: 'UP', reason: '' });
+  });
+
   it('markBackendUp does not clear a latched database outage and returns false', () => {
     setBackendDown('DATABASE_UNCONTACTABLE');
     expect(markBackendUp()).toBe(false);
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({
       status: 'DOWN',
       reason: 'DATABASE_UNCONTACTABLE',
+    });
+  });
+
+  it('markBackendUp does not clear a latched Redis outage and returns false', () => {
+    setBackendDown('REDIS_UNCONTACTABLE');
+    expect(markBackendUp()).toBe(false);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({
+      status: 'DOWN',
+      reason: 'REDIS_UNCONTACTABLE',
+    });
+  });
+
+  it('markBackendUp clears Redis when clearRedis is set', () => {
+    setBackendDown('REDIS_UNCONTACTABLE');
+    expect(markBackendUp({ clearRedis: true })).toBe(true);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: 'UP', reason: '' });
+  });
+
+  it('clearRedis does not clear a Civi outage', () => {
+    setBackendDown('CIVI_CRM_UNCONTACTABLE');
+    expect(markBackendUp({ clearRedis: true })).toBe(false);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({
+      status: 'DOWN',
+      reason: 'CIVI_CRM_UNCONTACTABLE',
     });
   });
 
@@ -54,20 +78,12 @@ describe('backend status latch helpers', () => {
     });
   });
 
-  it('still latches Civi DOWN during overlay cooldown', () => {
-    markCiviUncontactableOverlayShown(Date.now());
-    expect(isCiviUncontactableOverlayInCooldownoldown()).toBe(true);
-
-    setBackendDown('CIVI_CRM_UNCONTACTABLE');
+  it('does not let a network failure overwrite a latched Redis outage', () => {
+    setBackendDown('REDIS_UNCONTACTABLE');
+    setBackendDown('SERVER_UNCONTACTABLE');
     expect(getDefaultStore().get(backendStatusAtom)).toEqual({
       status: 'DOWN',
-      reason: 'CIVI_CRM_UNCONTACTABLE',
+      reason: 'REDIS_UNCONTACTABLE',
     });
-  });
-
-  it('ignores transient network downs during Civi overlay cooldown', () => {
-    markCiviUncontactableOverlayShown(Date.now());
-    setBackendDown('UNKNOWN');
-    expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: '', reason: '' });
   });
 });

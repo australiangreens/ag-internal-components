@@ -91,6 +91,9 @@ export default function BackendStatusDemo() {
             <Button variant="outlined" onClick={() => latch('DATABASE_UNCONTACTABLE')}>
               Latch DATABASE_UNCONTACTABLE
             </Button>
+            <Button variant="outlined" onClick={() => latch('REDIS_UNCONTACTABLE')}>
+              Latch REDIS_UNCONTACTABLE
+            </Button>
           </Stack>
           <FormControlLabel
             sx={{ mt: 1 }}
@@ -141,9 +144,9 @@ export default function BackendStatusDemo() {
         </Box>
 
         <Typography variant="body2" color="text.secondary">
-          Tip: dependency downs (Civi/DB) debounce ~400ms, skip health probing, and Civi has a
-          1-minute overlay cooldown after it is shown. Clear a dependency outage with the
-          overlay&apos;s Try again button.
+          Tip: all downs debounce ~400ms before the overlay opens. Dependency downs
+          (Civi/DB/Redis) skip /hashz probing — clear them with Try again (apps clear Redis/Civi
+          via markBackendUp clear options after a proving probe).
         </Typography>
       </Stack>
     </ServerStatusErrorBoundary>
