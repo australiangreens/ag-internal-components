@@ -11,7 +11,10 @@ import {
   setBackendDown,
   topBarMiddleAtom,
   type BackendStatusReason,
+  type MarkBackendUpOptions,
 } from 'ag-internal-components';
+
+type ScheduledMarkUp = MarkBackendUpOptions | 'plain';
 
 function ThrowCiviOnDemand({ armed }: { armed: boolean }): React.ReactNode {
   if (armed) {
@@ -22,6 +25,14 @@ function ThrowCiviOnDemand({ armed }: { armed: boolean }): React.ReactNode {
   return null;
 }
 
+function scheduledMarkUpLabel(scheduled: ScheduledMarkUp): string {
+  if (scheduled === 'plain') return 'markBackendUp() in ~2s…';
+  if (scheduled.clearCivi) return 'markBackendUp({ clearCivi }) in ~2s…';
+  if (scheduled.clearDatabase) return 'markBackendUp({ clearDatabase }) in ~2s…';
+  if (scheduled.clearRedis) return 'markBackendUp({ clearRedis }) in ~2s…';
+  return 'markBackendUp() in ~2s…';
+}
+
 export default function BackendStatusDemo() {
   const setNavBarTop = useSetAtom(navBarTopAtom);
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
@@ -29,7 +40,7 @@ export default function BackendStatusDemo() {
   const [probeSucceeds, setProbeSucceeds] = useState(false);
   const [throwCivi, setThrowCivi] = useState(false);
   const [recoverLog, setRecoverLog] = useState('—');
-  const [scheduledMarkUp, setScheduledMarkUp] = useState(false);
+  const [scheduledMarkUp, setScheduledMarkUp] = useState<ScheduledMarkUp | null>(null);
 
   useEffect(() => {
     setNavBarTop(undefined);
@@ -37,10 +48,10 @@ export default function BackendStatusDemo() {
   }, [setNavBarTop, setTopBarMiddle]);
 
   useEffect(() => {
-    if (!scheduledMarkUp) return undefined;
+    if (scheduledMarkUp == null) return undefined;
     const timeoutId = window.setTimeout(() => {
-      markBackendUp();
-      setScheduledMarkUp(false);
+      markBackendUp(scheduledMarkUp === 'plain' ? {} : scheduledMarkUp);
+      setScheduledMarkUp(null);
     }, 2000);
     return () => window.clearTimeout(timeoutId);
   }, [scheduledMarkUp]);
@@ -123,17 +134,57 @@ export default function BackendStatusDemo() {
             succeeds — not from a button under the overlay. Schedule it before (or while) the
             overlay is open so you can still observe the effect.
           </Typography>
-          <Button
-            variant="contained"
-            color="success"
-            disabled={scheduledMarkUp}
-            onClick={() => setScheduledMarkUp(true)}
-          >
-            {scheduledMarkUp ? 'markBackendUp() in ~2s…' : 'Schedule markBackendUp() in 2s'}
-          </Button>
+          <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={scheduledMarkUp != null}
+              onClick={() => setScheduledMarkUp('plain')}
+            >
+              {scheduledMarkUp === 'plain'
+                ? scheduledMarkUpLabel(scheduledMarkUp)
+                : 'Schedule markBackendUp() in 2s'}
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={scheduledMarkUp != null}
+              onClick={() => setScheduledMarkUp({ clearCivi: true })}
+            >
+              {scheduledMarkUp != null &&
+              scheduledMarkUp !== 'plain' &&
+              scheduledMarkUp.clearCivi
+                ? scheduledMarkUpLabel(scheduledMarkUp)
+                : 'Schedule clearCivi in 2s'}
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={scheduledMarkUp != null}
+              onClick={() => setScheduledMarkUp({ clearDatabase: true })}
+            >
+              {scheduledMarkUp != null &&
+              scheduledMarkUp !== 'plain' &&
+              scheduledMarkUp.clearDatabase
+                ? scheduledMarkUpLabel(scheduledMarkUp)
+                : 'Schedule clearDatabase in 2s'}
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={scheduledMarkUp != null}
+              onClick={() => setScheduledMarkUp({ clearRedis: true })}
+            >
+              {scheduledMarkUp != null &&
+              scheduledMarkUp !== 'plain' &&
+              scheduledMarkUp.clearRedis
+                ? scheduledMarkUpLabel(scheduledMarkUp)
+                : 'Schedule clearRedis in 2s'}
+            </Button>
+          </Stack>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-            Try: schedule, then latch UNKNOWN (overlay should clear) vs schedule, then latch
-            CIVI (overlay stays — dependency latch ignores markBackendUp).
+            Plain <code>markBackendUp()</code> clears UNKNOWN / SERVER only. The clear*
+            buttons mimic app recovery probes for Civi / DB / Redis.
           </Typography>
         </Box>
 
@@ -148,8 +199,8 @@ export default function BackendStatusDemo() {
 
         <Typography variant="body2" color="text.secondary">
           Tip: all downs debounce ~400ms before the overlay opens. Dependency downs
-          (Civi/DB/Redis) skip /hashz probing — clear them with Try again (apps clear Redis/Civi
-          via markBackendUp clear options after a proving probe).
+          (Civi/DB/Redis) skip /hashz probing — clear them with Try again (apps clear
+          Redis/Civi/DB via markBackendUp clear options after a proving probe).
         </Typography>
       </Stack>
     </ServerStatusErrorBoundary>

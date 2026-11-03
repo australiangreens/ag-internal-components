@@ -18,13 +18,15 @@ export type MarkBackendUpOptions = {
   clearRedis?: boolean;
   /** Clear a latched Civi outage after a Civi-proving authenticated success. */
   clearCivi?: boolean;
+  /** Clear a latched database outage after a DB-proving authenticated success. */
+  clearDatabase?: boolean;
 };
 
 /**
  * Clears app-unreachable / unknown DOWN states after a successful response.
  * Dependency outages stay latched by default so /hashz and unrelated successes
- * cannot dismiss Redis/Civi/DB overlays. Pass clearRedis / clearCivi from the
- * matching recovery path only.
+ * cannot dismiss Redis/Civi/DB overlays. Pass clearRedis / clearCivi /
+ * clearDatabase from the matching recovery path only.
  *
  * @returns true if status was cleared (or was not a latched dependency outage);
  *          false if a dependency outage remains latched.
@@ -37,6 +39,10 @@ export function markBackendUp(options: MarkBackendUpOptions = {}): boolean {
       return true;
     }
     if (options.clearCivi && current.reason === 'CIVI_CRM_UNCONTACTABLE') {
+      getDefaultStore().set(backendStatusAtom, BACKEND_STATUS_UP);
+      return true;
+    }
+    if (options.clearDatabase && current.reason === 'DATABASE_UNCONTACTABLE') {
       getDefaultStore().set(backendStatusAtom, BACKEND_STATUS_UP);
       return true;
     }

@@ -71,6 +71,21 @@ describe('backend status latch helpers', () => {
     });
   });
 
+  it('markBackendUp clears database when clearDatabase is set', () => {
+    setBackendDown('DATABASE_UNCONTACTABLE', new Error('db down'));
+    expect(markBackendUp({ clearDatabase: true })).toBe(true);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({ status: 'UP', reason: '' });
+  });
+
+  it('clearDatabase does not clear a Civi outage', () => {
+    setBackendDown('CIVI_CRM_UNCONTACTABLE');
+    expect(markBackendUp({ clearDatabase: true })).toBe(false);
+    expect(getDefaultStore().get(backendStatusAtom)).toEqual({
+      status: 'DOWN',
+      reason: 'CIVI_CRM_UNCONTACTABLE',
+    });
+  });
+
   it('markBackendUp does not clear a latched Redis outage and returns false', () => {
     setBackendDown('REDIS_UNCONTACTABLE');
     expect(markBackendUp()).toBe(false);
