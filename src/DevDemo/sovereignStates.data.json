@@ -1,0 +1,1486 @@
+[
+  {
+    "id": 1,
+    "name": "Afghanistan",
+    "region": "Eurasia",
+    "founded": "1823-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 2,
+    "name": "Albania",
+    "region": "Eurasia",
+    "founded": "1912-11-28",
+    "isTerritory": false
+  },
+  {
+    "id": 3,
+    "name": "Algeria",
+    "region": "Africa",
+    "founded": "1962-07-03",
+    "isTerritory": false
+  },
+  {
+    "id": 4,
+    "name": "Andorra",
+    "region": "Eurasia",
+    "founded": "1278-09-07",
+    "isTerritory": false
+  },
+  {
+    "id": 5,
+    "name": "Angola",
+    "region": "Africa",
+    "founded": "1975-11-11",
+    "isTerritory": false
+  },
+  {
+    "id": 6,
+    "name": "Antigua and Barbuda",
+    "region": "North America",
+    "founded": "1981-11-01",
+    "isTerritory": false
+  },
+  {
+    "id": 7,
+    "name": "Argentina",
+    "region": "South America",
+    "founded": "1810-05-25",
+    "isTerritory": false
+  },
+  {
+    "id": 8,
+    "name": "Armenia",
+    "region": "Eurasia",
+    "founded": "1991-09-23",
+    "isTerritory": false
+  },
+  {
+    "id": 9,
+    "name": "Aruba",
+    "region": "North America",
+    "founded": "1986-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 10,
+    "name": "Australia",
+    "region": "Oceania",
+    "founded": "1942-10-09",
+    "isTerritory": false
+  },
+  {
+    "id": 11,
+    "name": "Austria",
+    "region": "Eurasia",
+    "founded": "0970-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 12,
+    "name": "Azerbaijan",
+    "region": "Eurasia",
+    "founded": "1991-08-30",
+    "isTerritory": false
+  },
+  {
+    "id": 13,
+    "name": "Bahamas",
+    "region": "North America",
+    "founded": "1973-07-10",
+    "isTerritory": false
+  },
+  {
+    "id": 14,
+    "name": "Bahrain",
+    "region": "Eurasia",
+    "founded": "1971-12-16",
+    "isTerritory": false
+  },
+  {
+    "id": 15,
+    "name": "Bangladesh",
+    "region": "Eurasia",
+    "founded": "1971-12-16",
+    "isTerritory": false
+  },
+  {
+    "id": 16,
+    "name": "Barbados",
+    "region": "North America",
+    "founded": "1966-11-30",
+    "isTerritory": false
+  },
+  {
+    "id": 17,
+    "name": "Belarus",
+    "region": "Eurasia",
+    "founded": "1991-08-25",
+    "isTerritory": false
+  },
+  {
+    "id": 18,
+    "name": "Belgium",
+    "region": "Eurasia",
+    "founded": "1830-10-04",
+    "isTerritory": false
+  },
+  {
+    "id": 19,
+    "name": "Belize",
+    "region": "North America",
+    "founded": "1981-09-21",
+    "isTerritory": false
+  },
+  {
+    "id": 20,
+    "name": "Benin",
+    "region": "Africa",
+    "founded": "1960-08-01",
+    "isTerritory": false
+  },
+  {
+    "id": 21,
+    "name": "Bhutan",
+    "region": "Eurasia",
+    "founded": "1616-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 22,
+    "name": "Bolivia",
+    "region": "South America",
+    "founded": "1825-08-06",
+    "isTerritory": false
+  },
+  {
+    "id": 23,
+    "name": "Bosnia and Herzegovina",
+    "region": "Eurasia",
+    "founded": "1992-03-03",
+    "isTerritory": false
+  },
+  {
+    "id": 24,
+    "name": "Botswana",
+    "region": "Africa",
+    "founded": "1966-09-30",
+    "isTerritory": false
+  },
+  {
+    "id": 25,
+    "name": "Brazil",
+    "region": "South America",
+    "founded": "1822-09-07",
+    "isTerritory": false
+  },
+  {
+    "id": 26,
+    "name": "Brunei",
+    "region": "Eurasia",
+    "founded": "1984-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 27,
+    "name": "Bulgaria",
+    "region": "Eurasia",
+    "founded": "1908-10-05",
+    "isTerritory": false
+  },
+  {
+    "id": 28,
+    "name": "Burkina Faso",
+    "region": "Africa",
+    "founded": "1960-08-05",
+    "isTerritory": false
+  },
+  {
+    "id": 29,
+    "name": "Burundi",
+    "region": "Africa",
+    "founded": "1962-07-01",
+    "isTerritory": false
+  },
+  {
+    "id": 30,
+    "name": "Cambodia",
+    "region": "Eurasia",
+    "founded": "1953-11-09",
+    "isTerritory": false
+  },
+  {
+    "id": 31,
+    "name": "Cameroon",
+    "region": "Africa",
+    "founded": "1960-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 32,
+    "name": "Canada",
+    "region": "North America",
+    "founded": "1931-12-11",
+    "isTerritory": false
+  },
+  {
+    "id": 33,
+    "name": "Cape Verde",
+    "region": "Africa",
+    "founded": "1975-07-05",
+    "isTerritory": false
+  },
+  {
+    "id": 34,
+    "name": "Central African Republic",
+    "region": "Africa",
+    "founded": "1960-08-13",
+    "isTerritory": false
+  },
+  {
+    "id": 35,
+    "name": "Chad",
+    "region": "Africa",
+    "founded": "1960-08-11",
+    "isTerritory": false
+  },
+  {
+    "id": 36,
+    "name": "Chile",
+    "region": "South America",
+    "founded": "1818-02-12",
+    "isTerritory": false
+  },
+  {
+    "id": 37,
+    "name": "China",
+    "region": "Eurasia",
+    "founded": "1616-02-17",
+    "isTerritory": false
+  },
+  {
+    "id": 38,
+    "name": "Colombia",
+    "region": "South America",
+    "founded": "1819-08-07",
+    "isTerritory": false
+  },
+  {
+    "id": 39,
+    "name": "Comoros",
+    "region": "Africa",
+    "founded": "1975-07-06",
+    "isTerritory": false
+  },
+  {
+    "id": 40,
+    "name": "Congo, Democratic Republic of the",
+    "region": "Africa",
+    "founded": "1960-06-30",
+    "isTerritory": false
+  },
+  {
+    "id": 41,
+    "name": "Congo, Republic of the",
+    "region": "Africa",
+    "founded": "1960-08-15",
+    "isTerritory": false
+  },
+  {
+    "id": 42,
+    "name": "Cook Islands",
+    "region": "Oceania",
+    "founded": "1965-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 43,
+    "name": "Costa Rica",
+    "region": "North America",
+    "founded": "1838-11-14",
+    "isTerritory": false
+  },
+  {
+    "id": 44,
+    "name": "Croatia",
+    "region": "Eurasia",
+    "founded": "1991-10-08",
+    "isTerritory": false
+  },
+  {
+    "id": 45,
+    "name": "Cuba",
+    "region": "North America",
+    "founded": "1902-05-20",
+    "isTerritory": false
+  },
+  {
+    "id": 46,
+    "name": "Curaçao",
+    "region": "North America",
+    "founded": "2010-10-01",
+    "isTerritory": true
+  },
+  {
+    "id": 47,
+    "name": "Cyprus",
+    "region": "Eurasia",
+    "founded": "1960-08-16",
+    "isTerritory": false
+  },
+  {
+    "id": 48,
+    "name": "Czechia",
+    "region": "Eurasia",
+    "founded": "1993-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 49,
+    "name": "Denmark",
+    "region": "Eurasia",
+    "founded": "0714-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 50,
+    "name": "Djibouti",
+    "region": "Africa",
+    "founded": "1977-06-27",
+    "isTerritory": false
+  },
+  {
+    "id": 51,
+    "name": "Dominica",
+    "region": "North America",
+    "founded": "1978-11-03",
+    "isTerritory": false
+  },
+  {
+    "id": 52,
+    "name": "Dominican Republic",
+    "region": "North America",
+    "founded": "1844-02-27",
+    "isTerritory": false
+  },
+  {
+    "id": 53,
+    "name": "Ecuador",
+    "region": "South America",
+    "founded": "1830-05-13",
+    "isTerritory": false
+  },
+  {
+    "id": 54,
+    "name": "Egypt",
+    "region": "Africa",
+    "founded": "1922-02-28",
+    "isTerritory": false
+  },
+  {
+    "id": 55,
+    "name": "El Salvador",
+    "region": "North America",
+    "founded": "1841-02-01",
+    "isTerritory": false
+  },
+  {
+    "id": 56,
+    "name": "Equatorial Guinea",
+    "region": "Africa",
+    "founded": "1968-10-12",
+    "isTerritory": false
+  },
+  {
+    "id": 57,
+    "name": "Eritrea",
+    "region": "Africa",
+    "founded": "1993-05-24",
+    "isTerritory": false
+  },
+  {
+    "id": 58,
+    "name": "Estonia",
+    "region": "Eurasia",
+    "founded": "1918-02-24",
+    "isTerritory": false
+  },
+  {
+    "id": 59,
+    "name": "Eswatini",
+    "region": "Africa",
+    "founded": "1968-09-06",
+    "isTerritory": false
+  },
+  {
+    "id": 60,
+    "name": "Ethiopia",
+    "region": "Africa",
+    "founded": "1137-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 61,
+    "name": "Faroe Islands",
+    "region": "Eurasia",
+    "founded": "1948-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 62,
+    "name": "Fiji",
+    "region": "Oceania",
+    "founded": "1970-10-10",
+    "isTerritory": false
+  },
+  {
+    "id": 63,
+    "name": "Finland",
+    "region": "Eurasia",
+    "founded": "1917-12-06",
+    "isTerritory": false
+  },
+  {
+    "id": 64,
+    "name": "France",
+    "region": "Eurasia",
+    "founded": "0843-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 65,
+    "name": "French Polynesia",
+    "region": "Oceania",
+    "founded": "2003-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 66,
+    "name": "Gabon",
+    "region": "Africa",
+    "founded": "1960-08-17",
+    "isTerritory": false
+  },
+  {
+    "id": 67,
+    "name": "Gambia",
+    "region": "Africa",
+    "founded": "1965-02-18",
+    "isTerritory": false
+  },
+  {
+    "id": 68,
+    "name": "Georgia",
+    "region": "Eurasia",
+    "founded": "1991-04-09",
+    "isTerritory": false
+  },
+  {
+    "id": 69,
+    "name": "Germany",
+    "region": "Eurasia",
+    "founded": "1867-07-01",
+    "isTerritory": false
+  },
+  {
+    "id": 70,
+    "name": "Ghana",
+    "region": "Africa",
+    "founded": "1957-05-06",
+    "isTerritory": false
+  },
+  {
+    "id": 71,
+    "name": "Greece",
+    "region": "Eurasia",
+    "founded": "1822-03-25",
+    "isTerritory": false
+  },
+  {
+    "id": 72,
+    "name": "Greenland",
+    "region": "North America",
+    "founded": "1979-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 73,
+    "name": "Grenada",
+    "region": "North America",
+    "founded": "1974-02-07",
+    "isTerritory": false
+  },
+  {
+    "id": 74,
+    "name": "Guatemala",
+    "region": "North America",
+    "founded": "1839-04-17",
+    "isTerritory": false
+  },
+  {
+    "id": 75,
+    "name": "Guinea",
+    "region": "Africa",
+    "founded": "1958-10-02",
+    "isTerritory": false
+  },
+  {
+    "id": 76,
+    "name": "Guinea-Bissau",
+    "region": "Africa",
+    "founded": "1973-09-24",
+    "isTerritory": false
+  },
+  {
+    "id": 77,
+    "name": "Guyana",
+    "region": "South America",
+    "founded": "1966-05-26",
+    "isTerritory": false
+  },
+  {
+    "id": 78,
+    "name": "Haiti",
+    "region": "North America",
+    "founded": "1804-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 79,
+    "name": "Honduras",
+    "region": "North America",
+    "founded": "1838-10-26",
+    "isTerritory": false
+  },
+  {
+    "id": 80,
+    "name": "Hong Kong",
+    "region": "Eurasia",
+    "founded": "1997-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 81,
+    "name": "Hungary",
+    "region": "Eurasia",
+    "founded": "0895-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 82,
+    "name": "Iceland",
+    "region": "Eurasia",
+    "founded": "1918-12-01",
+    "isTerritory": false
+  },
+  {
+    "id": 83,
+    "name": "India",
+    "region": "Eurasia",
+    "founded": "1947-08-15",
+    "isTerritory": false
+  },
+  {
+    "id": 84,
+    "name": "Indonesia",
+    "region": "Eurasia",
+    "founded": "1945-08-17",
+    "isTerritory": false
+  },
+  {
+    "id": 85,
+    "name": "Iran",
+    "region": "Eurasia",
+    "founded": "1501-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 86,
+    "name": "Iraq",
+    "region": "Eurasia",
+    "founded": "1932-10-03",
+    "isTerritory": false
+  },
+  {
+    "id": 87,
+    "name": "Ireland",
+    "region": "Eurasia",
+    "founded": "1931-12-11",
+    "isTerritory": false
+  },
+  {
+    "id": 88,
+    "name": "Israel",
+    "region": "Eurasia",
+    "founded": "1948-05-14",
+    "isTerritory": false
+  },
+  {
+    "id": 89,
+    "name": "Italy",
+    "region": "Eurasia",
+    "founded": "1003-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 90,
+    "name": "Ivory Coast",
+    "region": "Africa",
+    "founded": "1960-08-07",
+    "isTerritory": false
+  },
+  {
+    "id": 91,
+    "name": "Jamaica",
+    "region": "North America",
+    "founded": "1962-08-06",
+    "isTerritory": false
+  },
+  {
+    "id": 92,
+    "name": "Japan",
+    "region": "Eurasia",
+    "founded": "0539-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 93,
+    "name": "Jordan",
+    "region": "Eurasia",
+    "founded": "1946-05-25",
+    "isTerritory": false
+  },
+  {
+    "id": 94,
+    "name": "Kazakhstan",
+    "region": "Eurasia",
+    "founded": "1991-12-16",
+    "isTerritory": false
+  },
+  {
+    "id": 95,
+    "name": "Kenya",
+    "region": "Africa",
+    "founded": "1963-12-12",
+    "isTerritory": false
+  },
+  {
+    "id": 96,
+    "name": "Kiribati",
+    "region": "Oceania",
+    "founded": "1979-07-12",
+    "isTerritory": false
+  },
+  {
+    "id": 97,
+    "name": "Kosovo",
+    "region": "Eurasia",
+    "founded": "2008-02-17",
+    "isTerritory": false
+  },
+  {
+    "id": 98,
+    "name": "Kuwait",
+    "region": "Eurasia",
+    "founded": "1961-06-19",
+    "isTerritory": false
+  },
+  {
+    "id": 99,
+    "name": "Kyrgyzstan",
+    "region": "Eurasia",
+    "founded": "1991-08-31",
+    "isTerritory": false
+  },
+  {
+    "id": 100,
+    "name": "Laos",
+    "region": "Eurasia",
+    "founded": "1953-10-22",
+    "isTerritory": false
+  },
+  {
+    "id": 101,
+    "name": "Latvia",
+    "region": "Eurasia",
+    "founded": "1918-11-18",
+    "isTerritory": false
+  },
+  {
+    "id": 102,
+    "name": "Lebanon",
+    "region": "Eurasia",
+    "founded": "1943-11-22",
+    "isTerritory": false
+  },
+  {
+    "id": 103,
+    "name": "Lesotho",
+    "region": "Africa",
+    "founded": "1966-10-04",
+    "isTerritory": false
+  },
+  {
+    "id": 104,
+    "name": "Liberia",
+    "region": "Africa",
+    "founded": "1847-07-26",
+    "isTerritory": false
+  },
+  {
+    "id": 105,
+    "name": "Libya",
+    "region": "Africa",
+    "founded": "1949-03-01",
+    "isTerritory": false
+  },
+  {
+    "id": 106,
+    "name": "Liechtenstein",
+    "region": "Eurasia",
+    "founded": "1719-01-23",
+    "isTerritory": false
+  },
+  {
+    "id": 107,
+    "name": "Lithuania",
+    "region": "Eurasia",
+    "founded": "1918-02-16",
+    "isTerritory": false
+  },
+  {
+    "id": 108,
+    "name": "Luxembourg",
+    "region": "Eurasia",
+    "founded": "1815-03-15",
+    "isTerritory": false
+  },
+  {
+    "id": 109,
+    "name": "Macau",
+    "region": "Eurasia",
+    "founded": "1999-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 110,
+    "name": "Madagascar",
+    "region": "Africa",
+    "founded": "1960-06-26",
+    "isTerritory": false
+  },
+  {
+    "id": 111,
+    "name": "Malawi",
+    "region": "Africa",
+    "founded": "1964-07-06",
+    "isTerritory": false
+  },
+  {
+    "id": 112,
+    "name": "Malaysia",
+    "region": "Eurasia",
+    "founded": "1957-08-31",
+    "isTerritory": false
+  },
+  {
+    "id": 113,
+    "name": "Maldives",
+    "region": "Eurasia",
+    "founded": "1965-07-26",
+    "isTerritory": false
+  },
+  {
+    "id": 114,
+    "name": "Mali",
+    "region": "Africa",
+    "founded": "1960-08-20",
+    "isTerritory": false
+  },
+  {
+    "id": 115,
+    "name": "Malta",
+    "region": "Eurasia",
+    "founded": "1964-09-21",
+    "isTerritory": false
+  },
+  {
+    "id": 116,
+    "name": "Marshall Islands",
+    "region": "Oceania",
+    "founded": "1986-10-21",
+    "isTerritory": false
+  },
+  {
+    "id": 117,
+    "name": "Mauritania",
+    "region": "Africa",
+    "founded": "1960-11-28",
+    "isTerritory": false
+  },
+  {
+    "id": 118,
+    "name": "Mauritius",
+    "region": "Africa",
+    "founded": "1968-03-12",
+    "isTerritory": false
+  },
+  {
+    "id": 119,
+    "name": "Mexico",
+    "region": "North America",
+    "founded": "1810-09-16",
+    "isTerritory": false
+  },
+  {
+    "id": 120,
+    "name": "Micronesia, Federated States of",
+    "region": "Oceania",
+    "founded": "1986-11-03",
+    "isTerritory": false
+  },
+  {
+    "id": 121,
+    "name": "Moldova",
+    "region": "Eurasia",
+    "founded": "1991-08-27",
+    "isTerritory": false
+  },
+  {
+    "id": 122,
+    "name": "Monaco",
+    "region": "Eurasia",
+    "founded": "1861-02-02",
+    "isTerritory": false
+  },
+  {
+    "id": 123,
+    "name": "Mongolia",
+    "region": "Eurasia",
+    "founded": "1921-03-13",
+    "isTerritory": false
+  },
+  {
+    "id": 124,
+    "name": "Montenegro",
+    "region": "Eurasia",
+    "founded": "2003-02-04",
+    "isTerritory": false
+  },
+  {
+    "id": 125,
+    "name": "Morocco",
+    "region": "Africa",
+    "founded": "1631-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 126,
+    "name": "Mozambique",
+    "region": "Africa",
+    "founded": "1975-06-25",
+    "isTerritory": false
+  },
+  {
+    "id": 127,
+    "name": "Myanmar",
+    "region": "Eurasia",
+    "founded": "1948-01-04",
+    "isTerritory": false
+  },
+  {
+    "id": 128,
+    "name": "Namibia",
+    "region": "Africa",
+    "founded": "1990-03-21",
+    "isTerritory": false
+  },
+  {
+    "id": 129,
+    "name": "Nauru",
+    "region": "Oceania",
+    "founded": "1968-01-31",
+    "isTerritory": false
+  },
+  {
+    "id": 130,
+    "name": "Nepal",
+    "region": "Eurasia",
+    "founded": "1559-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 131,
+    "name": "Netherlands",
+    "region": "Eurasia",
+    "founded": "1813-11-20",
+    "isTerritory": false
+  },
+  {
+    "id": 132,
+    "name": "New Caledonia",
+    "region": "Oceania",
+    "founded": "1998-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 133,
+    "name": "New Zealand",
+    "region": "Oceania",
+    "founded": "1947-11-25",
+    "isTerritory": false
+  },
+  {
+    "id": 134,
+    "name": "Nicaragua",
+    "region": "North America",
+    "founded": "1838-11-13",
+    "isTerritory": false
+  },
+  {
+    "id": 135,
+    "name": "Niger",
+    "region": "Africa",
+    "founded": "1960-08-07",
+    "isTerritory": false
+  },
+  {
+    "id": 136,
+    "name": "Nigeria",
+    "region": "Africa",
+    "founded": "1960-10-01",
+    "isTerritory": false
+  },
+  {
+    "id": 137,
+    "name": "Niue",
+    "region": "Oceania",
+    "founded": "1974-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 138,
+    "name": "North Korea",
+    "region": "Eurasia",
+    "founded": "1948-09-09",
+    "isTerritory": false
+  },
+  {
+    "id": 139,
+    "name": "North Macedonia",
+    "region": "Eurasia",
+    "founded": "1991-09-08",
+    "isTerritory": false
+  },
+  {
+    "id": 140,
+    "name": "Norway",
+    "region": "Eurasia",
+    "founded": "0872-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 141,
+    "name": "Oman",
+    "region": "Eurasia",
+    "founded": "1154-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 142,
+    "name": "Pakistan",
+    "region": "Eurasia",
+    "founded": "1947-08-14",
+    "isTerritory": false
+  },
+  {
+    "id": 143,
+    "name": "Palau",
+    "region": "Oceania",
+    "founded": "1994-10-01",
+    "isTerritory": false
+  },
+  {
+    "id": 144,
+    "name": "Palestine",
+    "region": "Eurasia",
+    "founded": "1988-11-15",
+    "isTerritory": false
+  },
+  {
+    "id": 145,
+    "name": "Panama",
+    "region": "North America",
+    "founded": "1903-11-03",
+    "isTerritory": false
+  },
+  {
+    "id": 146,
+    "name": "Papua New Guinea",
+    "region": "Oceania",
+    "founded": "1975-09-16",
+    "isTerritory": false
+  },
+  {
+    "id": 147,
+    "name": "Paraguay",
+    "region": "South America",
+    "founded": "1811-05-14",
+    "isTerritory": false
+  },
+  {
+    "id": 148,
+    "name": "Peru",
+    "region": "South America",
+    "founded": "1821-07-28",
+    "isTerritory": false
+  },
+  {
+    "id": 149,
+    "name": "Philippines",
+    "region": "Eurasia",
+    "founded": "1946-07-04",
+    "isTerritory": false
+  },
+  {
+    "id": 150,
+    "name": "Poland",
+    "region": "Eurasia",
+    "founded": "1918-11-11",
+    "isTerritory": false
+  },
+  {
+    "id": 151,
+    "name": "Portugal",
+    "region": "Eurasia",
+    "founded": "1139-07-25",
+    "isTerritory": false
+  },
+  {
+    "id": 152,
+    "name": "Qatar",
+    "region": "Eurasia",
+    "founded": "1971-09-03",
+    "isTerritory": false
+  },
+  {
+    "id": 153,
+    "name": "Romania",
+    "region": "Eurasia",
+    "founded": "1877-05-10",
+    "isTerritory": false
+  },
+  {
+    "id": 154,
+    "name": "Russia",
+    "region": "Eurasia",
+    "founded": "1480-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 155,
+    "name": "Rwanda",
+    "region": "Africa",
+    "founded": "1962-07-01",
+    "isTerritory": false
+  },
+  {
+    "id": 156,
+    "name": "Saint Barthélemy",
+    "region": "North America",
+    "founded": "2007-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 157,
+    "name": "Saint Kitts and Nevis",
+    "region": "North America",
+    "founded": "1983-09-19",
+    "isTerritory": false
+  },
+  {
+    "id": 158,
+    "name": "Saint Lucia",
+    "region": "North America",
+    "founded": "1979-02-22",
+    "isTerritory": false
+  },
+  {
+    "id": 159,
+    "name": "Saint Martin",
+    "region": "North America",
+    "founded": "2007-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 160,
+    "name": "Saint Pierre and Miquelon",
+    "region": "North America",
+    "founded": "1985-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 161,
+    "name": "Saint Vincent and the Grenadines",
+    "region": "North America",
+    "founded": "1979-10-27",
+    "isTerritory": false
+  },
+  {
+    "id": 162,
+    "name": "Samoa",
+    "region": "Oceania",
+    "founded": "1962-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 163,
+    "name": "San Marino",
+    "region": "Eurasia",
+    "founded": "1291-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 164,
+    "name": "São Tomé and Príncipe",
+    "region": "Africa",
+    "founded": "1975-07-12",
+    "isTerritory": false
+  },
+  {
+    "id": 165,
+    "name": "Saudi Arabia",
+    "region": "Eurasia",
+    "founded": "1932-09-23",
+    "isTerritory": false
+  },
+  {
+    "id": 166,
+    "name": "Senegal",
+    "region": "Africa",
+    "founded": "1960-08-20",
+    "isTerritory": false
+  },
+  {
+    "id": 167,
+    "name": "Serbia",
+    "region": "Eurasia",
+    "founded": "2003-02-04",
+    "isTerritory": false
+  },
+  {
+    "id": 168,
+    "name": "Seychelles",
+    "region": "Africa",
+    "founded": "1976-06-29",
+    "isTerritory": false
+  },
+  {
+    "id": 169,
+    "name": "Sierra Leone",
+    "region": "Africa",
+    "founded": "1961-04-27",
+    "isTerritory": false
+  },
+  {
+    "id": 170,
+    "name": "Singapore",
+    "region": "Eurasia",
+    "founded": "1965-08-09",
+    "isTerritory": false
+  },
+  {
+    "id": 171,
+    "name": "Sint Maarten",
+    "region": "North America",
+    "founded": "2010-10-01",
+    "isTerritory": true
+  },
+  {
+    "id": 172,
+    "name": "Slovakia",
+    "region": "Eurasia",
+    "founded": "1993-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 173,
+    "name": "Slovenia",
+    "region": "Eurasia",
+    "founded": "1991-06-25",
+    "isTerritory": false
+  },
+  {
+    "id": 174,
+    "name": "Solomon Islands",
+    "region": "Oceania",
+    "founded": "1978-07-07",
+    "isTerritory": false
+  },
+  {
+    "id": 175,
+    "name": "Somalia",
+    "region": "Africa",
+    "founded": "1960-07-01",
+    "isTerritory": false
+  },
+  {
+    "id": 176,
+    "name": "South Africa",
+    "region": "Africa",
+    "founded": "1931-12-11",
+    "isTerritory": false
+  },
+  {
+    "id": 177,
+    "name": "South Korea",
+    "region": "Eurasia",
+    "founded": "1948-08-15",
+    "isTerritory": false
+  },
+  {
+    "id": 178,
+    "name": "South Sudan",
+    "region": "Africa",
+    "founded": "2011-07-09",
+    "isTerritory": false
+  },
+  {
+    "id": 179,
+    "name": "Spain",
+    "region": "Eurasia",
+    "founded": "1479-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 180,
+    "name": "Sri Lanka",
+    "region": "Eurasia",
+    "founded": "1948-02-04",
+    "isTerritory": false
+  },
+  {
+    "id": 181,
+    "name": "Sudan",
+    "region": "Africa",
+    "founded": "1956-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 182,
+    "name": "Suriname",
+    "region": "South America",
+    "founded": "1975-11-25",
+    "isTerritory": false
+  },
+  {
+    "id": 183,
+    "name": "Svalbard",
+    "region": "Eurasia",
+    "founded": "1925-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 184,
+    "name": "Sweden",
+    "region": "Eurasia",
+    "founded": "0970-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 185,
+    "name": "Switzerland",
+    "region": "Eurasia",
+    "founded": "1648-10-24",
+    "isTerritory": false
+  },
+  {
+    "id": 186,
+    "name": "Syria",
+    "region": "Eurasia",
+    "founded": "1961-09-28",
+    "isTerritory": false
+  },
+  {
+    "id": 187,
+    "name": "Tajikistan",
+    "region": "Eurasia",
+    "founded": "1991-09-09",
+    "isTerritory": false
+  },
+  {
+    "id": 188,
+    "name": "Tanzania",
+    "region": "Africa",
+    "founded": "1964-04-26",
+    "isTerritory": false
+  },
+  {
+    "id": 189,
+    "name": "Thailand",
+    "region": "Eurasia",
+    "founded": "1351-03-04",
+    "isTerritory": false
+  },
+  {
+    "id": 190,
+    "name": "Timor-Leste",
+    "region": "Eurasia",
+    "founded": "2002-05-20",
+    "isTerritory": false
+  },
+  {
+    "id": 191,
+    "name": "Togo",
+    "region": "Africa",
+    "founded": "1960-04-27",
+    "isTerritory": false
+  },
+  {
+    "id": 192,
+    "name": "Tonga",
+    "region": "Oceania",
+    "founded": "1970-06-04",
+    "isTerritory": false
+  },
+  {
+    "id": 193,
+    "name": "Trinidad and Tobago",
+    "region": "North America",
+    "founded": "1962-08-31",
+    "isTerritory": false
+  },
+  {
+    "id": 194,
+    "name": "Tunisia",
+    "region": "Africa",
+    "founded": "1956-03-20",
+    "isTerritory": false
+  },
+  {
+    "id": 195,
+    "name": "Turkey",
+    "region": "Eurasia",
+    "founded": "1299-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 196,
+    "name": "Turkmenistan",
+    "region": "Eurasia",
+    "founded": "1991-10-27",
+    "isTerritory": false
+  },
+  {
+    "id": 197,
+    "name": "Tuvalu",
+    "region": "Oceania",
+    "founded": "1978-10-01",
+    "isTerritory": false
+  },
+  {
+    "id": 198,
+    "name": "Uganda",
+    "region": "Africa",
+    "founded": "1962-10-09",
+    "isTerritory": false
+  },
+  {
+    "id": 199,
+    "name": "Ukraine",
+    "region": "Eurasia",
+    "founded": "1991-08-24",
+    "isTerritory": false
+  },
+  {
+    "id": 200,
+    "name": "United Arab Emirates",
+    "region": "Eurasia",
+    "founded": "1971-12-02",
+    "isTerritory": false
+  },
+  {
+    "id": 201,
+    "name": "United Kingdom",
+    "region": "Eurasia",
+    "founded": "1801-01-01",
+    "isTerritory": false
+  },
+  {
+    "id": 202,
+    "name": "United States",
+    "region": "North America",
+    "founded": "1776-07-04",
+    "isTerritory": false
+  },
+  {
+    "id": 203,
+    "name": "Uruguay",
+    "region": "South America",
+    "founded": "1828-08-27",
+    "isTerritory": false
+  },
+  {
+    "id": 204,
+    "name": "Uzbekistan",
+    "region": "Eurasia",
+    "founded": "1991-09-01",
+    "isTerritory": false
+  },
+  {
+    "id": 205,
+    "name": "Vanuatu",
+    "region": "Oceania",
+    "founded": "1980-07-30",
+    "isTerritory": false
+  },
+  {
+    "id": 206,
+    "name": "Vatican City",
+    "region": "Eurasia",
+    "founded": "1929-02-11",
+    "isTerritory": false
+  },
+  {
+    "id": 207,
+    "name": "Venezuela",
+    "region": "South America",
+    "founded": "1830-01-13",
+    "isTerritory": false
+  },
+  {
+    "id": 208,
+    "name": "Vietnam",
+    "region": "Eurasia",
+    "founded": "1976-07-02",
+    "isTerritory": false
+  },
+  {
+    "id": 209,
+    "name": "Wallis and Futuna",
+    "region": "Oceania",
+    "founded": "1961-01-01",
+    "isTerritory": true
+  },
+  {
+    "id": 210,
+    "name": "Yemen",
+    "region": "Eurasia",
+    "founded": "1990-05-22",
+    "isTerritory": false
+  },
+  {
+    "id": 211,
+    "name": "Zambia",
+    "region": "Africa",
+    "founded": "1964-10-24",
+    "isTerritory": false
+  },
+  {
+    "id": 212,
+    "name": "Zimbabwe",
+    "region": "Africa",
+    "founded": "1965-11-11",
+    "isTerritory": false
+  }
+]

@@ -1,12 +1,13 @@
 import {
-  Search as AutoCompleteDemoIcon,
   TableChart as AgDataGridDemoIcon,
+  Search as AutoCompleteDemoIcon,
   CloudOff as BackendStatusDemoIcon,
   PieChart as DomainCodeDemoIcon,
   Send as ExampleComponentIcon,
   Add as NavBarTopDemoIcon,
   Inbox as RandomPageIcon,
   Drafts as SaladBarDemoIcon,
+  FilterList as SearchBarDemoIcon,
   BorderTop as TopBarMiddleDemoIcon,
 } from '@mui/icons-material';
 import { List } from '@mui/material';
@@ -26,10 +27,11 @@ export default function NavBarContent() {
 
       <NavBarLink label="DomainCode Demo" icon={<DomainCodeDemoIcon />} to={'/domaincode'} />
       <NavBarLink label="Autocomplete Demo" icon={<AutoCompleteDemoIcon />} to={'/autocomplete'} />
+      <NavBarLink label="AgDataGrid Demo" icon={<AgDataGridDemoIcon />} to={'/agDataGridDemo'} />
       <NavBarLink
-        label="AgDataGrid Demo"
-        icon={<AgDataGridDemoIcon />}
-        to={'/agDataGridDemo'}
+        label="AgTableSearchBar Demo"
+        icon={<SearchBarDemoIcon />}
+        to={'/searchBarDemo'}
       />
       <NavBarLink
         label="Backend Status Demo"

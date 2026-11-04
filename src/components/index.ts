@@ -21,3 +21,6 @@ export { default as NavBarLink } from './NavBarLink';
 
 export * from './AgDataGrid';
 export { default as AgDataGrid } from './AgDataGrid';
+
+export { default as AgTableSearchBar } from './AgTableSearchBar';
+export type { AgTableSearchBarProps, AgTableSearchField } from './AgTableSearchBar';

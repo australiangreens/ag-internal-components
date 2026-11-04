@@ -12,6 +12,7 @@ import ExampleComponentDemo from './ExampleComponentDemo';
 import NavBarContent from './NavBarContent';
 import NavBarTopDemo from './NavBarTopDemo';
 import SaladBarDemo from './SaladBarDemo';
+import SearchBarDemo from './SearchBarDemo';
 import SomeRandomDemo from './SomeRandomDemo';
 import TopBarMiddleDemo from './TopBarMiddleDemo';
 
@@ -66,6 +67,7 @@ export default function DevDemo() {
             <Route path="/domainCode" element={<DomainCodeDemo />} />
             <Route path="/autocomplete" element={<AutocompleteDemo />} />
             <Route path="/agDataGridDemo" element={<AgDataGridDemo />} />
+            <Route path="/searchBarDemo" element={<SearchBarDemo />} />
             <Route path="/backendStatusDemo" element={<BackendStatusDemo />} />
           </Routes>
         </AppLayout>
