@@ -40,6 +40,11 @@ export type AgTableSearchBarProps = {
   actions?: ReactNode;
   /** Collapse when the viewport is below this MUI breakpoint. Default 'sm'. */
   collapseBelow?: Breakpoint;
+  /**
+   * Flex weight of the Reset slot, in the same units as `fields`. Default 187,
+   * matching the events list. The label wraps when this slot is narrower than the words.
+   */
+  resetFlex?: number;
 };
 
 const AgTableSearchBar = ({
@@ -52,6 +57,7 @@ const AgTableSearchBar = ({
   onCancel,
   actions,
   collapseBelow = 'sm',
+  resetFlex = 187,
 }: AgTableSearchBarProps) => {
   const theme = useTheme();
   const collapsed = useMediaQuery(theme.breakpoints.down(collapseBelow));
@@ -144,18 +150,33 @@ const AgTableSearchBar = ({
             {field.render('live')}
           </Box>
         ))}
-        {collapsed && secondary.length > 0 && (
-          <IconButton aria-label="Filter" onClick={handleOpen} sx={{ paddingTop: '18px' }}>
-            <FilterListIcon />
-          </IconButton>
-        )}
-        <Button
-          onClick={onReset}
-          color="primary"
-          sx={{ flexShrink: 0, marginTop: '12px', paddingTop: '6px', paddingBottom: '6px' }}
-        >
-          {resetLabel}
-        </Button>
+        <Box sx={{ flex: resetFlex, minWidth: 0, display: 'flex', alignItems: 'flex-start' }}>
+          {collapsed && secondary.length > 0 && (
+            <IconButton
+              aria-label="Filter"
+              onClick={handleOpen}
+              sx={{ flexShrink: 0, paddingTop: '18px', paddingRight: '0px' }}
+            >
+              <FilterListIcon />
+            </IconButton>
+          )}
+          <Button
+            onClick={onReset}
+            color="primary"
+            sx={{
+              flex: '0 1 auto',
+              minWidth: 0,
+              maxWidth: '100%',
+              whiteSpace: 'normal',
+              paddingTop: '6px',
+              paddingBottom: '6px',
+              paddingLeft: '12px',
+              marginTop: '12px',
+            }}
+          >
+            {resetLabel}
+          </Button>
+        </Box>
         {!collapsed && actions}
       </Box>
       <AgDialog

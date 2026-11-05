@@ -90,6 +90,7 @@ export default function SearchBarDemo() {
   const setTopBarMiddle = useSetAtom(topBarMiddleAtom);
   const [search, setSearch] = useState<StateSearch>(emptyStateSearch);
   const [draft, setDraft] = useState<StateSearch>(emptyStateSearch);
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 25 });
 
   useEffect(() => {
     setNavBarTop(undefined);
@@ -130,6 +131,7 @@ export default function SearchBarDemo() {
       </Typography>
       <AgTableSearchBar
         dialogTitle="Filter countries"
+        resetFlex={1.1}
         onReset={() => setSearch(emptyStateSearch)}
         onDialogOpen={() => setDraft(search)}
         onApply={() =>
@@ -266,7 +268,8 @@ export default function SearchBarDemo() {
           rows={rows}
           columns={columns}
           pageSizeOptions={[25]}
-          initialState={{ pagination: { paginationModel: { pageSize: 25, page: 0 } } }}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
           disableColumnFilter
           aria-label="Countries and territories"
         />
