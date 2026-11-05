@@ -1,13 +1,5 @@
 import FilterListIcon from '@mui/icons-material/FilterList';
-import {
-  Box,
-  Breakpoint,
-  Button,
-  IconButton,
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, Breakpoint, Button, IconButton, Stack, useMediaQuery, useTheme } from '@mui/material';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import AgDialog from '../AgDialog';
@@ -135,7 +127,7 @@ const AgTableSearchBar = ({
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           paddingLeft: '12px',
           paddingRight: '12px',
           marginBottom: '16px',
@@ -150,12 +142,12 @@ const AgTableSearchBar = ({
             {field.render('live')}
           </Box>
         ))}
-        <Box sx={{ flex: resetFlex, minWidth: 0, display: 'flex', alignItems: 'flex-start' }}>
+        <Box sx={{ flex: resetFlex, minWidth: 0, display: 'flex', alignItems: 'center' }}>
           {collapsed && secondary.length > 0 && (
             <IconButton
               aria-label="Filter"
               onClick={handleOpen}
-              sx={{ flexShrink: 0, paddingTop: '18px', paddingRight: '0px' }}
+              sx={{ flexShrink: 0, paddingRight: '0px' }}
             >
               <FilterListIcon />
             </IconButton>
@@ -171,13 +163,12 @@ const AgTableSearchBar = ({
               paddingTop: '6px',
               paddingBottom: '6px',
               paddingLeft: '12px',
-              marginTop: '12px',
             }}
           >
             {resetLabel}
           </Button>
+          {!collapsed && actions}
         </Box>
-        {!collapsed && actions}
       </Box>
       <AgDialog
         isOpen={dialogOpen}
