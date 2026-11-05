@@ -15,12 +15,12 @@ describe('sovereignStates demo data', () => {
   it('maps sample states and territories', () => {
     expect(sovereignStates.find((row) => row.name === 'Hungary')).toMatchObject({
       region: 'Eurasia',
-      founded: '0895-01-01',
+      founded: '1989-10-23',
       isTerritory: false,
     });
     expect(sovereignStates.find((row) => row.name === 'United States')).toMatchObject({
       region: 'North America',
-      founded: '1776-07-04',
+      founded: '1781-10-19',
       isTerritory: false,
     });
     expect(sovereignStates.find((row) => row.name === 'Brazil')).toMatchObject({

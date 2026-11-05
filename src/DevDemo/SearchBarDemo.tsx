@@ -71,7 +71,7 @@ const columns: GridColDef[] = [
   { field: 'region', headerName: 'Region', flex: REGION_FLEX, minWidth: 130 },
   {
     field: 'founded',
-    headerName: 'Founded',
+    headerName: 'Last subordination',
     flex: FOUNDED_FLEX,
     minWidth: 120,
     valueFormatter: (value) => formatFounded(String(value)),
@@ -110,16 +110,16 @@ export default function SearchBarDemo() {
         AgTableSearchBar Demo
       </Typography>
       <Typography variant="body1" sx={{ mb: 2, fontStyle: 'italic' }}>
-        Countries and states by date of formation. When the exact date is not known, the date is set
-        to January the 1st of the relevant year. Data come from Wikipedia&apos;s{' '}
+        Data from Wikipedia&apos;s{' '}
         <Link
           href="https://en.wikipedia.org/wiki/List_of_modern_sovereign_states_by_date_of_formation"
           target="_blank"
           rel="noreferrer"
         >
           List of modern sovereign states by date of formation
-        </Link>{' '}
-        and{' '}
+        </Link>
+        . (Honduras is given only as May 1924, so that row uses 1 May). Territory dates come from
+        the{' '}
         <Link
           href="https://en.wikipedia.org/wiki/Dependent_territory"
           target="_blank"
@@ -127,7 +127,8 @@ export default function SearchBarDemo() {
         >
           Dependent territory
         </Link>{' '}
-        pages.
+        page; when dates are supplied as bare years, they have been &quot;normalised&quot; to 1
+        January.
       </Typography>
       <AgTableSearchBar
         dialogTitle="Filter countries"
@@ -217,7 +218,7 @@ export default function SearchBarDemo() {
             flex: FOUNDED_FLEX,
             render: (mode) => (
               <TextField
-                label="Founded from"
+                label="Since"
                 type="date"
                 value={mode === 'draft' ? draft.fromDate : search.fromDate}
                 onChange={(event) => {
@@ -247,7 +248,7 @@ export default function SearchBarDemo() {
                     }}
                   />
                 }
-                label="Territory"
+                label="Territory?"
               />
             ),
           },

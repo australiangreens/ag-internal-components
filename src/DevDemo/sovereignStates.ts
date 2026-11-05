@@ -8,7 +8,7 @@ export type SovereignStateRow = {
   id: number;
   name: string;
   region: Region;
-  /** ISO date with a four-digit year. A year-only source date is 1 January of that year. */
+  /** ISO date. States use Wikipedia's date of last subordination. */
   founded: string;
   isTerritory: boolean;
 };

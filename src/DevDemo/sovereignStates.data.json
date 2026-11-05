@@ -3,14 +3,14 @@
     "id": 1,
     "name": "Afghanistan",
     "region": "Eurasia",
-    "founded": "1823-01-01",
+    "founded": "2021-08-30",
     "isTerritory": false
   },
   {
     "id": 2,
     "name": "Albania",
     "region": "Eurasia",
-    "founded": "1912-11-28",
+    "founded": "1944-11-29",
     "isTerritory": false
   },
   {
@@ -24,7 +24,7 @@
     "id": 4,
     "name": "Andorra",
     "region": "Eurasia",
-    "founded": "1278-09-07",
+    "founded": "1944-11-14",
     "isTerritory": false
   },
   {
@@ -45,7 +45,7 @@
     "id": 7,
     "name": "Argentina",
     "region": "South America",
-    "founded": "1810-05-25",
+    "founded": "1816-07-09",
     "isTerritory": false
   },
   {
@@ -73,7 +73,7 @@
     "id": 11,
     "name": "Austria",
     "region": "Eurasia",
-    "founded": "0970-01-01",
+    "founded": "1955-07-27",
     "isTerritory": false
   },
   {
@@ -122,7 +122,7 @@
     "id": 18,
     "name": "Belgium",
     "region": "Eurasia",
-    "founded": "1830-10-04",
+    "founded": "1945-02-04",
     "isTerritory": false
   },
   {
@@ -143,7 +143,7 @@
     "id": 21,
     "name": "Bhutan",
     "region": "Eurasia",
-    "founded": "1616-01-01",
+    "founded": "1907-12-17",
     "isTerritory": false
   },
   {
@@ -171,7 +171,7 @@
     "id": 25,
     "name": "Brazil",
     "region": "South America",
-    "founded": "1822-09-07",
+    "founded": "1825-08-29",
     "isTerritory": false
   },
   {
@@ -213,7 +213,7 @@
     "id": 31,
     "name": "Cameroon",
     "region": "Africa",
-    "founded": "1960-01-01",
+    "founded": "1961-10-01",
     "isTerritory": false
   },
   {
@@ -255,7 +255,7 @@
     "id": 37,
     "name": "China",
     "region": "Eurasia",
-    "founded": "1616-02-17",
+    "founded": "1945-09-02",
     "isTerritory": false
   },
   {
@@ -311,7 +311,7 @@
     "id": 45,
     "name": "Cuba",
     "region": "North America",
-    "founded": "1902-05-20",
+    "founded": "1909-02-02",
     "isTerritory": false
   },
   {
@@ -339,7 +339,7 @@
     "id": 49,
     "name": "Denmark",
     "region": "Eurasia",
-    "founded": "0714-01-01",
+    "founded": "1945-05-05",
     "isTerritory": false
   },
   {
@@ -402,7 +402,7 @@
     "id": 58,
     "name": "Estonia",
     "region": "Eurasia",
-    "founded": "1918-02-24",
+    "founded": "1991-08-20",
     "isTerritory": false
   },
   {
@@ -416,7 +416,7 @@
     "id": 60,
     "name": "Ethiopia",
     "region": "Africa",
-    "founded": "1137-01-01",
+    "founded": "1941-05-05",
     "isTerritory": false
   },
   {
@@ -437,14 +437,14 @@
     "id": 63,
     "name": "Finland",
     "region": "Eurasia",
-    "founded": "1917-12-06",
+    "founded": "1918-01-04",
     "isTerritory": false
   },
   {
     "id": 64,
     "name": "France",
     "region": "Eurasia",
-    "founded": "0843-01-01",
+    "founded": "1944-08-25",
     "isTerritory": false
   },
   {
@@ -479,7 +479,7 @@
     "id": 69,
     "name": "Germany",
     "region": "Eurasia",
-    "founded": "1867-07-01",
+    "founded": "1991-03-15",
     "isTerritory": false
   },
   {
@@ -493,7 +493,7 @@
     "id": 71,
     "name": "Greece",
     "region": "Eurasia",
-    "founded": "1822-03-25",
+    "founded": "1945-05-08",
     "isTerritory": false
   },
   {
@@ -528,7 +528,7 @@
     "id": 76,
     "name": "Guinea-Bissau",
     "region": "Africa",
-    "founded": "1973-09-24",
+    "founded": "1974-09-10",
     "isTerritory": false
   },
   {
@@ -542,14 +542,14 @@
     "id": 78,
     "name": "Haiti",
     "region": "North America",
-    "founded": "1804-01-01",
+    "founded": "1934-08-01",
     "isTerritory": false
   },
   {
     "id": 79,
     "name": "Honduras",
     "region": "North America",
-    "founded": "1838-10-26",
+    "founded": "1924-05-01",
     "isTerritory": false
   },
   {
@@ -563,7 +563,7 @@
     "id": 81,
     "name": "Hungary",
     "region": "Eurasia",
-    "founded": "0895-01-01",
+    "founded": "1989-10-23",
     "isTerritory": false
   },
   {
@@ -584,21 +584,21 @@
     "id": 84,
     "name": "Indonesia",
     "region": "Eurasia",
-    "founded": "1945-08-17",
+    "founded": "1949-12-27",
     "isTerritory": false
   },
   {
     "id": 85,
     "name": "Iran",
     "region": "Eurasia",
-    "founded": "1501-01-01",
+    "founded": "1946-03-02",
     "isTerritory": false
   },
   {
     "id": 86,
     "name": "Iraq",
     "region": "Eurasia",
-    "founded": "1932-10-03",
+    "founded": "2003-05-01",
     "isTerritory": false
   },
   {
@@ -619,7 +619,7 @@
     "id": 89,
     "name": "Italy",
     "region": "Eurasia",
-    "founded": "1003-01-01",
+    "founded": "1945-05-02",
     "isTerritory": false
   },
   {
@@ -640,14 +640,14 @@
     "id": 92,
     "name": "Japan",
     "region": "Eurasia",
-    "founded": "0539-01-01",
+    "founded": "1952-04-28",
     "isTerritory": false
   },
   {
     "id": 93,
     "name": "Jordan",
     "region": "Eurasia",
-    "founded": "1946-05-25",
+    "founded": "1958-08-02",
     "isTerritory": false
   },
   {
@@ -682,7 +682,7 @@
     "id": 98,
     "name": "Kuwait",
     "region": "Eurasia",
-    "founded": "1961-06-19",
+    "founded": "1991-02-28",
     "isTerritory": false
   },
   {
@@ -703,14 +703,14 @@
     "id": 101,
     "name": "Latvia",
     "region": "Eurasia",
-    "founded": "1918-11-18",
+    "founded": "1990-05-04",
     "isTerritory": false
   },
   {
     "id": 102,
     "name": "Lebanon",
     "region": "Eurasia",
-    "founded": "1943-11-22",
+    "founded": "1946-12-31",
     "isTerritory": false
   },
   {
@@ -731,7 +731,7 @@
     "id": 105,
     "name": "Libya",
     "region": "Africa",
-    "founded": "1949-03-01",
+    "founded": "1951-12-24",
     "isTerritory": false
   },
   {
@@ -745,14 +745,14 @@
     "id": 107,
     "name": "Lithuania",
     "region": "Eurasia",
-    "founded": "1918-02-16",
+    "founded": "1990-03-11",
     "isTerritory": false
   },
   {
     "id": 108,
     "name": "Luxembourg",
     "region": "Eurasia",
-    "founded": "1815-03-15",
+    "founded": "1945-02-22",
     "isTerritory": false
   },
   {
@@ -829,7 +829,7 @@
     "id": 119,
     "name": "Mexico",
     "region": "North America",
-    "founded": "1810-09-16",
+    "founded": "1864-04-10",
     "isTerritory": false
   },
   {
@@ -850,7 +850,7 @@
     "id": 122,
     "name": "Monaco",
     "region": "Eurasia",
-    "founded": "1861-02-02",
+    "founded": "1944-09-03",
     "isTerritory": false
   },
   {
@@ -864,14 +864,14 @@
     "id": 124,
     "name": "Montenegro",
     "region": "Eurasia",
-    "founded": "2003-02-04",
+    "founded": "2006-06-03",
     "isTerritory": false
   },
   {
     "id": 125,
     "name": "Morocco",
     "region": "Africa",
-    "founded": "1631-01-01",
+    "founded": "1956-04-07",
     "isTerritory": false
   },
   {
@@ -906,14 +906,14 @@
     "id": 130,
     "name": "Nepal",
     "region": "Eurasia",
-    "founded": "1559-01-01",
+    "founded": "1768-09-29",
     "isTerritory": false
   },
   {
     "id": 131,
     "name": "Netherlands",
     "region": "Eurasia",
-    "founded": "1813-11-20",
+    "founded": "1945-05-05",
     "isTerritory": false
   },
   {
@@ -934,7 +934,7 @@
     "id": 134,
     "name": "Nicaragua",
     "region": "North America",
-    "founded": "1838-11-13",
+    "founded": "1933-01-02",
     "isTerritory": false
   },
   {
@@ -976,14 +976,14 @@
     "id": 140,
     "name": "Norway",
     "region": "Eurasia",
-    "founded": "0872-01-01",
+    "founded": "1945-05-08",
     "isTerritory": false
   },
   {
     "id": 141,
     "name": "Oman",
     "region": "Eurasia",
-    "founded": "1154-01-01",
+    "founded": "1976-03-11",
     "isTerritory": false
   },
   {
@@ -1011,7 +1011,7 @@
     "id": 145,
     "name": "Panama",
     "region": "North America",
-    "founded": "1903-11-03",
+    "founded": "1990-01-31",
     "isTerritory": false
   },
   {
@@ -1025,14 +1025,14 @@
     "id": 147,
     "name": "Paraguay",
     "region": "South America",
-    "founded": "1811-05-14",
+    "founded": "1876-06-22",
     "isTerritory": false
   },
   {
     "id": 148,
     "name": "Peru",
     "region": "South America",
-    "founded": "1821-07-28",
+    "founded": "1839-08-25",
     "isTerritory": false
   },
   {
@@ -1046,14 +1046,14 @@
     "id": 150,
     "name": "Poland",
     "region": "Eurasia",
-    "founded": "1918-11-11",
+    "founded": "1945-03-30",
     "isTerritory": false
   },
   {
     "id": 151,
     "name": "Portugal",
     "region": "Eurasia",
-    "founded": "1139-07-25",
+    "founded": "1808-08-30",
     "isTerritory": false
   },
   {
@@ -1074,7 +1074,7 @@
     "id": 154,
     "name": "Russia",
     "region": "Eurasia",
-    "founded": "1480-01-01",
+    "founded": "1991-12-26",
     "isTerritory": false
   },
   {
@@ -1137,7 +1137,7 @@
     "id": 163,
     "name": "San Marino",
     "region": "Eurasia",
-    "founded": "1291-01-01",
+    "founded": "1944-09-21",
     "isTerritory": false
   },
   {
@@ -1165,7 +1165,7 @@
     "id": 167,
     "name": "Serbia",
     "region": "Eurasia",
-    "founded": "2003-02-04",
+    "founded": "2006-06-03",
     "isTerritory": false
   },
   {
@@ -1249,7 +1249,7 @@
     "id": 179,
     "name": "Spain",
     "region": "Eurasia",
-    "founded": "1479-01-01",
+    "founded": "1813-12-11",
     "isTerritory": false
   },
   {
@@ -1284,21 +1284,21 @@
     "id": 184,
     "name": "Sweden",
     "region": "Eurasia",
-    "founded": "0970-01-01",
+    "founded": "1523-06-06",
     "isTerritory": false
   },
   {
     "id": 185,
     "name": "Switzerland",
     "region": "Eurasia",
-    "founded": "1648-10-24",
+    "founded": "1814-04-06",
     "isTerritory": false
   },
   {
     "id": 186,
     "name": "Syria",
     "region": "Eurasia",
-    "founded": "1961-09-28",
+    "founded": "2024-12-08",
     "isTerritory": false
   },
   {
@@ -1319,7 +1319,7 @@
     "id": 189,
     "name": "Thailand",
     "region": "Eurasia",
-    "founded": "1351-03-04",
+    "founded": "1945-09-09",
     "isTerritory": false
   },
   {
@@ -1361,7 +1361,7 @@
     "id": 195,
     "name": "Turkey",
     "region": "Eurasia",
-    "founded": "1299-01-01",
+    "founded": "1924-05-01",
     "isTerritory": false
   },
   {
@@ -1410,7 +1410,7 @@
     "id": 202,
     "name": "United States",
     "region": "North America",
-    "founded": "1776-07-04",
+    "founded": "1781-10-19",
     "isTerritory": false
   },
   {
@@ -1480,7 +1480,7 @@
     "id": 212,
     "name": "Zimbabwe",
     "region": "Africa",
-    "founded": "1965-11-11",
+    "founded": "1980-04-18",
     "isTerritory": false
   }
 ]
