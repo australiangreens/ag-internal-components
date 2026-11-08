@@ -4,5 +4,6 @@ export * from './domainCode';
 export * from './errors';
 export * from './layouts';
 export * from './providers';
+export * from './pwa';
 export * from './themes';
 export * from './utils';
