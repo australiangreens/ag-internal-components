@@ -42,9 +42,11 @@ export default defineConfig((configEnv) => ({
     target: 'es6',
     lib: {
       entry: {
-        // In the future we may want multiple entry points for different
-        // components etc
         index: './src/index.ts',
+        // Self-contained (React and MUI only), so apps without Auth0 or the data grid can
+        // import the install hint from '@australiangreens/ag-internal-components/pwa'
+        // without bundling the rest of the library. See src/pwa/isolation.unit.test.ts.
+        pwa: './src/pwa/index.ts',
       },
       name: 'AgInternalComponents',
       formats: ['es', 'cjs'] satisfies LibraryFormats[],
@@ -72,9 +74,10 @@ export default defineConfig((configEnv) => ({
 
 function determineFileName(format: string, entryName: string) {
   const moduleTypeDir = format === 'es' ? 'esm' : format;
+  const extension = format === 'cjs' ? 'cjs' : 'js';
   if (entryName === 'index') {
-    return `${moduleTypeDir}/index.${format === 'cjs' ? 'c' : ''}js`;
+    return `${moduleTypeDir}/index.${extension}`;
   } else {
-    return `${moduleTypeDir}/${entryName}/index.js`;
+    return `${moduleTypeDir}/${entryName}/index.${extension}`;
   }
 }

@@ -45,5 +45,4 @@ const subscribe = (notify: () => void) => {
 };
 
 /** The held `beforeinstallprompt` event, or `null`. */
-export const usePwaInstallPromptEvent = () =>
-  useSyncExternalStore(subscribe, () => deferredPrompt);
+export const usePwaInstallPromptEvent = () => useSyncExternalStore(subscribe, () => deferredPrompt);

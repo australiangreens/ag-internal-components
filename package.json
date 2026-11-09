@@ -45,6 +45,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.cjs"
+    },
+    "./pwa": {
+      "types": "./dist/pwa/index.d.ts",
+      "import": "./dist/esm/pwa/index.js",
+      "require": "./dist/cjs/pwa/index.cjs"
     }
   },
   "types": "./dist/index.d.ts",

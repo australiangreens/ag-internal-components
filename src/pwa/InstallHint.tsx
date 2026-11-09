@@ -54,8 +54,8 @@ const InstallHint = ({ appName }: InstallHintProps) => {
       ) : (
         <>
           Install {appName}: tap{' '}
-          <IosShareIcon fontSize="inherit" sx={{ verticalAlign: 'middle' }} /> then
-          &ldquo;Add to Home Screen&rdquo;.
+          <IosShareIcon fontSize="inherit" sx={{ verticalAlign: 'middle' }} /> then &ldquo;Add to
+          Home Screen&rdquo;.
         </>
       )}
     </Alert>

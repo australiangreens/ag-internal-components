@@ -8,6 +8,20 @@ app installable in the first place.
 - **iOS:** there is no prompt, so it explains Share, then Add to Home Screen.
 - Shown on small screens only, never once the app is installed, and hidden for 30 days after Dismiss.
 
+## Import path
+
+Import from the `/pwa` subpath. It is self-contained (React and MUI only), so an app without
+Auth0, the data grid or the rest of this library, such as a public site, can use it without
+bundling any of that. The same names are also exported from the package root.
+
+```ts
+import { InstallHint, capturePwaInstallPrompt } from '@australiangreens/ag-internal-components/pwa';
+```
+
+Mixing the two import paths in one app is safe: both share a single copy of the captured event.
+
+`src/pwa/isolation.unit.test.ts` fails if this folder starts importing anything else.
+
 ## Use
 
 Call `capturePwaInstallPrompt()` as early as possible, **before** anything awaits auth. Chrome fires
@@ -16,7 +30,7 @@ after Auth0 has finished would otherwise miss it.
 
 ```tsx
 // main.tsx
-import { capturePwaInstallPrompt } from '@australiangreens/ag-internal-components';
+import { capturePwaInstallPrompt } from '@australiangreens/ag-internal-components/pwa';
 
 capturePwaInstallPrompt();
 ```
@@ -24,7 +38,7 @@ capturePwaInstallPrompt();
 Then render the banner somewhere that is always mounted (it positions itself `fixed`):
 
 ```tsx
-import { InstallHint } from '@australiangreens/ag-internal-components';
+import { InstallHint } from '@australiangreens/ag-internal-components/pwa';
 
 <InstallHint appName="Greens Events" />;
 ```
