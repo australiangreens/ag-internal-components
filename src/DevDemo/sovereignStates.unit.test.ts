@@ -41,9 +41,10 @@ describe('sovereignStates demo data', () => {
   it('filters name, region, country, date, and territory together', () => {
     const territories = filterSovereignStates(sovereignStates, {
       name: '',
-      region: 'Oceania',
+      regions: ['Oceania'],
       country: null,
       fromDate: '1990-01-01',
+      dateOperator: 'onOrAfter',
       territoriesOnly: true,
     });
 

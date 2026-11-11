@@ -24,3 +24,14 @@ export { default as AgDataGrid } from './AgDataGrid';
 
 export { default as AgTableSearchBar } from './AgTableSearchBar';
 export type { AgTableSearchBarProps, AgTableSearchField } from './AgTableSearchBar';
+
+export { default as AgDateFilter } from './AgDateFilter';
+export {
+  DATE_FILTER_OPERATORS,
+  DEFAULT_DATE_FILTER_OPERATOR,
+  matchesDateFilter,
+} from './AgDateFilter';
+export type { AgDateFilterProps, DateFilterOperator } from './AgDateFilter';
+
+export { default as AgMultiSelectFilter } from './AgMultiSelectFilter';
+export type { AgMultiSelectFilterProps } from './AgMultiSelectFilter';

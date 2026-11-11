@@ -1,18 +1,10 @@
-import {
-  Box,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  Link,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Checkbox, FormControlLabel, Link, TextField, Typography } from '@mui/material';
+import { format, parseISO } from 'date-fns';
 import { GridColDef } from '@mui/x-data-grid';
 import {
   AgDataGrid,
+  AgDateFilter,
+  AgMultiSelectFilter,
   AgTableSearchBar,
   AutocompleteGenericEntity,
   SingleAutocomplete,
@@ -24,7 +16,6 @@ import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
 
 import {
   REGIONS,
-  type Region,
   type StateSearch,
   emptyStateSearch,
   filterSovereignStates,
@@ -63,7 +54,7 @@ const formatFounded = (founded: string) => {
 const SEARCH_NAME_FLEX = 2.4;
 const COUNTRY_FLEX = 2;
 const REGION_FLEX = 1.5;
-const FOUNDED_FLEX = 1.25;
+const FOUNDED_FLEX = 2.6;
 const TERRITORY_FLEX = 1;
 
 const columns: GridColDef[] = [
@@ -138,9 +129,10 @@ export default function SearchBarDemo() {
         onApply={() =>
           setSearch((current) => ({
             ...current,
-            region: draft.region,
+            regions: draft.regions,
             country: draft.country,
             fromDate: draft.fromDate,
+            dateOperator: draft.dateOperator,
             territoriesOnly: draft.territoriesOnly,
           }))
         }
@@ -187,49 +179,38 @@ export default function SearchBarDemo() {
           {
             id: 'region',
             flex: REGION_FLEX,
-            render: (mode) => {
-              const value = mode === 'draft' ? draft.region : search.region;
-              return (
-                <FormControl fullWidth>
-                  <InputLabel id="demo-region-label">Region</InputLabel>
-                  <Select
-                    labelId="demo-region-label"
-                    label="Region"
-                    value={value}
-                    onChange={(event) => {
-                      const region = event.target.value as '' | Region;
-                      if (mode === 'draft') setDraftField({ region });
-                      else setLive({ region });
-                    }}
-                  >
-                    <MenuItem value="">&nbsp;</MenuItem>
-                    {REGIONS.map((region) => (
-                      <MenuItem key={region} value={region}>
-                        {region}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              );
-            },
+            render: (mode) => (
+              <AgMultiSelectFilter
+                id="demo-region"
+                label="Region"
+                options={REGIONS}
+                value={mode === 'draft' ? draft.regions : search.regions}
+                onChange={(regions) => {
+                  if (mode === 'draft') setDraftField({ regions });
+                  else setLive({ regions });
+                }}
+              />
+            ),
           },
           {
             id: 'from-date',
             flex: FOUNDED_FLEX,
-            render: (mode) => (
-              <TextField
-                label="Since"
-                type="date"
-                value={mode === 'draft' ? draft.fromDate : search.fromDate}
-                onChange={(event) => {
-                  const fromDate = event.target.value;
-                  if (mode === 'draft') setDraftField({ fromDate });
-                  else setLive({ fromDate });
-                }}
-                fullWidth
-                slotProps={{ inputLabel: { shrink: true } }}
-              />
-            ),
+            minWidth: 320,
+            render: (mode) => {
+              const iso = mode === 'draft' ? draft.fromDate : search.fromDate;
+              const operator = mode === 'draft' ? draft.dateOperator : search.dateOperator;
+              const apply = mode === 'draft' ? setDraftField : setLive;
+              return (
+                <AgDateFilter
+                  id="demo-from-date"
+                  label="Since"
+                  operator={operator}
+                  value={iso ? parseISO(iso) : null}
+                  onOperatorChange={(dateOperator) => apply({ dateOperator })}
+                  onChange={(next) => apply({ fromDate: next ? format(next, 'yyyy-MM-dd') : '' })}
+                />
+              );
+            },
           },
           {
             id: 'territory',

@@ -1,3 +1,6 @@
+import { matchesDateFilter } from '../components/AgDateFilter/matchesDateFilter';
+import type { DateFilterOperator } from '../components/AgDateFilter/operators';
+
 import rawRows from './sovereignStates.data.json';
 
 export const REGIONS = ['Eurasia', 'North America', 'South America', 'Africa', 'Oceania'] as const;
@@ -17,17 +20,19 @@ export const sovereignStates = rawRows as SovereignStateRow[];
 
 export type StateSearch = {
   name: string;
-  region: '' | Region;
+  regions: Region[];
   country: string | null;
   fromDate: string;
+  dateOperator: DateFilterOperator;
   territoriesOnly: boolean;
 };
 
 export const emptyStateSearch: StateSearch = {
   name: '',
-  region: '',
+  regions: [],
   country: null,
   fromDate: '',
+  dateOperator: 'onOrAfter',
   territoriesOnly: false,
 };
 
@@ -35,9 +40,11 @@ export const filterSovereignStates = (rows: SovereignStateRow[], search: StateSe
   const nameQuery = search.name.trim().toLowerCase();
   return rows.filter((row) => {
     if (nameQuery && !row.name.toLowerCase().includes(nameQuery)) return false;
-    if (search.region && row.region !== search.region) return false;
+    if (search.regions.length > 0 && !search.regions.includes(row.region)) return false;
     if (search.country && row.name !== search.country) return false;
-    if (search.fromDate && row.founded < search.fromDate) return false;
+    if (search.fromDate && !matchesDateFilter(row.founded, search.dateOperator, search.fromDate)) {
+      return false;
+    }
     if (search.territoriesOnly && !row.isTerritory) return false;
     return true;
   });
