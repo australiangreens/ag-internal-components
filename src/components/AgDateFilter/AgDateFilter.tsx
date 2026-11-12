@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select, Stack } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV2';
 import { enAU } from 'date-fns/locale';
 import { useState } from 'react';
 
@@ -9,6 +9,7 @@ import {
   DATE_FILTER_OPERATORS,
   DEFAULT_DATE_FILTER_OPERATOR,
   type DateFilterOperator,
+  type DateFilterOperatorOption,
 } from './operators';
 
 export type AgDateFilterProps = {
@@ -19,6 +20,8 @@ export type AgDateFilterProps = {
   operator?: DateFilterOperator;
   /** Starting operator when `operator` is omitted. Defaults to on or after. */
   defaultOperator?: DateFilterOperator;
+  /** Operators shown in the dropdown. Defaults to all six. */
+  operators?: readonly DateFilterOperatorOption[];
   onOperatorChange?: (operator: DateFilterOperator) => void;
   value: Date | null;
   onChange: (value: Date | null) => void;
@@ -29,6 +32,7 @@ const AgDateFilter = ({
   id,
   operator: operatorProp,
   defaultOperator = DEFAULT_DATE_FILTER_OPERATOR,
+  operators = DATE_FILTER_OPERATORS,
   onOperatorChange,
   value,
   onChange,
@@ -41,7 +45,7 @@ const AgDateFilter = ({
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
       <Stack direction="row" spacing={1} sx={{ alignItems: 'flex-start' }}>
-        <FormControl sx={{ minWidth: 148, flex: '0 0 auto' }}>
+        <FormControl sx={{ minWidth: 180, flex: '0 0 auto' }}>
           <InputLabel id={operatorLabelId}>Operator</InputLabel>
           <Select
             labelId={operatorLabelId}
@@ -54,7 +58,7 @@ const AgDateFilter = ({
               onOperatorChange?.(next);
             }}
           >
-            {DATE_FILTER_OPERATORS.map((item) => (
+            {operators.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.label}
               </MenuItem>

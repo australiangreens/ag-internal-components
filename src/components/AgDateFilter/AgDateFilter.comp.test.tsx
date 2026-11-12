@@ -25,6 +25,31 @@ describe('AgDateFilter', () => {
     expect(screen.getByRole('combobox', { name: 'Operator' })).toHaveTextContent('on or after');
   });
 
+  it('shows only the operators a page asks for', async () => {
+    const user = userEvent.setup();
+    renderFilter(
+      <AgDateFilter
+        label="Date created"
+        value={null}
+        onChange={vi.fn()}
+        operators={[
+          { value: 'is', label: 'is' },
+          { value: 'onOrAfter', label: 'is on or after' },
+          { value: 'onOrBefore', label: 'is on or before' },
+        ]}
+      />
+    );
+
+    await user.click(screen.getByRole('combobox', { name: 'Operator' }));
+
+    expect(screen.getByRole('option', { name: 'is' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'is on or after' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'is on or before' })).toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'is not' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'is after' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'is before' })).not.toBeInTheDocument();
+  });
+
   it('reports a newly chosen operator', async () => {
     const user = userEvent.setup();
     const onOperatorChange = vi.fn();

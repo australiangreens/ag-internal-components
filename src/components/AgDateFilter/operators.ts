@@ -9,4 +9,9 @@ export const DATE_FILTER_OPERATORS = [
 
 export type DateFilterOperator = (typeof DATE_FILTER_OPERATORS)[number]['value'];
 
+export type DateFilterOperatorOption = {
+  value: DateFilterOperator;
+  label: string;
+};
+
 export const DEFAULT_DATE_FILTER_OPERATOR: DateFilterOperator = 'onOrAfter';

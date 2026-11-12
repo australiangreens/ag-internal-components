@@ -31,7 +31,11 @@ export {
   DEFAULT_DATE_FILTER_OPERATOR,
   matchesDateFilter,
 } from './AgDateFilter';
-export type { AgDateFilterProps, DateFilterOperator } from './AgDateFilter';
+export type {
+  AgDateFilterProps,
+  DateFilterOperator,
+  DateFilterOperatorOption,
+} from './AgDateFilter';
 
 export { default as AgMultiSelectFilter } from './AgMultiSelectFilter';
 export type { AgMultiSelectFilterProps } from './AgMultiSelectFilter';
